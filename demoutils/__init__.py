@@ -97,6 +97,7 @@ if agxPython.getContext() is None:
 
     if os.name == "posix":
         agx_dir = os.environ['AGX_DIR']
+        print(agx_dir)
         agxIO.Environment_instance().getFilePath(agxIO.Environment.RESOURCE_PATH).addFilePath(agx_dir)
         agxIO.Environment_instance().getFilePath(agxIO.Environment.RESOURCE_PATH).addFilePath(agx_dir + "/data")
 
@@ -105,10 +106,13 @@ if agxPython.getContext() is None:
     import sys
 
     argParser = agxIO.ArgumentParser([sys.executable] + sys.argv)
+    print(argParser.getArgumentName(1))
+    print('ok')
     example_app = agxOSG.ExampleApplication()
     example_app.addScene(argParser.getArgumentName(1), "build_scene", ord('1'), True)
 
     if example_app.init(argParser):
-        example_app.run()
+    #     example_app.run()
+        pass
     else:
         print("An error occurred while initializing ExampleApplication.")

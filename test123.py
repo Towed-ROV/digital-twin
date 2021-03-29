@@ -1,12 +1,18 @@
 import agxCollide
 import agxModel
 import math
-from
 import demoutils
 import agx
+from Boat.ship import Ship
+from Boat.boat_controller import Boat_Controller
+from Rov.rov_assembly import rovAssembly
+from Rov.rov_controller import RovController
+from keyboard_listener import KeyboardListener
 from make_water import MakeWater
-
-
+from make_wire import MakeWire
+from pid import PID_Controller
+# demoutils.example_app.run()
+print('hello')
 def setBodyViscousDrag(body, controller, viscousDrag):
     geometries = body.getGeometries()
     for geom in geometries:
@@ -22,7 +28,8 @@ def setBodyViscousDrag(body, controller, viscousDrag):
 
 def buildScene():
     """Building scene for simulation and adding it to the simulation. Also setting the simulation step"""""
-    # demoutils.sim().setTimeStep(1)
+    demoutils.sim().setTimeStep(1)
+    print('hello')
     build_scene()
 
 """Building scene"""
@@ -43,7 +50,6 @@ def build_scene():
     water_geometry = MakeWater().make_water(adjust_rov, 1025, 500, 2, 30)
     controller = agxModel.WindAndWaterController()
     controller.addWater(water_geometry)
-    controller.
     """adds seafloor"""
     bottom_geometry = agxCollide.Geometry(agxCollide.Plane(agx.Vec3.Z_AXIS(), agx.Vec3(0, 0, -30)))
 

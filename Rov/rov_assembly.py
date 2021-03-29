@@ -4,6 +4,8 @@ import agxSDK
 import numpy as np
 import pandas as pd
 import math
+
+from Assembly import create_rov_body, create_wing_right, create_wing_left, create_spoiler, _map
 from modules.agxPythonModules.utils.callbacks import StepEventCallback as Sec
 
 
