@@ -112,7 +112,7 @@ if agxPython.getContext() is None:
     example_app.addScene(argParser.getArgumentName(1), "build_scene", ord('1'), True)
 
     if example_app.init(argParser):
-    #     example_app.run()
+        example_app.run()
         pass
     else:
         print("An error occurred while initializing ExampleApplication.")

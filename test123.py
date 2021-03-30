@@ -11,8 +11,8 @@ from keyboard_listener import KeyboardListener
 from make_water import MakeWater
 from make_wire import MakeWire
 from pid import PID_Controller
-# demoutils.example_app.run()
-print('hello')
+
+
 def setBodyViscousDrag(body, controller, viscousDrag):
     geometries = body.getGeometries()
     for geom in geometries:
@@ -28,7 +28,7 @@ def setBodyViscousDrag(body, controller, viscousDrag):
 
 def buildScene():
     """Building scene for simulation and adding it to the simulation. Also setting the simulation step"""""
-    demoutils.sim().setTimeStep(1)
+    demoutils.sim().setTimeStep(0.05)
     print('hello')
     build_scene()
 
@@ -47,11 +47,11 @@ def build_scene():
     ki_boat = 0.0000001
     kd_boat = 0
     print('dsd')
-    water_geometry = MakeWater().make_water(adjust_rov, 1025, 500, 2, 30)
+    water_geometries, bottom_geometries = MakeWater().make_water(adjust_rov, 1025, 500, 2, 30)
     controller = agxModel.WindAndWaterController()
-    controller.addWater(water_geometry)
-    """adds seafloor"""
-    bottom_geometry = agxCollide.Geometry(agxCollide.Plane(agx.Vec3.Z_AXIS(), agx.Vec3(0, 0, -30)))
+    for water_geometry in water_geometries:
+        controller.addWater(water_geometry)
+
 
     """Creates a pid controller for depth"""
 
@@ -108,8 +108,10 @@ def build_scene():
     wing_controll.setName('wingControll')
 
     """Adds rov, boat, controller, and pid to the simulation"""
-    demoutils.sim().add(bottom_geometry)
-    demoutils.sim().add(water_geometry)
+    for bottom_geometry in bottom_geometries:
+        demoutils.sim().add(bottom_geometry)
+    for water_geometry in water_geometries:
+        demoutils.sim().add(water_geometry)
     demoutils.sim().add(rov)
     demoutils.sim().add(pid)
     demoutils.sim().add(pid_trim)
