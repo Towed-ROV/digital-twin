@@ -1,4 +1,3 @@
-import agxCollide
 import agxModel
 import math
 import demoutils
