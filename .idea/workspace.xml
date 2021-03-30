@@ -20,17 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a81053cf-228f-4eb3-8dc3-26f5da944597" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/rov-sim.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/rov-sim.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/boat_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/Boat/boat_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demoutils/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/demoutils/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rov_assembly.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rov/rov_assembly.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rov_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rov/rov_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ship.py" beforeDir="false" afterPath="$PROJECT_DIR$/Boat/ship.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test123.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test123.py" beforeDir="false" afterPath="$PROJECT_DIR$/test123.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
