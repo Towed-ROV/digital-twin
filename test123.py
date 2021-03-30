@@ -1,12 +1,16 @@
 import agxCollide
 import agxModel
 import math
-from
 import demoutils
 import agx
+from Boat.ship import Ship
+from Boat.boat_controller import Boat_Controller
+from Rov.rov_assembly import rovAssembly
+from Rov.rov_controller import RovController
+from keyboard_listener import KeyboardListener
 from make_water import MakeWater
-
-
+from make_wire import MakeWire
+from pid import PID_Controller
 def setBodyViscousDrag(body, controller, viscousDrag):
     geometries = body.getGeometries()
     for geom in geometries:
@@ -22,7 +26,8 @@ def setBodyViscousDrag(body, controller, viscousDrag):
 
 def buildScene():
     """Building scene for simulation and adding it to the simulation. Also setting the simulation step"""""
-    # demoutils.sim().setTimeStep(1)
+    demoutils.sim().setTimeStep(0.05)
+    print('hello')
     build_scene()
 
 """Building scene"""
@@ -40,12 +45,13 @@ def build_scene():
     ki_boat = 0.0000001
     kd_boat = 0
 
-    water_geometry = MakeWater().make_water(adjust_rov, 1025, 500, 2, 30)
+    water_geometries, bottom_geometries = MakeWater().make_water(adjust_rov, 1025, 500, 2, 30)
     controller = agxModel.WindAndWaterController()
-    controller.addWater(water_geometry)
-    controller.
+    test = MakeWater().make_water(False, 1025, 500, 2, 30)
+    for water_geometry in test[0]:
+        controller.addWater(water_geometry)
     """adds seafloor"""
-    bottom_geometry = agxCollide.Geometry(agxCollide.Plane(agx.Vec3.Z_AXIS(), agx.Vec3(0, 0, -30)))
+    # bottom_geometries = agxCollide.Geometry(agxCollide.Plane(agx.Vec3.Z_AXIS(), agx.Vec3(0, 0, -30)))
 
     """Creates a pid controller for depth"""
 
@@ -67,7 +73,7 @@ def build_scene():
 
     """Creates the rov"""
     rov = rovAssembly(pid, keyboard)
-    rov.setPosition(agx.Vec3(0, 0, 0))
+    rov.setPosition(agx.Vec3(1, 0, 0))
     rov.setName("rov")
     rov.setRotation(agx.EulerAngles(0, 0, math.pi))
 
@@ -102,8 +108,10 @@ def build_scene():
     wing_controll.setName('wingControll')
 
     """Adds rov, boat, controller, and pid to the simulation"""
-    demoutils.sim().add(bottom_geometry)
-    demoutils.sim().add(water_geometry)
+    for bottom_geometry in bottom_geometries:
+        demoutils.sim().add(bottom_geometry)
+    for water_geometry in water_geometries:
+        demoutils.sim().add(water_geometry)
     demoutils.sim().add(rov)
     demoutils.sim().add(pid)
     demoutils.sim().add(pid_trim)
@@ -120,10 +128,9 @@ def build_scene():
     """locks yaw"""
     lock.setCompliance(1e-12, agx.LockJoint.ROTATIONAL_3)
     demoutils.sim().add(lock)
-    demoutils.sim().setTimeStep(0.005)
     """locks the rov in fixed position, for mounting wing and cable to rov"""
-    # lock1 = agx.LockJoint(rov.link1)
-    # demoutils.sim().add(lock1)
-    #
-    # lock2 = agx.LockJoint(ship.m_body)
-    # demoutils.sim().add(lock2)
+    lock1 = agx.LockJoint(rov.link1)
+    demoutils.sim().add(lock1)
+
+    lock2 = agx.LockJoint(ship.m_body)
+    demoutils.sim().add(lock2)
