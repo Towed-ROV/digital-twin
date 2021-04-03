@@ -53,7 +53,8 @@ class PID_Controller(agxSDK.StepEventListener):
         self.last_time = time.perf_counter()
         self.last_input = np.nan
     # def update(self, agxSDK.StepEventListener):
-
+    def output(self):
+        return self.output
     def compute(self, current_input):
         """Compute new PID output. This function should be called repeatedly,
         preferably at a fixed time interval.
@@ -96,7 +97,7 @@ class PID_Controller(agxSDK.StepEventListener):
         self.last_input = _input
         self.last_time = now
 
-        return True
+        return self.output
     def set_setpoint(self, setpoint):
         self.setpoint = setpoint
 

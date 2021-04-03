@@ -67,6 +67,7 @@ def build_scene():
     pid_trim.set_output_limits(-8, 8)
     pid_trim.set_mode(1, 0, 0)
     pid_trim.set_setpoint(0)
+    pid_trim.set_tunings(0.02, 0.02, 1)
 
     keyboard = KeyboardListener(pid, plot)
 

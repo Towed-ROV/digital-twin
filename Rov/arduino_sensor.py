@@ -23,10 +23,8 @@ class ArduinoSensor:
     def run(self):
         previousMillis = 0
         while True:
-            print("treigt?")
             currentMillis = time.monotonic()
             if currentMillis - previousMillis >= self.interval:
-
                 self.send_sensor()
                 previousMillis = currentMillis
             self.handle_received_message()
