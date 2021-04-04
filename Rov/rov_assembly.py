@@ -4,14 +4,14 @@ import agxSDK
 import numpy as np
 import pandas as pd
 import math
-
-from Assembly import create_rov_body, create_wing_right, create_wing_left, create_spoiler, _map
+from functions import _map
+from Assembly import create_rov_body, create_wing_right, create_wing_left, create_spoiler
 from modules.agxPythonModules.utils.callbacks import StepEventCallback as Sec
 
 
 """Class rovAssembly, creates a agx assembly of the rov, with to hinges, one on each wings"""
 class rovAssembly(agxSDK.Assembly):
-    def __init__(self,pid,keyboard):
+    def __init__(self,keyboard):
         super().__init__()
         len1 = 2
         self.keyboard = keyboard
@@ -21,18 +21,17 @@ class rovAssembly(agxSDK.Assembly):
         self.plot_roll = []
         self.plotted = False
 
-        self.pid = pid
         aluminum = agx.Material('AluminumMaterial')
-        aluminum.getBulkMaterial().setDensity(706.8)
+        aluminum.getBulkMaterial().setDensity(3000)
         aluminum1 = agx.Material('AluminumMaterial')
         aluminum1.getBulkMaterial().setDensity(706.8)
         self.link1 = create_rov_body(aluminum)
-        print(self.link1.getCmPosition())
+        # print(self.link1.getCmPosition())
 
-        print(self.link1.getMassProperties().getMass())
+        # print(self.link1.getMassProperties().getMass())
         self.link1.setName('rovBody')
         self.link1.setCmLocalTranslate(agx.Vec3(0.27511,-0.18095, 0.0494))
-        print(self.link1.getCmPosition())
+        # print(self.link1.getCmPosition())
         self.link2 = create_wing_right(aluminum1)
         self.link2.setPosition(0.138, 0.219, 0.125)
         self.link2.setRotation(agx.EulerAngles(0, math.pi, math.pi))

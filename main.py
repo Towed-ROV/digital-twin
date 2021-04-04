@@ -10,7 +10,8 @@ from keyboard_listener import KeyboardListener
 from make_water import MakeWater
 from make_wire import MakeWire
 from pid import PID_Controller
-
+from Rov.arduino_sensor import ArduinoSensor
+from Rov.arduino_stepper import ArduinoStepper
 
 def setBodyViscousDrag(body, controller, viscousDrag):
     geometries = body.getGeometries()
@@ -27,8 +28,7 @@ def setBodyViscousDrag(body, controller, viscousDrag):
 
 def buildScene():
     """Building scene for simulation and adding it to the simulation. Also setting the simulation step"""""
-    demoutils.sim().setTimeStep(0.05)
-    print('hello')
+    demoutils.sim().setTimeStep(0.02)
     build_scene()
 
 """Building scene"""
@@ -39,26 +39,27 @@ def build_scene():
     kp = 1000
     ki = 1000
     kd = 0
-    kp_trim = 0
-    ki_trim = 0
-    kd_trim = 0
+    kp_trim = 0.02
+    ki_trim = 0.02
+    kd_trim = 1
     kp_boat = 0.02
     ki_boat = 0.0000001
     kd_boat = 0
-    print('dsd')
     water_geometries, bottom_geometries = MakeWater().make_water(adjust_rov, 1025, 500, 2, 30)
     controller = agxModel.WindAndWaterController()
     for water_geometry in water_geometries:
         controller.addWater(water_geometry)
 
 
+
+
     """Creates a pid controller for depth"""
 
-    pid = PID_Controller(kp, ki, kd, 0)
+    pid = PID_Controller(kp, ki, kd, 1)
     pid.setName('pid')
     pid.set_output_limits(-45, 45)
     pid.set_mode(1, 0, 0)
-    pid.set_setpoint(-11)
+    pid.set_setpoint(-1)
 
     """Creates a pid controller for trim"""
 
@@ -67,20 +68,22 @@ def build_scene():
     pid_trim.set_output_limits(-8, 8)
     pid_trim.set_mode(1, 0, 0)
     pid_trim.set_setpoint(0)
-    pid_trim.set_tunings(0.02, 0.02, 1)
+
 
     keyboard = KeyboardListener(pid, plot)
 
     """Creates the rov"""
-    rov = rovAssembly(pid, keyboard)
+    rov = rovAssembly(keyboard)
     rov.setPosition(agx.Vec3(0, 0, 0))
     rov.setName("rov")
     rov.setRotation(agx.EulerAngles(0, 0, math.pi))
 
-    setBodyViscousDrag(rov.link1,controller, 0.01)
+    setBodyViscousDrag(rov.link1, controller, 0.01)
 
     """Creates a pid controller for trim"""
     if not adjust_rov:
+        arduino_sensor = ArduinoSensor(rov)
+        arduino_stepper = ArduinoStepper(pid, pid_trim, rov)
 
         pid_boat = PID_Controller(kp_boat, ki_boat, kd_boat, 0)
         pid_boat.setName('pidBoat')
@@ -96,7 +99,8 @@ def build_scene():
         wire, wire_renderer = MakeWire().create_wire(1020,0.005, ship, agx.Vec3(2, 0, 0),
                                                      rov, agx.Vec3(0,-0.181,0.185))
 
-
+        demoutils.sim().add(arduino_sensor)
+        demoutils.sim().add(arduino_stepper)
         demoutils.sim().add(wire)
         demoutils.sim().add(wire_renderer)
         demoutils.sim().add(keyboard)
@@ -112,6 +116,7 @@ def build_scene():
         demoutils.sim().add(bottom_geometry)
     for water_geometry in water_geometries:
         demoutils.sim().add(water_geometry)
+
     demoutils.sim().add(rov)
     demoutils.sim().add(pid)
     demoutils.sim().add(pid_trim)
@@ -130,8 +135,9 @@ def build_scene():
     demoutils.sim().add(lock)
     demoutils.sim().setTimeStep(0.005)
     """locks the rov in fixed position, for mounting wing and cable to rov"""
-    # lock1 = agx.LockJoint(rov.link1)
-    # demoutils.sim().add(lock1)
+    if adjust_rov:
+        lock1 = agx.LockJoint(rov.link1)
+        demoutils.sim().add(lock1)
     #
     # lock2 = agx.LockJoint(ship.m_body)
     # demoutils.sim().add(lock2)

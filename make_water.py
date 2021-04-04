@@ -32,10 +32,10 @@ class MakeWater:
             all_water_geometry.append(water_geometry)
             all_bottom_geometry.append(bottom_geometry)
             print(water_geometry)
-            return water_geometry, all_bottom_geometry
+            return all_water_geometry, all_bottom_geometry
         else:
             for water_height in seafloor:
-                print(water_height)
+                # print(water_height)
                 water_geometry = agxCollide.Geometry(agxCollide.Box(0.5, water_width, water_height))
                 water_geometry.setPosition(pos_x, 0, -water_height)
                 bottom_geometry = agxCollide.Geometry(
