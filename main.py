@@ -34,6 +34,7 @@ def buildScene():
 """Building scene"""
 def build_scene():
     """write plot to csv file variable"""
+    start = False
     plot = False
     adjust_rov = False
     kp = 1000
@@ -106,7 +107,7 @@ def build_scene():
         demoutils.sim().add(keyboard)
         demoutils.sim().add(ship)
         demoutils.sim().add(pid_boat)
-        demoutils.sim().add(Boat_Controller(ship, pid_boat))
+        demoutils.sim().add(Boat_Controller(ship, pid_boat, arduino_stepper))
     """Creates a controller to control the wings of the Rov"""
     wing_controll = RovController(rov)
     wing_controll.setName('wingControll')
@@ -134,10 +135,16 @@ def build_scene():
     lock.setCompliance(1e-12, agx.LockJoint.ROTATIONAL_3)
     demoutils.sim().add(lock)
     demoutils.sim().setTimeStep(0.005)
+    "hold simulator untill start"
+    # if not start:
+    #     lock2 = agx.LockJoint(ship.m_body)
+    #     demoutils.sim().add(lock2)
+    #     lock1 = agx.LockJoint(rov.link1)
+    #     demoutils.sim().add(lock1)
+
     """locks the rov in fixed position, for mounting wing and cable to rov"""
     if adjust_rov:
         lock1 = agx.LockJoint(rov.link1)
         demoutils.sim().add(lock1)
     #
-    # lock2 = agx.LockJoint(ship.m_body)
-    # demoutils.sim().add(lock2)
+

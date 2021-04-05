@@ -24,13 +24,25 @@ class ArduinoSensor(agxSDK.StepEventListener):
             timeout=0)
         self.interval = 0.01
         self.previousMillis = 0
+        self.reset = False
+        self.start = False
 
     def pre(self, t):
-        currentMillis = time.monotonic()
-        if currentMillis - self.previousMillis >= self.interval:
-            self.send_sensor()
-            self.previousMillis = currentMillis
-        self.handle_received_message()
+        if not self.reset:
+            self.send("SensorArduino:0")
+            if self.read()[0] == "reset":
+                print("sensor arduino")
+                self.reset = True
+        # elif not self.start:
+        #     if self.read()[0] == "start":
+        #         print("start sens")
+        #         self.start = True
+        else:
+            currentMillis = time.monotonic()
+            if currentMillis - self.previousMillis >= self.interval:
+                self.send_sensor()
+                self.previousMillis = currentMillis
+            self.handle_received_message()
 
     def send_sensor(self):
         rov_body = self.rov
@@ -70,6 +82,7 @@ class ArduinoSensor(agxSDK.StepEventListener):
 
     def send(self, message):
         output = "<" + message + ">\n"
+        # print(output)
         self.ser.write(output.encode('utf-8'))
 
     def read(self):
