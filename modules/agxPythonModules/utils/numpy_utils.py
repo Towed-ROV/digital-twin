@@ -1,5 +1,5 @@
 '''
-Utility functions.py for creating numpy arrays of shared memory
+Utility functions for creating numpy arrays of shared memory
 '''
 
 import numpy as np

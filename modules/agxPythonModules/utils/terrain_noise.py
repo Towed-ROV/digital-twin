@@ -12,13 +12,13 @@ def addTerrainSurfaceNoise( terrain : agxTerrain.Terrain, **kwargs):
     """
     Util method applying a noise layer that modifies the terrain surface to make it look more organic.
     When noise is adding height to the terrain, it uses the 'TerrainGridControl::addSolidOccupancyLayerInColum'
-    to apply the noise as a height layer. Negative values, if used, simply uses get/set height functions.py to remove mass.
+    to apply the noise as a height layer. Negative values, if used, simply uses get/set height functions to remove mass.
 
     Inspiration and information about Perlin noise generation for terrain:
     https://medium.com/@yvanscher/playing-with-perlin-noise-generating-realistic-archipelagos-b59f004d8401
 
     Quote:
-    "Perlin noise combines multiple functions.py called ‘octaves’ to produce natural looking surfaces. Each octave
+    "Perlin noise combines multiple functions called ‘octaves’ to produce natural looking surfaces. Each octave
     adds a layer of detail to the surface. For example: octave 1 could be mountains, octave 2 could be boulders,
     octave 3 could be the rocks."
 
@@ -30,7 +30,7 @@ def addTerrainSurfaceNoise( terrain : agxTerrain.Terrain, **kwargs):
         should_avalanche    - Set to True if avalanching triggered in the indices where noise has been applied. (default: True)
         scaling_factor      - The scaling factor applied to the generated noise values before application.
                               to the terrain surface. (default: 1.0)
-        perlin_octaves      - The number of perlin octave functions.py (noise generation functions.py) to be applied.
+        perlin_octaves      - The number of perlin octave functions (noise generation functions) to be applied.
                               Determines how many levels of detail you want. (default: 10)
         perlin_scale        - The scale of the perlin noise. Determines at what scale to view the perlin noise.
                               Higher values mean smaller details. (default: 500)
