@@ -9,8 +9,9 @@ import numpy as np
 import pandas as pd
 import math
 #local imports
-from Assembly import create_rov_body, create_wing_right, create_wing_left, create_spoiler, _map
+from Assembly import create_rov_body, create_wing_right, create_wing_left, create_spoiler
 from modules.agxPythonModules.utils.callbacks import StepEventCallback as Sec
+from functions import _map
 
 
 """Class rovAssembly, creates a agx assembly of the rov, with to hinges, one on each wings"""
@@ -141,21 +142,22 @@ class rovAssembly(agxSDK.Assembly):
 
 
 if __name__ == "__main__":
-    kp = 1000
-    ki = 1000
-    kd = 1
-
-    pid = PID_Controller(kp, ki, kd, 0)
-    pid.setName('pid')
-    pid.set_output_limits(-45, 45)
-    pid.set_mode(1, 0, 0)
-    pid.set_setpoint(-20)
-    keyboard = KeyboardListener(pid, True)
-
-    """Creates the rov"""
-    rov = rovAssembly(pid, keyboard)
-    rov.setPosition(agx.Vec3(0, 0, 0))
-    rov.setName("rov")
-    rov.setRotation(agx.EulerAngles(0, 0, math.pi))
-
-    rov.displayForces(1)
+    pass
+    # kp = 1000
+    # ki = 1000
+    # kd = 1
+    #
+    # pid = PID_Controller(kp, ki, kd, 0)
+    # pid.setName('pid')
+    # pid.set_output_limits(-45, 45)
+    # pid.set_mode(1, 0, 0)
+    # pid.set_setpoint(-20)
+    # keyboard = KeyboardListener(pid, True)
+    #
+    # """Creates the rov"""
+    # rov = rovAssembly(pid, keyboard)
+    # rov.setPosition(agx.Vec3(0, 0, 0))
+    # rov.setName("rov")
+    # rov.setRotation(agx.EulerAngles(0, 0, math.pi))
+    #
+    # rov.displayForces(1)

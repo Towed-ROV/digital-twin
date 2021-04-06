@@ -49,13 +49,9 @@ def build_scene():
     kp_boat = 0.02
     ki_boat = 0.0000001
     kd_boat = 0
-    print('dsd')
-    water_geometry, bottom_geometry = MakeWater().make_water(adjust_rov, 1025, 500, 2, 30)
+    water_geometry, bottom_geometry = MakeWater().make_seafloor(1, 500, 10, 30)
     controller = agxModel.WindAndWaterController()
     controller.addWater(water_geometry)
-
-
-
 
     """Creates a pid controller for depth"""
 
@@ -100,7 +96,7 @@ def build_scene():
         ship.setName('ship')
         ship.setRotation(agx.EulerAngles(0,0,math.pi))
 
-        wire, wire_renderer = MakeWire().create_wire(1020,0.005, ship, agx.Vec3(2, 0, 0),
+        wire, wire_renderer = MakeWire().create_wire(1020, 0.005, ship, agx.Vec3(2, 0, 0),
                                                      rov, agx.Vec3(0,-0.181,0.185))
 
         demoutils.sim().add(arduino_sensor)
