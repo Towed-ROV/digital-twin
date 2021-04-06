@@ -2,7 +2,7 @@ import demoutils
 import time
 import agxSDK
 
-from Assembly import _map
+from functions import _map
 
 """Class RovController for Rov and by using StepEventListener it updates the wing position every step of the simulation"""
 class RovController(agxSDK.GuiEventListener):

@@ -1,15 +1,16 @@
 import agxSDK
-
 """KeyboardListener used to control the forces on motor on the boat"""
 class Boat_Controller(agxSDK.StepEventListener):
-    def __init__(self, ship, pid_boat):
+    def __init__(self, ship, pid_boat, stepper):
         # super().__init__(agxSDK.GuiEventListener.KEYBOARD)
         super().__init__()
         self.ship = ship
         self.pid_boat = pid_boat
         self.last_output  = 0
-
+        self.start = False
+        self.stepper = stepper
     def pre(self,t):
+        # if self.stepper.start:
         current_velocity = self.ship.getRigidBody('boat').getVelocity()[0]*1.94384449
         # print('-------')
         # print(self.last_output)

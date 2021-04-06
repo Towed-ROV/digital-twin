@@ -79,11 +79,3 @@ def create_wing_left(aluminum):
 
 
 
-
-
-"""function for mapping value with limits, equivalent to Arduinos map function"""
-def _map(x, in_min, in_max, out_min, out_max):
-    x = min(in_max, max(in_min, x))
-    d = (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
-    return d
-

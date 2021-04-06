@@ -7,9 +7,9 @@ class KeyboardListener(agxSDK.GuiEventListener):
     def __init__(self, pid, plot):
         super().__init__(agxSDK.GuiEventListener.KEYBOARD)
         # super().__init__()
+        self.pid = pid
         self.plotted = False
         self.plot = plot
-        self.pid = pid
         self.plot_time = []
         self.plot_setpoint = []
 
