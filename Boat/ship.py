@@ -13,7 +13,7 @@ class Ship(agxSDK.Assembly):
         super().__init__()
         width = 2
         right_fender = width * 0.25
-        length = 5 - right_fender * 0.4
+        length = 10 - right_fender * 0.4
         ship_color = agxRender.Color.LightYellow()
         self.m_propulsion_force = 0
         self.m_turn_fraction = 0.1
@@ -22,7 +22,7 @@ class Ship(agxSDK.Assembly):
         self.m_max_propulsion = 200000
         self.m_min_propulsion = -500
         self.init(width, length, right_fender)
-        self.m_body.getMassProperties().setMass(1000)
+        self.m_body.getMassProperties().setMass(10000)
         self.m_body.getCmFrame().setLocalTranslate(agx.Vec3(-0.2, 0, 0))
         self.m_body.getGeometries()[0].setEnableCollisions(True)
         agxOSG.setDiffuseColor(agxOSG.createVisual(self.m_body, demoutils.root()), ship_color)
