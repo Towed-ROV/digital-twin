@@ -46,7 +46,7 @@ class MakeWater:
             agxOSG.setAlpha(waterNode, alpha)
             return water_geometry, bottom_geometry
 
-    def make_seafloor(self, vairance, length, width, depth):
+    def make_seafloor(self, vairance, length,width, depth):
         if depth > 0:
             depth = -depth
         if depth + vairance > 0:
