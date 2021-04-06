@@ -15,7 +15,7 @@ from modules.agxPythonModules.utils.callbacks import StepEventCallback as Sec
 
 """Class rovAssembly, creates a agx assembly of the rov, with to hinges, one on each wings"""
 class rovAssembly(agxSDK.Assembly):
-    def __init__(self,pid,keyboard):
+    def __init__(self,keyboard):
         super().__init__()
         len1 = 2
         self.keyboard = keyboard
@@ -25,9 +25,8 @@ class rovAssembly(agxSDK.Assembly):
         self.plot_roll = []
         self.plotted = False
 
-        self.pid = pid
         aluminum = agx.Material('AluminumMaterial')
-        aluminum.getBulkMaterial().setDensity(706.8)
+        aluminum.getBulkMaterial().setDensity(3000)
         aluminum1 = agx.Material('AluminumMaterial')
         aluminum1.getBulkMaterial().setDensity(706.8)
         self.link1 = create_rov_body(aluminum)
