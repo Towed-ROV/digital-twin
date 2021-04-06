@@ -1,7 +1,9 @@
 import agxIO
 import agx
 import agxCollide
-
+import agxOSG
+import agxRender
+import demoutils
 """Creates fender geometry"""
 def create_fenders(self, fender_material, half_width, half_length):
     fender = agxCollide.Geometry(agxCollide.Capsule(0.8, half_width * 2))
@@ -45,6 +47,8 @@ def create_rov_body(aluminum) -> agx.RigidBody:
     geom = agxCollide.Geometry(trimesh)
     geom.setName('rr')
     geom.setMaterial(aluminum)
+
+    agxOSG.setDiffuseColor(agxOSG.createVisual(geom, demoutils.root()), agxRender.Color.Yellow())
     print(geom.calculateVolume())
     rov_body = agx.RigidBody()
     rov_body.setMotionControl(agx.RigidBody.DYNAMICS)

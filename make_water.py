@@ -23,6 +23,7 @@ class MakeWater:
             """Surface of water at z = 0."""
             water_geometry.setMaterial(water_material)
             waterNode = agxOSG.createVisual(water_geometry, demoutils.root())
+            color_bottom = agxRender.Color.Red()
             color = agxRender.Color.DeepSkyBlue()
             alpha = 0.4
             agxOSG.setDiffuseColor(waterNode, color)

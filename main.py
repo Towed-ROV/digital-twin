@@ -49,13 +49,10 @@ def build_scene():
     kp_boat = 0.02
     ki_boat = 0.0000001
     kd_boat = 0
-    print('dsd')
     water_geometry, bottom_geometry = MakeWater().make_water(adjust_rov, 1025, 500, 2, 30)
     controller = agxModel.WindAndWaterController()
     controller.addWater(water_geometry)
-
-
-
+    
 
     """Creates a pid controller for depth"""
 

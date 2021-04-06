@@ -9,9 +9,9 @@ import numpy as np
 import pandas as pd
 import math
 #local imports
-from Assembly import create_rov_body, create_wing_right, create_wing_left, create_spoiler, _map
+from Assembly import create_rov_body, create_wing_right, create_wing_left, create_spoiler
 from modules.agxPythonModules.utils.callbacks import StepEventCallback as Sec
-
+from functions import _map
 
 """Class rovAssembly, creates a agx assembly of the rov, with to hinges, one on each wings"""
 class rovAssembly(agxSDK.Assembly):
