@@ -1,14 +1,10 @@
-#AGX imports
 import demoutils
 import agx
 import agxSDK
-from pid import PID_Controller
-#python imports
-from keyboard_listener import KeyboardListener
 import numpy as np
 import pandas as pd
 import math
-#local imports
+
 from Assembly import create_rov_body, create_wing_right, create_wing_left, create_spoiler, _map
 from modules.agxPythonModules.utils.callbacks import StepEventCallback as Sec
 
@@ -31,12 +27,12 @@ class rovAssembly(agxSDK.Assembly):
         aluminum1 = agx.Material('AluminumMaterial')
         aluminum1.getBulkMaterial().setDensity(706.8)
         self.link1 = create_rov_body(aluminum)
-        print("pos: ", self.link1.getCmPosition())
+        print(self.link1.getCmPosition())
 
-        print("mass: ", self.link1.getMassProperties().getMass())
+        print(self.link1.getMassProperties().getMass())
         self.link1.setName('rovBody')
         self.link1.setCmLocalTranslate(agx.Vec3(0.27511,-0.18095, 0.0494))
-        print("cmpos: ", self.link1.getCmPosition())
+        print(self.link1.getCmPosition())
         self.link2 = create_wing_right(aluminum1)
         self.link2.setPosition(0.138, 0.219, 0.125)
         self.link2.setRotation(agx.EulerAngles(0, math.pi, math.pi))
@@ -58,21 +54,36 @@ class rovAssembly(agxSDK.Assembly):
         self.wire_pos = (0, 0, 0)
         self.wire_pos2 = [20, 0, 20]
 
-        self.hinge1 = self.build_hinge(link=self.link1,part=self.link2)
+        self.hinge1 = demoutils.create_constraint(
+            pos=agx.Vec3(0.138, 0.219, 0.125),
+            axis=agx.Vec3(0, 1, 0),
+            rb1=self.link1,
+            rb2=self.link2,
+            c=agx.Hinge)  # type: agx.Hinge
         self.hinge1.setCompliance(1e-5)
         self.hinge1.getLock1D().setEnable(False)
         self.hinge1.getMotor1D().setEnable(False)
         self.hinge1.getRange1D().setEnable(True)
         self.hinge1.getRange1D().setRange(math.radians(-75), math.radians(75))
 
-        self.hinge2 = self.build_hinge(self.link1,self.link3)
+        self.hinge2 = demoutils.create_constraint(
+            pos=agx.Vec3(0.138, -0.581, 0.125),
+            axis=agx.Vec3(0, 1, 0),
+            rb1=self.link1,
+            rb2=self.link3,
+            c=agx.Hinge)  # type: agx.Hinge
         self.hinge2.setCompliance(1e-6)
         self.hinge2.getLock1D().setEnable(False)
         self.hinge2.getMotor1D().setEnable(False)
         self.hinge2.getRange1D().setEnable(True)
         self.hinge2.getRange1D().setRange(math.radians(-75), math.radians(75))
 
-        self.hinge3 = self.build_hinge(self.link1,self.spoiler)
+        self.hinge3 = demoutils.create_constraint(
+            pos=agx.Vec3(0.2, -0.985, 0.22),
+            axis=agx.Vec3(0, 1, 0),
+            rb1=self.link1,
+            rb2=self.spoiler,
+            c=agx.Hinge)  # type: agx.Hinge
         self.hinge3.setCompliance(1e-6)
         self.hinge3.getLock1D().setEnable(False)
         self.hinge3.getMotor1D().setEnable(False)
@@ -106,7 +117,6 @@ class rovAssembly(agxSDK.Assembly):
         self.add(self.distance3)
         self.setName('rov')
         Sec.postCallback(lambda t: self.displayForces(t))
-
     def displayForces(self, t):
         plot = self.keyboard.plot
         pos = self.link1.getPosition()[2]*1.23
@@ -119,44 +129,16 @@ class rovAssembly(agxSDK.Assembly):
         self.plot_roll.append(self.link1.getRotation()[1] * 100)
         self.plot_wing_angle.append(_map(self.distance1.getAngle(), 0.753, 1.05, -45, 45))
 
-        if plot:
+        if plot and not self.plotted:
             """plots stored values to csv file"""
             plot_wing_angle = np.array(self.plot_wing_angle)
             plot_depth = np.array(self.plot_depth)
             plot_pitch = np.array(self.plot_pitch)
             plot_roll = np.array(self.plot_roll)
 
-            pd.DataFrame(plot_depth).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\plotDepth.csv")
-            pd.DataFrame(plot_pitch).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\plotPitch.csv")
-            pd.DataFrame(plot_wing_angle).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\plot_wing_angle.csv")
-            pd.DataFrame(plot_roll).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\pplot_roll.csv")
-            # print('check csv')
-            # self.plotted = True
-    def build_hinge(self, link, part):
-        return demoutils.create_constraint(
-                                            pos=agx.Vec3(0.2, -0.985, 0.22),
-                                            axis=agx.Vec3(0, 1, 0),
-                                            rb1= link,
-                                            rb2= part,
-                                            c=agx.Hinge)  # type: agx.Hinge
-
-
-if __name__ == "__main__":
-    kp = 1000
-    ki = 1000
-    kd = 1
-
-    pid = PID_Controller(kp, ki, kd, 0)
-    pid.setName('pid')
-    pid.set_output_limits(-45, 45)
-    pid.set_mode(1, 0, 0)
-    pid.set_setpoint(-20)
-    keyboard = KeyboardListener(pid, True)
-
-    """Creates the rov"""
-    rov = rovAssembly(pid, keyboard)
-    rov.setPosition(agx.Vec3(0, 0, 0))
-    rov.setName("rov")
-    rov.setRotation(agx.EulerAngles(0, 0, math.pi))
-
-    rov.displayForces(1)
+            # pd.DataFrame(plot_depth).to_csv("C:/Users/Ishmael/PycharmProjects/pythonProject1/TowedRov-Sim/plotDepth.csv")
+            pd.DataFrame(plot_pitch).to_csv("C:/Users/Ishmael/PycharmProjects/pythonProject1/TowedRov-Sim/plotPitch.csv")
+            # pd.DataFrame(plot_wing_angle).to_csv("C:/Users/Ishmael/PycharmProjects/pythonProject1/TowedRov-Sim/plotWingAngle.csv")
+            # pd.DataFrame(plot_roll).to_csv("C:/Users/Ishmael/PycharmProjects/pythonProject1/TowedRov-Sim/plotRoll.csv")
+            print('check csv')
+            self.plotted = True

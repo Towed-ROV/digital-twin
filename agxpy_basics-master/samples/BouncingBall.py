@@ -1,7 +1,7 @@
 import agx
 import agxCollide
 from agxRender import Color
-from rand import random
+from random import random
 
 
 

@@ -1,8 +1,7 @@
 import agxModel
-
+import math
 import demoutils
 import agx
-from agxOSG import createVisual
 from Boat.ship import Ship
 from Boat.boat_controller import Boat_Controller
 from Rov.rov_assembly import rovAssembly
@@ -11,8 +10,7 @@ from keyboard_listener import KeyboardListener
 from make_water import MakeWater
 from make_wire import MakeWire
 from pid import PID_Controller
-import matplotlib as plt
-import math
+
 
 def setBodyViscousDrag(body, controller, viscousDrag):
     geometries = body.getGeometries()
@@ -36,11 +34,11 @@ def buildScene():
 """Building scene"""
 def build_scene():
     """write plot to csv file variable"""
-    plot = True
+    plot = False
     adjust_rov = False
     kp = 1000
     ki = 1000
-    kd = 1
+    kd = 0
     kp_trim = 0
     ki_trim = 0
     kd_trim = 0
@@ -48,9 +46,10 @@ def build_scene():
     ki_boat = 0.0000001
     kd_boat = 0
     print('dsd')
-    water_geometry, bottom_geometry = MakeWater().make_water(adjust_rov, 1025, 500, 2, 30)
+    water_geometries, bottom_geometries = MakeWater().make_water(adjust_rov, 1025, 500, 2, 30)
     controller = agxModel.WindAndWaterController()
-    controller.addWater(water_geometry)
+    for water_geometry in water_geometries:
+        controller.addWater(water_geometry)
 
 
     """Creates a pid controller for depth"""
@@ -73,7 +72,7 @@ def build_scene():
 
     """Creates the rov"""
     rov = rovAssembly(pid, keyboard)
-    rov.setPosition(agx.Vec3(-100, 0, 0))
+    rov.setPosition(agx.Vec3(0, 0, 0))
     rov.setName("rov")
     rov.setRotation(agx.EulerAngles(0, 0, math.pi))
 
@@ -86,7 +85,7 @@ def build_scene():
         pid_boat.setName('pidBoat')
         pid_boat.set_output_limits(-2, 2)
         pid_boat.set_mode(1, 0, 0)
-        pid_boat.set_setpoint(50)
+        pid_boat.set_setpoint(3)
 
         """Creates the boat to tow the rov"""
         ship = Ship()
@@ -103,20 +102,20 @@ def build_scene():
         demoutils.sim().add(ship)
         demoutils.sim().add(pid_boat)
         demoutils.sim().add(Boat_Controller(ship, pid_boat))
-
     """Creates a controller to control the wings of the Rov"""
     wing_controll = RovController(rov)
     wing_controll.setName('wingControll')
 
     """Adds rov, boat, controller, and pid to the simulation"""
-    demoutils.sim().add(bottom_geometry)
-    demoutils.sim().add(water_geometry)
+    for bottom_geometry in bottom_geometries:
+        demoutils.sim().add(bottom_geometry)
+    for water_geometry in water_geometries:
+        demoutils.sim().add(water_geometry)
     demoutils.sim().add(rov)
     demoutils.sim().add(pid)
     demoutils.sim().add(pid_trim)
     demoutils.sim().add(wing_controll)
     demoutils.sim().add(controller)
-    createVisual(bottom_geometry, demoutils.root())
 
 
     lock = agx.LockJoint(rov.getRigidBody('rovBody'))
@@ -129,8 +128,6 @@ def build_scene():
     lock.setCompliance(1e-12, agx.LockJoint.ROTATIONAL_3)
     demoutils.sim().add(lock)
     demoutils.sim().setTimeStep(0.005)
-
-    rov.displayForces(1)
     """locks the rov in fixed position, for mounting wing and cable to rov"""
     # lock1 = agx.LockJoint(rov.link1)
     # demoutils.sim().add(lock1)
