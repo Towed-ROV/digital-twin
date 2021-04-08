@@ -57,21 +57,36 @@ class rovAssembly(agxSDK.Assembly):
         self.wire_pos = (0, 0, 0)
         self.wire_pos2 = [20, 0, 20]
 
-        self.hinge1 = self.build_hinge(link=self.link1,part=self.link2)
+        self.hinge1 = demoutils.create_constraint(
+            pos=agx.Vec3(0.138, 0.219, 0.125),
+            axis=agx.Vec3(0, 1, 0),
+            rb1=self.link1,
+            rb2=self.link2,
+            c=agx.Hinge)  # type: agx.Hinge
         self.hinge1.setCompliance(1e-5)
         self.hinge1.getLock1D().setEnable(False)
         self.hinge1.getMotor1D().setEnable(False)
         self.hinge1.getRange1D().setEnable(True)
         self.hinge1.getRange1D().setRange(math.radians(-75), math.radians(75))
 
-        self.hinge2 = self.build_hinge(self.link1,self.link3)
+        self.hinge2 = demoutils.create_constraint(
+            pos=agx.Vec3(0.138, -0.581, 0.125),
+            axis=agx.Vec3(0, 1, 0),
+            rb1=self.link1,
+            rb2=self.link3,
+            c=agx.Hinge)  # type: agx.Hinge
         self.hinge2.setCompliance(1e-6)
         self.hinge2.getLock1D().setEnable(False)
         self.hinge2.getMotor1D().setEnable(False)
         self.hinge2.getRange1D().setEnable(True)
         self.hinge2.getRange1D().setRange(math.radians(-75), math.radians(75))
 
-        self.hinge3 = self.build_hinge(self.link1,self.spoiler)
+        self.hinge3 = demoutils.create_constraint(
+            pos=agx.Vec3(0.2, -0.985, 0.22),
+            axis=agx.Vec3(0, 1, 0),
+            rb1=self.link1,
+            rb2=self.spoiler,
+            c=agx.Hinge)  # type: agx.Hinge
         self.hinge3.setCompliance(1e-6)
         self.hinge3.getLock1D().setEnable(False)
         self.hinge3.getMotor1D().setEnable(False)
@@ -108,7 +123,7 @@ class rovAssembly(agxSDK.Assembly):
 
     def displayForces(self, t):
         plot = self.keyboard.plot
-        pos = self.link1.getPosition()[2]*1.23
+        pos = self.link1.getPosition()[2]
         demoutils.app().getSceneDecorator().setText(3, "Rov Position in Z direction : {} M".format(str(round(pos, 2))))
         demoutils.app().getSceneDecorator().setText(4, "Pitch : {}".format(str(round(self.link1.getRotation()[0], 2))))
         demoutils.app().getSceneDecorator().setText(5, "Roll : {}".format(str(round(self.link1.getRotation()[1], 2))))
@@ -118,7 +133,7 @@ class rovAssembly(agxSDK.Assembly):
         self.plot_roll.append(self.link1.getRotation()[1] * 100)
         self.plot_wing_angle.append(_map(self.distance1.getAngle(), 0.753, 1.05, -45, 45))
 
-        if plot:
+        if plot and not self.plotted:
             """plots stored values to csv file"""
             plot_wing_angle = np.array(self.plot_wing_angle)
             plot_depth = np.array(self.plot_depth)
@@ -129,8 +144,8 @@ class rovAssembly(agxSDK.Assembly):
             pd.DataFrame(plot_pitch).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\plotPitch.csv")
             pd.DataFrame(plot_wing_angle).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\plot_wing_angle.csv")
             pd.DataFrame(plot_roll).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\pplot_roll.csv")
-            # print('check csv')
-            # self.plotted = True
+            print('check csv')
+            self.plotted = True
     def build_hinge(self, link, part):
         return demoutils.create_constraint(
                                             pos=agx.Vec3(0.2, -0.985, 0.22),

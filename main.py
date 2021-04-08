@@ -46,10 +46,10 @@ def build_scene():
     kp_trim = 0.02
     ki_trim = 0.02
     kd_trim = 1
-    kp_boat = 0.02
-    ki_boat = 0.0000001
+    kp_boat = 0
+    ki_boat = 0
     kd_boat = 0
-    water_geometry, bottom_geometry = MakeWater().make_water(adjust_rov, 1025, 500, 2, 30)
+    water_geometry, bottom_geometry = MakeWater().make_water(adjust_rov, 1025, 500, 2,20)
     controller = agxModel.WindAndWaterController()
     controller.addWater(water_geometry)
     
@@ -135,16 +135,17 @@ def build_scene():
     demoutils.sim().setTimeStep(0.005)
     "hold simulator untill start"
     # if not start:
-    #     lock2 = agx.LockJoint(ship.m_body)
-    #     demoutils.sim().add(lock2)
-    #     lock1 = agx.LockJoint(rov.link1)
-    #     demoutils.sim().add(lock1)
+    # lock2 = agx.LockJoint(ship.m_body)
+    # demoutils.sim().add(lock2)
+    # lock1 = agx.LockJoint(rov.link1)
+    # demoutils.sim().add(lock1)
 
 
     rov.displayForces(1)
     """locks the rov in fixed position, for mounting wing and cable to rov"""
     if adjust_rov:
-        lock1 = agx.LockJoint(rov.link1)
-        demoutils.sim().add(lock1)
+        pass
+        # lock1 = agx.LockJoint(rov.link1)
+        # demoutils.sim().add(lock1)
     #
 

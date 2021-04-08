@@ -28,7 +28,7 @@ class ArduinoStepper(agxSDK.StepEventListener):
             bytesize=serial.EIGHTBITS,
             timeout=0)
         #timer
-        self.interval = 0.01
+        self.interval = 0.2
         self.previousMillis = 0
 
         self.max_wing_angle = 35
@@ -54,7 +54,7 @@ class ArduinoStepper(agxSDK.StepEventListener):
     def pre(self, t):
         if not self.reset:
             self.send("StepperArduino:0")
-            if self.read()[0] == "reset":
+            if self.read()[0] == "start":
                 print("stepper arduino")
                 self.reset = True
 
@@ -63,17 +63,17 @@ class ArduinoStepper(agxSDK.StepEventListener):
         #         print("start step")
         #         self.start = True
         else:
-            self.depth = round(self.rov.link1.getPosition()[2] * 1.23, 2)
+            self.depth = round(self.rov.link1.getPosition()[2], 2)
             if self.has_been_reset:
                 if self.target_mode == self.manual_mode:
                     pos = constrain(self.manual_wing_pos, -self.max_wing_angle, self.max_wing_angle)
                     self.wing_pos_sb = pos
                     self.wing_pos_port = pos
                 elif self.target_mode == self.auto_depth_mode:
-                    print(self.depth)
+                    # print(self.depth)
                     # print(type(self.pid.compute(self.depth)))
                     wing_pos = self.pid.compute(self.depth)
-                    print(wing_pos)
+                    # print(wing_pos)
                     trim_pos = self.pid_trim.compute(self.roll)
                     if trim_pos != 0:
                         self.wing_pos_sb, self.wing_pos_port = self.trim_wing_pos(wing_pos, trim_pos)
@@ -99,7 +99,8 @@ class ArduinoStepper(agxSDK.StepEventListener):
             self.handle_received_message()
 
     def reset_stepper(self):
-         self.send("reset:True")
+        self.send("reset:True")
+        print("reset")
 
     def move_stepper_pos_port(self, step_pos):
         current_millis_port = time.monotonic()
@@ -132,8 +133,8 @@ class ArduinoStepper(agxSDK.StepEventListener):
                           -self.max_wing_angle, self.max_wing_angle)
         angle_sb = _map(sb, self.min_stepper_pos_sb, self.max_stepper_pos_sb,
                         -self.max_wing_angle, self.max_wing_angle)
-        self.send("wing_pos_port:" + str(angle_port))
-        self.send("wing_pos_sb:" + str(angle_sb))
+        self.send("wing_pos_port:" + str(round(angle_port,2)))
+        self.send("wing_pos_sb:" + str(round(angle_sb,2)))
 
     def compensate_wing_to_pitch(self):
         self.wing_pos_sb  = self.wing_pos_sb - self.pitch
@@ -161,13 +162,13 @@ class ArduinoStepper(agxSDK.StepEventListener):
             if received_command[0] == "auto_mode":
                 if received_command[1] == "True":
                     self.set_target_mode(self.auto_depth_mode)
-                    self.send(received_command + ":True")
+                    self.send(received_command[0] + ":True")
                 elif received_command[1] == "False":
                     self.set_target_mode(self.manual_mode)
                     self.manual_wing_pos = int(self.wing_pos_sb)
-                    self.send(received_command + ":True")
+                    self.send(received_command[0] + ":True")
                 else:
-                    self.send(received_command + ":False")
+                    self.send(received_command[0] + ":False")
 
             elif received_command[0] == "manual_wing_pos":
                 check_manual_wing_pos = float(received_command[1])
@@ -184,71 +185,67 @@ class ArduinoStepper(agxSDK.StepEventListener):
 
             elif received_command[0] == "depth":
                 self.depth = float(received_command[1])
-                self.send(received_command[0] + ":True")
 
             elif received_command[0] == "roll":
                 self.roll = float(received_command[1])
-                self.send(received_command[0] + ":True")
 
             elif received_command[0] == "pitch":
                 self.pitch = float(received_command[1])
-                self.send(received_command[0] + ":True")
 
             elif received_command[0] == "set_point_depth":
                 self.set_point_depth = float(received_command[1])
                 self.send(received_command[0] + ":True")
 
             elif received_command[0] == "pid_depth_p":
-                self.pid_depth_p = float(received_command[1])
-                if self.pid_depth_p >= 0:
-                    self.pid_trim.set_tunings(self.pid_depth_p, self.pid_depth_i, self.pid_depth_d)
+                pid_depth_p = float(received_command[1])
+                if pid_depth_p >= 0:
+                    self.pid_trim.set_tunings(pid_depth_p, self.pid.ki, self.pid.kd)
                     self.send(received_command[0] + ":True")
                 else:
                     self.send(received_command[0] + ":False")
 
             elif received_command[0] == "pid_depth_i":
-                self.pid_depth_i = float(received_command[1])
-                if self.pid_depth_i >= 0:
-                    self.pid_trim.set_tunings(self.pid_depth_p, self.pid_depth_i, self.pid_depth_d)
+                pid_depth_i = float(received_command[1])
+                if pid_depth_i >= 0:
+                    self.pid_trim.set_tunings(self.pid.kp, pid_depth_i, self.pid.kd)
                     self.send(received_command[0] + ":True")
                 else:
                     self.send(received_command[0] + ":False")
 
             elif received_command[0] == "pid_depth_d":
-                self.pid_depth_d = float(received_command[1])
-                if self.pid_depth_d >= 0:
-                    self.pid_trim.set_tunings(self.pid_depth_p, self.pid_depth_i, self.pid_depth_d)
+                pid_depth_d = float(received_command[1])
+                if pid_depth_d >= 0:
+                    self.pid_trim.set_tunings(self.pid.kp, self.pid.ki, pid_depth_d)
                     self.send(received_command[0] + ":True")
                 else:
                     self.send(received_command[0] + ":False")
 
             elif received_command[0] == "pid_roll_p":
-                self.pid_roll_p = float(received_command[1])
-                if self.pid_roll_p >= 0:
-                    self.pid_trim.set_tunings(self.pid_roll_p, self.pid_roll_i, self.pid_roll_d)
+                pid_roll_p = float(received_command[1])
+                if pid_roll_p >= 0:
+                    self.pid_trim.set_tunings(pid_roll_p, self.pid_trim.ki, self.pid_trim.kd)
                     self.send(received_command[0] + ":True")
                 else:
                     self.send(received_command[0] + ":False")
 
             elif received_command[0] == "pid_roll_i":
-                self.pid_roll_i = float(received_command[1])
-                if self.pid_roll_i >= 0:
-                    self.pid_trim.set_tunings(self.pid_roll_p, self.pid_roll_i, self.pid_roll_d)
+                pid_roll_i = float(received_command[1])
+                if pid_roll_i >= 0:
+                    self.pid_trim.set_tunings(self.pid_trim.kp, pid_roll_i, self.pid_trim.kd)
                     self.send(received_command[0] + ":True")
                 else:
                     self.send(received_command[0] + ":False")
 
             elif received_command[0] == "pid_roll_d":
-                self.pid_roll_d = float(received_command[1])
-                if self.pid_roll_d >= 0:
-                    self.pid_trim.set_tunings(self.pid_roll_p, self.pid_roll_i, self.pid_roll_d)
+                pid_roll_d = float(received_command[1])
+                if pid_roll_d >= 0:
+                    self.pid_trim.set_tunings(self.pid_trim.kp, self.pid_trim.ki, pid_roll_d)
                     self.send(received_command[0] + ":True")
                 else:
                     self.send(received_command[0] + ":False")
 
             elif received_command[0] == "reset":
                 self.reset_stepper()
-                self.send(received_command[0] + ":True")
         except ValueError:
             pass
     def set_target_mode(self, target_mode, wing_pos = 0):
@@ -265,8 +262,8 @@ class ArduinoStepper(agxSDK.StepEventListener):
             self.pid.set_mode(1, 0, 0)
             self.pid_trim.set_mode(1, 0, 0)
             self.target_mode = self.auto_depth_mode
-            self.pid.set_tunings(self.pid_depth_p,self.pid_depth_i,self.pid_depth_d)
-            self.pid_trim.set_tunings(self.pid_roll_p, self.pid_roll_i, self.pid_roll_d)
+            self.pid.set_tunings(self.pid.kp, self.pid.ki, self.pid.kd)
+            self.pid_trim.set_tunings(self.pid_trim.kp, self.pid_trim.ki, self.pid_trim.kd)
 
     def send(self, message):
         output = "<" + message + ">\n"
@@ -277,7 +274,13 @@ class ArduinoStepper(agxSDK.StepEventListener):
         message = message.strip()
         message = message.decode('utf-8').strip("<").strip(">")
         if message:
-            print(message)
+            try:
+                msg = message.split(":",1)
+                if msg[0] != 'depth' and msg[0] != 'roll' and msg[0] != 'pitch':
+                    print(message)
+
+            except Exception as e:
+                print(e)
         return message.split(":",1)
 
     # keyboards is used to tune the position of the wings

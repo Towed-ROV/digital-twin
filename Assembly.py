@@ -71,7 +71,7 @@ def create_wing_right(aluminum):
 """Creates rigidbody of the port wing from obj file"""
 def create_wing_left(aluminum):
     mesh_reader = agxIO.MeshReader()
-    mesh_reader.readFile("models/wingR.obj")
+    mesh_reader.readFile("models/wingR3.obj")
     scaled_vertices = scale_mesh(mesh_reader.getVertices(), agx.Vec3(0.001))
     trimesh = agxCollide.Trimesh(scaled_vertices, mesh_reader.getIndices(), "wingL")
     geom = agxCollide.Geometry(trimesh)
