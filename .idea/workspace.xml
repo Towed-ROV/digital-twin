@@ -20,6 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a81053cf-228f-4eb3-8dc3-26f5da944597" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/Rov/arduino_sensor.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Rov/arduino_stepper.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/fake_serial.py" afterDir="false" />
@@ -27,6 +28,9 @@
       <change beforePath="$PROJECT_DIR$/123.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Rov/rov_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rov/rov_controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test123.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/test123.py" beforeDir="false" afterPath="$PROJECT_DIR$/test123.py" afterDir="false" />
+>>>>>>> parent of 0966b6b... Auto stash before merge of "main" and "origin/main"
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +67,11 @@
       <recent name="C:\Users\Jørgen sin kule bruk\Documents\GitHub\AGX-towed-rov-simulation\Rov" />
     </key>
   </component>
+<<<<<<< HEAD
   <component name="RunManager" selected="Python.test">
+=======
+  <component name="RunManager" selected="Python.test123 (1)">
+>>>>>>> parent of 0966b6b... Auto stash before merge of "main" and "origin/main"
     <configuration name="123" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="rov-sim" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -97,7 +105,11 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+<<<<<<< HEAD
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/agxpy_basics-master/samples/BouncingBall.py" />
+=======
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Assembly.py" />
+>>>>>>> parent of 0966b6b... Auto stash before merge of "main" and "origin/main"
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -118,7 +130,11 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+<<<<<<< HEAD
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/demoutils/__init__.py" />
+=======
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/agxpy_basics-master/samples/BouncingBall.py" />
+>>>>>>> parent of 0966b6b... Auto stash before merge of "main" and "origin/main"
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -139,7 +155,11 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+<<<<<<< HEAD
       <option name="SCRIPT_NAME" value="C:\AGX-towed-rov-simulation\main.py" />
+=======
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/demoutils/__init__.py" />
+>>>>>>> parent of 0966b6b... Auto stash before merge of "main" and "origin/main"
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -160,7 +180,11 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+<<<<<<< HEAD
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+=======
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test123.py" />
+>>>>>>> parent of 0966b6b... Auto stash before merge of "main" and "origin/main"
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -252,9 +276,12 @@
       <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state x="1949" y="24" width="1441" height="717" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.1920.1160@0.0.1920.1040" timestamp="1616758146581" />
+<<<<<<< HEAD
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1617089507231">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1160@0.0.1920.1040" timestamp="1617089507231" />
+=======
+>>>>>>> parent of 0966b6b... Auto stash before merge of "main" and "origin/main"
   </component>
 </project>
