@@ -1,7 +1,9 @@
 import agxIO
 import agx
 import agxCollide
-
+import agxUtil
+import inspect
+from agx import RigidBody
 """Creates fender geometry"""
 def create_fenders(self, fender_material, half_width, half_length):
     fender = agxCollide.Geometry(agxCollide.Capsule(0.8, half_width * 2))
@@ -39,9 +41,9 @@ def create_spoiler():
 def create_rov_body(aluminum) -> agx.RigidBody:
     # trimesh = agxOSG.readNodeFile("models/test2.stl", False)
     mesh_reader = agxIO.MeshReader()
-    mesh_reader.readFile("models/test1.obj")
-    scaled_vertices = scale_mesh(mesh_reader.getVertices(), agx.Vec3(0.001))
-    trimesh = agxCollide.Trimesh(scaled_vertices, mesh_reader.getIndices(), "model")
+    mesh_reader.readFile("test_obj_new_simple.obj")
+    scaled_vertices = scale_mesh(mesh_reader.getVertices(), agx.Vec3(1))
+    trimesh = agxCollide.Trimesh(scaled_vertices, mesh_reader.getIndices(), 'test_obj_new_simple')
     geom = agxCollide.Geometry(trimesh)
     geom.setName('rr')
     geom.setMaterial(aluminum)
@@ -54,7 +56,7 @@ def create_rov_body(aluminum) -> agx.RigidBody:
 """Creates rigidbody of the starboard wing from obj file"""
 def create_wing_right(aluminum):
     mesh_reader = agxIO.MeshReader()
-    mesh_reader.readFile("models/wingL.obj")
+    mesh_reader.readFile("wing_simp.obj")
     scaled_vertices = scale_mesh(mesh_reader.getVertices(), agx.Vec3(0.001))
     trimesh = agxCollide.Trimesh(scaled_vertices, mesh_reader.getIndices(), "wingR")
     geom = agxCollide.Geometry(trimesh)
@@ -67,7 +69,7 @@ def create_wing_right(aluminum):
 """Creates rigidbody of the port wing from obj file"""
 def create_wing_left(aluminum):
     mesh_reader = agxIO.MeshReader()
-    mesh_reader.readFile("models/wingR3.obj")
+    mesh_reader.readFile("wing_simp.obj")
     scaled_vertices = scale_mesh(mesh_reader.getVertices(), agx.Vec3(0.001))
     trimesh = agxCollide.Trimesh(scaled_vertices, mesh_reader.getIndices(), "wingL")
     geom = agxCollide.Geometry(trimesh)
@@ -77,8 +79,34 @@ def create_wing_left(aluminum):
     wing_left.add(geom)
     return wing_left
 
+def ruged_body_from_obj(filename, scale, model_name, material, rotation_matrix, rov_pos,body:RigidBody = None):
+    mesh = agxUtil._agxUtil.createTrimesh(filename)
+    mesh_ref = agxCollide.TrimeshRef(mesh)
+    if scale is not 1:
+        scale_mesh(mesh_ref.getMeshData().getVertices(), agx.Vec3(scale))
+    mesh_ref.updateMeshGeometry(True, True)
+    print_frame(line_d(), mesh_ref.getBoundingVolume().size() ,mesh_ref.getBoundingVolume().thisown,model_name)
+    geometry = build_model(mesh, rov_pos, material, RigidBody.DYNAMICS, model_name,rigid_body=body)
+    geometry.setName(model_name)
+    geometry.setRotation(rotation_matrix)
 
+def build_model(shape, pos, material, motion_controll, name, rigid_body: RigidBody=None):
+    geometry = build_geometry_from_shape(shape, material, name)
+    if not rigid_body:
+        rigid_body = build_rigid_body(motion_controll, geometry, pos, name)
+    else:
+        rigid_body.add(geometry)
+    return rigid_body
 
+line_d = inspect.currentframe
+def print_frame(f:line_d, *args):
+    info = inspect.getframeinfo(f)
+    print("\n------------------------------------------------------------")
+    if len(args):
+        for arg in args:
+            print("  |==>  message: ", arg, "\n  |------------------------------------------------------------")
+    print("  |printed at line: %s\n  |in fuction: %s \n  |in document:%s" % (info.lineno, info.function, info.filename))
+    print("------------------------------------------------------------\n")
 
 
 """function for mapping value with limits, equivalent to Arduinos map function"""

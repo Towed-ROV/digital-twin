@@ -2,12 +2,14 @@ import agxModel
 import math
 import demoutils
 import agx
+import agxOSG
 from Boat.ship import Ship
 from Boat.boat_controller import Boat_Controller
 from Rov.rov_assembly import rovAssembly
 from Rov.rov_controller import RovController
 from keyboard_listener import KeyboardListener
 from make_water import MakeWater
+from make_simple_water import make_simple_water
 from make_wire import MakeWire
 from pid import PID_Controller
 
@@ -46,11 +48,12 @@ def build_scene():
     ki_boat = 0.0000001
     kd_boat = 0
     print('dsd')
-    water_geometries, bottom_geometries = MakeWater().make_water(adjust_rov, 1025, 500, 2, 30)
+    water_geometry, bottom_geometry = make_simple_water().make_water(adjust_rov, 1025, 500, 2, 30)
     controller = agxModel.WindAndWaterController()
-    for water_geometry in water_geometries:
-        controller.addWater(water_geometry)
-
+    #for water_geometry in water_geometries:
+    #    controller.addWater(water_geometry)
+    controller.addWater(water_geometry)
+    #controller.addObject(bottom_geometry)
 
     """Creates a pid controller for depth"""
 
@@ -107,10 +110,11 @@ def build_scene():
     wing_controll.setName('wingControll')
 
     """Adds rov, boat, controller, and pid to the simulation"""
-    for bottom_geometry in bottom_geometries:
-        demoutils.sim().add(bottom_geometry)
-    for water_geometry in water_geometries:
-        demoutils.sim().add(water_geometry)
+
+    demoutils.sim().add(bottom_geometry)
+    agxOSG.createVisual(bottom_geometry, demoutils.root())
+    demoutils.sim().add(water_geometry)
+
     demoutils.sim().add(rov)
     demoutils.sim().add(pid)
     demoutils.sim().add(pid_trim)

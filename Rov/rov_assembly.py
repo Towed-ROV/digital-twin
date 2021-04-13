@@ -54,12 +54,11 @@ class rovAssembly(agxSDK.Assembly):
         self.wire_pos = (0, 0, 0)
         self.wire_pos2 = [20, 0, 20]
 
-        self.hinge1 = demoutils.create_constraint(
-            pos=agx.Vec3(0.138, 0.219, 0.125),
-            axis=agx.Vec3(0, 1, 0),
-            rb1=self.link1,
-            rb2=self.link2,
-            c=agx.Hinge)  # type: agx.Hinge
+        self.hinge1 = demoutils.create_constraint(pos=agx.Vec3(0.138, 0.219, 0.125),
+                                                    axis=agx.Vec3(0, 1, 0),
+                                                    rb1=self.link1,
+                                                    rb2=self.link2,
+                                                    c=agx.Hinge)  # type: agx.Hinge
         self.hinge1.setCompliance(1e-5)
         self.hinge1.getLock1D().setEnable(False)
         self.hinge1.getMotor1D().setEnable(False)
@@ -117,6 +116,7 @@ class rovAssembly(agxSDK.Assembly):
         self.add(self.distance3)
         self.setName('rov')
         Sec.postCallback(lambda t: self.displayForces(t))
+
     def displayForces(self, t):
         plot = self.keyboard.plot
         pos = self.link1.getPosition()[2]*1.23
