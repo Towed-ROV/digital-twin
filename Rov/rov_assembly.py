@@ -119,7 +119,7 @@ class rovAssembly(agxSDK.Assembly):
 
     def displayForces(self, t):
         plot = self.keyboard.plot
-        pos = self.link1.getPosition()[2]*1.23
+        pos = self.link1.getPosition()[2]
         demoutils.app().getSceneDecorator().setText(3, "Rov Position in Z direction : {} M".format(str(round(pos, 2))))
         demoutils.app().getSceneDecorator().setText(4, "Pitch : {}".format(str(round(self.link1.getRotation()[0], 2))))
         demoutils.app().getSceneDecorator().setText(5, "Roll : {}".format(str(round(self.link1.getRotation()[1], 2))))

@@ -1,6 +1,7 @@
 import agx
 import agxUtil
 import agxCollide
+import demoutils
 import agxModel
 from pid import PID_Controller
 from agxOSG import WireRenderer
@@ -9,6 +10,7 @@ from agxWire import Wire, BodyFixedNode
 from agxModel import WindAndWaterParameters
 from agx import Material, RigidBody, OrthoMatrix3x3
 # debug imports
+from modules.agxPythonModules.utils.callbacks import StepEventCallback as Sec
 import inspect
 import math
 
@@ -143,14 +145,15 @@ class assembler:
         self.sim.add(wire)
         self.sim.add(wire_renderer)
 
+        Sec.postCallback(lambda t: self.displayForces(t,rov))
         [print (g.getName()) for g in self.sim.getGeometries()]
         for models in rov.getGeometries():
             for shape in models.getShapes():
                 parameters = water_controller.getOrCreateHydrodynamicsParameters(shape)
-                parameters.setCoefficient(WindAndWaterParameters.PRESSURE_DRAG, 1)
-                parameters.setCoefficient(WindAndWaterParameters.BUOYANCY, 0.1)
-                parameters.setCoefficient(WindAndWaterParameters.VISCOUS_DRAG, 0.1)
-                parameters.setCoefficient(WindAndWaterParameters.LIFT, 0.1)
+                parameters.setCoefficient(WindAndWaterParameters.PRESSURE_DRAG,1)
+                parameters.setCoefficient(WindAndWaterParameters.BUOYANCY, 0.5)
+                parameters.setCoefficient(WindAndWaterParameters.VISCOUS_DRAG, 0.5)
+                parameters.setCoefficient(WindAndWaterParameters.LIFT, 0.5)
 
 
         wire_parameters = water_controller.getOrCreateHydrodynamicsParameters(wire)
@@ -161,6 +164,9 @@ class assembler:
         water_controller.setEnableAerodynamics(False)
 
         return boat, wire, rov
+    def displayForces(self, t,rov):
+
+        print(rov.getPosition()[2])
 
 line_d = inspect.currentframe
 def print_frame(f:line_d, *args):

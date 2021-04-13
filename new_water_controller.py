@@ -44,12 +44,12 @@ class water_controller:
 def build_scene():
      sim = demoutils.sim()
      root = demoutils.root()
-     sim.setTimeStep(0.125)
+     sim.setTimeStep(0.05)
      water_length = 2000
      water_dim = (water_length, 400, 400)
      controller, geomotry = water_controller().build_water_controller(sim, water_dim, has_floor=True)
 
-     r= ROV_assembly.assembler(wire_length=1500, pos=(-water_dim[0]/2 + 100, water_dim[1]/2, water_dim[2]*2), speed=50, sim=sim, root=root)
+     r= ROV_assembly.assembler(wire_length=1500, pos=(-water_dim[0]/2 + 100, water_dim[1]/2, water_dim[2]*2), speed=25, sim=sim, root=root)
      bodies = r.build_bodies(geomotry, controller)
      for geomotries in bodies:
          if type(geomotries) is not agxWire.Wire:
