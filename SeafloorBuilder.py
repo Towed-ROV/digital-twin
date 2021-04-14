@@ -15,7 +15,8 @@ import math
 import numpy as np
 
 # Local modules
-from Seafloor_tracking.sftA_py.src import seafloor_generater
+#from Seafloor_tracking.sftA_py.src
+import seafloor_generater
 
 def generate_seafloor(length, width,depth, amplitude=30): #, sim=None, app=None, root=None):
     # Create a heightfield from a picture

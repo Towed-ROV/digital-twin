@@ -36,7 +36,7 @@ def noise(data, amp):
     return data
 
 
-def get_seafloor(max_depth=60, min_depth=30, length=100, samples_per_meter=100, add_noise = False, noise_amp=1, add_edge=True):
+def get_seafloor(max_depth=60, min_depth=30, length=100, samples_per_meter=100, add_noise = True, noise_amp=1, add_edge=True):
     """
     Generate seafloor.
 
@@ -62,7 +62,10 @@ def get_seafloor(max_depth=60, min_depth=30, length=100, samples_per_meter=100, 
     if max_depth < min_depth:
         raise Exception("max depth must be lower than min depth")
     resolution = samples_per_meter*length
-    resolution = int(resolution*7/10) if add_edge else resolution
+    print(resolution)
+    resolution = int(resolution*7/10) if add_edge else int(resolution)
+
+    print(length, resolution, samples_per_meter)
     print(resolution)
     median = (max_depth + min_depth) / 2
     t = np.linspace(0, length, resolution)
@@ -99,17 +102,19 @@ def get_seafloor(max_depth=60, min_depth=30, length=100, samples_per_meter=100, 
                              * seafloor[len(seafloor) - 1] + 10)
         seafloor = np.append(seafloor, np.ones(int(length * samples_per_meter / 10))
                              * seafloor[len(seafloor) - 1] - 20)
-    surface = np.zeros(len(seafloor))
 
     mini = np.min(seafloor)
+
     maxi = np.max(seafloor) - mini
 
     seafloor = ((seafloor - mini)/maxi) * (max_depth - min_depth) + min_depth
-    dif = length * samples_per_meter - len(seafloor)
+    dif = int(length * samples_per_meter - len(seafloor))
+
     if dif is not 0:
         seafloor = np.append(seafloor ,np.ones(dif) * seafloor[len(seafloor)-1])
     if add_noise:
-        return noise(seafloor.copy(), noise_amp), seafloor
+        return noise(seafloor.copy())
+
     return seafloor
 
 
@@ -118,31 +123,29 @@ def image_builder(filename, seafloor, width,show=False):
     maxi = np.max(seafloor) - mini
     seafloor = seafloor - mini
     seafloor = np.divide(seafloor, maxi)
-    #seafloor = seafloor * 255
-    seafloor = seafloor #* 127
+    seafloor = seafloor * 0.9
     img = np.zeros((width, len(seafloor)))
     for i in range(width):
         img[i] = seafloor
-    #print(np.size(img)/np.size(img[0]), np.size(img[0]))
-    #img = cv2.cvtColor(img,cv2.COLOR_GRAY2BGR)
     cv2.imwrite(filename, img*255)
     if show:
         cv2.imshow(filename,img)
         cv2.waitKey(0)
 
 def get_and_build(width, length, resolution):
-    seafloor = get_seafloor(min_depth=60,max_depth=100,length= length, samples_per_meter= resolution,add_noise= False,
+    seafloor = get_seafloor(min_depth=60,max_depth=100,length= length, samples_per_meter=resolution, add_noise= False,
                              add_edge= False)
     image_builder("seafloor.png", seafloor, width)
 
 if __name__ == "__main__":
-    seafloor = get_seafloor(min_depth=50, max_depth=60, length=40,
-                                                     samples_per_meter=2, add_noise=False, add_edge=False)
-    # print(seafloor.size)
+    seafloor = get_seafloor(length=100, samples_per_meter=10,noise_amp=2)
+    print(seafloor)
     #print(min(seafloor), max(seafloor))
     plt.figure()
-    print(len(seafloor))
-    #plt.plot(-noisy_seafloor)
-    plt.plot(-seafloor)
+    if type(seafloor) is list:
+        plt.plot(-seafloor[0])
+        plt.plot(-seafloor[1])
+    else:
+        plt.plot(-seafloor)
     plt.show()
-    image_builder("../../../AGX-towed-rov-simulation/seafloor.png", seafloor, len(seafloor),show=True)
+    image_builder("../../../AGX-towed-rov-simulation/seafloor.png", seafloor, len(seafloor), show=True)
