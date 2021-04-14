@@ -22,7 +22,7 @@ class RovController(agxSDK.GuiEventListener):
     """Runs every time before the simulation takes a step"""
     def pre(self, t):
         pid = demoutils.sim().getEventListener('pid')
-        pid.compute(demoutils.sim().getAssembly('rov').getRigidBody('rovBody').getPosition()[2] * 1.23)
+        pid.compute(demoutils.sim().getAssembly('rov').getRigidBody('rovBody').getPosition()[2] )#* 1.23)
         pid_trim = demoutils.sim().getEventListener('pidTrim')
         pid_trim.compute(demoutils.sim().getAssembly('rov').getRigidBody('rovBody').getRotation()[1])
         output_port = _map(pid.output-pid_trim.output, -45, 45,  1.387, 1.178)

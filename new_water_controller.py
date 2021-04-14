@@ -15,10 +15,10 @@ from threading import Event
 
 
 class water_controller:
-    def build_water_controller(self,sim_util, water_dim,has_floor=True):
+    def build_water_controller(self, water_dim, has_floor=True):
         water_controller = WindAndWaterController()
         water_geomotry = Geometry(Box(*water_dim))
-        water_pos = (water_dim[0]/2, water_dim[1]/2, water_dim[2])
+        water_pos = (water_dim[0]/2, -water_dim[1]/2, -water_dim[2])
         water_geomotry.setPosition(*water_pos)
         water_controller.addWater(water_geomotry)
         water_geomotry.setName("water")
@@ -28,17 +28,17 @@ class water_controller:
         water_color = Color.DeepSkyBlue()
         color = Color.DarkKhaki()
         demoutils.create_visual(water_geomotry, diffuse_color=water_color, ambient_color=color,shininess=120,alpha=0.3)
-        sim_util.add(water_controller)
-        sim_util.add(water_geomotry)
+        #sim_util.add(water_controller)
+        #sim_util.add(water_geomotry)
         if has_floor:
             floor_dim = (i * 2 for i in water_dim)
             hf = SeafloorBuilder.generate_seafloor(*floor_dim, amplitude=water_dim[2])
             color = Color.Black()
             demoutils.create_visual(hf, diffuse_color=color, ambient_color=color, alpha=1, shininess=0)
-            i = water_pos[2]*2
+            i = 0
             hf.setPosition(*water_pos[0:2],i)
-            sim_util.add(hf)
-        return water_controller,water_geomotry
+            #sim_util.add(hf)
+        return water_geomotry,water_controller, hf
 
 
 def build_scene():

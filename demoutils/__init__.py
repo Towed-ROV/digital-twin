@@ -83,11 +83,10 @@ def create_constraint(**kwds) -> agx.Constraint:
     c = kwds['c']
     rb1 = kwds['rb1']
     rb2 = kwds['rb2']
-
     f1 = agx.Frame()
     f2 = agx.Frame()
-
     agx.Constraint.calculateFramesFromBody(pos, axis, rb1, f1, rb2, f2)
+
     return c(rb1, f1, rb2, f2)
 
 

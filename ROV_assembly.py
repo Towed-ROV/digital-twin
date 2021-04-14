@@ -5,74 +5,69 @@ import demoutils
 import agxModel
 from pid import PID_Controller
 from agxOSG import WireRenderer
-from agxCollide import Geometry, Box
+from agxCollide import Geometry, Box, Trimesh
 from agxWire import Wire, BodyFixedNode
 from agxModel import WindAndWaterParameters
 from agx import Material, RigidBody, OrthoMatrix3x3
-# debug imports
-from modules.agxPythonModules.utils.callbacks import StepEventCallback as Sec
-import inspect
-import math
+from sophusUtil import line_d, print_frame, PI
+
 
 class assembler:
-    def __init__(self, pos, wire_length, speed, sim, root):
+    def __init__(self, pos, wire_length, speed): # sim, root):
         self.wire_length = wire_length
         self.rov_pos = (*pos[0:2], pos[2]-40)
         self.speed = speed
         self.boat_pos = (pos[0] + self.wire_length, *pos[1:3])
-        self.sim = sim
-        self.root = root
+        #self.sim = sim
+        #self.root = root
 
-    def build_rov(self):
-        material = Material('AluminumMaterial')
-        material.getBulkMaterial().setDensity(708)
-        rov = self.ruged_body_from_obj("test_obj_new_simple.obj", 0.1, "rov_body", material,
+    def build_rov(self, material):
+        #material = Material('AluminumMaterial')
+        #material.getBulkMaterial().setDensity(708)
+        rov = self.rugged_body_from_obj("test_obj_new_simple.obj", 0.001, "rov_body", material,
                                        OrthoMatrix3x3(1, 0, 0, 0, 1, 0, 0, 0, 1))
-        self.ruged_body_from_obj("wing_simp.obj", 100, "wingR", material,
-                                OrthoMatrix3x3(1, 0, 0, 0, 1, 0, 0, 0, 1),body=rov)
-        self.ruged_body_from_obj("wing_simp.obj", 100, "wingL", material,
-                                 OrthoMatrix3x3(1, 0, 0, 0, 1, 0, 0, 0, 1),body=rov)
+        wingR = self.rugged_body_from_obj("wing_simp.obj", 1, "wingR", material,
+                                    OrthoMatrix3x3(1, 0, 0, 0, 1, 0, 0, 0, 1))
+        wingL = self.rugged_body_from_obj("wing_simp.obj", 1, "wingL", material,
+                                    OrthoMatrix3x3(1, 0, 0, 0, 1, 0, 0, 0, 1))
         for bodies in rov.getGeometries():
             bodies.setRotation(OrthoMatrix3x3(-1, 0, 0, 0, 1, 0, 0, 0, 1))
-        widthR = 42
-        widthL = 20.5
-        wing_pos_R = agx.Vec3(self.rov_pos[0], self.rov_pos[1] - widthR, self.rov_pos[2] + 10)
-        wing_pos_L = agx.Vec3(self.rov_pos[0], self.rov_pos[1] + widthL,self.rov_pos[2] + 10)
-        wingR = rov.getGeometry("wingR")
-        wingL = rov.getGeometry("wingL")
 
-        wingL.setRotation(wingR.getRotation().rotate(-math.pi, 1, 0, 1))
-        wingL.setRotation(wingL.getRotation().rotate(-math.pi*0.9, 0, 1, 0))
-        wingR.setRotation(wingR.getRotation().rotate(-math.pi*0.9, 0, 1, 0))
+        rov.setRotation(rov.getRotation().rotate(PI,0,0,PI))
 
+        widthR = .05
+        widthL = .55
+        pos = rov.getPosition()
+        wing_pos_R = agx.Vec3(pos[0]+0.04, pos[1] - widthR, pos[2] + .1)
+        wing_pos_L = agx.Vec3(pos[0]+0.04, pos[1] + widthL, pos[2] + .1)
+        wingL.setRotation(wingL.getRotation().rotate(0,0,0,PI))
+        wingR.setRotation(wingL.getRotation().rotate(0,0,0,0))
         wingL.setPosition(wing_pos_R)
         wingR.setPosition(wing_pos_L)
-        return rov
+        return rov, wingR, wingL
 
-    def ruged_body_from_obj(self, filename, scale, model_name, material, rotation_matrix, body:RigidBody = None):
+    def rugged_body_from_obj(self, filename, scale, model_name, material, rotation_matrix, body:RigidBody = None):
         mesh = agxUtil._agxUtil.createTrimesh(filename)
         mesh_ref = agxCollide.TrimeshRef(mesh)
         if scale is not 1:
             self.scale_mesh(mesh_ref.getMeshData().getVertices(), agx.Vec3(scale))
         mesh_ref.updateMeshGeometry(True, True)
-        print_frame(line_d(), mesh_ref.getBoundingVolume().size() ,mesh_ref.getBoundingVolume().thisown,model_name)
-        geometry = self.build_model(mesh, self.rov_pos, material, RigidBody.DYNAMICS, model_name,rigid_body=body)
+        mesh = mesh_ref.asTrimesh()
+        geometry = self.build_model(mesh, self.rov_pos, material, RigidBody.DYNAMICS, model_name, rigid_body=body)
         geometry.setName(model_name)
         geometry.setRotation(rotation_matrix)
 
         return geometry
 
-    def obj_to_trimesh(self,filename,scale):
+    def obj_to_trimesh(self, filename, scale):
         mesh = agxUtil._agxUtil.createTrimesh(filename)
         mesh_ref = agxCollide.TrimeshRef(mesh)
-        print_frame(line_d(),mesh,filename,len(mesh_ref.getMeshData().getVertices()))
+        print_frame(line_d(), mesh, filename, len(mesh_ref.getMeshData().getVertices()))
         if scale is not 1:
             self.scale_mesh(mesh_ref.getMeshData().getVertices(), agx.Vec3(scale))
         mesh_ref.updateMeshGeometry(True, True)
         print_frame(line_d(),mesh_ref.getBoundingVolume())
         return mesh
-
-
 
     """Function to scale obj model to size"""
     def scale_mesh(self, mesh: agx.Vec3Vector, scale: agx.Vec3):
@@ -102,20 +97,21 @@ class assembler:
         shape.setName(name)
         return shape
 
-    def wire_builder(self,water, resolution=2):
+    def wire_builder(self, resolution=2):
         material = agx.Material('wireMaterial')
         wire = Wire(radius=0.25, resolutionPerUnitLength=resolution, enableCollisions=False)
-        wire.setEnableCollisions(water, True)
+        wire.setEnableCollisions(False)
         wire.setMaterial(material)
         wire.setName("wire")
-        wire_renderer = WireRenderer(wire, self.root)
-        return wire, wire_renderer
+        return wire
 
-    def build_boat(self):
+    def build_boat(self, boat_pos=None):
+        boat_pos = self.boat_pos if not boat_pos else boat_pos
         boat_shape = Box(*(20, 20, 20))
         material = Material("AluminumMaterial")
         boat_shape = Geometry(boat_shape)
-        boat_body = self.build_rigid_body(RigidBody.KINEMATICS,boat_shape, self.boat_pos, "boat")
+
+        boat_body = self.build_rigid_body(RigidBody.KINEMATICS,boat_shape, boat_pos, "boat")
         for geo in boat_body.getGeometries():
             geo.setMaterial(material)
         boat_body.setVelocity(agx.Vec3(self.speed, 0, 0))
@@ -132,49 +128,17 @@ class assembler:
         self.pid.set_mode(1, 0, 0)
         self.pid.set_setpoint(-20)
 
-    def build_bodies(self, water, water_controller):
-        wire, wire_renderer = self.wire_builder(water)
-        rov = self.build_rov()
+    def build_bodies(self,material): # , water, water_controller):
+        wire = self.wire_builder() # water)
+        # wire, wire_renderer = self.wire_builder()  # water)
+        rov, wingL, wingR = self.build_rov(material)
         boat = self.build_boat()
         wire.add(BodyFixedNode(rov, agx.Vec3(-10, -18, 20)))
         wire.add(BodyFixedNode(boat,  agx.Vec3(-20, 0, 20)))
 
-        self.sim.add(rov)
-
-        self.sim.add(boat)
-        self.sim.add(wire)
-        self.sim.add(wire_renderer)
-
-        Sec.postCallback(lambda t: self.displayForces(t,rov))
-        [print (g.getName()) for g in self.sim.getGeometries()]
-        for models in rov.getGeometries():
-            for shape in models.getShapes():
-                parameters = water_controller.getOrCreateHydrodynamicsParameters(shape)
-                parameters.setCoefficient(WindAndWaterParameters.PRESSURE_DRAG,1)
-                parameters.setCoefficient(WindAndWaterParameters.BUOYANCY, 0.5)
-                parameters.setCoefficient(WindAndWaterParameters.VISCOUS_DRAG, 0.5)
-                parameters.setCoefficient(WindAndWaterParameters.LIFT, 0.5)
-
-
-        wire_parameters = water_controller.getOrCreateHydrodynamicsParameters(wire)
-        wire_parameters.setCoefficient(WindAndWaterParameters.PRESSURE_DRAG,1 )
-        wire_parameters.setCoefficient(WindAndWaterParameters.VISCOUS_DRAG, 1 )
-        wire_parameters.setCoefficient(WindAndWaterParameters.LIFT, 0)
-        wire_parameters.setCoefficient(WindAndWaterParameters.BUOYANCY, 0 )
-        water_controller.setEnableAerodynamics(False)
 
         return boat, wire, rov
+
     def displayForces(self, t,rov):
 
         print(rov.getPosition()[2])
-
-line_d = inspect.currentframe
-def print_frame(f:line_d, *args):
-    info = inspect.getframeinfo(f)
-    print("\n------------------------------------------------------------")
-    if len(args):
-        for arg in args:
-            print("  |==>  message: ", arg, "\n  |------------------------------------------------------------")
-    print("  |printed at line: %s\n  |in fuction: %s \n  |in document:%s" % (info.lineno, info.function, info.filename))
-    print("------------------------------------------------------------\n")
-
