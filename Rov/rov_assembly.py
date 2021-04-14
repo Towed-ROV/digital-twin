@@ -12,7 +12,7 @@ import math
 from Assembly import create_rov_body, create_wing_right, create_wing_left, create_spoiler, _map
 from ROV_assembly import assembler
 from modules.agxPythonModules.utils.callbacks import StepEventCallback as Sec
-from sophusUtil import line_d, print_frame
+from sophusUtil import line_d, print_line
 
 
 """Class rovAssembly, creates a agx assembly of the rov, with to hinges, one on each wings"""
@@ -47,7 +47,7 @@ class rovAssembly(agxSDK.Assembly):
         self.link1.setName('rovBody')
         self.link2.setName('wingL')
         self.link3.setName('wingR')
-        print_frame(line_d(), self.link1.getName(),self.link2.getName(),self.link3.getName())
+        print_line( self.link1.getName(),self.link2.getName(),self.link3.getName())
         self.link1.setCmLocalTranslate(agx.Vec3(0.27511,-0.18095, 0.0494))
         # self.link2.setPosition(0.138, 0.219, 0.125)
         # self.link3.setPosition(0.138, -0.581, 0.125)

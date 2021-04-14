@@ -15,7 +15,7 @@ from make_wire import MakeWire
 from pid import PID_Controller
 import matplotlib as plt
 import math
-from sophusUtil import line_d, print_frame
+from sophusUtil import line_d, print_line
 
 def setBodyViscousDrag(body, controller, viscousDrag):
     geometries = body.getGeometries()
@@ -101,7 +101,7 @@ def build_scene():
         ship = Ship()
         ship.setName('ship')
         ship.setRotation(agx.EulerAngles(0,0,math.pi))
-        print_frame(line_d(), type(ship), type(rov))
+        print_line( type(ship), type(rov))
         wire, wire_renderer = MakeWire().create_wire(1020,0.005, ship, agx.Vec3(2, 0, 0), rov, agx.Vec3(0, -.18, .2))
         wire.setEnableCollisions(water_geomotry,True)
         demoutils.sim().add(wire)
@@ -124,9 +124,9 @@ def build_scene():
     demoutils.sim().add(controller)
     for part in rov.getGeometries():
         part.setEnableCollisions(water_geomotry, True)
-    print_frame(line_d())
+    print_line()
     createVisual(rov, demoutils.root())
-    print_frame(line_d())
+    print_line()
 
     lock = agx.LockJoint(rov.getRigidBody('rovBody'))
     lock.setCompliance(1e-2, agx.LockJoint.ALL_DOF)

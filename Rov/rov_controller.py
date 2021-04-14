@@ -28,16 +28,16 @@ class RovController(agxSDK.GuiEventListener):
         output_port = _map(pid.output-pid_trim.output, -45, 45,  1.387, 1.178)
         output_sb = _map(pid.output+pid_trim.output, -45, 45, 1.03, 0.723)
 
-        # print('--------------')
-        # print(pid.output)
-        # print('--------------')
-        # print(pidTrim.output)
-        # print('--------------')
-        # print(outputPort)
-        # print('--------------')
-        # print(outputSb)
-        # print('--------------')
-        # self.set_output(output_port, output_sb)
+        print('--------------')
+        print(pid.output)
+        print('--------------')
+        print(pid_trim.output)
+        print('--------------')
+        print(output_port)
+        print('--------------')
+        print(output_sb)
+        print('--------------')
+        self.set_output(output_port, output_sb)
 
     def set_output(self, output_port, output_sb):
         self.rov.output_port = output_port
@@ -101,6 +101,7 @@ class RovController(agxSDK.GuiEventListener):
     #     return handled
     def keyboard(self, key, modKeyMask, x, y, keydown) -> bool:
         handled = False
+        print("pos:", self.rov.distance1.getLock1D())
         if key == agxSDK.GuiEventListener.KEY_Right:
             print(self.current_pos)
             if (self.current_pos + self.interval_sb) < 1.1105:
@@ -118,8 +119,7 @@ class RovController(agxSDK.GuiEventListener):
         elif key == agxSDK.GuiEventListener.KEY_Left:
             print(self.current_pos)
             if (self.current_pos + self.interval) > 0.6575:
-
-                test = _map(self.current_pos, 0.6575, 1.1105, 0.8495, 1.232)
+                test = _map(self.current_pos, -3.1415, 3.1415, 3.1415, -3.1415)
                 print('------')
                 print("dsfs")
                 print(test)

@@ -9,7 +9,7 @@ from agxCollide import Geometry, Box, Trimesh
 from agxWire import Wire, BodyFixedNode
 from agxModel import WindAndWaterParameters
 from agx import Material, RigidBody, OrthoMatrix3x3
-from sophusUtil import line_d, print_frame, PI
+from sophusUtil import line_d, print_line, PI
 
 
 class assembler:
@@ -62,11 +62,11 @@ class assembler:
     def obj_to_trimesh(self, filename, scale):
         mesh = agxUtil._agxUtil.createTrimesh(filename)
         mesh_ref = agxCollide.TrimeshRef(mesh)
-        print_frame(line_d(), mesh, filename, len(mesh_ref.getMeshData().getVertices()))
+        print_line( mesh, filename, len(mesh_ref.getMeshData().getVertices()))
         if scale is not 1:
             self.scale_mesh(mesh_ref.getMeshData().getVertices(), agx.Vec3(scale))
         mesh_ref.updateMeshGeometry(True, True)
-        print_frame(line_d(),mesh_ref.getBoundingVolume())
+        print_line(mesh_ref.getBoundingVolume())
         return mesh
 
     """Function to scale obj model to size"""

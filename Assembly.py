@@ -85,7 +85,7 @@ def ruged_body_from_obj(filename, scale, model_name, material, rotation_matrix, 
     if scale is not 1:
         scale_mesh(mesh_ref.getMeshData().getVertices(), agx.Vec3(scale))
     mesh_ref.updateMeshGeometry(True, True)
-    print_frame(line_d(), mesh_ref.getBoundingVolume().size() ,mesh_ref.getBoundingVolume().thisown,model_name)
+    print_line( mesh_ref.getBoundingVolume().size() ,mesh_ref.getBoundingVolume().thisown,model_name)
     geometry = build_model(mesh, rov_pos, material, RigidBody.DYNAMICS, model_name,rigid_body=body)
     geometry.setName(model_name)
     geometry.setRotation(rotation_matrix)
