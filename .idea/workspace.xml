@@ -20,11 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a81053cf-228f-4eb3-8dc3-26f5da944597" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/SeafloorBuilder.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seafloor_generater.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assembly.py" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rov/arduino_sensor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rov/arduino_sensor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rov/arduino_stepper.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rov/arduino_stepper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Rov/rov_assembly.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rov/rov_assembly.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/make_water.py" beforeDir="false" afterPath="$PROJECT_DIR$/make_water.py" afterDir="false" />
     </list>
@@ -51,10 +52,13 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../AGX-towed-rov-simulation" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Ishmael\PycharmProjects\pythonProject1\TowedRov-Sim\rov-sim" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\AGX-towed-rov-simulation\Rov" />
       <recent name="C:\Users\Jørgen sin kule bruk\Documents\GitHub\AGX-towed-rov-simulation" />
@@ -107,13 +111,13 @@
       <method v="2" />
     </configuration>
     <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AGX-towed-rov-simulation" />
+      <module name="rov-sim" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Program Files\Algoryx\AGX-2.29.4.4\python-x64\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -212,27 +216,31 @@
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1160@0.0.1920.1040" timestamp="1616761480604" />
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1614866139530" />
-    <state width="936" height="369" key="GridCell.Tab.0.bottom" timestamp="1617799827863">
+    <state width="936" height="377" key="GridCell.Tab.0.bottom" timestamp="1618477004445">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="936" height="377" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.-566.1920.1040@0.0.1920.1040" timestamp="1618477004445" />
     <state width="1899" height="293" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1160@0.0.1920.1040" timestamp="1617707585394" />
     <state width="936" height="369" key="GridCell.Tab.0.bottom/1920.0.1920.1160/0.0.1920.1040@0.0.1920.1040" timestamp="1617799827863" />
     <state width="1110" height="293" key="GridCell.Tab.0.bottom/1920.0.1920.1160/0.0.1920.1040@1920.0.1920.1160" timestamp="1617779512605" />
-    <state width="936" height="369" key="GridCell.Tab.0.center" timestamp="1617799827863">
+    <state width="936" height="377" key="GridCell.Tab.0.center" timestamp="1618477004445">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="936" height="377" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.-566.1920.1040@0.0.1920.1040" timestamp="1618477004445" />
     <state width="1899" height="293" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1160@0.0.1920.1040" timestamp="1617707585394" />
     <state width="936" height="369" key="GridCell.Tab.0.center/1920.0.1920.1160/0.0.1920.1040@0.0.1920.1040" timestamp="1617799827863" />
     <state width="1110" height="293" key="GridCell.Tab.0.center/1920.0.1920.1160/0.0.1920.1040@1920.0.1920.1160" timestamp="1617779512604" />
-    <state width="936" height="369" key="GridCell.Tab.0.left" timestamp="1617799827863">
+    <state width="936" height="377" key="GridCell.Tab.0.left" timestamp="1618477004445">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="936" height="377" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.-566.1920.1040@0.0.1920.1040" timestamp="1618477004445" />
     <state width="1899" height="293" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1160@0.0.1920.1040" timestamp="1617707585394" />
     <state width="936" height="369" key="GridCell.Tab.0.left/1920.0.1920.1160/0.0.1920.1040@0.0.1920.1040" timestamp="1617799827863" />
     <state width="1110" height="293" key="GridCell.Tab.0.left/1920.0.1920.1160/0.0.1920.1040@1920.0.1920.1160" timestamp="1617779512604" />
-    <state width="936" height="369" key="GridCell.Tab.0.right" timestamp="1617799827863">
+    <state width="936" height="377" key="GridCell.Tab.0.right" timestamp="1618477004445">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="936" height="377" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.-566.1920.1040@0.0.1920.1040" timestamp="1618477004445" />
     <state width="1899" height="293" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1160@0.0.1920.1040" timestamp="1617707585394" />
     <state width="936" height="369" key="GridCell.Tab.0.right/1920.0.1920.1160/0.0.1920.1040@0.0.1920.1040" timestamp="1617799827863" />
     <state width="1110" height="293" key="GridCell.Tab.0.right/1920.0.1920.1160/0.0.1920.1040@1920.0.1920.1160" timestamp="1617779512605" />
@@ -252,14 +260,25 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1160@0.0.1920.1040" timestamp="1616757936876" />
-    <state x="461" y="165" key="SettingsEditor" timestamp="1617703800286">
+    <state x="461" y="165" key="SettingsEditor" timestamp="1618474720862">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040/-1920.-566.1920.1040@0.0.1920.1040" timestamp="1618474720862" />
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1160@0.0.1920.1040" timestamp="1617703800286" />
-    <state x="1949" y="24" width="1441" height="717" maximized="true" key="dock-window-1" timestamp="1616758146581">
-      <screen x="1920" y="0" width="1920" height="1160" />
+    <state x="953" y="0" width="974" height="1047" key="dock-window-1" timestamp="1618474343057">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="953" y="0" width="974" height="1047" key="dock-window-1/0.0.1920.1040/-1920.-566.1920.1040@0.0.1920.1040" timestamp="1618474343057" />
     <state x="1949" y="24" width="1441" height="717" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.1920.1160@0.0.1920.1040" timestamp="1616758146581" />
+    <state x="153" y="232" width="1727" height="715" key="dock-window-2" timestamp="1618475741456">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="153" y="232" width="1727" height="715" key="dock-window-2/0.0.1920.1040/-1920.-566.1920.1040@0.0.1920.1040" timestamp="1618475741456" />
+    <state x="953" y="0" width="974" height="1047" key="dock-window-3" timestamp="1618477315381">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="953" y="0" width="974" height="1047" key="dock-window-3/0.0.1920.1040/-1920.-566.1920.1040@0.0.1920.1040" timestamp="1618476282692" />
+    <state x="953" y="0" width="974" height="1047" key="dock-window-3/0.0.1920.1040@0.0.1920.1040" timestamp="1618477315381" />
     <state x="2956" y="245" width="585" height="801" key="find.popup" timestamp="1617721753987">
       <screen x="1920" y="0" width="1920" height="1160" />
     </state>

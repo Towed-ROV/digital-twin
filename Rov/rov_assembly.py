@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd
 import math
 #local imports
-from Assembly import create_rov_body, create_wing_right, create_wing_left, create_spoiler
+from Assembly import build_rov, create_spoiler
 from modules.agxPythonModules.utils.callbacks import StepEventCallback as Sec
 from functions import _map
 
@@ -29,17 +29,15 @@ class rovAssembly(agxSDK.Assembly):
         aluminum.getBulkMaterial().setDensity(3000)
         aluminum1 = agx.Material('AluminumMaterial')
         aluminum1.getBulkMaterial().setDensity(706.8)
-        self.link1 = create_rov_body(aluminum)
+        self.link1, self.link2, self.link3 = build_rov(aluminum)
         print("pos: ", self.link1.getCmPosition())
 
         print("mass: ", self.link1.getMassProperties().getMass())
         self.link1.setName('rovBody')
         self.link1.setCmLocalTranslate(agx.Vec3(0.27511,-0.18095, 0.0494))
         print("cmpos: ", self.link1.getCmPosition())
-        self.link2 = create_wing_right(aluminum1)
         self.link2.setPosition(0.138, 0.219, 0.125)
         self.link2.setRotation(agx.EulerAngles(0, math.pi, math.pi))
-        self.link3 = create_wing_left(aluminum1)
         self.link3.setPosition(0.138, -0.581, 0.125)
         self.link3.setRotation(agx.EulerAngles(0, 0, 0))
         self.spoiler = create_spoiler()
@@ -146,13 +144,6 @@ class rovAssembly(agxSDK.Assembly):
             pd.DataFrame(plot_roll).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\pplot_roll.csv")
             print('check csv')
             self.plotted = True
-    def build_hinge(self, link, part):
-        return demoutils.create_constraint(
-                                            pos=agx.Vec3(0.2, -0.985, 0.22),
-                                            axis=agx.Vec3(0, 1, 0),
-                                            rb1= link,
-                                            rb2= part,
-                                            c=agx.Hinge)  # type: agx.Hinge
 
 
 if __name__ == "__main__":

@@ -13,7 +13,9 @@ from make_wire import MakeWire
 from pid import PID_Controller
 from Rov.arduino_sensor import ArduinoSensor
 from Rov.arduino_stepper import ArduinoStepper
-import matplotlib as plt
+import matplotlib
+matplotlib.use('agg')
+import matplotlib.pyplot as plt
 import math
 
 def setBodyViscousDrag(body, controller, viscousDrag):
@@ -49,9 +51,9 @@ def build_scene():
     kp_boat = 0
     ki_boat = 0
     kd_boat = 0
-    water_geometry, bottom_geometry = MakeWater().make_water(adjust_rov, 1025, 500, 2,20)
-    controller = agxModel.WindAndWaterController()
-    controller.addWater(water_geometry)
+    water_geometry, controller, bottom_geometry = MakeWater().build_water_controller((200, 10, 20), adjust_rov)
+    # controller = agxModel.WindAndWaterController()
+    # controller.addWater(water_geometry)
     
 
     """Creates a pid controller for depth"""
