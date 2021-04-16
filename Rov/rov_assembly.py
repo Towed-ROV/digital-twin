@@ -1,6 +1,7 @@
 #AGX imports
 import demoutils
 import agx
+import agxCollide
 import agxSDK
 from pid import PID_Controller
 #python imports
@@ -29,23 +30,29 @@ class rovAssembly(agxSDK.Assembly):
         aluminum.getBulkMaterial().setDensity(3000)
         aluminum1 = agx.Material('AluminumMaterial')
         aluminum1.getBulkMaterial().setDensity(706.8)
-        self.link1, self.link2, self.link3 = build_rov(aluminum)
+        tetst, tet, tett = build_rov(aluminum)
+        self.link1 = agx.RigidBody()
+        self.link1.add(agxCollide.Geometry(agxCollide.Box(0.6,0.4,0.18)))
+        self.link2 = agx.RigidBody()
+        self.link2.add(agxCollide.Geometry(agxCollide.Box(0.2, 0.1, 0.006)))
+        self.link3 = agx.RigidBody()
+        self.link3.add(agxCollide.Geometry(agxCollide.Box(0.2, 0.1, 0.006)))
         print("pos: ", self.link1.getCmPosition())
 
         print("mass: ", self.link1.getMassProperties().getMass())
         self.link1.setName('rovBody')
         self.link1.setCmLocalTranslate(agx.Vec3(0.27511,-0.18095, 0.0494))
         print("cmpos: ", self.link1.getCmPosition())
-        self.link2.setPosition(0.138, 0.219, 0.125)
-        self.link2.setRotation(agx.EulerAngles(0, math.pi, math.pi))
-        self.link3.setPosition(0.138, -0.581, 0.125)
+        self.link2.setPosition(-0.2,0.45,0.1)
+        self.link2.setRotation(agx.EulerAngles(0, 0, 0))
+        self.link3.setPosition(-0.2,-0.45,0.1)
         self.link3.setRotation(agx.EulerAngles(0, 0, 0))
         self.spoiler = create_spoiler()
         self.spoiler.setPosition(1, -0.29, 0.45)
         self.spoiler.setRotation(agx.EulerAngles(0,-0.5,0))
 
-        self.link1.getGeometry('rr').setEnableCollisions(self.link2.getGeometry('rr'), False)
-        self.link1.getGeometry('rr').setEnableCollisions(self.link3.getGeometry('rr'), False)
+        # self.link1.getGeometry('rov_body').setEnableCollisions(self.link2.getGeometry('wingR'), False)
+        # self.link1.getGeometry('rov_body').setEnableCollisions(self.link3.getGeometry('wingL'), False)
 
         demoutils.create_visual(self.link1)
         demoutils.create_visual(self.link2)
@@ -56,28 +63,26 @@ class rovAssembly(agxSDK.Assembly):
         self.wire_pos2 = [20, 0, 20]
 
         self.hinge1 = demoutils.create_constraint(
-            pos=agx.Vec3(0.138, 0.219, 0.125),
+            pos=agx.Vec3(-0.2,-0.45,0.1),
             axis=agx.Vec3(0, 1, 0),
             rb1=self.link1,
             rb2=self.link2,
             c=agx.Hinge)  # type: agx.Hinge
-        self.hinge1.setCompliance(1e-5)
+        self.hinge1.setCompliance(1e-4)
         self.hinge1.getLock1D().setEnable(False)
         self.hinge1.getMotor1D().setEnable(False)
         self.hinge1.getRange1D().setEnable(True)
-        self.hinge1.getRange1D().setRange(math.radians(-75), math.radians(75))
 
         self.hinge2 = demoutils.create_constraint(
-            pos=agx.Vec3(0.138, -0.581, 0.125),
+            pos=agx.Vec3(-0.2,0.45,0.1),
             axis=agx.Vec3(0, 1, 0),
             rb1=self.link1,
             rb2=self.link3,
             c=agx.Hinge)  # type: agx.Hinge
-        self.hinge2.setCompliance(1e-6)
+        self.hinge2.setCompliance(1e-5)
         self.hinge2.getLock1D().setEnable(False)
         self.hinge2.getMotor1D().setEnable(False)
         self.hinge2.getRange1D().setEnable(True)
-        self.hinge2.getRange1D().setRange(math.radians(-75), math.radians(75))
 
         self.hinge3 = demoutils.create_constraint(
             pos=agx.Vec3(0.2, -0.985, 0.22),
@@ -98,8 +103,8 @@ class rovAssembly(agxSDK.Assembly):
         f4 = agx.Frame()
         f4.setTranslate(agx.Vec3(-0.5, 0, 0))
         self.distance1 = agx.DistanceJoint(self.link1, f1, self.link2, f2)
-        self.distance1.getMotor1D().setEnable(False)
-        self.distance1.getLock1D().setEnable(True)
+        # self.distance1.getMotor1D().setEnable(False)
+        # self.distance1.getLock1D().setEnable(True)
         self.distance2 = agx.DistanceJoint(self.link1, f1, self.link3, f3)
         self.distance2.getMotor1D().setEnable(False)
         self.distance2.getLock1D().setEnable(True)

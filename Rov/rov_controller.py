@@ -17,8 +17,8 @@ class RovController(agxSDK.GuiEventListener):
         self.interval_sb = self.interval
         self.rov = rov  # type:
         self.last_pos = 0
-        self.current_pos = 1.1105
-        self.current_pos_1 = 1.232
+        self.current_pos = 1
+        self.current_pos_1 = 1
     """Runs every time before the simulation takes a step"""
     def pre(self, t):
         pid = demoutils.sim().getEventListener('pid')
@@ -76,57 +76,57 @@ class RovController(agxSDK.GuiEventListener):
             self.last_millis = current_millis
 
     # keyboards is used to tune the position of the wings
-    # def keyboard(self, key, modKeyMask, x, y, keydown) -> bool:
-    #     handled = False
-    #     print("ok")
-    #     if key == agxSDK.GuiEventListener.KEY_Right:
-    #         print(self.current_pos)
-    #         print('------')
-    #         print("dsfs")
-    #         print('------')
-    #         self.current_pos = self.current_pos + 0.0005
-    #         self.rov.distance1.getLock1D().setPosition(self.current_pos)
-    #         self.rov.distance2.getLock1D().setPosition(self.current_pos)
-    #         handled = True
-    #
-    #     elif key == agxSDK.GuiEventListener.KEY_Left:
-    #         print('------')
-    #         print("dsfs")
-    #         print(self.current_pos)
-    #         print('------')
-    #         self.current_pos = self.current_pos - 0.0005
-    #         self.rov.distance1.getLock1D().setPosition(self.current_pos)
-    #         self.rov.distance2.getLock1D().setPosition(self.current_pos)
-    #         handled = True
-    #     return handled
     def keyboard(self, key, modKeyMask, x, y, keydown) -> bool:
         handled = False
+        print("ok")
         if key == agxSDK.GuiEventListener.KEY_Right:
             print(self.current_pos)
-            if (self.current_pos + self.interval_sb) < 1.1105:
-                test = _map(self.current_pos, 0.6575, 1.1105, 0.8495, 1.232)
-                print('------')
-                print(self.interval_sb)
-                print(test)
-                print('------')
-                self.current_pos_1 = test + self.interval_port
-                self.current_pos = self.current_pos + self.interval_sb
-                self.rov.distance1.getLock1D().setPosition(self.current_pos)
-                self.rov.distance2.getLock1D().setPosition(self.current_pos_1)
+            print('------')
+            print("dsfs")
+            print('------')
+            self.current_pos = self.current_pos + 0.005
+            self.rov.distance1.getLock1D().setPosition(self.current_pos)
+            self.rov.distance2.getLock1D().setPosition(self.current_pos)
             handled = True
 
         elif key == agxSDK.GuiEventListener.KEY_Left:
+            print('------')
+            print("dsfs")
             print(self.current_pos)
-            if (self.current_pos + self.interval) > 0.6575:
-
-                test = _map(self.current_pos, 0.6575, 1.1105, 0.8495, 1.232)
-                print('------')
-                print("dsfs")
-                print(test)
-                print('------')
-                self.current_pos = self.current_pos - self.interval
-                self.current_pos_1 = test - self.interval
-                self.rov.distance1.getLock1D().setPosition(self.current_pos)
-                self.rov.distance2.getLock1D().setPosition(self.current_pos_1)
+            print('------')
+            self.current_pos = self.current_pos - 0.005
+            self.rov.distance1.getLock1D().setPosition(self.current_pos)
+            self.rov.distance2.getLock1D().setPosition(self.current_pos)
             handled = True
         return handled
+    # def keyboard(self, key, modKeyMask, x, y, keydown) -> bool:
+    #     handled = False
+    #     if key == agxSDK.GuiEventListener.KEY_Right:
+    #         print(self.current_pos)
+    #         if (self.current_pos + self.interval_sb) < 1.1105:
+    #             test = _map(self.current_pos, 0.6575, 1.1105, 0.8495, 1.232)
+    #             print('------')
+    #             print(self.interval_sb)
+    #             print(test)
+    #             print('------')
+    #             self.current_pos_1 = test + self.interval_port
+    #             self.current_pos = self.current_pos + self.interval_sb
+    #             self.rov.distance1.getLock1D().setPosition(self.current_pos)
+    #             self.rov.distance2.getLock1D().setPosition(self.current_pos_1)
+    #         handled = True
+    #
+    #     elif key == agxSDK.GuiEventListener.KEY_Left:
+    #         print(self.current_pos)
+    #         if (self.current_pos + self.interval) > 0.6575:
+    #
+    #             test = _map(self.current_pos, 0.6575, 1.1105, 0.8495, 1.232)
+    #             print('------')
+    #             print("dsfs")
+    #             print(test)
+    #             print('------')
+    #             self.current_pos = self.current_pos - self.interval
+    #             self.current_pos_1 = test - self.interval
+    #             self.rov.distance1.getLock1D().setPosition(self.current_pos)
+    #             self.rov.distance2.getLock1D().setPosition(self.current_pos_1)
+    #         handled = True
+    #     return handled

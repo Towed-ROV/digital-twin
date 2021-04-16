@@ -9,26 +9,26 @@ import demoutils
 import math
 
 
-def rugged_body_from_obj(self, filename, scale, model_name, material, rotation_matrix, body: agx.RigidBody = None):
+def rugged_body_from_obj(filename, scale, model_name, material, rotation_matrix, body: agx.RigidBody = None):
     mesh = agxUtil.createTrimeshFromFile(filename)
     mesh_ref = agxCollide.TrimeshRef(mesh)
     if scale is not 1:
-        self.scale_mesh(mesh_ref.getMeshData().getVertices(), agx.Vec3(scale))
+        scale_mesh(mesh_ref.getMeshData().getVertices(), agx.Vec3(scale))
     mesh_ref.updateMeshGeometry(True, True)
     mesh = mesh_ref.asTrimesh()
-    geometry = self.build_model(mesh, self.rov_pos, material, agx.RigidBody.DYNAMICS, model_name, rigid_body=body)
+    geometry = build_model(mesh, (0,0,0), material, agx.RigidBody.DYNAMICS, model_name, rigid_body=body)
     geometry.setName(model_name)
     geometry.setRotation(rotation_matrix)
 
     return geometry
 
 
-def obj_to_trimesh(self, filename, scale):
+def obj_to_trimesh(filename, scale):
     mesh = agxUtil.createTrimeshFromFile(filename)
     mesh_ref = agxCollide.TrimeshRef(mesh)
     functions.print_line(mesh, filename, len(mesh_ref.getMeshData().getVertices()))
     if scale is not 1:
-        self.scale_mesh(mesh_ref.getMeshData().getVertices(), agx.Vec3(scale))
+        scale_mesh(mesh_ref.getMeshData().getVertices(), agx.Vec3(scale))
     mesh_ref.updateMeshGeometry(True, True)
     functions.print_line(mesh_ref.getBoundingVolume())
     return mesh
@@ -37,22 +37,22 @@ def obj_to_trimesh(self, filename, scale):
 """Function to scale obj model to size"""
 
 
-def scale_mesh(self, mesh: agx.Vec3Vector, scale: agx.Vec3):
+def scale_mesh(mesh: agx.Vec3Vector, scale: agx.Vec3):
     for i, verticies in enumerate(mesh):
         mesh.RemoveAt(i)
         mesh.Insert(i, agx.Vec3.mul(verticies, scale))
 
 
-def build_model(self, shape, pos, material, motion_controll, name, rigid_body: agx.RigidBody = None):
-    geometry = self.build_geometry_from_shape(shape, material, name)
+def build_model(shape, pos, material, motion_controll, name, rigid_body: agx.RigidBody = None):
+    geometry = build_geometry_from_shape(shape, material, name)
     if not rigid_body:
-        rigid_body = self.build_rigid_body(motion_controll, geometry, pos, name)
+        rigid_body = build_rigid_body(motion_controll, geometry, pos, name)
     else:
         rigid_body.add(geometry)
     return rigid_body
 
 
-def build_rigid_body(self, motion_controll, geometry, pos, name):
+def build_rigid_body(motion_controll, geometry, pos, name):
     part_body = agx.RigidBody()
     part_body.setMotionControl(motion_controll)
     part_body.add(geometry)
@@ -61,7 +61,7 @@ def build_rigid_body(self, motion_controll, geometry, pos, name):
     return part_body
 
 
-def build_geometry_from_shape(self, shape, material, name):
+def build_geometry_from_shape(shape, material, name):
     shape = agxCollide.Geometry(shape)
     shape.setMaterial(material)
     shape.setName(name)

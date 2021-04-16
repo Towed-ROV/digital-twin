@@ -41,7 +41,7 @@ def build_scene():
     """write plot to csv file variable"""
     start = False
     plot = False
-    adjust_rov = False
+    adjust_rov = True
     kp = 1000
     ki = 1000
     kd = 0
@@ -139,8 +139,8 @@ def build_scene():
     # if not start:
     # lock2 = agx.LockJoint(ship.m_body)
     # demoutils.sim().add(lock2)
-    # lock1 = agx.LockJoint(rov.link1)
-    # demoutils.sim().add(lock1)
+    lock1 = agx.LockJoint(rov.link1)
+    demoutils.sim().add(lock1)
 
 
     rov.displayForces(1)
