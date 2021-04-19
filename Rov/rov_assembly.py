@@ -27,26 +27,32 @@ class rovAssembly(agxSDK.Assembly):
         self.plotted = False
 
         aluminum = agx.Material('AluminumMaterial')
-        aluminum.getBulkMaterial().setDensity(3000)
+        aluminum.getBulkMaterial().setDensity(1020)
         aluminum1 = agx.Material('AluminumMaterial')
         aluminum1.getBulkMaterial().setDensity(706.8)
         tetst, tet, tett = build_rov(aluminum)
         self.link1 = agx.RigidBody()
-        self.link1.add(agxCollide.Geometry(agxCollide.Box(0.6,0.4,0.18)))
+        link1 = agxCollide.Geometry(agxCollide.Box(0.6,0.4,0.18))
+        link1.setMaterial(aluminum)
+        self.link1.add(link1)
         self.link2 = agx.RigidBody()
-        self.link2.add(agxCollide.Geometry(agxCollide.Box(0.2, 0.1, 0.006)))
+        link2 = agxCollide.Geometry(agxCollide.Box(0.2, 0.1, 0.006))
+        link2.setMaterial(aluminum)
+        self.link2.add(link2)
         self.link3 = agx.RigidBody()
-        self.link3.add(agxCollide.Geometry(agxCollide.Box(0.2, 0.1, 0.006)))
+        link3  = agxCollide.Geometry(agxCollide.Box(0.2, 0.1, 0.006))
+        link3.setMaterial(aluminum)
+        self.link3.add(link3)
         print("pos: ", self.link1.getCmPosition())
 
         print("mass: ", self.link1.getMassProperties().getMass())
         self.link1.setName('rovBody')
-        self.link1.setCmLocalTranslate(agx.Vec3(0.27511,-0.18095, 0.0494))
+        # self.link1.setCmLocalTranslate(agx.Vec3(0.27511,-0.18095, 0.0494))
         print("cmpos: ", self.link1.getCmPosition())
-        self.link2.setPosition(-0.2,0.45,0.1)
-        self.link2.setRotation(agx.EulerAngles(0, 0, 0))
-        self.link3.setPosition(-0.2,-0.45,0.1)
-        self.link3.setRotation(agx.EulerAngles(0, 0, 0))
+        self.link2.setPosition(-0.2,0.5,0)
+        self.link2.setRotation(agx.EulerAngles(0, 0, math.pi))
+        self.link3.setPosition(-0.2,-0.5,0)
+        self.link3.setRotation(agx.EulerAngles(0, 0, math.pi))
         self.spoiler = create_spoiler()
         self.spoiler.setPosition(1, -0.29, 0.45)
         self.spoiler.setRotation(agx.EulerAngles(0,-0.5,0))
@@ -63,23 +69,23 @@ class rovAssembly(agxSDK.Assembly):
         self.wire_pos2 = [20, 0, 20]
 
         self.hinge1 = demoutils.create_constraint(
-            pos=agx.Vec3(-0.2,-0.45,0.1),
+            pos=agx.Vec3(-0.2,-0.5,0),
             axis=agx.Vec3(0, 1, 0),
             rb1=self.link1,
             rb2=self.link2,
             c=agx.Hinge)  # type: agx.Hinge
-        self.hinge1.setCompliance(1e-4)
+        self.hinge1.setCompliance(1e-6)
         self.hinge1.getLock1D().setEnable(False)
         self.hinge1.getMotor1D().setEnable(False)
         self.hinge1.getRange1D().setEnable(True)
 
         self.hinge2 = demoutils.create_constraint(
-            pos=agx.Vec3(-0.2,0.45,0.1),
+            pos=agx.Vec3(-0.2,0.5,0),
             axis=agx.Vec3(0, 1, 0),
             rb1=self.link1,
             rb2=self.link3,
             c=agx.Hinge)  # type: agx.Hinge
-        self.hinge2.setCompliance(1e-5)
+        self.hinge2.setCompliance(1e-6)
         self.hinge2.getLock1D().setEnable(False)
         self.hinge2.getMotor1D().setEnable(False)
         self.hinge2.getRange1D().setEnable(True)

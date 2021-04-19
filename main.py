@@ -41,15 +41,15 @@ def build_scene():
     """write plot to csv file variable"""
     start = False
     plot = False
-    adjust_rov = True
+    adjust_rov = False
     kp = 1000
     ki = 1000
     kd = 0
     kp_trim = 0.02
     ki_trim = 0.02
     kd_trim = 1
-    kp_boat = 0
-    ki_boat = 0
+    kp_boat = 0.02
+    ki_boat = 0.0000001
     kd_boat = 0
     water_geometry, controller, bottom_geometry = MakeWater().build_water_controller((200, 10, 20), adjust_rov)
     # controller = agxModel.WindAndWaterController()
@@ -92,7 +92,7 @@ def build_scene():
         pid_boat.setName('pidBoat')
         pid_boat.set_output_limits(-2, 2)
         pid_boat.set_mode(1, 0, 0)
-        pid_boat.set_setpoint(50)
+        pid_boat.set_setpoint(3.5)
 
         """Creates the boat to tow the rov"""
         ship = Ship()
@@ -100,7 +100,7 @@ def build_scene():
         ship.setRotation(agx.EulerAngles(0,0,math.pi))
 
         wire, wire_renderer = MakeWire().create_wire(1020,0.005, ship, agx.Vec3(2, 0, 0),
-                                                     rov, agx.Vec3(0,-0.181,0.185))
+                                                     rov, agx.Vec3(-0.5,0,0.18))
 
         demoutils.sim().add(arduino_sensor)
         demoutils.sim().add(arduino_stepper)
@@ -139,15 +139,14 @@ def build_scene():
     # if not start:
     # lock2 = agx.LockJoint(ship.m_body)
     # demoutils.sim().add(lock2)
-    lock1 = agx.LockJoint(rov.link1)
-    demoutils.sim().add(lock1)
+    # lock1 = agx.LockJoint(rov.link1)
+    # demoutils.sim().add(lock1)
 
 
     rov.displayForces(1)
     """locks the rov in fixed position, for mounting wing and cable to rov"""
     if adjust_rov:
-        pass
-        # lock1 = agx.LockJoint(rov.link1)
-        # demoutils.sim().add(lock1)
+        lock1 = agx.LockJoint(rov.link1)
+        demoutils.sim().add(lock1)
     #
 
