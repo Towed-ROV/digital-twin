@@ -39,14 +39,15 @@ def create_spoiler():
 def create_rov_body(aluminum) -> agx.RigidBody:
     # trimesh = agxOSG.readNodeFile("models/test2.stl", False)
     mesh_reader = agxIO.MeshReader()
-    mesh_reader.readFile("models/test1.obj")
+    mesh_reader.readFile("models/rov_simp.obj")
     scaled_vertices = scale_mesh(mesh_reader.getVertices(), agx.Vec3(0.001))
-    trimesh = agxCollide.Trimesh(scaled_vertices, mesh_reader.getIndices(), "model")
+    trimesh = agxCollide.Trimesh(scaled_vertices, mesh_reader.getIndices(), "rov_simp")
     geom = agxCollide.Geometry(trimesh)
-    geom.setName('rr')
+    geom.setName('Rov_body')
     geom.setMaterial(aluminum)
-    print(geom.calculateVolume())
-    rov_body = agx.RigidBody()
+    print("volume: ",geom.calculateVolume())
+    rov_body = agx.RigidBody(geom)
+    print("rov_body:",rov_body)
     rov_body.setMotionControl(agx.RigidBody.DYNAMICS)
     rov_body.add(geom)
     return rov_body
@@ -54,28 +55,37 @@ def create_rov_body(aluminum) -> agx.RigidBody:
 """Creates rigidbody of the starboard wing from obj file"""
 def create_wing_right(aluminum):
     mesh_reader = agxIO.MeshReader()
-    mesh_reader.readFile("models/wingL.obj")
-    scaled_vertices = scale_mesh(mesh_reader.getVertices(), agx.Vec3(0.001))
-    trimesh = agxCollide.Trimesh(scaled_vertices, mesh_reader.getIndices(), "wingR")
+    mesh_reader.readFile("models/wing_simp.obj")
+    scaled_vertices = scale_mesh(mesh_reader.getVertices(), agx.Vec3(1))
+    trimesh = agxCollide.Trimesh(scaled_vertices, mesh_reader.getIndices(), "wing_simp")
     geom = agxCollide.Geometry(trimesh)
     geom.setMaterial(aluminum)
-    geom.setName('rr')
+    geom.setName('Wing_R')
+
+    print("volume: ",geom.calculateVolume())
     wing_right = agx.RigidBody()
     wing_right.add(geom)
+
     return wing_right
 
 """Creates rigidbody of the port wing from obj file"""
 def create_wing_left(aluminum):
     mesh_reader = agxIO.MeshReader()
-    mesh_reader.readFile("models/wingR.obj")
-    scaled_vertices = scale_mesh(mesh_reader.getVertices(), agx.Vec3(0.001))
-    trimesh = agxCollide.Trimesh(scaled_vertices, mesh_reader.getIndices(), "wingL")
+    mesh_reader.readFile("models/wing_simp.obj")
+    scaled_vertices = scale_mesh(mesh_reader.getVertices(), agx.Vec3(1))
+    trimesh = agxCollide.Trimesh(scaled_vertices, mesh_reader.getIndices(), "wing_simp")
     geom = agxCollide.Geometry(trimesh)
     geom.setMaterial(aluminum)
-    geom.setName('rr')
+    geom.setName('wing_L')
+
+    print("volume: ",geom.calculateVolume())
     wing_left = agx.RigidBody()
     wing_left.add(geom)
     return wing_left
 
 
-
+"""function for mapping value with limits, equivalent to Arduinos map function"""
+def _map(x, in_min, in_max, out_min, out_max):
+    x = min(in_max, max(in_min, x))
+    d = (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
+    return d

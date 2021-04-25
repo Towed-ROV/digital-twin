@@ -21,11 +21,19 @@ def setBodyViscousDrag(body, controller, viscousDrag):
     for geom in geometries:
         shapes = geom.getShapes()
         for shape in shapes:
-            # controller.getOrCreateHydrodynamicsParameters(shape).setCoefficient(agxModel.WindAndWaterParameters.LIFT, 2)
-            controller.getOrCreateHydrodynamicsParameters(shape).setCoefficient(agxModel.WindAndWaterParameters.PRESSURE_DRAG, 0.9)
-            # controller.getOrCreateHydrodynamicsParameters(shape).setCoefficient(agxModel.WindAndWaterParameters.VISCOUS_DRAG, 0.03)
-            # Prepare for pressure rendering of the hull too
-            # controller.registerPressureFieldRenderer(agxOSG.PressureFieldRenderer(demoutils.root,1.01), shape)
+            if "wing" in geom.getName():
+                controller.getOrCreateHydrodynamicsParameters(shape).setCoefficient(
+                    agxModel.WindAndWaterParameters.PRESSURE_DRAG, 1.5)
+
+                controller.getOrCreateHydrodynamicsParameters(shape).setCoefficient(
+                    agxModel.WindAndWaterParameters.VISCOUS_DRAG, 1.5)
+                print("wing")
+            else:
+                # controller.getOrCreateHydrodynamicsParameters(shape).setCoefficient(agxModel.WindAndWaterParameters.LIFT, 2)
+                controller.getOrCreateHydrodynamicsParameters(shape).setCoefficient(agxModel.WindAndWaterParameters.PRESSURE_DRAG, 0.9)
+                # controller.getOrCreateHydrodynamicsParameters(shape).setCoefficient(agxModel.WindAndWaterParameters.VISCOUS_DRAG, 0.03)
+                # Prepare for pressure rendering of the hull too
+                # controller.registerPressureFieldRenderer(agxOSG.PressureFieldRenderer(demoutils.root,1.01), shape)
             pass
 
 

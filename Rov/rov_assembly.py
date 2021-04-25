@@ -45,9 +45,13 @@ class rovAssembly(agxSDK.Assembly):
         self.spoiler = create_spoiler()
         self.spoiler.setPosition(1, -0.29, 0.45)
         self.spoiler.setRotation(agx.EulerAngles(0,-0.5,0))
+        [print(geo.getName())for geo in self.link1.getGeometries()]
 
-        self.link1.getGeometry('rr').setEnableCollisions(self.link2.getGeometry('rr'), False)
-        self.link1.getGeometry('rr').setEnableCollisions(self.link3.getGeometry('rr'), False)
+        [print(geo.getName())for geo in self.link2.getGeometries()]
+
+        [print(geo.getName())for geo in self.link3.getGeometries()]
+        self.link1.getGeometry('Rov_body').setEnableCollisions(self.link2.getGeometry('Wing_R'), False)
+        self.link1.getGeometry('Rov_body').setEnableCollisions(self.link3.getGeometry('wing_L'), False)
 
         demoutils.create_visual(self.link1)
         demoutils.create_visual(self.link2)
@@ -125,10 +129,10 @@ class rovAssembly(agxSDK.Assembly):
             plot_pitch = np.array(self.plot_pitch)
             plot_roll = np.array(self.plot_roll)
 
-            pd.DataFrame(plot_depth).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\plotDepth.csv")
-            pd.DataFrame(plot_pitch).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\plotPitch.csv")
-            pd.DataFrame(plot_wing_angle).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\plot_wing_angle.csv")
-            pd.DataFrame(plot_roll).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\pplot_roll.csv")
+            #pd.DataFrame(plot_depth).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\plotDepth.csv")
+            #pd.DataFrame(plot_pitch).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\plotPitch.csv")
+            #pd.DataFrame(plot_wing_angle).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\plot_wing_angle.csv")
+           #pd.DataFrame(plot_roll).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\pplot_roll.csv")
             # print('check csv')
             # self.plotted = True
     def build_hinge(self, link, part):
