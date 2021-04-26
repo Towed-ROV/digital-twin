@@ -1,3 +1,5 @@
+
+import math
 def constrain(val, min_val, max_val):
     return min(max_val, max(min_val, val))
 
@@ -9,3 +11,5 @@ def _map(x, in_min, in_max, out_min, out_max):
     d = (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
     return d
 
+rad2deg = lambda rad: rad / math.pi * 180
+deg2rad = lambda deg: deg / 180 * math.pi
