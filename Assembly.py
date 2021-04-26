@@ -56,7 +56,7 @@ def create_rov_body(aluminum) -> agx.RigidBody:
 def create_wing_right(aluminum):
     mesh_reader = agxIO.MeshReader()
     mesh_reader.readFile("models/wing_simp.obj")
-    scaled_vertices = scale_mesh(mesh_reader.getVertices(), agx.Vec3(1))
+    scaled_vertices = scale_mesh(mesh_reader.getVertices(), agx.Vec3(3))
     trimesh = agxCollide.Trimesh(scaled_vertices, mesh_reader.getIndices(), "wing_simp")
     geom = agxCollide.Geometry(trimesh)
     geom.setMaterial(aluminum)
@@ -72,7 +72,7 @@ def create_wing_right(aluminum):
 def create_wing_left(aluminum):
     mesh_reader = agxIO.MeshReader()
     mesh_reader.readFile("models/wing_simp.obj")
-    scaled_vertices = scale_mesh(mesh_reader.getVertices(), agx.Vec3(1))
+    scaled_vertices = scale_mesh(mesh_reader.getVertices(), agx.Vec3(3))
     trimesh = agxCollide.Trimesh(scaled_vertices, mesh_reader.getIndices(), "wing_simp")
     geom = agxCollide.Geometry(trimesh)
     geom.setMaterial(aluminum)

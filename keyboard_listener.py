@@ -60,4 +60,5 @@ class KeyboardListener(agxSDK.GuiEventListener):
             if key_down:
                 self.pid.set_setpoint(-13)
             return True
+
         return False

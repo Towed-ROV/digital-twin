@@ -14,5 +14,6 @@ class MakeWire():
         wire.add(agxWire.BodyFixedNode(body_2.link1, pos_2))
         wire.setEnableCollisions(True)
         wire.setEnableCollisions(body_1.m_body, False)
+        wire.setEnableCollisions(body_2.link1, False)
         wire_renderer = agxOSG.WireRendererOld(wire, demoutils.root())
         return wire, wire_renderer

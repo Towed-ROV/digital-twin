@@ -9,6 +9,7 @@ from Rov.rov_assembly import rovAssembly
 from Rov.rov_controller import RovController
 from keyboard_listener import KeyboardListener
 from make_water import MakeWater
+import agxCollide
 from make_wire import MakeWire
 from pid import PID_Controller
 from Rov.arduino_sensor import ArduinoSensor
@@ -16,26 +17,49 @@ from Rov.arduino_stepper import ArduinoStepper
 import matplotlib as plt
 import math
 
+
 def setBodyViscousDrag(body, controller, viscousDrag):
-    geometries = body.getGeometries()
-    for geom in geometries:
-        shapes = geom.getShapes()
-        for shape in shapes:
-            if "wing" in geom.getName():
-                controller.getOrCreateHydrodynamicsParameters(shape).setCoefficient(
-                    agxModel.WindAndWaterParameters.PRESSURE_DRAG, 1.5)
+    print(body.getName())
+    bodies = body.getRigidBodies()
+    for rigid_bodies in bodies:
+        if "wing" in rigid_bodies.getName().lower():
+          #agxModel.WindAndWaterParameters.setHydrodynamicCoefficient(controller, rigid_bodies,
+           #                                                          agxModel.WindAndWaterParameters.VISCOUS_DRAG,
+           #                                                          2)
+          agxModel.WindAndWaterParameters.setHydrodynamicCoefficient(controller, rigid_bodies,
+                                                                    agxModel.WindAndWaterParameters.PRESSURE_DRAG,
+                                                                     2)
+          print("wing")
 
-                controller.getOrCreateHydrodynamicsParameters(shape).setCoefficient(
-                    agxModel.WindAndWaterParameters.VISCOUS_DRAG, 1.5)
-                print("wing")
-            else:
-                # controller.getOrCreateHydrodynamicsParameters(shape).setCoefficient(agxModel.WindAndWaterParameters.LIFT, 2)
-                controller.getOrCreateHydrodynamicsParameters(shape).setCoefficient(agxModel.WindAndWaterParameters.PRESSURE_DRAG, 0.9)
-                # controller.getOrCreateHydrodynamicsParameters(shape).setCoefficient(agxModel.WindAndWaterParameters.VISCOUS_DRAG, 0.03)
-                # Prepare for pressure rendering of the hull too
-                # controller.registerPressureFieldRenderer(agxOSG.PressureFieldRenderer(demoutils.root,1.01), shape)
-            pass
+        else:
 
+            agxModel.WindAndWaterParameters.setHydrodynamicCoefficient(controller, rigid_bodies,
+                                                                         agxModel.WindAndWaterParameters.PRESSURE_DRAG, 1)
+def    setWireViscousDrag(wire,controller):
+    for geo in wire.nodes:
+        rig = geo.getRigidBody()
+        agxModel.WindAndWaterParameters.setHydrodynamicCoefficient(controller,rig,
+                                                                   agxModel.WindAndWaterParameters.VISCOUS_DRAG, 0.5)
+        agxModel.WindAndWaterParameters.setHydrodynamicCoefficient(controller, rig,
+                                                                   agxModel.WindAndWaterParameters.PRESSURE_DRAG, 0.5)
+    #for bodys in bodies:
+    #    geometries = bodys.getGeometries()
+     #   for geom in geometries:
+      #      shapes = geom.getShapes()
+       #     for shape in shapes:
+          #      if "wing" in geom.getName().lower():
+        #            controller.getOrCreateHydrodynamicsParameters(shape).setCoefficient(
+           #             agxModel.WindAndWaterParameters.PRESSURE_DRAG, 2)
+
+         #           controller.getOrCreateHydrodynamicsParameters(shape).setCoefficient(
+       ##                 agxModel.WindAndWaterParameters.VISCOUS_DRAG, 2)
+         #           print("wing")
+      #          else:
+            #        controller.getOrCreateHydrodynamicsParameters(shape).setCoefficient(agxModel.WindAndWaterParameters.LIFT,0.4)
+            #        controller.getOrCreateHydrodynamicsParameters(shape).setCoefficient(agxModel.WindAndWaterParameters.PRESSURE_DRAG,1.4)
+                    # controller.getOrCreateHydrodynamicsParameters(shape).setCoefficient(agxModel.WindAndWaterParameters.VISCOUS_DRAG, 0.03)
+                    # Prepare for pressure rendering of the hull too
+                    # controller.registerPressureFieldRenderer(agxOSG.PressureFieldRenderer(demoutils.root,1.01), shape)
 
 def buildScene():
     """Building scene for simulation and adding it to the simulation. Also setting the simulation step"""""
@@ -58,9 +82,10 @@ def build_scene():
     ki_boat = 0.0000001
     kd_boat = 0
     print('dsd')
-    water_geometry, bottom_geometry = MakeWater().make_water(adjust_rov, 1025, 500, 2, 30)
+    water_geometry, bottom_geometry = MakeWater().make_water(adjust_rov, 1027, 1000, 2, 30)
     controller = agxModel.WindAndWaterController()
     controller.addWater(water_geometry)
+
 
 
 
@@ -71,7 +96,7 @@ def build_scene():
     pid.setName('pid')
     pid.set_output_limits(-45, 45)
     pid.set_mode(1, 0, 0)
-    pid.set_setpoint(-1)
+    pid.set_setpoint(-20)
 
     """Creates a pid controller for trim"""
 
@@ -86,11 +111,11 @@ def build_scene():
 
     """Creates the rov"""
     rov = rovAssembly(keyboard)
-    rov.setPosition(agx.Vec3(0, 0, 0))
+    rov.setPosition(agx.Vec3(-500, 0, 0))
     rov.setName("rov")
     rov.setRotation(agx.EulerAngles(0, 0, math.pi))
+    setBodyViscousDrag(rov, controller, 0.01)
 
-    setBodyViscousDrag(rov.link1, controller, 0.01)
 
     """Creates a pid controller for trim"""
     if not adjust_rov:
@@ -101,18 +126,17 @@ def build_scene():
         pid_boat.setName('pidBoat')
         pid_boat.set_output_limits(-2, 2)
         pid_boat.set_mode(1, 0, 0)
-        pid_boat.set_setpoint(50)
+        pid_boat.set_setpoint(10)
 
         """Creates the boat to tow the rov"""
         ship = Ship()
         ship.setName('ship')
         ship.setRotation(agx.EulerAngles(0,0,math.pi))
-
-        wire, wire_renderer = MakeWire().create_wire(1020,0.005, ship, agx.Vec3(2, 0, 0),
-                                                     rov, agx.Vec3(0,-0.181,0.185))
-
-        demoutils.sim().add(arduino_sensor)
-        demoutils.sim().add(arduino_stepper)
+        wire, wire_renderer = MakeWire().create_wire(1020,0.001, ship, agx.Vec3(2, 0, 0),
+                                                     rov, agx.Vec3(0,-0.1,0.1))
+        setWireViscousDrag(wire,controller)
+        # demoutils.sim().add(arduino_sensor)
+        # demoutils.sim().add(arduino_stepper)
         demoutils.sim().add(wire)
         demoutils.sim().add(wire_renderer)
         demoutils.sim().add(keyboard)
@@ -157,5 +181,3 @@ def build_scene():
     if adjust_rov:
         lock1 = agx.LockJoint(rov.link1)
         demoutils.sim().add(lock1)
-    #
-

@@ -15,16 +15,16 @@ class ArduinoSensor(agxSDK.StepEventListener):
         self.pitch = 0
         self.yaw = 0
         self.turn_to_send = 1
-        self.ser = serial.Serial(
-            port='COM27',
-            baudrate=19200,
-            parity=serial.PARITY_NONE,
-            stopbits=serial.STOPBITS_ONE,
-            bytesize=serial.EIGHTBITS,
-            timeout=0)
+        # self.ser = serial.Serial(
+        #    port='COM27',
+        #    baudrate=19200,
+        #    parity=serial.PARITY_NONE,
+        #    stopbits=serial.STOPBITS_ONE,
+        #    bytesize=serial.EIGHTBITS,
+        #    timeout=0)
         self.interval = 0.01
         self.previousMillis = 0
-        self.reset = False
+        self.reset = True
         self.start = False
 
     def pre(self, t):
