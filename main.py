@@ -1,6 +1,7 @@
 import agxModel
 
 import demoutils
+from demoutils import sim
 import agx
 from agxOSG import createVisual
 from Boat.ship import Ship
@@ -63,7 +64,7 @@ def decorator(decerator, sim):
 
 def buildScene():
     """Building scene for simulation and adding it to the simulation. Also setting the simulation step"""""
-    demoutils.sim().setTimeStep(0.02)
+    sim().setTimeStep(0.02)
     build_scene()
 
 
@@ -136,30 +137,33 @@ def build_scene():
         ship.setRotation(agx.EulerAngles(0, 0, math.pi))
         ship.setPosition(agx.Vec3(-length + 20 + 300, 0, 0))
         wire, wire_renderer = MakeWire().create_wire(1030, 0.001, ship, agx.Vec3(2, 0, 0),
-                                                     rov, agx.Vec3(0, -0.1 * 0, 0.1 * 0))
+                                                     rov, agx.Vec3(0, -0.1 , 0.1))
         setWireViscousDrag(wire, controller)
 
         ship.setVelocity(agx.Vec3(-50, 0, 0))
-        # demoutils.sim().add(arduino_sensor)
-        # demoutils.sim().add(arduino_stepper)
-        demoutils.sim().add(wire)
-        demoutils.sim().add(wire_renderer)
-        demoutils.sim().add(keyboard)
-        demoutils.sim().add(ship)
-        demoutils.sim().add(pid_boat)
-        demoutils.sim().add(Boat_Controller(ship, pid_boat, arduino_stepper))
+        # sim().add(arduino_sensor)
+        # sim().add(arduino_stepper)
+        sim().add(wire)
+        sim().add(wire_renderer)
+        sim().add(keyboard)
+        sim().add(ship)
+        sim().add(pid_boat)
+        sim().add(Boat_Controller(ship, pid_boat, arduino_stepper))
     """Creates a controller to control the wings of the Rov"""
-    wing_controll = RovController(rov, pid, pid_trim)
+    wing_controll = RovController(rov, pid, pid_trim,bottom_geometry.getShape().asHeightField())
     wing_controll.setName('wingControll')
 
     """Adds rov, boat, controller, and pid to the simulation"""
-    demoutils.sim().add(bottom_geometry)
-    demoutils.sim().add(water_geometry)
-    demoutils.sim().add(rov)
-    demoutils.sim().add(pid)
-    demoutils.sim().add(pid_trim)
-    demoutils.sim().add(wing_controll)
-    demoutils.sim().add(controller)
+    sim().add(bottom_geometry)
+    sim().add(water_geometry)
+    sim().add(rov)
+    sim().add(pid)
+    sim().add(pid_trim)
+    sim().add(wing_controll)
+    sim().add(controller)
+    sim().add(rov.ehco_lod.beam)
+    sim().addEventListener(rov.ehco_lod)
+    rov.ehco_lod.beam.setEnableCollisions(water_geometry,False)
 
     createVisual(bottom_geometry, demoutils.root())
 
@@ -171,20 +175,20 @@ def build_scene():
     # lock.setCompliance(1e-12, agx.LockJoint.ROTATIONAL_2)
     """locks yaw"""
     lock.setCompliance(1e-12, agx.LockJoint.ROTATIONAL_3)
-    demoutils.sim().add(lock)
-    demoutils.sim().setTimeStep(0.005)
+    sim().add(lock)
+    sim().setTimeStep(0.005)
     "hold simulator untill start"
     # if not start:
     #     lock2 = agx.LockJoint(ship.m_body)
-    #     demoutils.sim().add(lock2)
+    #     sim().add(lock2)
     #     lock1 = agx.LockJoint(rov.link1)
-    #     demoutils.sim().add(lock1)
+    #     sim().add(lock1)
 
-    t = Thread(decorator(decerator=demoutils.app().getSceneDecorator(), sim=demoutils.sim()))
+    t = Thread(decorator(decerator=demoutils.app().getSceneDecorator(), sim=sim()))
     t.daemon = True
     t.start()
 
     """locks the rov in fixed position, for mounting wing and cable to rov"""
     if adjust_rov:
         lock1 = agx.LockJoint(rov.link1)
-        demoutils.sim().add(lock1)
+        sim().add(lock1)

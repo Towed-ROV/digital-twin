@@ -8,7 +8,7 @@ from functions import deg2rad, rad2deg, limit
 import numpy as np
 import pandas as pd
 import math
-from Assembly import create_rov_body, create_wing_right, create_wing_left, create_spoiler, _map
+from Assembly import create_rov_body, create_wing_right, create_wing_left
 from modules.agxPythonModules.utils.callbacks import StepEventCallback as Sec
 from Sensor import Sensor
 
@@ -43,22 +43,15 @@ class rovAssembly(agxSDK.Assembly):
         link3rot = agx.Vec3(0.1, -0.25, 0)
         self.link3.setRotation(agx.EulerAngles(0, 0, 0))
         self.link3.setName("wing_l")
-        # self.ehco_lod.setPossition(agx.Vec3(0, 0, -self.ehco_lod.getHeight()/2))
-
-        self.spoiler = create_spoiler()
-        # self.spoiler.setPosition(0.7, -0.3,- 0.3)
-        # self.spoiler.setRotation(agx.EulerAngles(0, -0.5, 0))
-        # self.spoiler.setName("spoiler_wing")
 
         self.link1.getGeometry('Rov_body').setEnableCollisions(self.link2.getGeometry('Wing_R'), False)
         self.link1.getGeometry('Rov_body').setEnableCollisions(self.link3.getGeometry('wing_L'), False)
-        # self.link1.getGeometry('Rov_body').setEnableCollisions(self.spoiler.getGeometry('spoiler'), False)
 
         demoutils.create_visual(self.link1)
         demoutils.create_visual(self.link2)
         demoutils.create_visual(self.link3)
-        demoutils.create_visual(self.spoiler)
-        self.link1.getMassProperties().setMass(self.link1.getMassProperties().getMass() / 2)
+        #self.link1.getMassProperties().setMass(self.link1.getMassProperties().getMass() / 2)
+
         self.hinge1 = self.build_hinge(link=self.link1, part=self.link2,
                                        pos=link2rot, axis=agx.Vec3(0, 1, 0))
         self.hinge1.setCompliance(1e-5)
@@ -75,30 +68,22 @@ class rovAssembly(agxSDK.Assembly):
         self.hinge2.getRange1D().setEnable(True)
         self.hinge2.getRange1D().setRange(deg2rad(-45), deg2rad(45))
 
-        self.hinge3 = self.build_hinge(self.link1, self.spoiler,
-                                       pos=self.spoiler.getPosition(), axis=agx.Vec3(0, 0, 0))
-        self.link1.add(self.ehco_lod.beam)
-        # self.hinge3.setCompliance(1e-6)
-        # self.hinge3.getLock1D().setEnable(False)
-        # self.hinge3.getMotor1D().setEnable(False)
-        f1 = agx.Frame()
-        f1.setTranslate(agx.Vec3(0.05, 0, 0.05))
+        self.ehco_lod.beam.setPosition(agx.Vec3(0, 0, 0))
+        self.link4=agx.RigidBody(self.ehco_lod.beam)
+        self.link4.setPosition(agx.Vec3(0,0,-depth))
         f2 = agx.Frame()
-        f2.setTranslate(agx.Vec3(0, 0, 0))
         f3 = agx.Frame()
-        f3.setTranslate(agx.Vec3(0, 0, 0))
-        f4 = agx.Frame()
-        f4.setTranslate(agx.Vec3(0, 0, 0))
-        f5 = agx.Frame()
-        f5.setTranslate(agx.Vec3(0, 0, 0))
+        f2.setTranslate(agx.Vec3(0,0,0))
+        f3.setTranslate(agx.Vec3(0,0,0))
+        self.sonar_hinge = self.build_lock_joint(self.link1, self.link4,f2,f3)
 
         self.add(self.link1)
         self.add(self.link2)
         self.add(self.link3)
+        self.add(self.link4)
         self.add(self.hinge1)
         self.add(self.hinge2)
-        self.ehco_lod.addSim((demoutils.sim()))
-
+        self.add(self.sonar_hinge)
         self.left_wing_angle = lambda: self.hinge1.getAngle()
         self.right_wing_angle = lambda: self.hinge2.getAngle()
         self.wing_step_length = deg2rad(2)
@@ -117,6 +102,14 @@ class rovAssembly(agxSDK.Assembly):
             rb2=part,
             c=agx.Hinge)  # type: agx.Hinge
 
+    def build_lock_joint(self, part1, part2, pos1, pos2):
+        return demoutils.create_constraint(
+            pos1=pos1,
+            pos2=pos2,
+            rb1=part1,
+            rb2=part2,
+            c=agx.LockJoint)  # type: agx.LockJoint
+
     def getGeometries(self) -> "agxCollide::GeometryRefSet const &":
         a = agxSDK.Assembly.getGeometries(self)
         return a
@@ -134,7 +127,6 @@ class rovAssembly(agxSDK.Assembly):
         self.plot_depth.append(self.link1.getPosition()[2])
         self.plot_pitch.append(self.link1.getRotation()[0] * 10)
         self.plot_roll.append(self.link1.getRotation()[1] * 100)
-        self.plot_wing_angle.append(_map(self.distance1.getAngle(), 0.753, 1.05, -45, 45))
 
         if plot:
 
