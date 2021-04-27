@@ -6,7 +6,9 @@ import agxSDK
 import agxCollide
 import math
 from modules.agxPythonModules.utils.callbacks import StepEventCallback as Sec
+
 """Class Ship, create a agx assembly of the boat used to tow the Rov."""
+
 
 class Ship(agxSDK.Assembly):
     def __init__(self):
@@ -105,6 +107,10 @@ class Ship(agxSDK.Assembly):
         self.m_body.addForceAtLocalPosition(right_force, self.m_right_propeller)
 
     def display_forces(self, t):
+        pass
+        # self.plot()
+
+    def plot(self):
         tot_contact_force = agx.Vec3()
         contacts = demoutils.sim().getSpace().getGeometryContacts()
         for contact in contacts:
@@ -112,10 +118,10 @@ class Ship(agxSDK.Assembly):
             for p in points:
                 f = p.getForce()
                 tot_contact_force = tot_contact_force + f
-        demoutils.app().getSceneDecorator().setText(0, "Towed-Rov simulation")
         demoutils.app().getSceneDecorator().setText(1, "Thrust       : {} kN".format(
             self.m_propulsion_force / 500))  # 2/1000 ( 2 because of the 2 propellers )
-        demoutils.app().getSceneDecorator().setText(2, "Speed in X direction : {} knots".format(str(round(self.m_body.getVelocity()[0] * 1.94384449, 2))))
+        demoutils.app().getSceneDecorator().setText(2, "Speed in X direction : {} knots".format(
+            str(round(self.m_body.getVelocity()[0] * 1.94384449, 2))))
 
     def get_min(self):
         return self.m_propulsion_force

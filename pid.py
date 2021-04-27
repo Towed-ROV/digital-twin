@@ -52,6 +52,7 @@ class PID_Controller(agxSDK.StepEventListener):
         self.set_output_limits(0, 100)
         self.last_time = time.perf_counter()
         self.last_input = np.nan
+
     # def update(self, agxSDK.StepEventListener):
 
     def output(self):
@@ -80,7 +81,6 @@ class PID_Controller(agxSDK.StepEventListener):
         # self.iTerm = self.iTerm + (self.ki * error)
         self.i_term = self.i_term + (self.ki * time_step * error)
 
-
         # Prevent integral windup
         self.i_term = np.clip(self.i_term, self.output_limit_min, self.output_limit_max)
 
@@ -98,12 +98,10 @@ class PID_Controller(agxSDK.StepEventListener):
         self.last_input = _input
         self.last_time = now
 
-
         return (self.output)
 
     def set_setpoint(self, setpoint):
         self.setpoint = setpoint
-
 
     def set_tunings(self, Kp, Ki, Kd, direction=Constants.DIRECT):
         """This function allows the controller's dynamic performance to be
@@ -162,6 +160,5 @@ class PID_Controller(agxSDK.StepEventListener):
         """
         self.i_term = current_output
         self.last_input = current_input
-
 
         self.i_term = np.clip(self.i_term, self.output_limit_min, self.output_limit_max)

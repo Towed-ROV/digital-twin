@@ -1,6 +1,7 @@
 import serial, time
 import agxSDK
 
+
 class ArduinoSensor(agxSDK.StepEventListener):
     def __init__(self, rov):
         super().__init__()
@@ -46,14 +47,14 @@ class ArduinoSensor(agxSDK.StepEventListener):
 
     def send_sensor(self):
         rov_body = self.rov
-        if self.turn_to_send == 1 :
+        if self.turn_to_send == 1:
             self.depth = round(rov_body.link1.getPosition()[2] * 1.23, 2)
             self.send("depth:" + str(self.depth))
             self.turn_to_send = 2
         elif self.turn_to_send == 2:
-            self.depth_beneath_rov = 10 ##get distance to botttom remove detph
+            self.depth_beneath_rov = 10  ##get distance to botttom remove detph
             self.send("depth_beneath_rov:" + str(self.depth_beneath_rov))
-            self.turn_to_send  = 3
+            self.turn_to_send = 3
         elif self.turn_to_send == 3:
             self.temp = 10
             self.send("temperature:" + str(self.temp))
@@ -61,9 +62,9 @@ class ArduinoSensor(agxSDK.StepEventListener):
         elif self.turn_to_send == 4:
             self.roll = round(rov_body.link1.getRotation()[1], 2)
             self.send("roll:" + str(self.roll))
-            self.turn_to_send =5
+            self.turn_to_send = 5
         elif self.turn_to_send == 5:
-            self.pitch  = round(rov_body.link1.getRotation()[0], 2)
+            self.pitch = round(rov_body.link1.getRotation()[0], 2)
             self.send("pitch:" + str(self.pitch))
             self.turn_to_send = 6
         elif self.turn_to_send == 6:
@@ -89,7 +90,7 @@ class ArduinoSensor(agxSDK.StepEventListener):
         message = self.ser.readline()
         message = message.strip()
         message = message.decode('utf-8').strip("<").strip(">")
-        return message.split(":",1)
+        return message.split(":", 1)
 
 
 if __name__ == '__main__':

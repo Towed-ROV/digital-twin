@@ -50,7 +50,7 @@ class rovAssembly(agxSDK.Assembly):
         demoutils.create_visual(self.link1)
         demoutils.create_visual(self.link2)
         demoutils.create_visual(self.link3)
-        #self.link1.getMassProperties().setMass(self.link1.getMassProperties().getMass() / 2)
+        # self.link1.getMassProperties().setMass(self.link1.getMassProperties().getMass() / 2)
 
         self.hinge1 = self.build_hinge(link=self.link1, part=self.link2,
                                        pos=link2rot, axis=agx.Vec3(0, 1, 0))
@@ -69,13 +69,13 @@ class rovAssembly(agxSDK.Assembly):
         self.hinge2.getRange1D().setRange(deg2rad(-45), deg2rad(45))
 
         self.ehco_lod.beam.setPosition(agx.Vec3(0, 0, 0))
-        self.link4=agx.RigidBody(self.ehco_lod.beam)
-        self.link4.setPosition(agx.Vec3(0,0,-depth))
+        self.link4 = agx.RigidBody(self.ehco_lod.beam)
+        self.link4.setPosition(agx.Vec3(0, 0, -depth))
         f2 = agx.Frame()
         f3 = agx.Frame()
-        f2.setTranslate(agx.Vec3(0,0,0))
-        f3.setTranslate(agx.Vec3(0,0,0))
-        self.sonar_hinge = self.build_lock_joint(self.link1, self.link4,f2,f3)
+        f2.setTranslate(agx.Vec3(0, 0, 0))
+        f3.setTranslate(agx.Vec3(0, 0, 0))
+        self.sonar_hinge = self.build_lock_joint(self.link1, self.link4, f2, f3)
 
         self.add(self.link1)
         self.add(self.link2)
@@ -88,7 +88,6 @@ class rovAssembly(agxSDK.Assembly):
         self.right_wing_angle = lambda: self.hinge2.getAngle()
         self.wing_step_length = deg2rad(2)
         self.setName('rov')
-
 
     def disable_col(self, geo, ruged: agx.RigidBody):
         for geometries in ruged.getGeometries():
@@ -118,8 +117,8 @@ class rovAssembly(agxSDK.Assembly):
 
         a1 = -self.hinge1.getAngle()
         a2 = -self.hinge2.getAngle()
-        d1 = limit(a1 - sb_p,-2,2)*10
-        d2 = limit(a2 - port_p, -2, 2)*10
+        d1 = limit(a1 - sb_p, -2, 2) * 10
+        d2 = limit(a2 - port_p, -2, 2) * 10
         self.hinge1.getMotor1D().setSpeed(d1)
         self.hinge2.getMotor1D().setSpeed(d2)
 
@@ -129,7 +128,6 @@ class rovAssembly(agxSDK.Assembly):
         self.plot_roll.append(self.link1.getRotation()[1] * 100)
 
         if plot:
-
             """plots stored values to csv file"""
             plot_wing_angle = np.array(self.plot_wing_angle)
             plot_depth = np.array(self.plot_depth)

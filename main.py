@@ -38,7 +38,7 @@ def setBodyViscousDrag(body, controller: agxModel.WindAndWaterController):
     bodies = body.getRigidBodies()
     for rigid_bodies in bodies:
         if "wing" in rigid_bodies.getName().lower():
-            setBodyWaterParameters(controller, rigid_bodies, pressure_drag=2)
+            setBodyWaterParameters(controller, rigid_bodies, pressure_drag=3)
             print("wing")
         else:
             setBodyWaterParameters(controller, rigid_bodies, pressure_drag=1)
@@ -102,7 +102,7 @@ def build_scene():
     pid.setName('pid')
     pid.set_output_limits(-45, 45)
     pid.set_mode(1, 0, 0)
-    pid.set_setpoint(-6)
+    pid.set_setpoint(-30)
 
     """Creates a pid controller for trim"""
 
@@ -115,7 +115,7 @@ def build_scene():
     keyboard = KeyboardListener(pid, plot)
 
     """Creates the rov"""
-    rov = rovAssembly(keyboard, wing_scale=wingscale,depth=depth,seaFloor=bottom_geometry)
+    rov = rovAssembly(keyboard, wing_scale=wingscale, depth=depth, seaFloor=bottom_geometry)
     rov.setPosition(agx.Vec3(-length + 10, 0, 0))
     rov.setName("rov")
     rov.setRotation(agx.EulerAngles(0, 0, math.pi))
@@ -137,7 +137,7 @@ def build_scene():
         ship.setRotation(agx.EulerAngles(0, 0, math.pi))
         ship.setPosition(agx.Vec3(-length + 20 + 300, 0, 0))
         wire, wire_renderer = MakeWire().create_wire(1030, 0.001, ship, agx.Vec3(2, 0, 0),
-                                                     rov, agx.Vec3(0, -0.1 , 0.1))
+                                                     rov, agx.Vec3(0, -0.1, 0.1))
         setWireViscousDrag(wire, controller)
 
         ship.setVelocity(agx.Vec3(-50, 0, 0))
@@ -150,7 +150,7 @@ def build_scene():
         sim().add(pid_boat)
         sim().add(Boat_Controller(ship, pid_boat, arduino_stepper))
     """Creates a controller to control the wings of the Rov"""
-    wing_controll = RovController(rov, pid, pid_trim,bottom_geometry.getShape().asHeightField())
+    wing_controll = RovController(rov, pid, pid_trim, bottom_geometry.getShape().asHeightField())
     wing_controll.setName('wingControll')
 
     """Adds rov, boat, controller, and pid to the simulation"""
@@ -163,7 +163,7 @@ def build_scene():
     sim().add(controller)
     sim().add(rov.ehco_lod.beam)
     sim().addEventListener(rov.ehco_lod)
-    rov.ehco_lod.beam.setEnableCollisions(water_geometry,False)
+    rov.ehco_lod.beam.setEnableCollisions(water_geometry, False)
 
     createVisual(bottom_geometry, demoutils.root())
 
@@ -177,16 +177,13 @@ def build_scene():
     lock.setCompliance(1e-12, agx.LockJoint.ROTATIONAL_3)
     sim().add(lock)
     sim().setTimeStep(0.005)
+    demoutils.app().getSceneDecorator().setText(0, "Towed-Rov simulation")
     "hold simulator untill start"
     # if not start:
     #     lock2 = agx.LockJoint(ship.m_body)
     #     sim().add(lock2)
     #     lock1 = agx.LockJoint(rov.link1)
     #     sim().add(lock1)
-
-    t = Thread(decorator(decerator=demoutils.app().getSceneDecorator(), sim=sim()))
-    t.daemon = True
-    t.start()
 
     """locks the rov in fixed position, for mounting wing and cable to rov"""
     if adjust_rov:

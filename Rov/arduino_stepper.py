@@ -4,7 +4,7 @@ from functions import _map, constrain
 
 
 class ArduinoStepper(agxSDK.StepEventListener):
-    def __init__(self, pid, pid_trim,rov):
+    def __init__(self, pid, pid_trim, rov):
         # super().__init__(agxSDK.GuiEventListener.KEYBOARD)
         super().__init__()
         # PID controller
@@ -20,14 +20,14 @@ class ArduinoStepper(agxSDK.StepEventListener):
         self.manual_mode = 0
         self.auto_depth_mode = 1
         self.target_mode = 1
-        #self.ser = serial.Serial(
+        # self.ser = serial.Serial(
         #    port='COM31',
         #    baudrate=19200,
         #    parity=serial.PARITY_NONE,
         #    stopbits=serial.STOPBITS_ONE,
         #    bytesize=serial.EIGHTBITS,
         #    timeout=0)
-        #timer
+        # timer
         self.interval = 0.01
         self.previousMillis = 0
 
@@ -64,7 +64,7 @@ class ArduinoStepper(agxSDK.StepEventListener):
         #         print("start step")
         #         self.start = True
         else:
-            self.depth = round(self.rov.link1.getPosition()[2])# * 1.23, 2)
+            self.depth = round(self.rov.link1.getPosition()[2])  # * 1.23, 2)
             if self.has_been_reset:
                 if self.target_mode == self.manual_mode:
                     pos = constrain(self.manual_wing_pos, -self.max_wing_angle, self.max_wing_angle)
@@ -86,7 +86,7 @@ class ArduinoStepper(agxSDK.StepEventListener):
                 step_position_sb = _map(self.wing_pos_sb, -self.max_wing_angle, self.max_wing_angle,
                                         self.min_stepper_pos_sb, self.max_stepper_pos_sb)
                 step_position_port = _map(self.wing_pos_port, -self.max_wing_angle, self.max_wing_angle,
-                                        self.min_stepper_pos_port, self.max_stepper_pos_port)
+                                          self.min_stepper_pos_port, self.max_stepper_pos_port)
                 self.current_pos_sb = self.rov.distance1.getAngle()
                 self.current_pos_port = self.rov.distance2.getAngle()
                 if step_position_sb != self.current_pos_sb:
@@ -101,7 +101,7 @@ class ArduinoStepper(agxSDK.StepEventListener):
             self.handle_received_message()
 
     def reset_stepper(self):
-         self.send("reset:True")
+        self.send("reset:True")
 
     def move_stepper_pos_port(self, step_pos):
         current_millis_port = time.monotonic()
@@ -110,7 +110,7 @@ class ArduinoStepper(agxSDK.StepEventListener):
                 # print("opp port")
                 self.current_pos_port = self.current_pos_port + self.interval_port
                 self.rov.distance2.getLock1D().setPosition(self.current_pos_port)
-            elif step_pos< self.current_pos_port:
+            elif step_pos < self.current_pos_port:
                 # print("ned port")
                 self.current_pos_port = self.current_pos_port - self.interval_sb
                 self.rov.distance2.getLock1D().setPosition(self.current_pos_port)
@@ -134,27 +134,27 @@ class ArduinoStepper(agxSDK.StepEventListener):
                           -self.max_wing_angle, self.max_wing_angle)
         angle_sb = _map(sb, self.min_stepper_pos_sb, self.max_stepper_pos_sb,
                         -self.max_wing_angle, self.max_wing_angle)
-        #self.send("wing_pos_port:" + str(angle_port))
-        #self.send("wing_pos_sb:" + str(angle_sb))
+        # self.send("wing_pos_port:" + str(angle_port))
+        # self.send("wing_pos_sb:" + str(angle_sb))
 
     def compensate_wing_to_pitch(self):
-        self.wing_pos_sb  = self.wing_pos_sb - self.pitch
-        self.wing_pos_port  = self.wing_pos_port - self.pitch
+        self.wing_pos_sb = self.wing_pos_sb - self.pitch
+        self.wing_pos_port = self.wing_pos_port - self.pitch
 
     def trim_wing_pos(self, wing_pos, trim_pos):
         if wing_pos + trim_pos > self.max_wing_angle:
-            compensate = float(-self.max_wing_angle + 2*wing_pos)
+            compensate = float(-self.max_wing_angle + 2 * wing_pos)
             wing_pos_sb = self.max_wing_angle
             wing_pos_port = compensate
         elif wing_pos - trim_pos < -self.max_wing_angle:
-            compensate = float(-self.max_wing_angle + 2*trim_pos)
+            compensate = float(-self.max_wing_angle + 2 * trim_pos)
             wing_pos_sb = compensate
             wing_pos_port = -self.max_wing_angle
         else:
             wing_pos_sb = wing_pos - trim_pos
             wing_pos_port = wing_pos + trim_pos
-        return  constrain(wing_pos_sb, -self.max_wing_angle, self.max_wing_angle),\
-                constrain(wing_pos_port, -self.max_wing_angle, self.max_wing_angle)
+        return constrain(wing_pos_sb, -self.max_wing_angle, self.max_wing_angle), \
+               constrain(wing_pos_port, -self.max_wing_angle, self.max_wing_angle)
 
     def handle_received_message(self):
         try:
@@ -253,11 +253,12 @@ class ArduinoStepper(agxSDK.StepEventListener):
                 self.send(received_command[0] + ":True")
         except ValueError:
             pass
-    def set_target_mode(self, target_mode, wing_pos = 0):
+
+    def set_target_mode(self, target_mode, wing_pos=0):
         mode_set = False
         if target_mode == self.manual_mode:
-            self.pid.set_mode(0,0,0)
-            self.pid_trim.set_mode(0,0,0)
+            self.pid.set_mode(0, 0, 0)
+            self.pid_trim.set_mode(0, 0, 0)
             self.target_mode = self.manual_mode
             self.manual_wing_pos = wing_pos
             mode_set = True
@@ -267,7 +268,7 @@ class ArduinoStepper(agxSDK.StepEventListener):
             self.pid.set_mode(1, 0, 0)
             self.pid_trim.set_mode(1, 0, 0)
             self.target_mode = self.auto_depth_mode
-            self.pid.set_tunings(self.pid_depth_p,self.pid_depth_i,self.pid_depth_d)
+            self.pid.set_tunings(self.pid_depth_p, self.pid_depth_i, self.pid_depth_d)
             self.pid_trim.set_tunings(self.pid_roll_p, self.pid_roll_i, self.pid_roll_d)
 
     def send(self, message):
@@ -280,7 +281,7 @@ class ArduinoStepper(agxSDK.StepEventListener):
         message = message.decode('utf-8').strip("<").strip(">")
         if message:
             print(message)
-        return message.split(":",1)
+        return message.split(":", 1)
 
     # keyboards is used to tune the position of the wings
     # def keyboard(self, key, modKeyMask, x, y, keydown) -> bool:

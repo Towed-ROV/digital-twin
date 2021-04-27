@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 
+
 class seafloorImageBuilder:
     def normalize(self, array, new_min=0, new_max=1):
         """
@@ -13,7 +14,7 @@ class seafloorImageBuilder:
         """
         old_min = np.min(array)
         old_max = np.max(array)
-        ret_array = np.divide(array-old_min, old_max - old_min)
+        ret_array = np.divide(array - old_min, old_max - old_min)
         ret_array = np.array((ret_array * (new_max - new_min) + new_min))
         return ret_array
 
@@ -25,13 +26,13 @@ class seafloorImageBuilder:
             width: the new dimention count of the new array.
         """
         img = np.zeros((width, len(array)))
-        array = np.array(self.normalize(array, new_min=0, new_max=255),np.uint8)
+        array = np.array(self.normalize(array, new_min=0, new_max=255), np.uint8)
 
         for i in range(width):
             img[i] = array
         return img
 
-    def save_new_seafloor_image(self,width, seafloor_array=None):
+    def save_new_seafloor_image(self, width, seafloor_array=None):
         """
         generates and saves an image of the seafloor to the project.
         Args:

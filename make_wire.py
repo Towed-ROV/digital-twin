@@ -2,7 +2,10 @@ import agxWire
 import agx
 import agxOSG
 import demoutils
+
 """Create a pulling wire"""
+
+
 class MakeWire():
     def create_wire(self, density, size, body_1, pos_1, body_2, pos_2):
         wire_material = agx.Material('wireMaterial')

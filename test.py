@@ -8,19 +8,18 @@
 import serial
 from time import sleep
 
+
 # Example 1  from http://pyserial.sourceforge.net/shortintro.html
 def Example1():
     counter = 0
     ser = serial.Serial('COM28', 19200, timeout=1)  # open first serial port
     print(ser.name)  # check which port was really used
     while True:
-        ser.write(("message number: " +  str(counter) + "\n").encode('utf-8'))  # write a string
+        ser.write(("message number: " + str(counter) + "\n").encode('utf-8'))  # write a string
         sleep(0.0001)
         print(counter)
-        counter  = counter +1
+        counter = counter + 1
     ser.close()  # close port
-
-
 
 
 Example1()
