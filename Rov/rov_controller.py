@@ -14,11 +14,13 @@ class RovController(agxSDK.StepEventListener):
         self.pid_trim = pid_trim
         self.last_output = 0
         self.__start = False
+        pid.set_output_limits(-45,45)
 
     """Runs every time before the simulation takes a step"""
 
     def pre(self, t):
-        current_depth = self.rov.getPosition()[2]
+        current_depth = self.rov.getRigidBody('rovBody').getPosition()[2]
+
         self.pid.compute(current_depth)
         output_left = deg2rad(self.pid.output)# - self.pid_trim.output)
         output_right = deg2rad(self.pid.output) #+ self.pid_trim.output)
