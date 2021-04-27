@@ -20,9 +20,20 @@ class RovController(agxSDK.StepEventListener):
 
     def pre(self, t):
         current_depth = self.rov.getRigidBody('rovBody').getPosition()[2]
-
         self.pid.compute(current_depth)
-        output_left = deg2rad(self.pid.output)# - self.pid_trim.output)
-        output_right = deg2rad(self.pid.output) #+ self.pid_trim.output)
+        output_left = deg2rad(-self.pid.output)# - self.pid_trim.output)
+        output_right = deg2rad(-self.pid.output) #+ self.pid_trim.output)
         self.rov.update_wings(port_p=output_right, sb_p=output_left)
-        demoutils.app().getSceneDecorator().setText(9,"pid : {}, wing: {}".format(str(self.pid.output),round(rad2deg(self.rov.left_wing_angle()),2)))
+        self.rov.update_wings(output_left,output_right)
+
+    def post(self,t):
+        demoutils.app().getSceneDecorator().setText(9, "pid : {}, wing: {}".format(str(self.pid.output), round(
+            rad2deg(self.rov.left_wing_angle()), 2)))
+        demoutils.app().getSceneDecorator().setText(3, "Rov Position in Z direction : {} M".format(
+            str(round(self.rov.link1.getPosition()[2], 2))))
+        demoutils.app().getSceneDecorator().setText(4, "Pitch : {}".format(
+            str(round(self.rov.link1.getRotation()[0] * 100, 2))))
+        demoutils.app().getSceneDecorator().setText(5, "Roll : {}".format(
+            str(round(self.rov.link1.getRotation()[1] * 100, 2))))
+        demoutils.app().getSceneDecorator().setText(7,
+            "distance : {}M".format(str(round(self.rov.link1.getPosition()[0], 2))))

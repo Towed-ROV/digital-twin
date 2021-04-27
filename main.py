@@ -71,15 +71,15 @@ def buildScene():
 
 
 def build_scene():
-    wingscale = 1.5
+    wingscale = 2
 
     """write plot to csv file variable"""
     start = False
     plot = False
     adjust_rov = False
-    kp = 10
-    ki = 1
-    kd = 5
+    kp = 100
+    ki = 5
+    kd = 50
     kp_trim = 0.02
     ki_trim = 0.02
     kd_trim = 1
@@ -160,7 +160,6 @@ def build_scene():
     demoutils.sim().add(pid_trim)
     demoutils.sim().add(wing_controll)
     demoutils.sim().add(controller)
-    demoutils.sim().add(rov.ehco_lod.beam)
 
     createVisual(bottom_geometry, demoutils.root())
 
@@ -180,8 +179,6 @@ def build_scene():
     #     demoutils.sim().add(lock2)
     #     lock1 = agx.LockJoint(rov.link1)
     #     demoutils.sim().add(lock1)
-
-    rov.displayForces(1)
 
     t = Thread(decorator(decerator=demoutils.app().getSceneDecorator(), sim=demoutils.sim()))
     t.daemon = True

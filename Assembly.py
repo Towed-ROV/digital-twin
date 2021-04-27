@@ -1,7 +1,8 @@
 import agxIO
 import agx
 import agxCollide
-
+#python imports
+import math
 """Creates fender geometry"""
 def create_fenders(self, fender_material, half_width, half_length):
     fender = agxCollide.Geometry(agxCollide.Capsule(0.8, half_width * 2))
@@ -62,6 +63,7 @@ def create_wing_right(aluminum,scale):
     geom.setMaterial(aluminum)
     geom.setName('Wing_R')
 
+    geom.setRotation(agx.EulerAngles(0, math.pi, math.pi))
     print("volume: ",geom.calculateVolume())
     wing_right = agx.RigidBody()
     wing_right.add(geom)
@@ -75,9 +77,9 @@ def create_wing_left(aluminum,scale):
     scaled_vertices = scale_mesh(mesh_reader.getVertices(), agx.Vec3(scale))
     trimesh = agxCollide.Trimesh(scaled_vertices, mesh_reader.getIndices(), "wing_simp")
     geom = agxCollide.Geometry(trimesh)
+
     geom.setMaterial(aluminum)
     geom.setName('wing_L')
-
     print("volume: ",geom.calculateVolume())
     wing_left = agx.RigidBody()
     wing_left.add(geom)
