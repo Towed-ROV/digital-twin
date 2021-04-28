@@ -162,6 +162,4 @@ class PID_Controller(agxSDK.StepEventListener):
         """
         self.i_term = current_output
         self.last_input = current_input
-
-
         self.i_term = np.clip(self.i_term, self.output_limit_min, self.output_limit_max)

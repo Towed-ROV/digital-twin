@@ -89,8 +89,9 @@ def build_scene():
     kd_boat = 0
     print('dsd')
     depth = 60
-    length = 520
+    length = 520*2
     width = 30
+    wire_length= 300
     density = 1027
     water_geometry, bottom_geometry = MakeWater().make_water(adjust_rov, density, length, width, depth)
     controller = agxModel.WindAndWaterController()
@@ -115,8 +116,8 @@ def build_scene():
     keyboard = KeyboardListener(pid, plot)
 
     """Creates the rov"""
-    rov = rovAssembly(keyboard, wing_scale=wingscale,depth=depth,seaFloor=bottom_geometry)
-    rov.setPosition(agx.Vec3(-length + 10, 0, 0))
+    rov = rovAssembly(keyboard, wing_scale=wingscale,depth=depth/2,seaFloor=bottom_geometry)
+    rov.setPosition(agx.Vec3(-length/2 +1, 0, 0))
     rov.setName("rov")
     rov.setRotation(agx.EulerAngles(0, 0, math.pi))
     setBodyViscousDrag(rov, controller)
@@ -132,15 +133,15 @@ def build_scene():
         pid_boat.set_setpoint(10)
 
         """Creates the boat to tow the rov"""
-        ship = Ship()
+        ship = Ship(bottom_geometry.getShape().asHeightField())
         ship.setName('ship')
         ship.setRotation(agx.EulerAngles(0, 0, math.pi))
-        ship.setPosition(agx.Vec3(-length + 20 + 300, 0, 0))
+        ship.setPosition(agx.Vec3(-length/2 + 1 + wire_length, 0, 0))
         wire, wire_renderer = MakeWire().create_wire(1030, 0.001, ship, agx.Vec3(2, 0, 0),
                                                      rov, agx.Vec3(0, -0.1 , 0.1))
         setWireViscousDrag(wire, controller)
-
-        ship.setVelocity(agx.Vec3(-50, 0, 0))
+        print(bottom_geometry.getShape().asHeightField().getHeight(0,1))
+        ship.setVelocity(agx.Vec3(-length/50, 0, 0))
         # sim().add(arduino_sensor)
         # sim().add(arduino_stepper)
         sim().add(wire)
@@ -176,17 +177,8 @@ def build_scene():
     """locks yaw"""
     lock.setCompliance(1e-12, agx.LockJoint.ROTATIONAL_3)
     sim().add(lock)
-    sim().setTimeStep(0.005)
-    "hold simulator untill start"
-    # if not start:
-    #     lock2 = agx.LockJoint(ship.m_body)
-    #     sim().add(lock2)
-    #     lock1 = agx.LockJoint(rov.link1)
-    #     sim().add(lock1)
+    sim().setTimeStep(0.002)
 
-    t = Thread(decorator(decerator=demoutils.app().getSceneDecorator(), sim=sim()))
-    t.daemon = True
-    t.start()
 
     """locks the rov in fixed position, for mounting wing and cable to rov"""
     if adjust_rov:
