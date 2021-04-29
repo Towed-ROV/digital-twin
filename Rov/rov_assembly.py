@@ -8,109 +8,165 @@ from functions import deg2rad, rad2deg, limit
 import numpy as np
 import pandas as pd
 import math
-from Assembly import create_rov_body, create_wing_right, create_wing_left
+from assembly import rov_builder
 from modules.agxPythonModules.utils.callbacks import StepEventCallback as Sec
-from Sensor import Sensor
+from sensor import Sensor
+from rov_simulation_parameters import *
 
 """Class rovAssembly, creates a agx assembly of the rov, with to hinges, one on each wings"""
 
 
-class rovAssembly(agxSDK.Assembly):
-    def __init__(self, keyboard, seaFloor, wing_scale=1, depth=60):
+class RovAssembly(agxSDK.Assembly):
+    def __init__(self, keyboard, seafloor):
+        """
+
+        Args:
+            keyboard:
+            seaFloor:
+            wing_scale:
+            depth:
+        """
         super().__init__()
-        len1 = 2
+
         self.keyboard = keyboard
         self.plot_pitch = []
         self.plot_wing_angle = []
         self.plot_depth = []
         self.plot_roll = []
         self.plotted = False
-        self.ehco_lod = Sensor(seaFloor, self, depth)
-        aluminum = agx.Material('AluminumMaterial')
-        aluminum.getBulkMaterial().setDensity(1027)
-        aluminum1 = agx.Material('AluminumMaterial')
-        aluminum1.getBulkMaterial().setDensity(1027)  # 706.8)
-        self.link1 = create_rov_body(aluminum)
-        self.link1.setName('rovBody')
-        self.link1.setCmLocalTranslate(agx.Vec3(0.27511, -0.18095, 0.0494))
-        self.link2 = create_wing_right(aluminum1, scale=wing_scale)
-        self.link2.setPosition(0.05, 0.25, 0)
-        link2rot = agx.Vec3(0.1, 0.25, 0)
-        self.link2.setRotation(agx.EulerAngles(0, 0, 0))
-        self.link2.setName("wing_r")
-        self.link3 = create_wing_left(aluminum1, scale=wing_scale)
-        self.link3.setPosition(0.05, -0.25, 0)
+        print("initilaized master and vields")
+
+        # building models
+        rov_material = self.build_material('AluminumMaterial', ROV_BODY_DENSITY)
+        wing_material = self.build_material('AluminumMaterial', ROV_WING_DENSITY)
+        builder = rov_builder()
+        print("rov builder ready")
+
+        # rov body
+        self.link1 = builder.create_rov_body(rov_material,name='rovBody',scale=ROV_SCALE,cm = (0.27511, -0.18095, 0.0494))
+        print("buildt rov body")
+        # wing left
+        self.link2 = builder.create_wing_right(wing_material, WING_SCALE,"wing_r",pos = (0.05, 0.25, 0), rot=(0, 0, 0))
+        link2rot = agx.Vec3(0.05, 0.25, 0)
+        print("buildt right wing")
+        # wing right
+        self.link3 = builder.create_wing_left(wing_material, WING_SCALE,"wing_l",pos = (0.05, -0.25, 0), rot=(0, 0, 0))
         link3rot = agx.Vec3(0.1, -0.25, 0)
-        self.link3.setRotation(agx.EulerAngles(0, 0, 0))
-        self.link3.setName("wing_l")
+        print("buildt left wing")
+        #echo lod
+        # self.ehco_lod = Sensor(seafloor, self, WATER_DEPTH)
+        # print("buildt echo lod")
+        # self.ehco_lod.beam.setPosition(agx.Vec3(0, 0, 0))
+        # self.link4 = agx.RigidBody(self.ehco_lod.beam)
+        # self.link4.setPosition(agx.Vec3(0, 0, -WATER_DEPTH))
+        # self.link1.getGeometry('Rov_body').setEnableCollisions(self.ehco_lod.beam, False)
+        # print("buildt sonar shape")
 
-        self.link1.getGeometry('Rov_body').setEnableCollisions(self.link2.getGeometry('Wing_R'), False)
-        self.link1.getGeometry('Rov_body').setEnableCollisions(self.link3.getGeometry('wing_L'), False)
+        # disabling internal collisions
+        self.link1.getGeometry('Rov_body').setEnableCollisions(self.link2.getGeometry('wing_r'), False)
+        self.link1.getGeometry('Rov_body').setEnableCollisions(self.link3.getGeometry('wing_l'), False)
 
+        print("removed internal collitions")
+
+        # adding visualisation
         demoutils.create_visual(self.link1)
         demoutils.create_visual(self.link2)
         demoutils.create_visual(self.link3)
-        #self.link1.getMassProperties().setMass(self.link1.getMassProperties().getMass() / 2)
+        print("created visuals")
 
+        # conecting models
+        # left wing
         self.hinge1 = self.build_hinge(link=self.link1, part=self.link2,
-                                       pos=link2rot, axis=agx.Vec3(0, 1, 0))
-        self.hinge1.setCompliance(1e-5)
-        self.hinge1.getLock1D().setEnable(False)
-        self.hinge1.getMotor1D().setEnable(True)
-        self.hinge1.getRange1D().setEnable(True)
-        self.hinge1.getRange1D().setRange(deg2rad(-45), deg2rad(45))
-
+                                       pos=link2rot, axis=agx.Vec3(0, 1, 0),lock=False,motor=True,range=(MIN_WING_ANGLE,MAX_WING_ANGLE),compliance=1e-5)
+        # right wing
         self.hinge2 = self.build_hinge(self.link1, self.link3,
-                                       pos=link3rot, axis=agx.Vec3(0, 1, 0))
-        self.hinge2.setCompliance(1e-5)
-        self.hinge2.getLock1D().setEnable(False)
-        self.hinge2.getMotor1D().setEnable(True)
-        self.hinge2.getRange1D().setEnable(True)
-        self.hinge2.getRange1D().setRange(deg2rad(-45), deg2rad(45))
-
-        self.ehco_lod.beam.setPosition(agx.Vec3(0, 0, 0))
-        self.link4=agx.RigidBody(self.ehco_lod.beam)
-        self.link4.setPosition(agx.Vec3(0,0,-depth))
-        f2 = agx.Frame()
-        f3 = agx.Frame()
-        f2.setTranslate(agx.Vec3(0,0,0))
-        f3.setTranslate(agx.Vec3(0,0,0))
-        self.sonar_hinge = self.build_lock_joint(self.link1, self.link4,f2,f3)
-
+                                       pos=link3rot, axis=agx.Vec3(0, 1, 0),lock=False,motor=True,range=(MIN_WING_ANGLE,MAX_WING_ANGLE),compliance=1e-5)
+        # sonar
+        # self.sonar_joint = self.build_lock_joint(self.link1, self.link4, (0,0,0), (0,0,0))
+        print("buildt joints")
+        # adding models to assembly
         self.add(self.link1)
         self.add(self.link2)
         self.add(self.link3)
-        self.add(self.link4)
+        # self.add(self.link4)
+        print("added models to assembly")
         self.add(self.hinge1)
         self.add(self.hinge2)
-        self.add(self.sonar_hinge)
+        # self.add(self.sonar_joint)
+        print("aded links to assembly")
         self.left_wing_angle = lambda: self.hinge1.getAngle()
         self.right_wing_angle = lambda: self.hinge2.getAngle()
+        print("set the wing controll functions")
         self.wing_step_length = deg2rad(2)
+        print("added wing step lenght")
         self.setName('rov')
+        print("set name")
 
+    @staticmethod
+    def disable_col(geo, ruged: agx.RigidBody):
+        """
 
-    def disable_col(self, geo, ruged: agx.RigidBody):
+        Args:
+            geo:
+            ruged:
+        """
         for geometries in ruged.getGeometries():
             geo.setEnableCollisions(geometries, False)
 
-    def build_hinge(self, link, part, pos, axis):
-        return demoutils.create_constraint(
-            pos=pos,
-            axis=axis,
-            rb1=link,
-            rb2=part,
-            c=agx.Hinge)  # type: agx.Hinge
+    @staticmethod
+    def build_hinge(link, part, pos, axis,lock,motor,compliance,range=None)->agx.Hinge:
+        """
 
-    def build_lock_joint(self, part1, part2, pos1, pos2):
+        Args:
+            link:
+            part:
+            pos:
+            axis:
+
+        Returns:
+
+        """
+        hinge = demoutils.create_constraint(pos=pos,axis=axis,rb1=link,rb2=part,c=agx.Hinge)  # type: agx.Hinge
+        hinge.setCompliance(compliance)
+        hinge.getLock1D().setEnable(lock)
+        hinge.getMotor1D().setEnable(motor)
+        if range:
+            hinge.getRange1D().setEnable(True)
+            hinge.getRange1D().setRange(deg2rad(range[0]), deg2rad(range[1]))
+        else:
+            hinge.getRange1D().setEnable(False)
+        return hinge
+
+    @staticmethod
+    def build_lock_joint(part1, part2, pos1, pos2)->agx.LockJoint:
+        """
+
+        Args:
+            part1:
+            part2:
+            pos1:
+            pos2:
+
+        Returns:
+
+        """
+        f1 = agx.Frame()
+        f2 = agx.Frame()
+        f1.setTranslate(agx.Vec3(*pos1))
+        f2.setTranslate(agx.Vec3(*pos2))
         return demoutils.create_constraint(
-            pos1=pos1,
-            pos2=pos2,
+            pos1=f1,
+            pos2=f2,
             rb1=part1,
             rb2=part2,
             c=agx.LockJoint)  # type: agx.LockJoint
 
     def getGeometries(self) -> "agxCollide::GeometryRefSet const &":
+        """
+
+        Returns:
+
+        """
         a = agxSDK.Assembly.getGeometries(self)
         return a
 
@@ -118,8 +174,8 @@ class rovAssembly(agxSDK.Assembly):
 
         a1 = -self.hinge1.getAngle()
         a2 = -self.hinge2.getAngle()
-        d1 = limit(a1 - sb_p,-2,2)*10
-        d2 = limit(a2 - port_p, -2, 2)*10
+        d1 = limit(a1 - sb_p, -2, 2) * 10
+        d2 = limit(a2 - port_p, -2, 2) * 10
         self.hinge1.getMotor1D().setSpeed(d1)
         self.hinge2.getMotor1D().setSpeed(d2)
 
@@ -129,7 +185,6 @@ class rovAssembly(agxSDK.Assembly):
         self.plot_roll.append(self.link1.getRotation()[1] * 100)
 
         if plot:
-
             """plots stored values to csv file"""
             plot_wing_angle = np.array(self.plot_wing_angle)
             plot_depth = np.array(self.plot_depth)
@@ -141,6 +196,12 @@ class rovAssembly(agxSDK.Assembly):
             pd.DataFrame(plot_wing_angle).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\plot_wing_angle.csv")
             pd.DataFrame(plot_roll).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\pplot_roll.csv")
             self.plotted = True
+
+    @staticmethod
+    def build_material(name, density):
+        material = agx.Material(name)
+        material.getBulkMaterial().setDensity(density)
+        return material
 
 
 if __name__ == "__main__":
@@ -156,7 +217,7 @@ if __name__ == "__main__":
     keyboard = KeyboardListener(pid, True)
 
     """Creates the rov"""
-    rov = rovAssembly(pid, keyboard)
+    rov = RovAssembly(pid, keyboard)
     rov.setPosition(agx.Vec3(0, 0, 0))
     rov.setName("rov")
     rov.setRotation(agx.EulerAngles(0, 0, math.pi))

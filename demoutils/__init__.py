@@ -110,7 +110,6 @@ if agxPython.getContext() is None:
     print('ok')
     example_app = agxOSG.ExampleApplication()
     example_app.addScene(argParser.getArgumentName(1), "build_scene", ord('1'), True)
-
     if example_app.init(argParser):
         example_app.run()
         pass

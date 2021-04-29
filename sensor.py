@@ -8,6 +8,13 @@ from agxSDK import ContactEventListener,GeometryFilter
 from agxCollide import Geometry,GeometryContact,ContactPoint
 class Sensor(ContactEventListener):
     def __init__(self,ground:agxCollide.Geometry,rov,depth):
+        """
+
+        Args:
+            ground:
+            rov:
+            depth:
+        """
         super().__init__()
         self.setMask(ContactEventListener.CONTACT)
         b= agxCollide.Box(.1, .1, depth)
@@ -26,7 +33,15 @@ class Sensor(ContactEventListener):
 
 
     def contact(self, time: "agx::TimeStamp const &", geometryContact: "GeometryContact") -> "agxSDK::ContactEventListener::KeepContactPolicy":
+        """
 
+        Args:
+            time:
+            geometryContact:
+
+        Returns:
+
+        """
         for p in geometryContact.points():
             d= p.getPoint()[2]
             x= p.getPoint()[0]

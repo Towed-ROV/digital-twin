@@ -2,7 +2,8 @@ import numpy as np
 import cv2
 
 class seafloorImageBuilder:
-    def normalize(self, array, new_min=0, new_max=1):
+    @staticmethod
+    def normalize(array, new_min=0, new_max=1):
         """
         Normalizes an array, to the new provided min and max.
 
@@ -17,7 +18,8 @@ class seafloorImageBuilder:
         ret_array = np.array((ret_array * (new_max - new_min) + new_min))
         return ret_array
 
-    def generate_image(self, array, width=10):
+    @staticmethod
+    def generate_image(array, width=10):
         """
         generate a multimidmetional array row of an array.
         Args:
@@ -25,13 +27,14 @@ class seafloorImageBuilder:
             width: the new dimention count of the new array.
         """
         img = np.zeros((width, len(array)))
-        array = np.array(self.normalize(array, new_min=0, new_max=255),np.uint8)
+        array = np.array(seafloorImageBuilder.normalize(array, new_min=0, new_max=255),np.uint8)
 
         for i in range(width):
             img[i] = array
         return img
 
-    def save_new_seafloor_image(self,width, seafloor_array=None):
+    @staticmethod
+    def save_new_seafloor_image(width, seafloor_array=None):
         """
         generates and saves an image of the seafloor to the project.
         Args:
@@ -39,11 +42,18 @@ class seafloorImageBuilder:
             seafloor_array: the seafloor plot to be made to an image.
         """
         if not seafloor_array:
-            seafloor_array = self.get_base_seafloor()
-        img = self.generate_image(seafloor_array, width)
+            seafloor_array = seafloorImageBuilder.get_base_seafloor()
+
+        img = seafloorImageBuilder.generate_image(seafloor_array, width)
         cv2.imwrite('seafloor.png', img)
 
-    def get_base_seafloor(self):
+    @staticmethod
+    def get_base_seafloor():
+        """
+
+        Returns:
+
+        """
         return np.array(
             [14.23, 14.25, 14.27, 14.28, 14.3, 14.31, 14.32, 14.33, 14.34, 14.35, 14.35, 14.36, 14.36, 14.36,
              14.36, 14.36, 14.36, 14.36, 14.35, 14.35, 14.34, 14.33, 14.32, 14.31, 14.3, 14.29, 14.27, 14.26,
