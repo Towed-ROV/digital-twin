@@ -3,7 +3,7 @@ from Rov.rov_assembly import RovAssembly
 from pid import PID_Controller
 from functions import deg2rad, rad2deg
 import demoutils
-
+from rov_simulation_parameters import WATER_LENGTH
 """Class RovController for Rov and by using StepEventListener it updates the wing position every step of the simulation"""
 
 
@@ -55,6 +55,8 @@ class RovController(agxSDK.StepEventListener):
         decorator.setText(3, "Rov Position in Z direction : {} M".format(str(round(pos[2], 2))))
         decorator.setText(4, "Pitch : {}".format(str(round(rot[0] * 100, 2))))
         decorator.setText(5, "Roll : {}".format(str(round(rot[1] * 100, 2))))
-        x, y = int(520 + pos[0]), int(pos[1])
+        x, y = int(WATER_LENGTH + pos[0]), int(pos[1])
+        print(x,y)
+        print(pos)
         decorator.setText(5, "seafloor actual : {}".format(str(round(self.depth.getHeight(x, y) - pos[2], 2))))
         decorator.setText(7, "distance : {}M".format(str(round(self.rov.link1.getPosition()[0], 2))))

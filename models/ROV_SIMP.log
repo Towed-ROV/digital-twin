@@ -1,0 +1,23 @@
+
+          NX-OBJ Export
+
+File to export: F:\sophus\Documents\AGX_ROV_SIM\ROV_SIMP.prt
+
+INFO: Options
+INFO: -------
+INFO: Export Units.......: millimeters
+INFO: Chordal Tolerance..: 0.080000 millimeters
+INFO: Angular Tolerance..: 18.000000 degrees
+INFO: Flatten Assembly...: on
+INFO: 
+INFO:       Summary of Obj Entities
+INFO: 
+INFO: Entity Type                                                   Count
+INFO: -----------                                                   ------
+INFO: Node Count ...........................................:   2
+INFO: Geometry Count........................................:   1
+INFO: Texture Count.........................................:   0
+INFO: Material Count........................................:   1
+
+Export Successful!
+Output file : F:\docs\AGX-towed-rov-simulation\model\ROV_SIMP.obj

@@ -130,13 +130,14 @@ def build_scene():
     ship = Ship()
     ship.setName('ship')
     ship.setRotation(agx.EulerAngles(0, 0, math.pi))
-    ship.setPosition(agx.Vec3(-WATER_LENGTH + 20 + 300, 0, 0))
+    ship.setPosition(agx.Vec3(-WATER_LENGTH + 20 + WIRE_LENGTH, 0, 0))
+    print(ship.getPosition())
     print("buildt ship")
     wire, wire_renderer = MakeWire().create_wire(1030, 0.001, ship, agx.Vec3(2, 0, 0),
-                                                 rov, agx.Vec3(0, -0.1, 0.1))
+                                                 rov, agx.Vec3(-0.1, 0, 0.1))
     print("buildt wire")
     setWireViscousDrag(wire, controller)
-    ship.setVelocity(agx.Vec3(-50, 0, 0))
+    ship.setVelocity(agx.Vec3(-10, 0, 0))
     print("buildt controll for wire")
 
     """Creates a controller to control the wings of the Rov"""

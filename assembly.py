@@ -21,8 +21,8 @@ class rov_builder(agxIO.MeshReader):
         geom = self.build_geomery(trimesh,'Rov_body',aluminum,(0,0,0))
         rov_body = self.build_rigid_body(geom,name,(0,0,0),(0,0,0))
         rov_body.setMotionControl(agx.RigidBody.DYNAMICS)
-
         rov_body.setCmLocalTranslate(agx.Vec3(*cm))
+        [rov_body.add(tank) for tank in self.build_tanks()]
         return rov_body
 
     """Creates rigidbody of the starboard wing from obj file"""
@@ -47,6 +47,15 @@ class rov_builder(agxIO.MeshReader):
         else:
             trimesh = agxCollide.Trimesh(self.getVertices(), self.getIndices(), name)
         return trimesh
+
+    def build_tanks(self):
+        tank1 = self.capsules(155*0.001,170*0.001)
+        tank2 = tank1.clone()
+        tank1.setRotation(agx.EulerAngles(0,0,1/2*math.pi))
+        tank2.setRotation(agx.EulerAngles(0,math.pi, math.pi*3/2))
+        tank1.setPosition(0,1,1)
+        tank2.setPosition(0,-1,1)
+        return tank1,tank2
 
     @staticmethod
     def build_geomery(shape:agxCollide.Shape, name:str, material,rot)-> agxCollide.Geometry:
@@ -75,14 +84,14 @@ class rov_builder(agxIO.MeshReader):
 
     """Creates capsules geometry"""
     @staticmethod
-    def capsules(half_length, half_height):
+    def capsules(half_length, half_height)-> agxCollide.Geometry:
         length = 2 * half_length
-        radius = half_height * 1.2
+        radius = half_height
         return agxCollide.Geometry(agxCollide.Capsule(radius, length - 2 * radius))
 
     """Creates rigidbody of the boat"""
     @staticmethod
-    def ship_body(half_length, half_width, half_height):
+    def ship_body(half_length, half_width, half_height)-> agx.RigidBody:
         geom = agxCollide.Geometry(agxCollide.Box(half_length, half_width, half_height))
         boat = agx.RigidBody(geom)
         boat.setMotionControl(agx.RigidBody.DYNAMICS)
