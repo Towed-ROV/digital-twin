@@ -49,7 +49,7 @@ class rov_builder(agxIO.MeshReader):
     def get_trimesh(self, filename:str, scale, name:str) -> agxCollide.Trimesh:
         self.readFile(filename)
         if scale is not 1:
-            scaled_vertices = self.scale_mesh(self.getVertices(), agx.Vec3(0.001))
+            scaled_vertices = self.scale_mesh(self.getVertices(), agx.Vec3(scale))
             trimesh = agxCollide.Trimesh(scaled_vertices, self.getIndices(), name)
         else:
             trimesh = agxCollide.Trimesh(self.getVertices(), self.getIndices(), name)

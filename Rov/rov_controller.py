@@ -23,7 +23,7 @@ class RovController(agxSDK.StepEventListener):
         self.pid_trim = pid_trim
         self.last_output = 0
         self.__start = False
-        pid.set_output_limits(-45, 45)
+        pid.set_output_limits(-25, 25)
         self.depth = depth
 
     """Runs every time before the simulation takes a step"""
@@ -34,11 +34,13 @@ class RovController(agxSDK.StepEventListener):
         Args:
             t:
         """
+        rot = self.rov.link1.getRotation()
         current_depth = self.rov.getRigidBody('rovBody').getPosition()[2]
         self.pid.compute(current_depth)
-        output_left = deg2rad(-self.pid.output)  # - self.pid_trim.output)
-        output_right = deg2rad(-self.pid.output)  # + self.pid_trim.output)
-        self.rov.update_wings(port_p=output_right, sb_p=output_left)
+        print(-self.pid.output-rot[0] * 100,-self.pid.output,rot[0] * 100)
+        output_left = deg2rad(-self.pid.output-rot[0] * 100)  # - self.pid_trim.output)
+        output_right = deg2rad(-self.pid.output-rot[0] * 100)  # + self.pid_trim.output)
+        #self.rov.update_wings(port_p=output_right, sb_p=output_left)
         self.rov.update_wings(output_left, output_right)
 
     def post(self, t):

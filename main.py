@@ -134,7 +134,7 @@ def build_scene():
     print(ship.getPosition())
     print("buildt ship")
     wire, wire_renderer = MakeWire().create_wire(1030, 0.001, ship, agx.Vec3(2, 0, 0),
-                                                 rov, agx.Vec3(-0.1, 0, 0.1))
+                                                 rov, agx.Vec3(*WIRE_POS_ROV))
     print("buildt wire")
     setWireViscousDrag(wire, controller)
     ship.setVelocity(agx.Vec3(-1, 0, 0))
