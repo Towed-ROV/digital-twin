@@ -16,13 +16,20 @@ class rov_builder(agxIO.MeshReader):
         super().__init__()
 
     """Creates rigidbody of the rovbody from obj file"""
-    def create_rov_body(self,aluminum,scale,name,cm) -> agx.RigidBody:
+    def create_rov_body(self,aluminum:agx.Material,scale,name:str,cm,tank_material:agx.Material) -> agx.RigidBody:
         trimesh = self.get_trimesh("models/rov_simp.obj", scale, "rov_simp")
         geom = self.build_geomery(trimesh,'Rov_body',aluminum,(0,0,0))
         rov_body = self.build_rigid_body(geom,name,(0,0,0),(0,0,0))
         rov_body.setMotionControl(agx.RigidBody.DYNAMICS)
         rov_body.setCmLocalTranslate(agx.Vec3(*cm))
-        [rov_body.add(tank) for tank in self.build_tanks()]
+
+        tank1,tank2 = self.build_tanks(material=tank_material)
+
+        print(geom.getShape().getVolume(),geom.getShape().getVolume()*(aluminum.getBulkMaterial().getDensity()-1027))
+
+        print(tank1.getShape().getVolume()*2,(tank1.getShape().getVolume()+tank2.getShape().getVolume())*(tank_material.getBulkMaterial().getDensity()-1027))
+        rov_body.add(tank1)
+        rov_body.add(tank2)
         return rov_body
 
     """Creates rigidbody of the starboard wing from obj file"""
@@ -48,13 +55,14 @@ class rov_builder(agxIO.MeshReader):
             trimesh = agxCollide.Trimesh(self.getVertices(), self.getIndices(), name)
         return trimesh
 
-    def build_tanks(self):
-        tank1 = self.capsules(155*0.001,170*0.001)
+    def build_tanks(self,material):
+        tank1 = self.capsules(155*0.001,170*0.001*1/2)
+        tank1.setMaterial(material)
         tank2 = tank1.clone()
         tank1.setRotation(agx.EulerAngles(0,0,1/2*math.pi))
         tank2.setRotation(agx.EulerAngles(0,math.pi, math.pi*3/2))
-        tank1.setPosition(0,1,1)
-        tank2.setPosition(0,-1,1)
+        tank1.setPosition(0.1,.1,.15)
+        tank2.setPosition(0.1,-.1,.15)
         return tank1,tank2
 
     @staticmethod
@@ -86,7 +94,7 @@ class rov_builder(agxIO.MeshReader):
     @staticmethod
     def capsules(half_length, half_height)-> agxCollide.Geometry:
         length = 2 * half_length
-        radius = half_height
+        radius = half_height*1.2
         return agxCollide.Geometry(agxCollide.Capsule(radius, length - 2 * radius))
 
     """Creates rigidbody of the boat"""

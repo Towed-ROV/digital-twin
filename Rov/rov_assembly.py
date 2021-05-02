@@ -39,11 +39,12 @@ class RovAssembly(agxSDK.Assembly):
         # building models
         rov_material = self.build_material('AluminumMaterial', ROV_BODY_DENSITY)
         wing_material = self.build_material('AluminumMaterial', ROV_WING_DENSITY)
+        tank_material = self.build_material('AluminumMaterial', ROV_TANK_DENSITY)
         builder = rov_builder()
         print("rov builder ready")
 
         # rov body
-        self.link1 = builder.create_rov_body(rov_material,name='rovBody',scale=ROV_SCALE,cm = (0.27511, -0.18095, 0.0494))
+        self.link1 = builder.create_rov_body(rov_material,name='rovBody',scale=ROV_SCALE,cm = (0.27511, -0.18095, 0.0494),tank_material=tank_material)
         print("buildt rov body")
         # wing left
         self.link2 = builder.create_wing_right(wing_material, WING_SCALE,"wing_r",pos = (0.05, 0.25, 0), rot=(0, 0, 0))

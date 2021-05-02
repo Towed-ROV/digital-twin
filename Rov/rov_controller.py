@@ -56,7 +56,6 @@ class RovController(agxSDK.StepEventListener):
         decorator.setText(4, "Pitch : {}".format(str(round(rot[0] * 100, 2))))
         decorator.setText(5, "Roll : {}".format(str(round(rot[1] * 100, 2))))
         x, y = int(WATER_LENGTH + pos[0]), int(pos[1])
-        print(x,y)
-        print(pos)
+        #print(int(pos[0]),int(pos[1]),int(pos[2]))
         decorator.setText(5, "seafloor actual : {}".format(str(round(self.depth.getHeight(x, y) - pos[2], 2))))
         decorator.setText(7, "distance : {}M".format(str(round(self.rov.link1.getPosition()[0], 2))))
