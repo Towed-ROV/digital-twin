@@ -20,32 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a81053cf-228f-4eb3-8dc3-26f5da944597" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Boat/Boat_sensor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Boat/ship.py" beforeDir="false" afterPath="$PROJECT_DIR$/Boat/ship.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Boat/Boat_sensor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Boat/Boat_sensor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Rov/arduino_sensor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rov/arduino_sensor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Rov/arduino_stepper.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rov/arduino_stepper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Rov/rov_assembly.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rov/rov_assembly.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rov/rov_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rov/rov_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fonts/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fonts/README.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fonts/RobotoMono-Italic-VariableFont_wght.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fonts/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fonts/static/RobotoMono-Bold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fonts/static/RobotoMono-BoldItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fonts/static/RobotoMono-ExtraLight.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fonts/static/RobotoMono-ExtraLightItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fonts/static/RobotoMono-Italic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fonts/static/RobotoMono-Light.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fonts/static/RobotoMono-LightItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fonts/static/RobotoMono-Medium.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fonts/static/RobotoMono-MediumItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fonts/static/RobotoMono-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fonts/static/RobotoMono-SemiBold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fonts/static/RobotoMono-SemiBoldItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fonts/static/RobotoMono-Thin.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fonts/static/RobotoMono-ThinItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/agx_mov.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/agx_mov.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assembly.py" beforeDir="false" afterPath="$PROJECT_DIR$/assembly.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rov_simulation_parameters/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/rov_simulation_parameters/__init__.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +76,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Slepe-ROV-RPi" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
@@ -264,6 +246,7 @@
       <workItem from="1619521296911" duration="2798000" />
       <workItem from="1619530712156" duration="18292000" />
       <workItem from="1619681746922" duration="15720000" />
+      <workItem from="1620034800150" duration="7092000" />
     </task>
     <servers />
   </component>
@@ -287,14 +270,14 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>190</line>
+          <line>193</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/AGX_towed_rov_simulation$main.coverage" NAME="main Coverage Results" MODIFIED="1620009039562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/AGX_towed_rov_simulation$main.coverage" NAME="main Coverage Results" MODIFIED="1620045539986" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/AGX_towed_rov_simulation$arduino_sensor.coverage" NAME="arduino_sensor Coverage Results" MODIFIED="1619351634407" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Rov" />
     <SUITE FILE_PATH="coverage/AGX_towed_rov_simulation$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1619555984064" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/AGX_towed_rov_simulation$seafloor_image_generator.coverage" NAME="seafloor_image_generator Coverage Results" MODIFIED="1619352389971" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

@@ -18,17 +18,17 @@ class ArduinoSensor(agxSDK.StepEventListener):
         self.pitch = 0
         self.yaw = 0
         self.turn_to_send = 1
-        # self.ser = serial.Serial(
-        #    port='COM27',
-        #    baudrate=19200,
-        #    parity=serial.PARITY_NONE,
-        #    stopbits=serial.STOPBITS_ONE,
-        #    bytesize=serial.EIGHTBITS,
-        #    timeout=0)
+        self.ser = serial.Serial(
+           port='COM20',
+           baudrate=19200,
+           parity=serial.PARITY_NONE,
+           stopbits=serial.STOPBITS_ONE,
+           bytesize=serial.EIGHTBITS,
+           timeout=0)
         self.interval = 0.01
         self.previousMillis = 0
         self.reset = True
-        self.start = True
+        self.start = False
         self.command_number = 6
         self.seafloor = seafloor
 
@@ -42,10 +42,12 @@ class ArduinoSensor(agxSDK.StepEventListener):
         self.sender = lambda x: self.send_switch[x]
 
     def pre(self, t):
+
+        self.send("SensorArduino","0")
         if not self.reset:
-            self.send("SensorArduino:0")
+            self.send("SensorArduino","0")
             if self.read()[0] == "reset":
-                print("sensor arduino")
+                print("SensorArduino")
                 self.reset = True
         elif not self.start:
             if self.read()[0] == "start":
@@ -92,11 +94,10 @@ class ArduinoSensor(agxSDK.StepEventListener):
     def send(self, key,value):
         output =  "<{}:{}>".format(key,value)
         print(output)
-        # self.ser.write(output.encode('utf-8'))
+        self.ser.write(output.encode('utf-8'))
 
     def read(self):
-        # message = self.ser.readline()
-        message = b"cucked"
+        message = self.ser.readline()
         message = message.strip()
         message = message.decode('utf-8').strip("<").strip(">")
         return message.split(":", 1)

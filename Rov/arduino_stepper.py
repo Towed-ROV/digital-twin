@@ -20,13 +20,13 @@ class ArduinoStepper(agxSDK.StepEventListener):
         self.manual_mode = 0
         self.auto_depth_mode = 1
         self.target_mode = 1
-        #self.ser = serial.Serial(
-        #    port='COM31',
-        #    baudrate=19200,
-        #    parity=serial.PARITY_NONE,
-        #    stopbits=serial.STOPBITS_ONE,
-        #    bytesize=serial.EIGHTBITS,
-        #    timeout=0)
+        self.ser = serial.Serial(
+            port='COM10',
+            baudrate=19200,
+            parity=serial.PARITY_NONE,
+            stopbits=serial.STOPBITS_ONE,
+            bytesize=serial.EIGHTBITS,
+            timeout=0)
         #timer
         self.interval = 0.01
         self.previousMillis = 0
@@ -59,10 +59,10 @@ class ArduinoStepper(agxSDK.StepEventListener):
                 print("stepper arduino")
                 self.reset = True
 
-        # elif not self.start:
-        #     if self.read()[0] == "start":
-        #         print("start step")
-        #         self.start = True
+        elif not self.start:
+            if self.read()[0] == "start":
+                print("start step")
+                self.start = True
         else:
             self.depth = round(self.rov.link1.getPosition()[2])# * 1.23, 2)
             if self.has_been_reset:
@@ -135,8 +135,8 @@ class ArduinoStepper(agxSDK.StepEventListener):
                           -self.max_wing_angle, self.max_wing_angle)
         angle_sb = _map(sb, self.min_stepper_pos_sb, self.max_stepper_pos_sb,
                         -self.max_wing_angle, self.max_wing_angle)
-        #self.send("wing_pos_port:" + str(angle_port))
-        #self.send("wing_pos_sb:" + str(angle_sb))
+        self.send("wing_pos_port:" + str(angle_port))
+        self.send("wing_pos_sb:" + str(angle_sb))
 
     def compensate_wing_to_pitch(self):
         self.wing_pos_sb  = self.wing_pos_sb - self.pitch
@@ -144,11 +144,11 @@ class ArduinoStepper(agxSDK.StepEventListener):
 
     def trim_wing_pos(self, wing_pos, trim_pos):
         if wing_pos + trim_pos > self.max_wing_angle:
-            compensate = float(-self.max_wing_angle + 2*wing_pos)
+            compensate = float(-self.max_wing_angle + wing_pos)
             wing_pos_sb = self.max_wing_angle
             wing_pos_port = compensate
         elif wing_pos - trim_pos < -self.max_wing_angle:
-            compensate = float(-self.max_wing_angle + 2*trim_pos)
+            compensate = float(-self.max_wing_angle + trim_pos)
             wing_pos_sb = compensate
             wing_pos_port = -self.max_wing_angle
         else:
@@ -273,11 +273,11 @@ class ArduinoStepper(agxSDK.StepEventListener):
 
     def send(self, message):
         output = "<" + message + ">\n"
-        #self.ser.write(output.encode('utf-8'))
-        print(output)
+        self.ser.write(output.encode('utf-8'))
+        print("sent: ",output)
 
     def read(self):
-        #message = self.ser.readline()
+        message = self.ser.readline()
         message = b"chad"
         message = message.strip()
         message = message.decode('utf-8').strip("<").strip(">")

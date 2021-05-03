@@ -1,52 +1,66 @@
 import agxIO
 import agx
 import agxCollide
-#python imports
+# python imports
 import math
+
 """Creates fender geometry"""
 
-
 """Creates spoiler geometry"""
+
+
 def create_spoiler():
     spoiler_geom = agxCollide.Geometry(agxCollide.Box(0.05, 0.38, 0.005))
     spoiler = agx.RigidBody(spoiler_geom)
     return spoiler
+
+
 class rov_builder(agxIO.MeshReader):
     def __init__(self):
         super().__init__()
+        self.rov_volume = None
 
     """Creates rigidbody of the rovbody from obj file"""
-    def create_rov_body(self,aluminum:agx.Material,scale,name:str,cm,tank_material:agx.Material) -> agx.RigidBody:
+
+    def create_rov_body(self, aluminum: agx.Material, scale, name: str, cm,
+                        tank_material: agx.Material) -> agx.RigidBody:
         trimesh = self.get_trimesh("models/rov_simp.obj", scale, "rov_simp")
-        geom = self.build_geomery(trimesh,'Rov_body',aluminum,(0,0,0))
-        rov_body = self.build_rigid_body(geom,name,(0,0,0),(0,0,0))
+        geom = self.build_geomery(trimesh, 'Rov_body', aluminum, (0, 0, 0))
+        self.rov_volume = geom.getBoundingVolume().size()
+        rov_body = self.build_rigid_body(geom, name, (0, 0, 0), (0, 0, 0))
         rov_body.setMotionControl(agx.RigidBody.DYNAMICS)
         rov_body.setCmLocalTranslate(agx.Vec3(*cm))
 
-        tank1,tank2 = self.build_tanks(material=tank_material)
+        tank1, tank2 = self.build_tanks(material=tank_material)
 
-        print(geom.getShape().getVolume(),geom.getShape().getVolume()*(aluminum.getBulkMaterial().getDensity()-1027))
+        print(geom.getShape().getVolume(),
+              geom.getShape().getVolume() * (aluminum.getBulkMaterial().getDensity() - 1027))
 
-        print(tank1.getShape().getVolume()*2,(tank1.getShape().getVolume()+tank2.getShape().getVolume())*(tank_material.getBulkMaterial().getDensity()-1027))
+        print(tank1.getShape().getVolume() * 2, (tank1.getShape().getVolume() + tank2.getShape().getVolume()) * (
+                    tank_material.getBulkMaterial().getDensity() - 1027))
         rov_body.add(tank1)
         rov_body.add(tank2)
         return rov_body
 
     """Creates rigidbody of the starboard wing from obj file"""
-    def create_wing_right(self,aluminum,scale,name,pos,rot)-> agx.RigidBody:
-        trimesh = self.get_trimesh("models/wing_simp.obj",scale,"wing_simp")
-        geom = self.build_geomery(trimesh,name,aluminum,(0,math.pi, math.pi))
-        wing_right = self.build_rigid_body(geom,name,pos,rot)
+
+    def create_wing_right(self, aluminum, scale, name, rot) -> agx.RigidBody:
+        trimesh = self.get_trimesh("models/wing_simp.obj", scale, "wing_simp")
+        geom = self.build_geomery(trimesh, name, aluminum, (0, math.pi, math.pi))
+        pos = (self.rov_volume[0] / 10, self.rov_volume[1] / 1.9, 0)
+        wing_right = self.build_rigid_body(geom, name, pos, rot)
         return wing_right
 
     """Creates rigidbody of the port wing from obj file"""
-    def create_wing_left(self,aluminum,scale,name,pos,rot)-> agx.RigidBody:
-        trimesh = self.get_trimesh("models/wing_simp.obj",scale,"wing_simp")
-        geom = self.build_geomery(trimesh,name,aluminum,(0,0,0))
-        wing_left = self.build_rigid_body(geom,name,pos,rot)
+
+    def create_wing_left(self, aluminum, scale, name, rot) -> agx.RigidBody:
+        trimesh = self.get_trimesh("models/wing_simp.obj", scale, "wing_simp")
+        geom = self.build_geomery(trimesh, name, aluminum, (0, 0, 0))
+        pos = (self.rov_volume[0] / 10, -self.rov_volume[1] / 1.9, 0)
+        wing_left = self.build_rigid_body(geom, name, pos, rot)
         return wing_left
 
-    def get_trimesh(self, filename:str, scale, name:str) -> agxCollide.Trimesh:
+    def get_trimesh(self, filename: str, scale, name: str) -> agxCollide.Trimesh:
         self.readFile(filename)
         if scale is not 1:
             scaled_vertices = self.scale_mesh(self.getVertices(), agx.Vec3(scale))
@@ -55,27 +69,28 @@ class rov_builder(agxIO.MeshReader):
             trimesh = agxCollide.Trimesh(self.getVertices(), self.getIndices(), name)
         return trimesh
 
-    def build_tanks(self,material):
-        tank1 = self.capsules(155*0.001,170*0.001*1/2)
+    def build_tanks(self, material):
+        length = self.rov_volume[0] / 3.5
+        rad = self.rov_volume[2] / 2.5
+        tank1 = self.capsules(length, rad)
         tank1.setMaterial(material)
         tank2 = tank1.clone()
-        tank1.setRotation(agx.EulerAngles(0,0,1/2*math.pi))
-        tank2.setRotation(agx.EulerAngles(0,math.pi, math.pi*3/2))
-        tank1.setPosition(0.1,.1,.15)
-        tank2.setPosition(0.1,-.1,.15)
-        return tank1,tank2
+        tank1.setRotation(agx.EulerAngles(0, 0, 1 / 2 * math.pi))
+        tank2.setRotation(agx.EulerAngles(0, math.pi, math.pi * 3 / 2))
+        tank1.setPosition(length / 2.1, rad * 1.5, rad * 1.75)
+        tank2.setPosition(length / 2.1, -rad * 1.5, rad * 1.75)
+        return tank1, tank2
 
     @staticmethod
-    def build_geomery(shape:agxCollide.Shape, name:str, material,rot)-> agxCollide.Geometry:
+    def build_geomery(shape: agxCollide.Shape, name: str, material, rot) -> agxCollide.Geometry:
         geom = agxCollide.Geometry(shape)
         geom.setMaterial(material)
         geom.setName(name)
         geom.setRotation(agx.EulerAngles(*rot))
         return geom
 
-
     @staticmethod
-    def build_rigid_body(geom:agxCollide.Geometry,name:str,pos,rot)->agx.RigidBody:
+    def build_rigid_body(geom: agxCollide.Geometry, name: str, pos, rot) -> agx.RigidBody:
         body = agx.RigidBody()
         body.add(geom)
         body.setName(name)
@@ -91,21 +106,24 @@ class rov_builder(agxIO.MeshReader):
         return fender
 
     """Creates capsules geometry"""
+
     @staticmethod
-    def capsules(half_length, half_height)-> agxCollide.Geometry:
+    def capsules(half_length, half_height) -> agxCollide.Geometry:
         length = 2 * half_length
-        radius = half_height*1.2
+        radius = half_height * 1.2
         return agxCollide.Geometry(agxCollide.Capsule(radius, length - 2 * radius))
 
     """Creates rigidbody of the boat"""
+
     @staticmethod
-    def ship_body(half_length, half_width, half_height)-> agx.RigidBody:
+    def ship_body(half_length, half_width, half_height) -> agx.RigidBody:
         geom = agxCollide.Geometry(agxCollide.Box(half_length, half_width, half_height))
         boat = agx.RigidBody(geom)
         boat.setMotionControl(agx.RigidBody.DYNAMICS)
         return boat
 
     """Function to scale obj model to size"""
+
     @staticmethod
     def scale_mesh(vertices: agx.Vec3Vector, scale: agx.Vec3):
         scaled = agx.Vec3Vector()
@@ -115,6 +133,8 @@ class rov_builder(agxIO.MeshReader):
 
 
 """function for mapping value with limits, equivalent to Arduinos map function"""
+
+
 def _map(x, in_min, in_max, out_min, out_max):
     x = min(in_max, max(in_min, x))
     d = (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min

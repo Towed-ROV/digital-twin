@@ -48,13 +48,14 @@ class RovAssembly(agxSDK.Assembly):
                                              cm=(0.27511, -0.18095, 0.0494), tank_material=tank_material)
 
         print("buildt rov body")
+        print("volumebounds: ", self.link1.getGeometry("Rov_body").getBoundingVolume().size())
         # wing left
-        self.link2 = builder.create_wing_right(wing_material, WING_SCALE, "wing_r", pos=(0.05, 0.25, 0), rot=(0, 0, 0))
-        link2rot = agx.Vec3(0.05, 0.25, 0)
-        print("buildt right wing")
+        self.link2 = builder.create_wing_right(wing_material, WING_SCALE, "wing_r", rot=(0, 0, 0))
+        link2rot = self.link2.getPosition()
+        print("buildt right wing",link2rot)
         # wing right
-        self.link3 = builder.create_wing_left(wing_material, WING_SCALE, "wing_l", pos=(0.05, -0.25, 0), rot=(0, 0, 0))
-        link3rot = agx.Vec3(0.1, -0.25, 0)
+        self.link3 = builder.create_wing_left(wing_material, WING_SCALE, "wing_l", rot=(0, 0, 0))
+        link3rot = self.link3.getPosition()
         print("buildt left wing")
         # echo lod
         # self.ehco_lod = Sensor(seafloor, self, WATER_DEPTH)
