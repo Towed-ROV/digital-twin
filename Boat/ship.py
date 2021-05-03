@@ -6,7 +6,9 @@ import agxSDK
 import agxCollide
 import math
 from modules.agxPythonModules.utils.callbacks import StepEventCallback as Sec
+
 """Class Ship, create a agx assembly of the boat used to tow the Rov."""
+
 
 class Ship(agxSDK.Assembly):
     def __init__(self):
@@ -36,12 +38,12 @@ class Ship(agxSDK.Assembly):
         self.add(ship)
         self.m_body = ship
         self.m_body.setName('boat')
-
         half_length = length * 0.5
         half_width = width * 0.5
         half_height = 0.25 * half_width
         b = agxCollide.Geometry(agxCollide.Box(half_length, half_width, half_height))
         b.setName('ship')
+
         """Capsules"""
         radius = half_height * 1.2
         left_c = agxCollide.Geometry(agxCollide.Capsule(radius, length - 2 * radius))
@@ -71,6 +73,7 @@ class Ship(agxSDK.Assembly):
 
         """Assemble ship"""
         ship.add(b)  # base
+
         ship.add(left_c)  # left capsule
         ship.add(right_capsules)  # left fender
         ship.add(t_box)  # box on top of base
@@ -79,6 +82,9 @@ class Ship(agxSDK.Assembly):
 
         self.m_left_propeller = agx.Vec3(-half_length, half_width - radius, - (half_height + 2 * radius))
         self.m_right_propeller = agx.Vec3(-half_length, radius - half_width, - (half_height + 2 * radius))
+
+    def getPosition(self) -> "agx::Vec3":
+        return self.m_body.getGeometry('ship').getPosition()
 
     def create_fenders(self, fender_material, r_fender, half_width, half_height, half_length):
         fender_color = agxRender.Color.Black()
@@ -115,7 +121,8 @@ class Ship(agxSDK.Assembly):
         demoutils.app().getSceneDecorator().setText(0, "Towed-Rov simulation")
         demoutils.app().getSceneDecorator().setText(1, "Thrust       : {} kN".format(
             self.m_propulsion_force / 500))  # 2/1000 ( 2 because of the 2 propellers )
-        demoutils.app().getSceneDecorator().setText(2, "Speed in X direction : {} knots".format(str(round(self.m_body.getVelocity()[0] * 1.94384449, 2))))
+        demoutils.app().getSceneDecorator().setText(2, "Speed in X direction : {} knots".format(
+            str(round(self.m_body.getVelocity()[0] * 1.94384449, 2))))
 
     def get_min(self):
         return self.m_propulsion_force

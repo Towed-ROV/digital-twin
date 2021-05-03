@@ -7,14 +7,10 @@
 
 *.mtl
 
-*.obj
-
-models/wingsimp_base.3mf
-
 *.stl
 
 *.xml
 
 .idea/rov-sim.iml
 
-models/anchor.flt
+

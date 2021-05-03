@@ -17,7 +17,7 @@ from rov_simulation_parameters import *
 
 
 class RovAssembly(agxSDK.Assembly):
-    def __init__(self, keyboard, seafloor):
+    def __init__(self, keyboard):
         """
 
         Args:
@@ -44,17 +44,19 @@ class RovAssembly(agxSDK.Assembly):
         print("rov builder ready")
 
         # rov body
-        self.link1 = builder.create_rov_body(rov_material,name='rovBody',scale=ROV_SCALE,cm = (0.27511, -0.18095, 0.0494),tank_material=tank_material)
+        self.link1 = builder.create_rov_body(rov_material, name='rovBody', scale=ROV_SCALE,
+                                             cm=(0.27511, -0.18095, 0.0494), tank_material=tank_material)
+
         print("buildt rov body")
         # wing left
-        self.link2 = builder.create_wing_right(wing_material, WING_SCALE,"wing_r",pos = (0.05, 0.25, 0), rot=(0, 0, 0))
+        self.link2 = builder.create_wing_right(wing_material, WING_SCALE, "wing_r", pos=(0.05, 0.25, 0), rot=(0, 0, 0))
         link2rot = agx.Vec3(0.05, 0.25, 0)
         print("buildt right wing")
         # wing right
-        self.link3 = builder.create_wing_left(wing_material, WING_SCALE,"wing_l",pos = (0.05, -0.25, 0), rot=(0, 0, 0))
+        self.link3 = builder.create_wing_left(wing_material, WING_SCALE, "wing_l", pos=(0.05, -0.25, 0), rot=(0, 0, 0))
         link3rot = agx.Vec3(0.1, -0.25, 0)
         print("buildt left wing")
-        #echo lod
+        # echo lod
         # self.ehco_lod = Sensor(seafloor, self, WATER_DEPTH)
         # print("buildt echo lod")
         # self.ehco_lod.beam.setPosition(agx.Vec3(0, 0, 0))
@@ -78,10 +80,12 @@ class RovAssembly(agxSDK.Assembly):
         # conecting models
         # left wing
         self.hinge1 = self.build_hinge(link=self.link1, part=self.link2,
-                                       pos=link2rot, axis=agx.Vec3(0, 1, 0),lock=False,motor=True,range=(MIN_WING_ANGLE,MAX_WING_ANGLE),compliance=1e-5)
+                                       pos=link2rot, axis=agx.Vec3(0, 1, 0), lock=False, motor=True,
+                                       range=(MIN_WING_ANGLE, MAX_WING_ANGLE), compliance=1e-5)
         # right wing
         self.hinge2 = self.build_hinge(self.link1, self.link3,
-                                       pos=link3rot, axis=agx.Vec3(0, 1, 0),lock=False,motor=True,range=(MIN_WING_ANGLE,MAX_WING_ANGLE),compliance=1e-5)
+                                       pos=link3rot, axis=agx.Vec3(0, 1, 0), lock=False, motor=True,
+                                       range=(MIN_WING_ANGLE, MAX_WING_ANGLE), compliance=1e-5)
         # sonar
         # self.sonar_joint = self.build_lock_joint(self.link1, self.link4, (0,0,0), (0,0,0))
         print("buildt joints")
@@ -115,7 +119,7 @@ class RovAssembly(agxSDK.Assembly):
             geo.setEnableCollisions(geometries, False)
 
     @staticmethod
-    def build_hinge(link, part, pos, axis,lock,motor,compliance,range=None)->agx.Hinge:
+    def build_hinge(link, part, pos, axis, lock, motor, compliance, range=None) -> agx.Hinge:
         """
 
         Args:
@@ -127,7 +131,7 @@ class RovAssembly(agxSDK.Assembly):
         Returns:
 
         """
-        hinge = demoutils.create_constraint(pos=pos,axis=axis,rb1=link,rb2=part,c=agx.Hinge)  # type: agx.Hinge
+        hinge = demoutils.create_constraint(pos=pos, axis=axis, rb1=link, rb2=part, c=agx.Hinge)  # type: agx.Hinge
         hinge.setCompliance(compliance)
         hinge.getLock1D().setEnable(lock)
         hinge.getMotor1D().setEnable(motor)
@@ -139,7 +143,7 @@ class RovAssembly(agxSDK.Assembly):
         return hinge
 
     @staticmethod
-    def build_lock_joint(part1, part2, pos1, pos2)->agx.LockJoint:
+    def build_lock_joint(part1, part2, pos1, pos2) -> agx.LockJoint:
         """
 
         Args:
@@ -203,6 +207,7 @@ class RovAssembly(agxSDK.Assembly):
         material = agx.Material(name)
         material.getBulkMaterial().setDensity(density)
         return material
+
 
 
 if __name__ == "__main__":

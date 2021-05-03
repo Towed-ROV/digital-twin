@@ -37,7 +37,7 @@ class RovController(agxSDK.StepEventListener):
         rot = self.rov.link1.getRotation()
         current_depth = self.rov.getRigidBody('rovBody').getPosition()[2]
         self.pid.compute(current_depth)
-        print(-self.pid.output-rot[0] * 100,-self.pid.output,rot[0] * 100)
+        # print(-self.pid.output-rot[0] * 100,-self.pid.output,rot[0] * 100)
         output_left = deg2rad(-self.pid.output-rot[0] * 100)  # - self.pid_trim.output)
         output_right = deg2rad(-self.pid.output-rot[0] * 100)  # + self.pid_trim.output)
         #self.rov.update_wings(port_p=output_right, sb_p=output_left)

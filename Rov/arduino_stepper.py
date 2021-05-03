@@ -72,10 +72,10 @@ class ArduinoStepper(agxSDK.StepEventListener):
                     self.wing_pos_sb = pos
                     self.wing_pos_port = pos
                 elif self.target_mode == self.auto_depth_mode:
-                    print("depth: ", self.depth)
+                    #print("depth: ", self.depth)
                     # print(type(self.pid.compute(self.depth)))
                     wing_pos = self.pid.compute(self.depth)
-                    print("wing_pos: ", wing_pos)
+                    #print("wing_pos: ", wing_pos)
                     trim_pos = self.pid_trim.compute(self.roll)
                     if trim_pos != 0:
                         self.wing_pos_sb, self.wing_pos_port = self.trim_wing_pos(wing_pos, trim_pos)
@@ -87,11 +87,12 @@ class ArduinoStepper(agxSDK.StepEventListener):
                                         self.min_stepper_pos_sb, self.max_stepper_pos_sb)
                 step_position_port = _map(self.wing_pos_port, -self.max_wing_angle, self.max_wing_angle,
                                         self.min_stepper_pos_port, self.max_stepper_pos_port)
-                self.current_pos_sb = self.rov.distance1.getAngle()
-                self.current_pos_port = self.rov.distance2.getAngle()
+                self.current_pos_sb = self.rov.hinge1.getAngle()
+                self.current_pos_port = self.rov.hinge2.getAngle()
                 if step_position_sb != self.current_pos_sb:
                     self.move_stepper_pos_sb(step_position_sb)
                 if step_position_port != self.current_pos_port:
+                    self.move_stepper_pos_port(step_position_port)
                     self.move_stepper_pos_port(step_position_port)
 
                 current_millis = time.monotonic()
@@ -109,11 +110,11 @@ class ArduinoStepper(agxSDK.StepEventListener):
             if step_pos > self.current_pos_port:
                 # print("opp port")
                 self.current_pos_port = self.current_pos_port + self.interval_port
-                self.rov.distance2.getLock1D().setPosition(self.current_pos_port)
+                self.rov.hinge2.getLock1D().setPosition(self.current_pos_port)
             elif step_pos< self.current_pos_port:
                 # print("ned port")
                 self.current_pos_port = self.current_pos_port - self.interval_sb
-                self.rov.distance2.getLock1D().setPosition(self.current_pos_port)
+                self.rov.hinge2.getLock1D().setPosition(self.current_pos_port)
             self.last_millis_port = current_millis_port
 
     def move_stepper_pos_sb(self, step_pos):
@@ -122,11 +123,11 @@ class ArduinoStepper(agxSDK.StepEventListener):
             if step_pos > self.current_pos_sb:
                 # print("opp sb")
                 self.current_pos_sb = self.current_pos_sb + self.interval_port
-                self.rov.distance1.getLock1D().setPosition(self.current_pos_sb)
+                self.rov.hinge1.getLock1D().setPosition(self.current_pos_sb)
             elif step_pos < self.current_pos_sb:
                 # print("ned sb")
                 self.current_pos_sb = self.current_pos_sb - self.interval_sb
-                self.rov.distance1.getLock1D().setPosition(self.current_pos_sb)
+                self.rov.hinge1.getLock1D().setPosition(self.current_pos_sb)
             self.last_millis_sb = current_millis_sb
 
     def update_wing_pos_gui(self, port, sb):
@@ -272,10 +273,12 @@ class ArduinoStepper(agxSDK.StepEventListener):
 
     def send(self, message):
         output = "<" + message + ">\n"
-        self.ser.write(output.encode('utf-8'))
+        #self.ser.write(output.encode('utf-8'))
+        print(output)
 
     def read(self):
-        message = self.ser.readline()
+        #message = self.ser.readline()
+        message = b"chad"
         message = message.strip()
         message = message.decode('utf-8').strip("<").strip(">")
         if message:

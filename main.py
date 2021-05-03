@@ -12,6 +12,7 @@ from Rov.arduino_sensor import ArduinoSensor
 from Rov.arduino_stepper import ArduinoStepper
 from Boat.ship import Ship
 from Boat.boat_controller import Boat_Controller
+from Boat.Boat_sensor import Boat_Sensor
 from Rov.rov_assembly import RovAssembly
 from Rov.rov_controller import RovController
 
@@ -36,10 +37,12 @@ def setBodyViscousDrag(body, controller: agxModel.WindAndWaterController):
     bodies = body.getRigidBodies()
     for rigid_bodies in bodies:
         if "wing" in rigid_bodies.getName().lower():
-            setBodyWaterParameters(controller, rigid_bodies, pressure_drag=WING_PDRAG,lift=WING_LIFT,viscous_drag=WING_VDRAG)
+            setBodyWaterParameters(controller, rigid_bodies, pressure_drag=WING_PDRAG, lift=WING_LIFT,
+                                   viscous_drag=WING_VDRAG)
             print("wing")
         else:
-            setBodyWaterParameters(controller, rigid_bodies, pressure_drag=BODY_PDRAG,lift=BODY_LIFT,viscous_drag=BODY_VDRAG)
+            setBodyWaterParameters(controller, rigid_bodies, pressure_drag=BODY_PDRAG, lift=BODY_LIFT,
+                                   viscous_drag=BODY_VDRAG)
 
 
 def setWireViscousDrag(wire, controller):
@@ -52,10 +55,12 @@ def decorator(decerator, sim):
     rov_body = sim.getRigidBody("rov_body")
     if rov_body:
         while True:
-            decerator.setText(3, "depth : {} M".format(str(round(-rov_body.getPosition[2], 2))))
-            decerator.setText(7, "distance : {} M".format(str(round(rov_body.getPosition()[0], 2))))
+            decerator.setText(2, "depth : {} M".format(str(round(-rov_body.getPosition[2], 2))))
+            decerator.setText(3, "distance : {} M".format(str(round(rov_body.getPosition()[0], 2))))
             decerator.setText(4, "Pitch : {}".format(str(round(rov_body.getRotation()[0] * 100, 2))))
             decerator.setText(5, "Roll : {}".format(str(round(rov_body.getRotation()[1] * 100, 2))))
+            decerator.setText(6, "wing : L:{} || R:{}".format(str(round(rov_body.hinge1.getAngle(), 2)),
+                                                              str(round(rov_body.hinge2.getAngle(), 2))))
     else:
         rov_body = sim.getRigidBody("rov_body")
 
@@ -100,7 +105,7 @@ def build_scene():
     keyboard = KeyboardListener(rov_pid, plot)
 
     """Creates the rov"""
-    rov = RovAssembly(keyboard, seafloor=seafloor)
+    rov = RovAssembly(keyboard)
     print("base rov ready")
 
     rov.setPosition(agx.Vec3(-WATER_LENGTH + 10, 0, 0))
@@ -120,7 +125,7 @@ def build_scene():
     print("buildt lock for rov")
 
     """Creates a pid controller for trim"""
-    arduino_sensor = ArduinoSensor(rov)
+    arduino_sensor = ArduinoSensor(rov, seafloor.getShape().asHeightField())
     arduino_stepper = ArduinoStepper(rov_pid, pid_trim, rov)
 
     pid_boat = build_pid_controller(p=BOAT_K_P, i=BOAT_K_I, d=BOAT_K_D, direction=0, name="pidBoat", max_out=2,
@@ -132,6 +137,7 @@ def build_scene():
     ship.setRotation(agx.EulerAngles(0, 0, math.pi))
     ship.setPosition(agx.Vec3(-WATER_LENGTH + 20 + WIRE_LENGTH, 0, 0))
     print(ship.getPosition())
+    ship_echo = Boat_Sensor(ship, seafloor.getShape().asHeightField())
     print("buildt ship")
     wire, wire_renderer = MakeWire().create_wire(1030, 0.001, ship, agx.Vec3(2, 0, 0),
                                                  rov, agx.Vec3(*WIRE_POS_ROV))
@@ -149,8 +155,8 @@ def build_scene():
     # print("set echolod and water collisions to false")
 
     """Adds rov, boat, controller, and pid to the simulation"""
-    # sim().add(arduino_sensor)
-    # sim().add(arduino_stepper)
+    sim().add(arduino_sensor)
+    sim().add(arduino_stepper)
     sim().add(wire)
     print("added wire")
     sim().add(wire_renderer)
@@ -159,8 +165,8 @@ def build_scene():
     print("added keyboard listener")
     sim().add(ship)
     print("added ship")
-    #sim().add(pid_boat)
-    #print("added ship pid")
+    # sim().add(pid_boat)
+    # print("added ship pid")
     sim().add(Boat_Controller(ship, pid_boat, arduino_stepper))
     print("added ship controller")
     sim().add(seafloor)
@@ -170,11 +176,14 @@ def build_scene():
     sim().add(controller)
     print("added water controller")
     sim().add(rov)
-    print("added ship rov")
-    #sim().add(rov_pid)
-    #print("added ship rov pid")
-    #sim().add(pid_trim)
-    #print("added ship rov trim pid")
+    print("added rov")
+
+    sim().addEventListener(ship_echo)
+    print("added ship sensor")
+    # sim().add(rov_pid)
+    # print("added ship rov pid")
+    # sim().add(pid_trim)
+    # print("added ship rov trim pid")
     sim().add(wing_controll)
     print("added wing controller")
     sim().add(lock)
@@ -185,8 +194,8 @@ def build_scene():
     print("created visuals")
     sim().setTimeStep(SIM_TIME_STEP)
     r_p = rov.getPosition()
-    cam_pos = agx.Vec3(r_p[0]+30,r_p[1]+60,r_p[2]+20)
-    demoutils.init_camera(eye=cam_pos,center=rov.getPosition())
+    cam_pos = agx.Vec3(r_p[0] + 30, r_p[1] + 60, r_p[2] + 20)
+    demoutils.init_camera(eye=cam_pos, center=rov.getPosition())
 
     """locks the rov in fixed position, for mounting wing and cable to rov"""
     if adjust_rov:
