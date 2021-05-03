@@ -68,14 +68,11 @@ class ArduinoStepper(agxSDK.StepEventListener):
             if self.has_been_reset:
                 if self.target_mode == self.manual_mode:
                     pos = constrain(self.manual_wing_pos, -self.max_wing_angle, self.max_wing_angle)
-                    print(pos)
+                    print("pos: ",pos)
                     self.wing_pos_sb = pos
                     self.wing_pos_port = pos
                 elif self.target_mode == self.auto_depth_mode:
-                    #print("depth: ", self.depth)
-                    # print(type(self.pid.compute(self.depth)))
                     wing_pos = self.pid.compute(self.depth)
-                    #print("wing_pos: ", wing_pos)
                     trim_pos = self.pid_trim.compute(self.roll)
                     if trim_pos != 0:
                         self.wing_pos_sb, self.wing_pos_port = self.trim_wing_pos(wing_pos, trim_pos)
@@ -110,11 +107,11 @@ class ArduinoStepper(agxSDK.StepEventListener):
             if step_pos > self.current_pos_port:
                 # print("opp port")
                 self.current_pos_port = self.current_pos_port + self.interval_port
-                self.rov.hinge2.getLock1D().setPosition(self.current_pos_port)
+                #self.rov.hinge2.getLock1D().setPosition(self.current_pos_port)
             elif step_pos< self.current_pos_port:
                 # print("ned port")
                 self.current_pos_port = self.current_pos_port - self.interval_sb
-                self.rov.hinge2.getLock1D().setPosition(self.current_pos_port)
+                #self.rov.hinge2.getLock1D().setPosition(self.current_pos_port)
             self.last_millis_port = current_millis_port
 
     def move_stepper_pos_sb(self, step_pos):
@@ -123,11 +120,11 @@ class ArduinoStepper(agxSDK.StepEventListener):
             if step_pos > self.current_pos_sb:
                 # print("opp sb")
                 self.current_pos_sb = self.current_pos_sb + self.interval_port
-                self.rov.hinge1.getLock1D().setPosition(self.current_pos_sb)
+                #self.rov.hinge1.getLock1D().setPosition(self.current_pos_sb)
             elif step_pos < self.current_pos_sb:
                 # print("ned sb")
                 self.current_pos_sb = self.current_pos_sb - self.interval_sb
-                self.rov.hinge1.getLock1D().setPosition(self.current_pos_sb)
+                #self.rov.hinge1.getLock1D().setPosition(self.current_pos_sb)
             self.last_millis_sb = current_millis_sb
 
     def update_wing_pos_gui(self, port, sb):
@@ -278,64 +275,8 @@ class ArduinoStepper(agxSDK.StepEventListener):
 
     def read(self):
         message = self.ser.readline()
-        message = b"chad"
         message = message.strip()
         message = message.decode('utf-8').strip("<").strip(">")
         if message:
-            print(message)
+            print("message: ",message)
         return message.split(":",1)
-
-    # keyboards is used to tune the position of the wings
-    # def keyboard(self, key, modKeyMask, x, y, keydown) -> bool:
-    #     handled = False
-    #     print("ok")
-    #     if key == agxSDK.GuiEventListener.KEY_Right:
-    #         print(self.current_pos)
-    #         print('------')
-    #         print("dsfs")
-    #         print('------')
-    #         self.current_pos = self.current_pos + 0.0005
-    #         self.rov.distance1.getLock1D().setPosition(self.current_pos)
-    #         self.rov.distance2.getLock1D().setPosition(self.current_pos)
-    #         handled = True
-    #
-    #     elif key == agxSDK.GuiEventListener.KEY_Left:
-    #         print('------')
-    #         print("dsfs")
-    #         print(self.current_pos)
-    #         print('------')
-    #         self.current_pos = self.current_pos - 0.0005
-    #         self.rov.distance1.getLock1D().setPosition(self.current_pos)
-    #         self.rov.distance2.getLock1D().setPosition(self.current_pos)
-    #         handled = True
-    #     return handled
-    # def keyboard(self, key, modKeyMask, x, y, keydown) -> bool:
-    #     handled = False
-    #     if key == agxSDK.GuiEventListener.KEY_Right:
-    #         print(self.current_pos)
-    #         if (self.current_pos + self.interval_sb) < 1.1105:
-    #             test = _map(self.current_pos, 0.6575, 1.1105, 0.8495, 1.232)
-    #             print('------')
-    #             print(self.interval_sb)
-    #             print(test)
-    #             print('------')
-    #             self.current_pos_1 = test + self.interval_port
-    #             self.current_pos = self.current_pos + self.interval_sb
-    #             self.rov.distance1.getLock1D().setPosition(self.current_pos)
-    #             self.rov.distance2.getLock1D().setPosition(self.current_pos_1)
-    #         handled = True
-    #
-    #     elif key == agxSDK.GuiEventListener.KEY_Left:
-    #         print(self.current_pos)
-    #         if (self.current_pos + self.interval) > 0.6575:
-    #             test = _map(self.current_pos, 0.6575, 1.1105, 0.8495, 1.232)
-    #             print('------')
-    #             print("dsfs")
-    #             print(test)
-    #             print('------')
-    #             self.current_pos = self.current_pos - self.interval
-    #             self.current_pos_1 = test - self.interval
-    #             self.rov.distance1.getLock1D().setPosition(self.current_pos)
-    #             self.rov.distance2.getLock1D().setPosition(self.current_pos_1)
-    #         handled = True
-    #     return handled

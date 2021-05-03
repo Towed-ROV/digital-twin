@@ -23,7 +23,6 @@ class Boat_Sensor(StepEventListener):
 
     def pre(self, time: "agx::TimeStamp const &"):
         delta_x = self.get_travel_distance()
-        print(delta_x)
         if delta_x >= self.travel_distance:
             self.send(self.message_builder("commands", [self.pay_loader("has_traveled_set_distance",True)]))
         self.send(self.message_builder("sensors", [self.pay_loader("depth_under_boat", self.get_depth_under_boat())]))
@@ -41,7 +40,6 @@ class Boat_Sensor(StepEventListener):
         pos = self.boat.getPosition()
         x = int(pos[0] + WATER_LENGTH)
         y = int(pos[1])
-        print(x, y)
         return self.seafloor.getHeight(x, y)
 
     def handle_received_message(self):
@@ -55,10 +53,10 @@ class Boat_Sensor(StepEventListener):
 
 
     def send(self, data):
-        print(data)
+        #print("send: ",data)
         self.connection.send_json(data)
 
     def recv(self):
         data = self.connection.recv_json()
-        print(data)
+        print("reciving: ", data)
         return data

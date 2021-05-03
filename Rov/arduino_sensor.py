@@ -93,7 +93,7 @@ class ArduinoSensor(agxSDK.StepEventListener):
 
     def send(self, key,value):
         output =  "<{}:{}>".format(key,value)
-        print(output)
+        # print("output: ", output)
         self.ser.write(output.encode('utf-8'))
 
     def read(self):
