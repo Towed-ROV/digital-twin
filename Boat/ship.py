@@ -6,14 +6,16 @@ import agxSDK
 import agxCollide
 import math
 from modules.agxPythonModules.utils.callbacks import StepEventCallback as Sec
-
+from rov_simulation_parameters import *
+import make_water
 """Class Ship, create a agx assembly of the boat used to tow the Rov."""
 
 
 class Ship(agxSDK.Assembly):
-    def __init__(self):
+    def __init__(self,controller):
         super().__init__()
-        width = 2
+        self.controller = controller
+        width = 2*1.5
         right_fender = width * 0.25
         length = 10 - right_fender * 0.4
         ship_color = agxRender.Color.LightYellow()
@@ -24,7 +26,7 @@ class Ship(agxSDK.Assembly):
         self.m_max_propulsion = 200000
         self.m_min_propulsion = -500
         self.init(width, length, right_fender)
-        self.m_body.getMassProperties().setMass(1000)
+        self.m_body.getMassProperties().setMass(1000*2)
         self.m_body.getCmFrame().setLocalTranslate(agx.Vec3(-0.2, 0, 0))
         self.m_body.getGeometries()[0].setEnableCollisions(True)
         agxOSG.setDiffuseColor(agxOSG.createVisual(self.m_body, demoutils.root()), ship_color)
@@ -32,6 +34,7 @@ class Ship(agxSDK.Assembly):
         """Create callbacks"""
         Sec.preCallback(lambda t: self.update_propulsion())
         Sec.postCallback(lambda t: self.display_forces(t))
+        Sec.postCallback(lambda t: self.post(t))
 
     def init(self, width, length, rFender):
         ship = agx.RigidBody()
@@ -79,7 +82,7 @@ class Ship(agxSDK.Assembly):
         ship.add(t_box)  # box on top of base
         ship.add(tt_box)  # box on top of box on top of base
         ship.setPosition(-90, 0, 0)
-
+        self.n  =1
         self.m_left_propeller = agx.Vec3(-half_length, half_width - radius, - (half_height + 2 * radius))
         self.m_right_propeller = agx.Vec3(-half_length, radius - half_width, - (half_height + 2 * radius))
 
@@ -123,6 +126,18 @@ class Ship(agxSDK.Assembly):
             self.m_propulsion_force / 500))  # 2/1000 ( 2 because of the 2 propellers )
         demoutils.app().getSceneDecorator().setText(2, "Speed in X direction : {} knots".format(
             str(round(self.m_body.getVelocity()[0] * 1.94384449, 2))))
+    def post(self,t):
+        if self.getPosition()[0] - WATER_LENGTH * self.n> 100:
+            self.n +=1
+            sea, floor = make_water.MakeWater.make_water(WATER_DENSITY,WATER_LENGTH,WATER_WIDTH,WATER_DEPTH)
+            p = sea.getPosition()
+            sea.setPosition(p[0]+WATER_LENGTH*self.n,p[1],p[2])
+            p = floor.getPosition()
+            floor.setPosition(p[0] + WATER_LENGTH * self.n, p[1], p[2])
+            self.controller.addWater(sea)
+            demoutils.sim().add(sea)
+            demoutils.sim().add(floor)
+
 
     def get_min(self):
         return self.m_propulsion_force

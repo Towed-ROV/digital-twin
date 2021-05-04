@@ -81,11 +81,11 @@ class RovAssembly(agxSDK.Assembly):
         # conecting models
         # left wing
         self.hinge1 = self.build_hinge(link=self.link1, part=self.link2,
-                                       pos=link2rot, axis=agx.Vec3(0, 1, 0), lock=False, motor=True,
+                                       pos=link2rot, axis=agx.Vec3(0, 1, 0), lock=True, motor=False,
                                        range=(MIN_WING_ANGLE, MAX_WING_ANGLE), compliance=1e-5)
         # right wing
         self.hinge2 = self.build_hinge(self.link1, self.link3,
-                                       pos=link3rot, axis=agx.Vec3(0, 1, 0), lock=False, motor=True,
+                                       pos=link3rot, axis=agx.Vec3(0, 1, 0), lock=True, motor=False,
                                        range=(MIN_WING_ANGLE, MAX_WING_ANGLE), compliance=1e-5)
         # sonar
         # self.sonar_joint = self.build_lock_joint(self.link1, self.link4, (0,0,0), (0,0,0))

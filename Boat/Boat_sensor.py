@@ -14,18 +14,26 @@ class Boat_Sensor(StepEventListener):
         self.connection = self.ctx.socket(zmq.PUB)
         self.host = "127.0.0.1"
         self.port = "6969"
+        self.connection.bind("tcp://"+self.host + ":"+self.port)
         self.boat = boat
         self.seafloor = seafloor
         self.last_x = boat.getPosition()[0]
         self.travel_distance = 4
-        self.message_builder = lambda type, data: str({"payload_name": type, "payload_data": data})
-        self.pay_loader = lambda name, value: str({"name":name,"value":value})
+        self.message_builder = lambda type, data: {"payload_name": type, "payload_data": data}
+        self.pay_loader = lambda name, value: {"name":name,"value":value}
+        self.last_time= 0
+        self.freq= 1/2
 
     def pre(self, time: "agx::TimeStamp const &"):
         delta_x = self.get_travel_distance()
         if delta_x >= self.travel_distance:
             self.send(self.message_builder("commands", [self.pay_loader("has_traveled_set_distance",True)]))
-        self.send(self.message_builder("sensors", [self.pay_loader("depth_under_boat", self.get_depth_under_boat())]))
+
+        if time-self.last_time > self.freq:
+            self.send(self.message_builder("commands", [self.pay_loader("depth_beneath_boat", self.get_depth_under_boat())]))
+            self.last_time = time
+            print(self.last_time ,time)
+
     def connect(self):
         self.connection.connect(f"tcp://{self.host}:{self.port}")
 
@@ -53,10 +61,8 @@ class Boat_Sensor(StepEventListener):
 
 
     def send(self, data):
-        #print("send: ",data)
         self.connection.send_json(data)
 
     def recv(self):
         data = self.connection.recv_json()
-        print("reciving: ", data)
         return data

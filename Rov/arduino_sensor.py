@@ -27,7 +27,7 @@ class ArduinoSensor(agxSDK.StepEventListener):
            timeout=0)
         self.interval = 0.01
         self.previousMillis = 0
-        self.reset = True
+        self.reset = False
         self.start = False
         self.command_number = 6
         self.seafloor = seafloor
@@ -42,17 +42,14 @@ class ArduinoSensor(agxSDK.StepEventListener):
         self.sender = lambda x: self.send_switch[x]
 
     def pre(self, t):
-
-        self.send("SensorArduino","0")
         if not self.reset:
             self.send("SensorArduino","0")
             if self.read()[0] == "reset":
-                print("SensorArduino")
                 self.reset = True
-        elif not self.start:
-            if self.read()[0] == "start":
-                print("start sens")
-                self.start = True
+        # elif not self.start:
+        #     if self.read()[0] == "start":
+        #         print("start sens")
+        #         self.start = True
         else:
             currentMillis = time.monotonic()
             if currentMillis - self.previousMillis >= self.interval:
@@ -92,14 +89,17 @@ class ArduinoSensor(agxSDK.StepEventListener):
             self.send(received_command + ":True")
 
     def send(self, key,value):
-        output =  "<{}:{}>".format(key,value)
-        # print("output: ", output)
+        output =  "<{}:{}>\n".format(key,value)
         self.ser.write(output.encode('utf-8'))
 
     def read(self):
         message = self.ser.readline()
+
         message = message.strip()
         message = message.decode('utf-8').strip("<").strip(">")
+        if message and len(message)>1:
+            print("read: ", message)
+            pass
         return message.split(":", 1)
 
 

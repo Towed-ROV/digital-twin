@@ -14,3 +14,7 @@
 .idea/rov-sim.iml
 
 
+
+*.mp4
+
+venv/
