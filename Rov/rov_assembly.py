@@ -52,7 +52,7 @@ class RovAssembly(agxSDK.Assembly):
         # wing left
         self.link2 = builder.create_wing_right(wing_material, WING_SCALE, "wing_r", rot=(0, 0, 0))
         link2rot = self.link2.getPosition()
-        print("buildt right wing",link2rot)
+        print("buildt right wing", link2rot)
         # wing right
         self.link3 = builder.create_wing_left(wing_material, WING_SCALE, "wing_l", rot=(0, 0, 0))
         link3rot = self.link3.getPosition()
@@ -81,11 +81,11 @@ class RovAssembly(agxSDK.Assembly):
         # conecting models
         # left wing
         self.hinge1 = self.build_hinge(link=self.link1, part=self.link2,
-                                       pos=link2rot, axis=agx.Vec3(0, 1, 0), lock=True, motor=False,
+                                       pos=link2rot, axis=agx.Vec3(0, 1, 0), lock=False, motor=True,
                                        range=(MIN_WING_ANGLE, MAX_WING_ANGLE), compliance=1e-5)
         # right wing
         self.hinge2 = self.build_hinge(self.link1, self.link3,
-                                       pos=link3rot, axis=agx.Vec3(0, 1, 0), lock=True, motor=False,
+                                       pos=link3rot, axis=agx.Vec3(0, 1, 0), lock=False, motor=True,
                                        range=(MIN_WING_ANGLE, MAX_WING_ANGLE), compliance=1e-5)
         # sonar
         # self.sonar_joint = self.build_lock_joint(self.link1, self.link4, (0,0,0), (0,0,0))
@@ -107,6 +107,7 @@ class RovAssembly(agxSDK.Assembly):
         print("added wing step lenght")
         self.setName('rov')
         print("set name")
+
 
     @staticmethod
     def disable_col(geo, ruged: agx.RigidBody):
@@ -176,8 +177,12 @@ class RovAssembly(agxSDK.Assembly):
         a = agxSDK.Assembly.getGeometries(self)
         return a
 
-    def update_wings(self, sb_p, port_p):
+    def getPitch(self) -> "agx::Quat":
+        return self.link1.getRotation()[0]
 
+    def update_wings(self, sb_p, port_p):
+        sb_p = deg2rad(sb_p)
+        port_p = deg2rad(port_p)
         a1 = -self.hinge1.getAngle()
         a2 = -self.hinge2.getAngle()
         d1 = limit(a1 - sb_p, -2, 2) * 10
@@ -208,7 +213,6 @@ class RovAssembly(agxSDK.Assembly):
         material = agx.Material(name)
         material.getBulkMaterial().setDensity(density)
         return material
-
 
 
 if __name__ == "__main__":

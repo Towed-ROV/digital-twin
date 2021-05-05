@@ -26,7 +26,7 @@ K_D_TRIM = 1
 TRIM_MAX_OUT = 8
 TRIM_MIN_OUT = -8
 # ------------------------SIMULATION------------------------#
-SIM_TIME_STEP = 0.0015
+SIM_TIME_STEP = 0.0005
 start = False
 plot = False
 adjust_rov = False

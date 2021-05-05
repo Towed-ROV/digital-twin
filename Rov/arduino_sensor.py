@@ -50,12 +50,15 @@ class ArduinoSensor(agxSDK.StepEventListener):
         #     if self.read()[0] == "start":
         #         print("start sens")
         #         self.start = True
-        else:
+
+        elif t - self.previousMillis > self.interval:
             currentMillis = time.monotonic()
             if currentMillis - self.previousMillis >= self.interval:
                 self.send_sensor()
                 self.previousMillis = currentMillis
             self.handle_received_message()
+
+            self.previousMillis = t
 
     def get_temp(self):
         return self.temp
