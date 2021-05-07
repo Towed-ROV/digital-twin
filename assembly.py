@@ -37,7 +37,7 @@ class rov_builder(agxIO.MeshReader):
               geom.getShape().getVolume() * (aluminum.getBulkMaterial().getDensity() - 1027))
 
         print(tank1.getShape().getVolume() * 2, (tank1.getShape().getVolume() + tank2.getShape().getVolume()) * (
-                    tank_material.getBulkMaterial().getDensity() - 1027))
+                tank_material.getBulkMaterial().getDensity() - 1027))
         rov_body.add(tank1)
         rov_body.add(tank2)
         return rov_body
@@ -70,15 +70,16 @@ class rov_builder(agxIO.MeshReader):
         return trimesh
 
     def build_tanks(self, material):
-        length = self.rov_volume[0] / 3.5
-        rad = self.rov_volume[2] / 2.5
-        tank1 = self.capsules(length, rad)
+        length = self.rov_volume[0] / 2.75
+        rad = self.rov_volume[2] / 2.25
+        tank1 = self.cylinders(length, rad)
         tank1.setMaterial(material)
         tank2 = tank1.clone()
         tank1.setRotation(agx.EulerAngles(0, 0, 1 / 2 * math.pi))
         tank2.setRotation(agx.EulerAngles(0, math.pi, math.pi * 3 / 2))
-        tank1.setPosition(length / 2.1, rad * 1.5, rad * 1.75)
-        tank2.setPosition(length / 2.1, -rad * 1.5, rad * 1.75)
+        x, y, z = self.rov_volume[0] / 6, self.rov_volume[1] / 3.75, self.rov_volume[2] / 1.25
+        tank1.setPosition(x, +y, z)
+        tank2.setPosition(x, -y, z)
         return tank1, tank2
 
     @staticmethod
@@ -108,10 +109,10 @@ class rov_builder(agxIO.MeshReader):
     """Creates capsules geometry"""
 
     @staticmethod
-    def capsules(half_length, half_height) -> agxCollide.Geometry:
+    def cylinders(half_length, half_height) -> agxCollide.Geometry:
         length = 2 * half_length
         radius = half_height * 1.2
-        return agxCollide.Geometry(agxCollide.Capsule(radius, length - 2 * radius))
+        return agxCollide.Geometry(agxCollide.Cylinder(radius, length - 2 * radius))
 
     """Creates rigidbody of the boat"""
 
