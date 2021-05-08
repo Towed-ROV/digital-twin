@@ -21,7 +21,7 @@ class Boat_Sensor(StepEventListener):
         self.connection.bind("tcp://" + self.host + ":" + self.port)
         self.boat = boat
         self.seafloor = seafloor
-        self.last_x = boat.getPosition()[0]
+        self.last_x = boat.getPosition()[0][0]
         self.travel_distance = 4
         self.message_builder = lambda type, data: {"payload_name": type, "payload_data": data}
         self.pay_loader = lambda name, value: {"name": name, "value": value}
@@ -31,10 +31,6 @@ class Boat_Sensor(StepEventListener):
         self.lon_list = [l * 1 / 10 for l in self.lat_list]
 
         self.GPS_i = 0
-        print(self.GPS_i,
-              self.lat_list[self.GPS_i],
-              self.lon_list[self.GPS_i],
-              self.lat_list, self.lon_list)
 
     def pre(self, time: "agx::TimeStamp const &"):
         delta_x = self.get_travel_distance()
@@ -66,15 +62,16 @@ class Boat_Sensor(StepEventListener):
         self.connection.connect(f"tcp://{self.host}:{self.port}")
 
     def get_travel_distance(self):
-        x = self.boat.getPosition()[0]
+        pos, n = self.boat.getPosition()
+        x = pos[0]
         delta_x = x - self.last_x
         if delta_x > self.travel_distance:
             self.last_x = x
         return delta_x
 
     def get_depth_under_boat(self) -> float:
-        pos = self.boat.getPosition()
-        x = int(pos[0] + WATER_LENGTH)
+        pos,n = self.boat.getPosition()
+        x = int(pos[0] + WATER_LENGTH*(n)-1)
         y = int(pos[1])
         return self.seafloor.getHeight(x, y)
 

@@ -3,6 +3,7 @@ import agx
 import agxCollide
 # python imports
 import math
+from rov_simulation_parameters import *
 
 """Creates fender geometry"""
 
@@ -24,7 +25,7 @@ class rov_builder(agxIO.MeshReader):
 
     def create_rov_body(self, aluminum: agx.Material, scale, name: str, cm,
                         tank_material: agx.Material) -> agx.RigidBody:
-        trimesh = self.get_trimesh("models/rov_simp.obj", scale, "rov_simp")
+        trimesh = self.get_trimesh(MODEL_LOCATION + ROV_MODEL_NAME, scale, ROV_MODEL_NAME)
         geom = self.build_geomery(trimesh, 'Rov_body', aluminum, (0, 0, 0))
         self.rov_volume = geom.getBoundingVolume().size()
         rov_body = self.build_rigid_body(geom, name, (0, 0, 0), (0, 0, 0))
@@ -45,7 +46,7 @@ class rov_builder(agxIO.MeshReader):
     """Creates rigidbody of the starboard wing from obj file"""
 
     def create_wing_right(self, aluminum, scale, name, rot) -> agx.RigidBody:
-        trimesh = self.get_trimesh("models/wing_simp.obj", scale, "wing_simp")
+        trimesh = self.get_trimesh(MODEL_LOCATION+ WING_NAME, scale,WING_NAME)
         geom = self.build_geomery(trimesh, name, aluminum, (0, math.pi, math.pi))
         pos = (self.rov_volume[0] / 10, self.rov_volume[1] / 1.9, 0)
         wing_right = self.build_rigid_body(geom, name, pos, rot)
@@ -54,7 +55,7 @@ class rov_builder(agxIO.MeshReader):
     """Creates rigidbody of the port wing from obj file"""
 
     def create_wing_left(self, aluminum, scale, name, rot) -> agx.RigidBody:
-        trimesh = self.get_trimesh("models/wing_simp.obj", scale, "wing_simp")
+        trimesh = self.get_trimesh(MODEL_LOCATION+ WING_NAME, scale,WING_NAME)
         geom = self.build_geomery(trimesh, name, aluminum, (0, 0, 0))
         pos = (self.rov_volume[0] / 10, -self.rov_volume[1] / 1.9, 0)
         wing_left = self.build_rigid_body(geom, name, pos, rot)

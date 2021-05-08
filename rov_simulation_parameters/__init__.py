@@ -2,7 +2,7 @@ from agx import Vec3
 # ------------------------POSITION, SIZE AND WIRE------------------------#
 WATER_DEPTH = 60
 WATER_WIDTH = 30
-WATER_LENGTH = 520
+WATER_LENGTH = 520*4
 WATER_DENSITY = 1027
 WIRE_LENGTH = 300
 WIRE_RESOLUTION = 10
@@ -26,7 +26,7 @@ K_D_TRIM = 1
 TRIM_MAX_OUT = 8
 TRIM_MIN_OUT = -8
 # ------------------------SIMULATION------------------------#
-SIM_TIME_STEP = 0.0005
+SIM_TIME_STEP = 0.005
 start = False
 plot = False
 adjust_rov = False
@@ -48,3 +48,7 @@ WING_VDRAG = STD_VDRAG*2
 BODY_PDRAG = STD_PDRAG*2
 BODY_LIFT = STD_LIFT*1
 BODY_VDRAG = STD_VDRAG*2
+# models
+WING_NAME = "wing_simp.obj"
+MODEL_LOCATION = "models/"
+ROV_MODEL_NAME = "ROV_SIMP_w_tail_f.obj"
