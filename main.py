@@ -2,6 +2,7 @@
 from agxOSG import createVisual
 import demoutils
 from demoutils import sim
+from agxCollide import Geometry
 
 # local imports:
 from rov_simulation_parameters import *
@@ -20,8 +21,9 @@ from Rov.rov_controller import RovController
 from keyboard_listener import KeyboardListener
 import math
 
-
 """Building scene"""
+
+
 def build_scene():
     """write plot to csv file variable"""
     print("build staring")
@@ -81,7 +83,7 @@ def build_scene():
                                                  rov, agx.Vec3(*WIRE_POS_ROV))
     print("buildt wire")
     setWireViscousDrag(wire, controller)
-    ship.setVelocity(agx.Vec3(-1, 0, 0))
+    ship.setVelocity(agx.Vec3(-2, 0, 0))
     print("buildt controll for wire")
 
     """Creates a controller to control the wings of the Rov"""
@@ -130,8 +132,13 @@ def build_scene():
     sim().setTimeStep(SIM_TIME_STEP)
     r_p = rov.getPosition()
     cam_pos = agx.Vec3(r_p[0] + 30, r_p[1] + 60, r_p[2] + 20)
-    demoutils.init_camera(eye=cam_pos, center=rov.getPosition())
-
+    demoutils.init_camera(eye=cam_pos, center=r_p)
+    v =0
+    m = 0
+    for geo in rov.link1.getGeometries():
+        v += geo.calculateVolume() * 1027
+        m += geo.calculateMass()
+        print(m,v,m-v)
     """locks the rov in fixed position, for mounting wing and cable to rov"""
     if adjust_rov:
         lock1 = agx.LockJoint(rov.link1)

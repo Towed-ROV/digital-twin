@@ -46,11 +46,11 @@ class KeyboardListener(agxSDK.GuiEventListener):
                 self.plot = True
         if key == agxSDK.GuiEventListener.KEY_F5:
             if key_down:
-                self.pid.set_setpoint(-11)
+                self.pid.set_setpoint(-4)
             return True
         if key == agxSDK.GuiEventListener.KEY_F2:
             if key_down:
-                self.pid.set_setpoint(-11.5)
+                self.pid.set_setpoint(-8)
             return True
         if key == agxSDK.GuiEventListener.KEY_F3:
             if key_down:
@@ -60,5 +60,18 @@ class KeyboardListener(agxSDK.GuiEventListener):
             if key_down:
                 self.pid.set_setpoint(-13)
             return True
+        if key == agxSDK.GuiEventListener.KEY_F5:
+            if key_down:
+                self.pid.set_setpoint(0)
+            return True
+        if key == agxSDK.GuiEventListener.KEY_F6:
+            if key_down:
+                self.pid.set_setpoint(+10)
+            return True
+        if key == agxSDK.GuiEventListener.KEY_F7:
+            if key_down:
+                self.pid.set_setpoint(-100)
+            return True
+
 
         return False

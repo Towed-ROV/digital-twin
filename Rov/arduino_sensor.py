@@ -19,12 +19,12 @@ class ArduinoSensor(agxSDK.StepEventListener):
         self.yaw = 0
         self.turn_to_send = 1
         self.ser = serial.Serial(
-           port='COM20',
-           baudrate=19200,
-           parity=serial.PARITY_NONE,
-           stopbits=serial.STOPBITS_ONE,
-           bytesize=serial.EIGHTBITS,
-           timeout=0)
+            port='COM20',
+            baudrate=19200,
+            parity=serial.PARITY_NONE,
+            stopbits=serial.STOPBITS_ONE,
+            bytesize=serial.EIGHTBITS,
+            timeout=0)
         self.interval = 0.01
         self.previousMillis = 0
         self.reset = False
@@ -43,7 +43,7 @@ class ArduinoSensor(agxSDK.StepEventListener):
 
     def pre(self, t):
         if not self.reset:
-            self.send("SensorArduino","0")
+            self.send("SensorArduino", "0")
             if self.read()[0] == "reset":
                 self.reset = True
         # elif not self.start:
@@ -69,8 +69,8 @@ class ArduinoSensor(agxSDK.StepEventListener):
         y = int(pos[1])
         return self.seafloor.getHeight(x, y)
 
-    def send_data(self, key,value):
-        self.send(key,value)
+    def send_data(self, key, value):
+        self.send(key, value)
         self.turn_to_send += 1
         if self.turn_to_send == self.command_number:
             self.turn_to_send = 1
@@ -80,19 +80,21 @@ class ArduinoSensor(agxSDK.StepEventListener):
         data = data()
         if not isinstance(numb, type(None)):
             data = data[numb]
-        self.send_data(key,data)
+        self.send_data(key, data)
 
     def handle_received_message(self):
         received_command = self.read()
-        if received_command[0] == "depth_rov_offset":
-            self.depth_beneath_rov_offset = received_command[1]
-            self.send(received_command + ":True")
-        elif received_command[0] == "depth_beneath_rov_offset":
-            self.depth_rov_offset = received_command[1]
-            self.send(received_command + ":True")
+        if len(received_command) > 1:
+            #print(received_command)
+            if received_command[0] == "depth_rov_offset":
+                self.depth_beneath_rov_offset = received_command[1]
+                self.send(received_command + ":True")
+            elif received_command[0] == "depth_beneath_rov_offset":
+                self.depth_rov_offset = received_command[1]
+                self.send(received_command + ":True")
 
-    def send(self, key,value):
-        output =  "<{}:{}>\n".format(key,value)
+    def send(self, key, value):
+        output = "<{}:{}>\n".format(key, value)
         self.ser.write(output.encode('utf-8'))
 
     def read(self):
@@ -100,8 +102,8 @@ class ArduinoSensor(agxSDK.StepEventListener):
 
         message = message.strip()
         message = message.decode('utf-8').strip("<").strip(">")
-        if message and len(message)>1:
-            print("read: ", message)
+        if message and len(message) > 1:
+            #print("read: ", message)
             pass
         return message.split(":", 1)
 

@@ -44,9 +44,6 @@ def decorator(decerator, sim):
             decerator.setText(5, "Roll : {}".format(str(round(rov_body.getRotation()[1] * 100, 2))))
             decerator.setText(6, "wing : L:{} || R:{}".format(str(round(rov_body.hinge1.getAngle(), 2)),
                                                               str(round(rov_body.hinge2.getAngle(), 2))))
-    else:
-        rov_body = sim.getRigidBody("rov_body")
-
 
 def build_pid_controller(p, i, d, mode, setpoint, direction, name, max_out=None, min_out=None):
     pid = PID_Controller(p, i, d, direction)

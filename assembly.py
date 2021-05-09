@@ -28,6 +28,7 @@ class rov_builder(agxIO.MeshReader):
         trimesh = self.get_trimesh(MODEL_LOCATION + ROV_MODEL_NAME, scale, ROV_MODEL_NAME)
         geom = self.build_geomery(trimesh, 'Rov_body', aluminum, (0, 0, 0))
         self.rov_volume = geom.getBoundingVolume().size()
+        geom.setPosition(agx.Vec3(0, self.rov_volume[2] / 1.15, 0))
         rov_body = self.build_rigid_body(geom, name, (0, 0, 0), (0, 0, 0))
         rov_body.setMotionControl(agx.RigidBody.DYNAMICS)
         rov_body.setCmLocalTranslate(agx.Vec3(*cm))
@@ -46,18 +47,18 @@ class rov_builder(agxIO.MeshReader):
     """Creates rigidbody of the starboard wing from obj file"""
 
     def create_wing_right(self, aluminum, scale, name, rot) -> agx.RigidBody:
-        trimesh = self.get_trimesh(MODEL_LOCATION+ WING_NAME, scale,WING_NAME)
+        trimesh = self.get_trimesh(MODEL_LOCATION + WING_NAME, scale, WING_NAME)
         geom = self.build_geomery(trimesh, name, aluminum, (0, math.pi, math.pi))
-        pos = (self.rov_volume[0] / 10, self.rov_volume[1] / 1.9, 0)
+        pos = (self.rov_volume[0] / 12, self.rov_volume[1] / 2, self.rov_volume[2] / 2.2)
         wing_right = self.build_rigid_body(geom, name, pos, rot)
         return wing_right
 
     """Creates rigidbody of the port wing from obj file"""
 
     def create_wing_left(self, aluminum, scale, name, rot) -> agx.RigidBody:
-        trimesh = self.get_trimesh(MODEL_LOCATION+ WING_NAME, scale,WING_NAME)
+        trimesh = self.get_trimesh(MODEL_LOCATION + WING_NAME, scale, WING_NAME)
         geom = self.build_geomery(trimesh, name, aluminum, (0, 0, 0))
-        pos = (self.rov_volume[0] / 10, -self.rov_volume[1] / 1.9, 0)
+        pos = (self.rov_volume[0] / 12, -self.rov_volume[1] / 2, self.rov_volume[2] / 2.2)
         wing_left = self.build_rigid_body(geom, name, pos, rot)
         return wing_left
 
@@ -71,14 +72,14 @@ class rov_builder(agxIO.MeshReader):
         return trimesh
 
     def build_tanks(self, material):
-        length = self.rov_volume[0] / 2.75
-        rad = self.rov_volume[2] / 2.25
+        length = self.rov_volume[0] / 5
+        rad = self.rov_volume[2] / 3
         tank1 = self.cylinders(length, rad)
         tank1.setMaterial(material)
         tank2 = tank1.clone()
         tank1.setRotation(agx.EulerAngles(0, 0, 1 / 2 * math.pi))
         tank2.setRotation(agx.EulerAngles(0, math.pi, math.pi * 3 / 2))
-        x, y, z = self.rov_volume[0] / 6, self.rov_volume[1] / 3.75, self.rov_volume[2] / 1.25
+        x, y, z = self.rov_volume[0] / 8, self.rov_volume[2] / 1.9, rad / 1.8 + self.rov_volume[2]
         tank1.setPosition(x, +y, z)
         tank2.setPosition(x, -y, z)
         return tank1, tank2

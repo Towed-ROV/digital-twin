@@ -1,0 +1,5330 @@
+
+
+ *** Time step 53.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Inter-step time: 33.5456 (33.5456)
+    Step forward time: 5.75941 (5.75941)
+    Pre-step event time: 3.37215 (3.37215)
+    Dynamics-system time: 1.20912 (1.20912)
+    Post-step event time: 0.55365 (0.55365)
+    Collision-detection time: 0.31703 (0.31703)
+    Pre-collide event time: 0.20821 (0.20821)
+    Triggering contact events: 0.00814 (0.00814)
+    Committing removed contacts: 0.00109 (0.00109)
+    Triggering contact separation events: 0.00073 (0.00073)
+    Culling contacts: 0.00043 (0.00043)
+    Contact reduction: 0.00017 (0.00017)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.19749 (0.19749)
+      Broad-phase time: 0.10005 (0.10005)
+      Sync bounds time: 0.04388 (0.04388)
+      Sync transforms time: 0.0251 (0.0251)
+      Narrow-phase time: 0.01825 (0.01825)
+    - Data:
+      Num geometries: 126 (126)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.06158 (0.06158)
+        SweepAndPrune::UpdateTask::run: 0.05882 (0.05882)
+        BroadPhase 2: 0.02647 (0.02647)
+        BroadPhase 4: 0.02139 (0.02139)
+        BroadPhase 3: 0.00221 (0.00221)
+        BroadPhase 1: 0.00059 (0.00059)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 124 (124)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 1.19535 (1.19535)
+      Solver time: 0.41045 (0.41045)
+      Sabre: Factoring: 0.10037 (0.10037)
+      Sabre: Solve: 0.01301 (0.01301)
+    - Data:
+      Num multi-body constraints: 111 (111)
+      Num solve islands: 1 (1)
+      Num enabled rigid bodies: 61 (61)
+      Num binary constraints: 5 (5)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 54.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (27612.8)
+    Inter-step time: 22.4891 (23713.1)
+    Step forward time: 3.42748 (3569.42)
+    Pre-step event time: 2.07496 (2211.66)
+    Dynamics-system time: 0.68483 (726.474)
+    Last-step event time: 0 (341.714)
+    Post-step event time: 0.32187 (291.164)
+    Pre-collide event time: 0.14377 (158.721)
+    Collision-detection time: 0.12338 (113.467)
+    Triggering contact events: 0.00625 (4.50043)
+    Triggering contact separation events: 0.00066 (0.6721)
+    Committing removed contacts: 0.00148 (0.48769)
+    Culling contacts: 0.00027 (0.30619)
+    Contact reduction: 0.00015 (0.19422)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.11552 (105.416)
+      Broad-phase time: 0.04191 (41.0515)
+      Sync bounds time: 0.02595 (29.8558)
+      Sync transforms time: 0.01462 (16.1805)
+      Narrow-phase time: 0.0094 (10.9306)
+    - Data:
+      Num geometries: 126 (126126)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.03068 (28.2936)
+        SweepAndPrune::UpdateTask::run: 0.02902 (26.7314)
+        BroadPhase 2: 0.0221 (19.2785)
+        BroadPhase 4: 0.00264 (3.40553)
+        BroadPhase 3: 0.00161 (1.29668)
+        BroadPhase 1: 0.00042 (0.5055)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 124 (124124)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.67975 (719.601)
+      Solver time: 0.28053 (325.382)
+      Sabre: Factoring: 0.07079 (80.1766)
+      Sabre: Solve: 0.00992 (11.4764)
+    - Data:
+      Num multi-body constraints: 111 (111111)
+      Num solve islands: 1 (1001)
+      Num enabled rigid bodies: 61 (61061)
+      Num binary constraints: 5 (5005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 55.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (55038)
+    Inter-step time: 23.1699 (47253.3)
+    Step forward time: 3.65114 (7103.57)
+    Pre-step event time: 2.21757 (4424.97)
+    Dynamics-system time: 0.84446 (1437.57)
+    Last-step event time: 0 (680.824)
+    Post-step event time: 0.26571 (566.914)
+    Pre-collide event time: 0.14477 (315.481)
+    Collision-detection time: 0.11606 (224.253)
+    Triggering contact events: 0.00353 (8.80453)
+    Triggering contact separation events: 0.00062 (1.34326)
+    Committing removed contacts: 0.00051 (1.11168)
+    Culling contacts: 0.00029 (0.62245)
+    Contact reduction: 0.00023 (0.3811)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.1087 (208.407)
+      Broad-phase time: 0.03622 (80.7246)
+      Sync bounds time: 0.04002 (59.0494)
+      Sync transforms time: 0.01497 (32.1808)
+      Narrow-phase time: 0.01073 (21.8152)
+    - Data:
+      Num geometries: 126 (252126)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02482 (55.5179)
+        SweepAndPrune::UpdateTask::run: 0.02332 (52.0645)
+        BroadPhase 2: 0.01702 (37.4171)
+        BroadPhase 4: 0.00303 (6.82223)
+        BroadPhase 3: 0.00108 (2.55956)
+        BroadPhase 1: 0.00026 (0.92999)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 124 (248124)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.83643 (1423.91)
+      Solver time: 0.37992 (641.955)
+      Sabre: Factoring: 0.09403 (159.162)
+      Sabre: Solve: 0.01019 (22.3815)
+    - Data:
+      Num multi-body constraints: 111 (222111)
+      Num solve islands: 1 (2001)
+      Num enabled rigid bodies: 61 (122061)
+      Num binary constraints: 5 (10005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 56.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (82519.5)
+    Inter-step time: 22.8218 (70889.1)
+    Step forward time: 3.19398 (10600.8)
+    Pre-step event time: 1.98558 (6600.11)
+    Dynamics-system time: 0.66714 (2151.45)
+    Last-step event time: 0 (1015.54)
+    Post-step event time: 0.2402 (845.056)
+    Pre-collide event time: 0.14301 (469.946)
+    Collision-detection time: 0.09911 (333.691)
+    Triggering contact events: 0.00366 (13.1063)
+    Triggering contact separation events: 0.00066 (2.11164)
+    Committing removed contacts: 0.00051 (1.61489)
+    Culling contacts: 0.00027 (0.92379)
+    Contact reduction: 0.00024 (0.59272)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.09217 (310.007)
+      Broad-phase time: 0.03482 (120.046)
+      Sync bounds time: 0.02702 (87.7365)
+      Sync transforms time: 0.01416 (47.7633)
+      Narrow-phase time: 0.00986 (32.6844)
+    - Data:
+      Num geometries: 126 (378126)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02374 (82.337)
+        SweepAndPrune::UpdateTask::run: 0.02265 (77.3282)
+        BroadPhase 2: 0.01651 (55.5748)
+        BroadPhase 4: 0.00284 (9.94504)
+        BroadPhase 3: 0.00119 (3.79833)
+        BroadPhase 1: 0.00035 (1.43908)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 124 (372124)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.66195 (2131.24)
+      Solver time: 0.33217 (959.833)
+      Sabre: Factoring: 0.07205 (238.683)
+      Sabre: Solve: 0.01016 (33.3248)
+    - Data:
+      Num multi-body constraints: 111 (333111)
+      Num solve islands: 1 (3001)
+      Num enabled rigid bodies: 61 (183061)
+      Num binary constraints: 5 (15005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 57.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (109848)
+    Inter-step time: 21.8664 (94388)
+    Step forward time: 3.25747 (14076.3)
+    Pre-step event time: 2.03993 (8756.32)
+    Dynamics-system time: 0.64542 (2861.61)
+    Last-step event time: 0 (1356.2)
+    Post-step event time: 0.25753 (1122.01)
+    Pre-collide event time: 0.14127 (625.62)
+    Collision-detection time: 0.10008 (443.834)
+    Triggering contact events: 0.00344 (17.2912)
+    Triggering contact separation events: 0.00072 (2.77321)
+    Committing removed contacts: 0.00044 (2.10588)
+    Culling contacts: 0.00029 (1.22644)
+    Contact reduction: 0.00023 (0.79546)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.09233 (412.456)
+      Broad-phase time: 0.03513 (159.564)
+      Sync bounds time: 0.02633 (116.278)
+      Sync transforms time: 0.01476 (63.9589)
+      Narrow-phase time: 0.00959 (43.5881)
+    - Data:
+      Num geometries: 126 (504126)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02405 (109.147)
+        SweepAndPrune::UpdateTask::run: 0.02273 (102.677)
+        BroadPhase 2: 0.01641 (73.7605)
+        BroadPhase 4: 0.003 (13.22)
+        BroadPhase 3: 0.0012 (4.95069)
+        BroadPhase 1: 0.0004 (1.88627)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 124 (496124)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.64002 (2834.93)
+      Solver time: 0.28778 (1277.46)
+      Sabre: Factoring: 0.0777 (318.398)
+      Sabre: Solve: 0.01027 (44.304)
+    - Data:
+      Num multi-body constraints: 111 (444111)
+      Num solve islands: 1 (4001)
+      Num enabled rigid bodies: 61 (244061)
+      Num binary constraints: 5 (20005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 58.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (137021)
+    Inter-step time: 21.8231 (117728)
+    Step forward time: 3.29626 (17557.1)
+    Pre-step event time: 2.05299 (10921.9)
+    Dynamics-system time: 0.62399 (3567.84)
+    Last-step event time: 0 (1695.78)
+    Post-step event time: 0.28393 (1399.61)
+    Pre-collide event time: 0.14115 (781.541)
+    Collision-detection time: 0.13411 (553.613)
+    Triggering contact events: 0.00507 (21.4946)
+    Triggering contact separation events: 0.00055 (3.43473)
+    Committing removed contacts: 0.00045 (2.60805)
+    Culling contacts: 0.00028 (1.59043)
+    Contact reduction: 0.00023 (0.98027)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.12708 (514.326)
+      Broad-phase time: 0.03786 (198.366)
+      Sync bounds time: 0.05294 (145.038)
+      Sync transforms time: 0.01965 (79.7925)
+      Narrow-phase time: 0.00947 (54.6407)
+    - Data:
+      Num geometries: 126 (630126)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02593 (135.58)
+        SweepAndPrune::UpdateTask::run: 0.02363 (127.632)
+        BroadPhase 2: 0.01631 (91.4271)
+        BroadPhase 4: 0.00331 (16.4107)
+        BroadPhase 3: 0.00119 (6.2566)
+        BroadPhase 1: 0.00053 (2.31378)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 124 (620124)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.61906 (3534.46)
+      Solver time: 0.28923 (1593.15)
+      Sabre: Factoring: 0.07103 (396.876)
+      Sabre: Solve: 0.00986 (55.0887)
+    - Data:
+      Num multi-body constraints: 111 (555111)
+      Num solve islands: 1 (5001)
+      Num enabled rigid bodies: 61 (305061)
+      Num binary constraints: 5 (25005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 59.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (163990)
+    Inter-step time: 21.5037 (140861)
+    Step forward time: 3.80696 (21040.8)
+    Pre-step event time: 2.51966 (13086.2)
+    Dynamics-system time: 0.64182 (4279.12)
+    Last-step event time: 0 (2035.36)
+    Post-step event time: 0.34438 (1676.51)
+    Pre-collide event time: 0.14243 (936.581)
+    Collision-detection time: 0.09838 (663.295)
+    Triggering contact events: 0.00345 (25.8179)
+    Triggering contact separation events: 0.00067 (4.08694)
+    Committing removed contacts: 0.0004 (3.09227)
+    Culling contacts: 0.00028 (1.91873)
+    Contact reduction: 0.00014 (1.27022)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.0913 (616.245)
+      Broad-phase time: 0.03434 (237.576)
+      Sync bounds time: 0.02568 (173.336)
+      Sync transforms time: 0.01477 (96.108)
+      Narrow-phase time: 0.00952 (65.3545)
+    - Data:
+      Num geometries: 126 (756126)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02333 (162.326)
+        SweepAndPrune::UpdateTask::run: 0.02207 (152.77)
+        BroadPhase 2: 0.01597 (109.695)
+        BroadPhase 4: 0.00299 (19.5613)
+        BroadPhase 3: 0.00104 (7.43374)
+        BroadPhase 1: 0.00035 (2.79023)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 124 (744124)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.63607 (4239.19)
+      Solver time: 0.28688 (1912.56)
+      Sabre: Factoring: 0.0712 (476.458)
+      Sabre: Solve: 0.00991 (66.1581)
+    - Data:
+      Num multi-body constraints: 111 (666111)
+      Num solve islands: 1 (6001)
+      Num enabled rigid bodies: 61 (366061)
+      Num binary constraints: 5 (30005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 60.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (191686)
+    Inter-step time: 22.7978 (164701)
+    Step forward time: 3.21745 (24544.5)
+    Pre-step event time: 2.01371 (15265.9)
+    Dynamics-system time: 0.65196 (4988.46)
+    Last-step event time: 0 (2375.76)
+    Post-step event time: 0.24485 (1958.06)
+    Pre-collide event time: 0.14984 (1093.34)
+    Collision-detection time: 0.09844 (773.226)
+    Triggering contact events: 0.00358 (30.2117)
+    Triggering contact separation events: 0.00069 (4.7447)
+    Committing removed contacts: 0.00045 (3.59883)
+    Culling contacts: 0.00028 (2.22315)
+    Contact reduction: 0.00024 (1.47555)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.09169 (718.652)
+      Broad-phase time: 0.03477 (276.798)
+      Sync bounds time: 0.02626 (202.045)
+      Sync transforms time: 0.01374 (112.371)
+      Narrow-phase time: 0.01013 (76.3597)
+    - Data:
+      Num geometries: 126 (882126)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02356 (188.83)
+        SweepAndPrune::UpdateTask::run: 0.0224 (177.807)
+        BroadPhase 2: 0.01609 (127.681)
+        BroadPhase 4: 0.00298 (22.8493)
+        BroadPhase 3: 0.00118 (8.66305)
+        BroadPhase 1: 0.00036 (3.20772)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 124 (868124)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.64663 (4941.77)
+      Solver time: 0.31437 (2228.73)
+      Sabre: Factoring: 0.08921 (555.408)
+      Sabre: Solve: 0.01001 (77.2219)
+    - Data:
+      Num multi-body constraints: 111 (777111)
+      Num solve islands: 1 (7001)
+      Num enabled rigid bodies: 61 (427061)
+      Num binary constraints: 5 (35005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 61.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (219113)
+    Inter-step time: 21.7269 (188288)
+    Step forward time: 3.59736 (28031)
+    Pre-step event time: 2.38178 (17433.2)
+    Dynamics-system time: 0.62568 (5697.88)
+    Last-step event time: 0 (2715.28)
+    Post-step event time: 0.29044 (2236.49)
+    Pre-collide event time: 0.14177 (1248.35)
+    Collision-detection time: 0.09847 (882.447)
+    Triggering contact events: 0.00343 (34.4438)
+    Triggering contact separation events: 0.00065 (5.47464)
+    Committing removed contacts: 0.00108 (4.10713)
+    Culling contacts: 0.00052 (2.52387)
+    Contact reduction: 0.00024 (1.68046)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.09145 (820.279)
+      Broad-phase time: 0.03531 (316.11)
+      Sync bounds time: 0.02586 (230.613)
+      Sync transforms time: 0.01456 (128.222)
+      Narrow-phase time: 0.00928 (87.034)
+    - Data:
+      Num geometries: 126 (1008126)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02436 (215.449)
+        SweepAndPrune::UpdateTask::run: 0.0232 (202.802)
+        BroadPhase 2: 0.01659 (145.669)
+        BroadPhase 4: 0.00309 (26.0796)
+        BroadPhase 3: 0.00121 (9.87882)
+        BroadPhase 1: 0.0005 (3.64774)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 124 (992124)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.62051 (5644.41)
+      Solver time: 0.27769 (2545.24)
+      Sabre: Factoring: 0.07044 (634.584)
+      Sabre: Solve: 0.00987 (88.1573)
+    - Data:
+      Num multi-body constraints: 111 (888111)
+      Num solve islands: 1 (8001)
+      Num enabled rigid bodies: 61 (488061)
+      Num binary constraints: 5 (40005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 62.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (246725)
+    Inter-step time: 22.8423 (212011)
+    Step forward time: 3.63378 (31564.8)
+    Pre-step event time: 2.20033 (19625.9)
+    Dynamics-system time: 0.83395 (6418.73)
+    Last-step event time: 0 (3059.2)
+    Post-step event time: 0.27152 (2519.13)
+    Pre-collide event time: 0.16362 (1406.28)
+    Collision-detection time: 0.10221 (994.726)
+    Triggering contact events: 0.00346 (38.7711)
+    Triggering contact separation events: 0.0007 (6.14134)
+    Committing removed contacts: 0.00043 (4.61993)
+    Culling contacts: 0.00028 (2.85295)
+    Contact reduction: 0.00013 (1.87828)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.09458 (924.668)
+      Broad-phase time: 0.0356 (356.082)
+      Sync bounds time: 0.02734 (260.35)
+      Sync transforms time: 0.01473 (144.718)
+      Narrow-phase time: 0.0096 (97.9263)
+    - Data:
+      Num geometries: 126 (1134126)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02451 (242.68)
+        SweepAndPrune::UpdateTask::run: 0.02323 (228.509)
+        BroadPhase 2: 0.01663 (163.956)
+        BroadPhase 4: 0.00313 (29.3939)
+        BroadPhase 3: 0.00107 (11.2523)
+        BroadPhase 1: 0.0005 (4.17338)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 124 (1116124)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.82619 (6358.13)
+      Solver time: 0.39555 (2867.46)
+      Sabre: Factoring: 0.07138 (713.97)
+      Sabre: Solve: 0.01004 (99.0567)
+    - Data:
+      Num multi-body constraints: 111 (999111)
+      Num solve islands: 1 (9001)
+      Num enabled rigid bodies: 61 (549061)
+      Num binary constraints: 5 (45005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 63.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (275184)
+    Inter-step time: 22.3856 (236406)
+    Step forward time: 3.41219 (35262.2)
+    Pre-step event time: 2.12382 (21914.8)
+    Dynamics-system time: 0.74583 (7175.98)
+    Last-step event time: 0 (3408.61)
+    Post-step event time: 0.24247 (2817.13)
+    Pre-collide event time: 0.14201 (1572.04)
+    Collision-detection time: 0.09885 (1112.19)
+    Triggering contact events: 0.00377 (43.1966)
+    Triggering contact separation events: 0.00068 (6.81964)
+    Committing removed contacts: 0.00043 (5.16974)
+    Culling contacts: 0.00028 (3.18768)
+    Contact reduction: 0.00023 (2.07708)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.09195 (1033.89)
+      Broad-phase time: 0.035 (398.021)
+      Sync bounds time: 0.02629 (290.831)
+      Sync transforms time: 0.01401 (162.189)
+      Narrow-phase time: 0.01012 (109.61)
+    - Data:
+      Num geometries: 126 (1260126)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02405 (271.265)
+        SweepAndPrune::UpdateTask::run: 0.02291 (255.462)
+        BroadPhase 2: 0.01648 (183.62)
+        BroadPhase 4: 0.0032 (32.6879)
+        BroadPhase 3: 0.00106 (12.5674)
+        BroadPhase 1: 0.00044 (4.63489)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 124 (1240124)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.74014 (7107.84)
+      Solver time: 0.29259 (3203.29)
+      Sabre: Factoring: 0.07097 (798.185)
+      Sabre: Solve: 0.00999 (110.699)
+    - Data:
+      Num multi-body constraints: 111 (1110111)
+      Num solve islands: 1 (10001)
+      Num enabled rigid bodies: 61 (610061)
+      Num binary constraints: 5 (50005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 64.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (302438)
+    Inter-step time: 22.9618 (259792)
+    Step forward time: 3.27784 (38778.1)
+    Pre-step event time: 2.08486 (24098.7)
+    Dynamics-system time: 0.61695 (7890.74)
+    Last-step event time: 0 (3748.76)
+    Post-step event time: 0.26457 (3098.31)
+    Pre-collide event time: 0.14362 (1729.24)
+    Collision-detection time: 0.10756 (1224.25)
+    Triggering contact events: 0.00354 (47.4171)
+    Triggering contact separation events: 0.00059 (7.59941)
+    Committing removed contacts: 0.00046 (5.66811)
+    Culling contacts: 0.0003 (3.57705)
+    Contact reduction: 0.00012 (2.28654)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.10093 (1137.96)
+      Broad-phase time: 0.04456 (438.02)
+      Sync bounds time: 0.02543 (320.122)
+      Sync transforms time: 0.01417 (178.584)
+      Narrow-phase time: 0.00991 (120.54)
+    - Data:
+      Num geometries: 126 (1386126)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.03291 (298.541)
+        SweepAndPrune::UpdateTask::run: 0.03147 (281.165)
+        BroadPhase 2: 0.01711 (202.044)
+        BroadPhase 4: 0.003 (35.8896)
+        BroadPhase 3: 0.00105 (13.9382)
+        BroadPhase 1: 0.0004 (5.14135)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 124 (1364124)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.61205 (7815.91)
+      Solver time: 0.2806 (3523.86)
+      Sabre: Factoring: 0.07139 (877.269)
+      Sabre: Solve: 0.00987 (122.015)
+    - Data:
+      Num multi-body constraints: 111 (1221111)
+      Num solve islands: 1 (11001)
+      Num enabled rigid bodies: 61 (671061)
+      Num binary constraints: 5 (55005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 65.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (330597)
+    Inter-step time: 25.6784 (283966)
+    Step forward time: 4.46449 (42408.2)
+    Pre-step event time: 2.66826 (26346.1)
+    Dynamics-system time: 1.05773 (8632.35)
+    Last-step event time: 0 (4094.17)
+    Post-step event time: 0.39263 (3393.23)
+    Pre-collide event time: 0.14881 (1889.85)
+    Collision-detection time: 0.13044 (1340.08)
+    Triggering contact events: 0.00401 (51.8832)
+    Triggering contact separation events: 0.00097 (8.34095)
+    Committing removed contacts: 0.00045 (6.20491)
+    Culling contacts: 0.00029 (3.96989)
+    Contact reduction: 0.00023 (2.49741)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.12277 (1245.65)
+      Broad-phase time: 0.03863 (478.536)
+      Sync bounds time: 0.05111 (350.844)
+      Sync transforms time: 0.01491 (195.194)
+      Narrow-phase time: 0.01122 (132.235)
+    - Data:
+      Num geometries: 126 (1512126)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02674 (326.447)
+        SweepAndPrune::UpdateTask::run: 0.02514 (307.447)
+        BroadPhase 2: 0.01803 (220.857)
+        BroadPhase 4: 0.00353 (39.3962)
+        BroadPhase 3: 0.00123 (15.1491)
+        BroadPhase 1: 0.0004 (5.58553)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 124 (1488124)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 1.04863 (8550.18)
+      Solver time: 0.46309 (3851.38)
+      Sabre: Factoring: 0.10103 (957.759)
+      Sabre: Solve: 0.01289 (133.098)
+    - Data:
+      Num multi-body constraints: 111 (1332111)
+      Num solve islands: 1 (12001)
+      Num enabled rigid bodies: 61 (732061)
+      Num binary constraints: 5 (60005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 66.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (358754)
+    Inter-step time: 21.3412 (308077)
+    Step forward time: 3.36198 (46088.7)
+    Pre-step event time: 2.06271 (28618.4)
+    Dynamics-system time: 0.6739 (9388.37)
+    Last-step event time: 0 (4439.46)
+    Post-step event time: 0.24306 (3696.13)
+    Pre-collide event time: 0.18021 (2050.98)
+    Collision-detection time: 0.12322 (1457.06)
+    Triggering contact events: 0.00528 (56.2564)
+    Triggering contact separation events: 0.0006 (9.01439)
+    Committing removed contacts: 0.00048 (6.71681)
+    Culling contacts: 0.00057 (4.28981)
+    Contact reduction: 0.00012 (2.69848)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.11457 (1354.47)
+      Broad-phase time: 0.0455 (520.589)
+      Sync bounds time: 0.03146 (381.089)
+      Sync transforms time: 0.01547 (212.381)
+      Narrow-phase time: 0.01328 (143.604)
+    - Data:
+      Num geometries: 126 (1638126)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.03154 (355.233)
+        SweepAndPrune::UpdateTask::run: 0.02994 (334.638)
+        BroadPhase 2: 0.02191 (240.2)
+        BroadPhase 4: 0.00346 (43.0491)
+        BroadPhase 3: 0.00182 (16.5615)
+        BroadPhase 1: 0.00039 (6.09495)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 124 (1612124)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.66772 (9298.89)
+      Solver time: 0.32867 (4184.27)
+      Sabre: Factoring: 0.07868 (1039.02)
+      Sabre: Solve: 0.00997 (144.873)
+    - Data:
+      Num multi-body constraints: 111 (1443111)
+      Num solve islands: 1 (13001)
+      Num enabled rigid bodies: 61 (793061)
+      Num binary constraints: 5 (65005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 67.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (386044)
+    Inter-step time: 22.57 (331527)
+    Step forward time: 3.2585 (49577.8)
+    Pre-step event time: 2.05204 (30786)
+    Dynamics-system time: 0.674 (10099.7)
+    Last-step event time: 0 (4779.03)
+    Post-step event time: 0.23271 (3972.65)
+    Pre-collide event time: 0.14088 (2207.23)
+    Collision-detection time: 0.09996 (1567.63)
+    Triggering contact events: 0.00342 (60.5791)
+    Triggering contact separation events: 0.00065 (9.65794)
+    Committing removed contacts: 0.00042 (7.2803)
+    Culling contacts: 0.00028 (4.62227)
+    Contact reduction: 0.00013 (2.9019)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.09295 (1456.93)
+      Broad-phase time: 0.03558 (559.35)
+      Sync bounds time: 0.02666 (410.227)
+      Sync transforms time: 0.01443 (228.527)
+      Narrow-phase time: 0.00943 (154.641)
+    - Data:
+      Num geometries: 126 (1764126)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02457 (382.067)
+        SweepAndPrune::UpdateTask::run: 0.0233 (359.871)
+        BroadPhase 2: 0.01645 (258.347)
+        BroadPhase 4: 0.00312 (46.2253)
+        BroadPhase 3: 0.00122 (17.7365)
+        BroadPhase 1: 0.00047 (6.64402)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 124 (1736124)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.66888 (10003.8)
+      Solver time: 0.28005 (4501.5)
+      Sabre: Factoring: 0.0709 (1118.63)
+      Sabre: Solve: 0.01004 (155.822)
+    - Data:
+      Num multi-body constraints: 111 (1554111)
+      Num solve islands: 1 (14001)
+      Num enabled rigid bodies: 61 (854061)
+      Num binary constraints: 5 (70005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 68.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (413455)
+    Inter-step time: 27.6769 (355048)
+    Step forward time: 4.17766 (53118)
+    Pre-step event time: 2.68416 (32984.9)
+    Dynamics-system time: 0.79465 (10817.6)
+    Last-step event time: 0 (5121.41)
+    Post-step event time: 0.26566 (4259.33)
+    Pre-collide event time: 0.18016 (2365.74)
+    Collision-detection time: 0.16059 (1678.13)
+    Triggering contact events: 0.0046 (64.812)
+    Triggering contact separation events: 0.00055 (10.3372)
+    Committing removed contacts: 0.00159 (7.77489)
+    Culling contacts: 0.00039 (4.93371)
+    Contact reduction: 0.00013 (3.10526)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.15238 (1559.72)
+      Broad-phase time: 0.05689 (599.131)
+      Sync bounds time: 0.03741 (439.049)
+      Sync transforms time: 0.02492 (244.691)
+      Narrow-phase time: 0.0252 (165.521)
+    - Data:
+      Num geometries: 126 (1890126)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.04253 (409.174)
+        SweepAndPrune::UpdateTask::run: 0.04092 (385.44)
+        BroadPhase 2: 0.02187 (276.742)
+        BroadPhase 4: 0.00378 (49.3988)
+        BroadPhase 3: 0.01222 (19.0017)
+        BroadPhase 1: 0.00057 (7.06283)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 124 (1860124)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.78737 (10715)
+      Solver time: 0.29713 (4820.19)
+      Sabre: Factoring: 0.07293 (1197.74)
+      Sabre: Solve: 0.01001 (166.529)
+    - Data:
+      Num multi-body constraints: 111 (1665111)
+      Num solve islands: 1 (15001)
+      Num enabled rigid bodies: 61 (915061)
+      Num binary constraints: 5 (75005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 69.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (442593)
+    Inter-step time: 22.9904 (380063)
+    Step forward time: 3.36641 (56866)
+    Pre-step event time: 2.0307 (35294.1)
+    Dynamics-system time: 0.7197 (11592.8)
+    Last-step event time: 0 (5477.49)
+    Post-step event time: 0.29366 (4563.13)
+    Pre-collide event time: 0.14244 (2534.01)
+    Collision-detection time: 0.1038 (1797.29)
+    Triggering contact events: 0.00375 (69.6906)
+    Triggering contact separation events: 0.00051 (11.1159)
+    Committing removed contacts: 0.00159 (8.30229)
+    Culling contacts: 0.00027 (5.28172)
+    Contact reduction: 0.00016 (3.30425)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.09666 (1670.27)
+      Broad-phase time: 0.03474 (641.523)
+      Sync bounds time: 0.0264402 (470.562)
+      Sync transforms time: 0.01465 (261.674)
+      Narrow-phase time: 0.01299 (177.361)
+    - Data:
+      Num geometries: 126 (2016126)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02388 (438.617)
+        SweepAndPrune::UpdateTask::run: 0.02273 (413.302)
+        BroadPhase 2: 0.01634 (296.514)
+        BroadPhase 4: 0.00317 (53.1395)
+        BroadPhase 3: 0.00106 (20.4604)
+        BroadPhase 1: 0.0004 (7.50604)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 124 (1984124)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.71459 (11482.5)
+      Solver time: 0.30623 (5158.24)
+      Sabre: Factoring: 0.07133 (1280.21)
+      Sabre: Solve: 0.01031 (178.876)
+    - Data:
+      Num multi-body constraints: 111 (1776111)
+      Num solve islands: 1 (16001)
+      Num enabled rigid bodies: 61 (976061)
+      Num binary constraints: 5 (80005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 70.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (470975)
+    Inter-step time: 22.3561 (404378)
+    Step forward time: 3.26297 (60568.3)
+    Pre-step event time: 2.03574 (37580.9)
+    Dynamics-system time: 0.64819 (12352.9)
+    Last-step event time: 0 (5825.68)
+    Post-step event time: 0.25302 (4863.01)
+    Pre-collide event time: 0.15341 (2700.01)
+    Collision-detection time: 0.10056 (1915.28)
+    Triggering contact events: 0.00345 (74.6106)
+    Triggering contact separation events: 0.00069 (11.7743)
+    Committing removed contacts: 0.00041 (8.8435)
+    Culling contacts: 0.00028 (5.61164)
+    Contact reduction: 0.00023 (3.50481)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.09351 (1779.7)
+      Broad-phase time: 0.03663 (682.892)
+      Sync bounds time: 0.0260202 (501.491)
+      Sync transforms time: 0.01426 (279.019)
+      Narrow-phase time: 0.00943 (189.131)
+    - Data:
+      Num geometries: 126 (2142126)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02541 (466.398)
+        SweepAndPrune::UpdateTask::run: 0.0242 (439.463)
+        BroadPhase 2: 0.01748 (315.275)
+        BroadPhase 4: 0.00301 (56.4665)
+        BroadPhase 3: 0.00106 (21.7224)
+        BroadPhase 1: 0.00041 (7.93502)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 124 (2108124)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.62959 (12235)
+      Solver time: 0.28115 (5495.52)
+      Sabre: Factoring: 0.07112 (1364.61)
+      Sabre: Solve: 0.0099 (190.895)
+    - Data:
+      Num multi-body constraints: 111 (1887111)
+      Num solve islands: 1 (17001)
+      Num enabled rigid bodies: 61 (1037061)
+      Num binary constraints: 5 (85005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 71.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (498751)
+    Inter-step time: 22.084 (428199)
+    Step forward time: 3.29373 (64167.1)
+    Pre-step event time: 2.04833 (39816.5)
+    Dynamics-system time: 0.64028 (13087.7)
+    Last-step event time: 0 (6168.84)
+    Post-step event time: 0.27746 (5150.23)
+    Pre-collide event time: 0.15468 (2858.7)
+    Collision-detection time: 0.09875 (2029.91)
+    Triggering contact events: 0.00354 (78.7775)
+    Triggering contact separation events: 0.00059 (12.4915)
+    Committing removed contacts: 0.00041 (9.36705)
+    Culling contacts: 0.0003 (6.02785)
+    Contact reduction: 0.00013 (3.79992)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.09105 (1886.21)
+      Broad-phase time: 0.03454 (723.425)
+      Sync bounds time: 0.02619 (531.961)
+      Sync transforms time: 0.01436 (295.878)
+      Narrow-phase time: 0.00908 (200.04)
+    - Data:
+      Num geometries: 124 (2267586)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02388 (494.482)
+        SweepAndPrune::UpdateTask::run: 0.02254 (465.997)
+        BroadPhase 2: 0.01639 (334.328)
+        BroadPhase 4: 0.00279 (59.6865)
+        BroadPhase 3: 0.00104 (22.8986)
+        BroadPhase 1: 0.00041 (8.54876)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 122 (2231584)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.63386 (12962.9)
+      Solver time: 0.28343 (5825.59)
+      Sabre: Factoring: 0.06758 (1444.69)
+      Sabre: Solve: 0.00978 (202.131)
+    - Data:
+      Num multi-body constraints: 109 (1997567)
+      Num solve islands: 1 (18001)
+      Num enabled rigid bodies: 60 (1097789)
+      Num binary constraints: 5 (90005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 72.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (526784)
+    Inter-step time: 22.8001 (452286)
+    Step forward time: 3.32466 (67752.3)
+    Pre-step event time: 2.07701 (42047)
+    Dynamics-system time: 0.7006 (13817)
+    Last-step event time: 0 (6516.76)
+    Post-step event time: 0.24612 (5434.59)
+    Pre-collide event time: 0.14228 (3018.08)
+    Collision-detection time: 0.09946 (2143.37)
+    Triggering contact events: 0.00337 (82.9438)
+    Triggering contact separation events: 0.00063 (13.1589)
+    Committing removed contacts: 0.00043 (9.98588)
+    Culling contacts: 0.00028 (6.33756)
+    Contact reduction: 0.00013 (4.0321)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.09213 (1991.06)
+      Broad-phase time: 0.03497 (764.196)
+      Sync bounds time: 0.02676 (561.757)
+      Sync transforms time: 0.01397 (311.615)
+      Narrow-phase time: 0.00943 (210.913)
+    - Data:
+      Num geometries: 124 (2391586)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02371 (522.365)
+        SweepAndPrune::UpdateTask::run: 0.02238 (492.115)
+        BroadPhase 2: 0.01603 (353.035)
+        BroadPhase 4: 0.00299 (63.0281)
+        BroadPhase 3: 0.00106 (24.1087)
+        BroadPhase 1: 0.00042 (9.29345)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 122 (2353584)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.69495 (13685.7)
+      Solver time: 0.30212 (6150.91)
+      Sabre: Factoring: 0.06997 (1522.62)
+      Sabre: Solve: 0.00977 (212.919)
+    - Data:
+      Num multi-body constraints: 109 (2106567)
+      Num solve islands: 1 (19001)
+      Num enabled rigid bodies: 60 (1157789)
+      Num binary constraints: 5 (95005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 73.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (555359)
+    Inter-step time: 22.1452 (476887)
+    Step forward time: 3.31164 (71367.5)
+    Pre-step event time: 2.12158 (44293.6)
+    Dynamics-system time: 0.64704 (14548.8)
+    Last-step event time: 0 (6861.79)
+    Post-step event time: 0.24476 (5728.81)
+    Pre-collide event time: 0.14038 (3178.43)
+    Collision-detection time: 0.09848 (2256.47)
+    Triggering contact events: 0.0034 (87.3359)
+    Triggering contact separation events: 0.00058 (13.8305)
+    Committing removed contacts: 0.00044 (10.5032)
+    Culling contacts: 0.00028 (6.65038)
+    Contact reduction: 0.00014 (4.23603)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.09149 (2096.06)
+      Broad-phase time: 0.03541 (804.344)
+      Sync bounds time: 0.0260302 (591.795)
+      Sync transforms time: 0.01419 (327.899)
+      Narrow-phase time: 0.00937 (222.034)
+    - Data:
+      Num geometries: 124 (2515586)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02386 (549.596)
+        SweepAndPrune::UpdateTask::run: 0.02275 (517.825)
+        BroadPhase 2: 0.01654 (371.425)
+        BroadPhase 4: 0.00285 (66.333)
+        BroadPhase 3: 0.00105 (25.5117)
+        BroadPhase 1: 0.00035 (9.71623)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 122 (2475584)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.64162 (14410.1)
+      Solver time: 0.29934 (6473.58)
+      Sabre: Factoring: 0.0702 (1602.36)
+      Sabre: Solve: 0.0099 (223.892)
+    - Data:
+      Num multi-body constraints: 109 (2215567)
+      Num solve islands: 1 (20001)
+      Num enabled rigid bodies: 60 (1217789)
+      Num binary constraints: 5 (100005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 74.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (583410)
+    Inter-step time: 22.1451 (501008)
+    Step forward time: 3.67199 (74941.8)
+    Pre-step event time: 2.40682 (46509.3)
+    Dynamics-system time: 0.68025 (15278.3)
+    Last-step event time: 0 (7204.13)
+    Post-step event time: 0.25133 (6015.85)
+    Pre-collide event time: 0.17517 (3339.26)
+    Collision-detection time: 0.10001 (2369.93)
+    Triggering contact events: 0.00359 (91.4363)
+    Triggering contact separation events: 0.00059 (14.5161)
+    Committing removed contacts: 0.00043 (11.0002)
+    Culling contacts: 0.00029 (6.97211)
+    Contact reduction: 0.00015 (4.43565)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.09271 (2201.53)
+      Broad-phase time: 0.03606 (845.411)
+      Sync bounds time: 0.0262 (621.54)
+      Sync transforms time: 0.01373 (344.093)
+      Narrow-phase time: 0.01001 (232.751)
+    - Data:
+      Num geometries: 124 (2639586)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02469 (577.78)
+        SweepAndPrune::UpdateTask::run: 0.0234 (544.174)
+        BroadPhase 2: 0.01674 (390.221)
+        BroadPhase 4: 0.00306 (69.6403)
+        BroadPhase 3: 0.00105 (26.8299)
+        BroadPhase 1: 0.00055 (10.1681)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 122 (2597584)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.67373 (15132.6)
+      Solver time: 0.32603 (6800.86)
+      Sabre: Factoring: 0.07081 (1681.45)
+      Sabre: Solve: 0.00978 (235.488)
+    - Data:
+      Num multi-body constraints: 109 (2324567)
+      Num solve islands: 1 (21001)
+      Num enabled rigid bodies: 60 (1277789)
+      Num binary constraints: 5 (105005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 75.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (611404)
+    Inter-step time: 22.8977 (525079)
+    Step forward time: 3.1687 (78510)
+    Pre-step event time: 1.99291 (48722.1)
+    Dynamics-system time: 0.61612 (16004.5)
+    Last-step event time: 0 (7547.6)
+    Post-step event time: 0.25352 (6304.07)
+    Pre-collide event time: 0.14903 (3497.59)
+    Collision-detection time: 0.09796 (2483.13)
+    Triggering contact events: 0.00341 (95.6253)
+    Triggering contact separation events: 0.00058 (15.1694)
+    Committing removed contacts: 0.00041 (11.4909)
+    Culling contacts: 0.00027 (7.31162)
+    Contact reduction: 0.00023 (4.63587)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.09053 (2306.96)
+      Broad-phase time: 0.03473 (886.092)
+      Sync bounds time: 0.02606 (651.096)
+      Sync transforms time: 0.01388 (360.477)
+      Narrow-phase time: 0.00931 (243.917)
+    - Data:
+      Num geometries: 124 (2763586)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.0235 (605.442)
+        SweepAndPrune::UpdateTask::run: 0.02232 (570.288)
+        BroadPhase 2: 0.01606 (408.867)
+        BroadPhase 4: 0.00282 (72.9392)
+        BroadPhase 3: 0.00105 (28.1008)
+        BroadPhase 1: 0.00041 (10.6381)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 122 (2719584)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.61083 (15851.8)
+      Solver time: 0.27825 (7122.7)
+      Sabre: Factoring: 0.06999 (1760.68)
+      Sabre: Solve: 0.00983 (246.078)
+    - Data:
+      Num multi-body constraints: 109 (2433567)
+      Num solve islands: 1 (22001)
+      Num enabled rigid bodies: 60 (1337789)
+      Num binary constraints: 5 (110005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 76.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (639024)
+    Inter-step time: 21.7709 (548756)
+    Step forward time: 4.11888 (82090.8)
+    Pre-step event time: 2.36469 (50946)
+    Dynamics-system time: 0.69537 (16729.7)
+    Last-step event time: 0 (7894.72)
+    Post-step event time: 0.35548 (6593.62)
+    Pre-collide event time: 0.50624 (3657.87)
+    Collision-detection time: 0.13367 (2596.01)
+    Triggering contact events: 0.00474 (99.8284)
+    Triggering contact separation events: 0.00057 (15.7952)
+    Committing removed contacts: 0.00042 (12.0267)
+    Culling contacts: 0.00032 (7.70937)
+    Contact reduction: 0.00016 (4.8459)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.12585 (2411.03)
+      Broad-phase time: 0.04385 (926.111)
+      Sync bounds time: 0.03948 (680.323)
+      Sync transforms time: 0.02398 (376.331)
+      Narrow-phase time: 0.01128 (255.096)
+    - Data:
+      Num geometries: 124 (2887586)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.03125 (632.664)
+        SweepAndPrune::UpdateTask::run: 0.02902 (595.802)
+        BroadPhase 2: 0.02135 (427.154)
+        BroadPhase 4: 0.00364 (76.2224)
+        BroadPhase 3: 0.00115 (29.3732)
+        BroadPhase 1: 0.00044 (11.0617)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 122 (2841584)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.68913 (16570)
+      Solver time: 0.28076 (7444.35)
+      Sabre: Factoring: 0.07064 (1839.77)
+      Sabre: Solve: 0.00978 (256.81)
+    - Data:
+      Num multi-body constraints: 109 (2542567)
+      Num solve islands: 1 (23001)
+      Num enabled rigid bodies: 60 (1397789)
+      Num binary constraints: 5 (115005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 77.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (666690)
+    Inter-step time: 22.5353 (572497)
+    Step forward time: 3.3081 (85661.1)
+    Pre-step event time: 2.121 (53164.9)
+    Dynamics-system time: 0.62194 (17452)
+    Last-step event time: 0 (8236.13)
+    Post-step event time: 0.23611 (6883.41)
+    Pre-collide event time: 0.14114 (3817.08)
+    Collision-detection time: 0.11037 (2708.19)
+    Triggering contact events: 0.00359 (104.065)
+    Triggering contact separation events: 0.00057 (16.8259)
+    Committing removed contacts: 0.00162 (12.529)
+    Culling contacts: 0.00043 (8.03442)
+    Contact reduction: 0.00023 (5.0469)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.1028 (2515.25)
+      Broad-phase time: 0.03522 (966.096)
+      Sync bounds time: 0.02578 (709.671)
+      Sync transforms time: 0.01455 (392.486)
+      Narrow-phase time: 0.01 (266.323)
+    - Data:
+      Num geometries: 124 (3011586)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02417 (659.879)
+        SweepAndPrune::UpdateTask::run: 0.02296 (621.503)
+        BroadPhase 2: 0.01637 (445.568)
+        BroadPhase 4: 0.00306 (79.6301)
+        BroadPhase 3: 0.00118 (30.6165)
+        BroadPhase 1: 0.00038 (11.501)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 122 (2963584)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.61683 (17284.8)
+      Solver time: 0.27987 (7767.13)
+      Sabre: Factoring: 0.06983 (1918.23)
+      Sabre: Solve: 0.00978 (267.344)
+    - Data:
+      Num multi-body constraints: 109 (2651567)
+      Num solve islands: 1 (24001)
+      Num enabled rigid bodies: 60 (1457789)
+      Num binary constraints: 5 (120005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 78.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (695231)
+    Inter-step time: 21.8969 (597110)
+    Step forward time: 3.73919 (89233.4)
+    Pre-step event time: 2.06921 (55387.9)
+    Dynamics-system time: 0.94183 (18177.9)
+    Last-step event time: 0 (8579.63)
+    Post-step event time: 0.4279 (7166.22)
+    Pre-collide event time: 0.14261 (3976.23)
+    Collision-detection time: 0.09823 (2821.52)
+    Triggering contact events: 0.00327 (108.351)
+    Triggering contact separation events: 0.0005 (17.4836)
+    Committing removed contacts: 0.00042 (13.0281)
+    Culling contacts: 0.00028 (8.35532)
+    Contact reduction: 0.00022 (5.22857)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.09106 (2620.72)
+      Broad-phase time: 0.03483 (1006.05)
+      Sync bounds time: 0.02573 (740.511)
+      Sync transforms time: 0.01406 (408.416)
+      Narrow-phase time: 0.01017 (277.627)
+    - Data:
+      Num geometries: 124 (3135586)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02389 (687.046)
+        SweepAndPrune::UpdateTask::run: 0.02274 (647.085)
+        BroadPhase 2: 0.01631 (463.679)
+        BroadPhase 4: 0.00295 (83.1465)
+        BroadPhase 3: 0.00106 (31.8253)
+        BroadPhase 1: 0.00043 (11.9245)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 122 (3085584)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.93576 (18003.7)
+      Solver time: 0.30335 (8091.2)
+      Sabre: Factoring: 0.07133 (1997.18)
+      Sabre: Solve: 0.01006 (278.359)
+    - Data:
+      Num multi-body constraints: 109 (2760567)
+      Num solve islands: 1 (25001)
+      Num enabled rigid bodies: 60 (1517789)
+      Num binary constraints: 5 (125005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 79.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (723357)
+    Inter-step time: 23.3497 (621304)
+    Step forward time: 3.59864 (92810.3)
+    Pre-step event time: 2.10907 (57610.1)
+    Dynamics-system time: 0.86414 (18907.2)
+    Last-step event time: 0 (8922.61)
+    Post-step event time: 0.3164 (7451.13)
+    Pre-collide event time: 0.14383 (4135.54)
+    Collision-detection time: 0.1031 (2934.28)
+    Triggering contact events: 0.00351 (112.439)
+    Triggering contact separation events: 0.00058 (18.1617)
+    Committing removed contacts: 0.00042 (13.5355)
+    Culling contacts: 0.00053 (8.68718)
+    Contact reduction: 0.00013 (5.42872)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.09564 (2725.46)
+      Broad-phase time: 0.03682 (1046.15)
+      Sync bounds time: 0.02771 (770.123)
+      Sync transforms time: 0.01406 (424.681)
+      Narrow-phase time: 0.00947 (288.583)
+    - Data:
+      Num geometries: 124 (3259586)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02455 (714.548)
+        SweepAndPrune::UpdateTask::run: 0.02332 (672.951)
+        BroadPhase 2: 0.01672 (482.466)
+        BroadPhase 4: 0.00286 (86.3877)
+        BroadPhase 3: 0.00105 (33.0003)
+        BroadPhase 1: 0.00044 (12.3697)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 122 (3207584)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.75311 (18726.1)
+      Solver time: 0.34481 (8419.01)
+      Sabre: Factoring: 0.07171 (2078.61)
+      Sabre: Solve: 0.01022 (289.573)
+    - Data:
+      Num multi-body constraints: 109 (2869567)
+      Num solve islands: 1 (26001)
+      Num enabled rigid bodies: 60 (1577789)
+      Num binary constraints: 5 (130005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 80.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (751601)
+    Inter-step time: 22.4418 (645618)
+    Step forward time: 3.50366 (96384.4)
+    Pre-step event time: 2.15846 (59831.2)
+    Dynamics-system time: 0.66681 (19631.9)
+    Last-step event time: 0 (9264.13)
+    Post-step event time: 0.37974 (7737.52)
+    Pre-collide event time: 0.14139 (4296.75)
+    Collision-detection time: 0.09874 (3047.13)
+    Triggering contact events: 0.00343 (116.948)
+    Triggering contact separation events: 0.0007 (18.8238)
+    Committing removed contacts: 0.00044 (14.1267)
+    Culling contacts: 0.00028 (9.06134)
+    Contact reduction: 0.00025 (5.62658)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.09216 (2830.02)
+      Broad-phase time: 0.03494 (1087.2)
+      Sync bounds time: 0.02692 (799.231)
+      Sync transforms time: 0.01397 (440.562)
+      Narrow-phase time: 0.00975 (299.601)
+    - Data:
+      Num geometries: 124 (3383586)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02371 (743.118)
+        SweepAndPrune::UpdateTask::run: 0.02225 (699.757)
+        BroadPhase 2: 0.01591 (502)
+        BroadPhase 4: 0.00273 (89.749)
+        BroadPhase 3: 0.00122 (34.24)
+        BroadPhase 1: 0.00043 (12.9092)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 122 (3329584)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.66117 (19443.9)
+      Solver time: 0.2942 (8741.68)
+      Sabre: Factoring: 0.07007 (2158.13)
+      Sabre: Solve: 0.01 (300.173)
+    - Data:
+      Num multi-body constraints: 109 (2978567)
+      Num solve islands: 1 (27001)
+      Num enabled rigid bodies: 60 (1637789)
+      Num binary constraints: 5 (135005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 81.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (780075)
+    Inter-step time: 23.8622 (670180)
+    Step forward time: 3.53575 (99944.5)
+    Pre-step event time: 2.20451 (62046.1)
+    Dynamics-system time: 0.71307 (20354.4)
+    Last-step event time: 0 (9604.68)
+    Post-step event time: 0.24304 (8021.5)
+    Pre-collide event time: 0.21272 (4455.41)
+    Collision-detection time: 0.10275 (3159.45)
+    Triggering contact events: 0.00393 (121.098)
+    Triggering contact separation events: 0.00063 (19.5457)
+    Committing removed contacts: 0.00043 (14.6183)
+    Culling contacts: 0.00028 (9.37262)
+    Contact reduction: 0.00023 (5.83903)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.09491 (2934.42)
+      Broad-phase time: 0.0358002 (1127.73)
+      Sync bounds time: 0.02754 (828.851)
+      Sync transforms time: 0.01522 (456.343)
+      Narrow-phase time: 0.00961 (310.67)
+    - Data:
+      Num geometries: 124 (3507586)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02462 (770.303)
+        SweepAndPrune::UpdateTask::run: 0.02326 (725.413)
+        BroadPhase 2: 0.01656 (520.599)
+        BroadPhase 4: 0.00329 (92.962)
+        BroadPhase 3: 0.00107 (35.4335)
+        BroadPhase 1: 0.00045 (13.342)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 122 (3451584)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.70628 (20158.9)
+      Solver time: 0.28517 (9064.62)
+      Sabre: Factoring: 0.06985 (2238.82)
+      Sabre: Solve: 0.00987 (310.884)
+    - Data:
+      Num multi-body constraints: 109 (3087567)
+      Num solve islands: 1 (28001)
+      Num enabled rigid bodies: 60 (1697789)
+      Num binary constraints: 5 (140005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 82.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (807978)
+    Inter-step time: 21.8737 (694429)
+    Step forward time: 3.0696 (103355)
+    Pre-step event time: 2.07174 (64225.3)
+    Dynamics-system time: 0.4911 (20954.5)
+    Last-step event time: 0 (9833.19)
+    Post-step event time: 0.23595 (8337.35)
+    Pre-collide event time: 0.12166 (4598.09)
+    Collision-detection time: 0.09052 (3264.85)
+    Triggering contact events: 0.00352 (125.736)
+    Triggering contact separation events: 0.00086 (20.2118)
+    Committing removed contacts: 0.00043 (15.1532)
+    Culling contacts: 0.00028 (9.72677)
+    Contact reduction: 0.00024 (6.03472)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08354 (3031.55)
+      Broad-phase time: 0.03124 (1164.79)
+      Sync bounds time: 0.02632 (858.06)
+      Sync transforms time: 0.01004 (468.784)
+      Narrow-phase time: 0.00959 (321.291)
+    - Data:
+      Num geometries: 70 (3591465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01973 (794.875)
+        SweepAndPrune::UpdateTask::run: 0.01864 (748.439)
+        BroadPhase 2: 0.01282 (535.182)
+        BroadPhase 4: 0.00274 (96.5416)
+        BroadPhase 3: 0.00086 (36.7037)
+        BroadPhase 1: 0.00039 (13.8938)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (3533463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.48527 (20752.6)
+      Solver time: 0.2071 (9322.98)
+      Sabre: Factoring: 0.04001 (2293.97)
+      Sabre: Solve: 0.00616 (318.942)
+    - Data:
+      Num multi-body constraints: 55 (3156365)
+      Num solve islands: 1 (29001)
+      Num enabled rigid bodies: 33 (1737688)
+      Num binary constraints: 5 (145005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 83.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (835870)
+    Inter-step time: 22.662 (718820)
+    Step forward time: 2.99536 (106658)
+    Pre-step event time: 1.95588 (66390.5)
+    Dynamics-system time: 0.52974 (21503.6)
+    Last-step event time: 0 (10017.9)
+    Post-step event time: 0.24014 (8621.06)
+    Pre-collide event time: 0.12346 (4734.45)
+    Collision-detection time: 0.0897 (3366.96)
+    Triggering contact events: 0.00363 (129.935)
+    Triggering contact separation events: 0.00058 (20.8623)
+    Committing removed contacts: 0.00042 (15.6262)
+    Culling contacts: 0.00028 (10.0708)
+    Contact reduction: 0.00024 (6.20818)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08247 (3125.84)
+      Broad-phase time: 0.03056 (1199.24)
+      Sync bounds time: 0.02613 (887.885)
+      Sync transforms time: 0.00972 (480.422)
+      Narrow-phase time: 0.00957 (332.149)
+    - Data:
+      Num geometries: 70 (3661465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01941 (816.759)
+        SweepAndPrune::UpdateTask::run: 0.01782 (768.808)
+        BroadPhase 2: 0.01192 (548.336)
+        BroadPhase 4: 0.00284 (99.7887)
+        BroadPhase 3: 0.00072 (37.6651)
+        BroadPhase 1: 0.0004 (14.3667)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (3601463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.52423 (21295.2)
+      Solver time: 0.25847 (9552.97)
+      Sabre: Factoring: 0.03985 (2338.48)
+      Sabre: Solve: 0.00615 (325.905)
+    - Data:
+      Num multi-body constraints: 55 (3211365)
+      Num solve islands: 1 (30001)
+      Num enabled rigid bodies: 33 (1770688)
+      Num binary constraints: 5 (150005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 84.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (863201)
+    Inter-step time: 21.9305 (742661)
+    Step forward time: 4.09915 (109956)
+    Pre-step event time: 2.36745 (68547.5)
+    Dynamics-system time: 1.0681 (22050.1)
+    Last-step event time: 0 (10198.7)
+    Post-step event time: 0.39118 (8911.29)
+    Pre-collide event time: 0.12142 (4870.81)
+    Collision-detection time: 0.09021 (3469.62)
+    Triggering contact events: 0.00356 (134.397)
+    Triggering contact separation events: 0.00062 (21.6026)
+    Committing removed contacts: 0.00041 (16.1152)
+    Culling contacts: 0.00053 (10.3988)
+    Contact reduction: 0.00013 (6.40848)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08331 (3220.67)
+      Broad-phase time: 0.03073 (1235.41)
+      Sync bounds time: 0.02617 (917.034)
+      Sync transforms time: 0.01003 (491.672)
+      Narrow-phase time: 0.00941 (343.069)
+    - Data:
+      Num geometries: 70 (3731465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01918 (840.25)
+        SweepAndPrune::UpdateTask::run: 0.01793 (790.675)
+        BroadPhase 2: 0.0119 (563.114)
+        BroadPhase 4: 0.00278 (103.118)
+        BroadPhase 3: 0.00099 (38.4567)
+        BroadPhase 1: 0.00037 (14.7854)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (3669463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 1.05986 (21834.7)
+      Solver time: 0.554 (9784.34)
+      Sabre: Factoring: 0.05412 (2383.17)
+      Sabre: Solve: 0.20674 (333.036)
+    - Data:
+      Num multi-body constraints: 55 (3266365)
+      Num solve islands: 1 (31001)
+      Num enabled rigid bodies: 33 (1803688)
+      Num binary constraints: 5 (155005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 85.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (890908)
+    Inter-step time: 21.7469 (766867)
+    Step forward time: 3.95158 (113257)
+    Pre-step event time: 2.80014 (70708.7)
+    Dynamics-system time: 0.63441 (22602.8)
+    Last-step event time: 0 (10385.2)
+    Post-step event time: 0.24829 (9192.46)
+    Pre-collide event time: 0.12136 (5006.7)
+    Collision-detection time: 0.08786 (3573.17)
+    Triggering contact events: 0.00355 (138.722)
+    Triggering contact separation events: 0.00068 (22.2902)
+    Committing removed contacts: 0.00042 (16.5976)
+    Culling contacts: 0.00028 (10.7562)
+    Contact reduction: 0.00013 (6.6066)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08055 (3316.47)
+      Broad-phase time: 0.02997 (1270.61)
+      Sync bounds time: 0.0251002 (946.988)
+      Sync transforms time: 0.0097 (503.569)
+      Narrow-phase time: 0.00924 (354.382)
+    - Data:
+      Num geometries: 70 (3801465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01964 (862.608)
+        SweepAndPrune::UpdateTask::run: 0.01832 (811.296)
+        BroadPhase 2: 0.01184 (577.146)
+        BroadPhase 4: 0.00345 (106.281)
+        BroadPhase 3: 0.00085 (39.3489)
+        BroadPhase 1: 0.00037 (15.2171)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (3737463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.62702 (22380.3)
+      Solver time: 0.33446 (10015.3)
+      Sabre: Factoring: 0.03998 (2428.38)
+      Sabre: Solve: 0.0061 (340.14)
+    - Data:
+      Num multi-body constraints: 55 (3321365)
+      Num solve islands: 1 (32001)
+      Num enabled rigid bodies: 33 (1836688)
+      Num binary constraints: 5 (160005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 86.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (917951)
+    Inter-step time: 20.9347 (790451)
+    Step forward time: 2.95494 (116523)
+    Pre-step event time: 1.97436 (72858.1)
+    Dynamics-system time: 0.4727 (23136.8)
+    Last-step event time: 0 (10565.1)
+    Post-step event time: 0.24125 (9469.93)
+    Pre-collide event time: 0.12249 (5143.25)
+    Collision-detection time: 0.08818 (3675.98)
+    Triggering contact events: 0.00338 (143.147)
+    Triggering contact separation events: 0.00056 (22.9855)
+    Committing removed contacts: 0.00049 (17.0969)
+    Culling contacts: 0.00027 (11.1161)
+    Contact reduction: 0.00022 (6.80298)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08129 (3411.47)
+      Broad-phase time: 0.02901 (1305.6)
+      Sync bounds time: 0.02542 (976.759)
+      Sync transforms time: 0.00996 (515.186)
+      Narrow-phase time: 0.01012 (365.724)
+    - Data:
+      Num geometries: 70 (3871465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.0184 (884.739)
+        SweepAndPrune::UpdateTask::run: 0.01739 (831.847)
+        BroadPhase 2: 0.01163 (591.036)
+        BroadPhase 4: 0.00264 (109.531)
+        BroadPhase 3: 0.00084 (40.1919)
+        BroadPhase 1: 0.00039 (15.6488)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (3805463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.4678 (22908)
+      Solver time: 0.20807 (10241.7)
+      Sabre: Factoring: 0.03978 (2471.79)
+      Sabre: Solve: 0.0061 (347.199)
+    - Data:
+      Num multi-body constraints: 55 (3376365)
+      Num solve islands: 1 (33001)
+      Num enabled rigid bodies: 33 (1869688)
+      Num binary constraints: 5 (165005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 87.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (943723)
+    Inter-step time: 22.221 (812834)
+    Step forward time: 3.06255 (119726)
+    Pre-step event time: 2.03375 (74975.7)
+    Dynamics-system time: 0.52492 (23655.3)
+    Last-step event time: 0 (10741.9)
+    Post-step event time: 0.23368 (9737.39)
+    Pre-collide event time: 0.12254 (5276.38)
+    Collision-detection time: 0.09 (3778.01)
+    Triggering contact events: 0.00368 (147.243)
+    Triggering contact separation events: 0.00055 (23.642)
+    Committing removed contacts: 0.00041 (17.5965)
+    Culling contacts: 0.00031 (11.4224)
+    Contact reduction: 0.00024 (7.01543)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08238 (3505.22)
+      Broad-phase time: 0.03008 (1340.55)
+      Sync bounds time: 0.02592 (1006.26)
+      Sync transforms time: 0.00995 (526.247)
+      Narrow-phase time: 0.00971 (376.63)
+    - Data:
+      Num geometries: 70 (3941465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01904 (907.171)
+        SweepAndPrune::UpdateTask::run: 0.01774 (852.683)
+        BroadPhase 2: 0.01185 (604.767)
+        BroadPhase 4: 0.0029 (113.227)
+        BroadPhase 3: 0.00097 (41.0513)
+        BroadPhase 1: 0.00038 (16.0765)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (3873463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.51955 (23420.3)
+      Solver time: 0.19939 (10460.5)
+      Sabre: Factoring: 0.03933 (2514.75)
+      Sabre: Solve: 0.00612 (353.599)
+    - Data:
+      Num multi-body constraints: 55 (3431365)
+      Num solve islands: 1 (34001)
+      Num enabled rigid bodies: 33 (1902688)
+      Num binary constraints: 5 (170005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 88.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (969535)
+    Inter-step time: 23.0453 (835261)
+    Step forward time: 3.24375 (122926)
+    Pre-step event time: 2.07775 (77091.1)
+    Dynamics-system time: 0.53607 (24176.6)
+    Last-step event time: 0 (10916.5)
+    Post-step event time: 0.31424 (10004.1)
+    Pre-collide event time: 0.15691 (5409.99)
+    Collision-detection time: 0.09158 (3878.13)
+    Triggering contact events: 0.00342 (151.724)
+    Triggering contact separation events: 0.00059 (24.2707)
+    Committing removed contacts: 0.00042 (18.1777)
+    Culling contacts: 0.00027 (11.8079)
+    Contact reduction: 0.00015 (7.23637)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08406 (3597.57)
+      Broad-phase time: 0.03015 (1374.22)
+      Sync bounds time: 0.02707 (1035.6)
+      Sync transforms time: 0.00978 (537.404)
+      Narrow-phase time: 0.00997 (387.33)
+    - Data:
+      Num geometries: 70 (4011465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01841 (928.39)
+        SweepAndPrune::UpdateTask::run: 0.01709 (872.362)
+        BroadPhase 2: 0.01115 (617.866)
+        BroadPhase 4: 0.0026 (116.398)
+        BroadPhase 3: 0.00072 (41.843)
+        BroadPhase 1: 0.00027 (16.5053)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (3941463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.53062 (23935.4)
+      Solver time: 0.24395 (10679)
+      Sabre: Factoring: 0.03924 (2558.11)
+      Sabre: Solve: 0.0063 (360.092)
+    - Data:
+      Num multi-body constraints: 55 (3486365)
+      Num solve islands: 1 (35001)
+      Num enabled rigid bodies: 33 (1935688)
+      Num binary constraints: 5 (175005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 89.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (995305)
+    Inter-step time: 22.3485 (857645)
+    Step forward time: 3.26041 (126122)
+    Pre-step event time: 2.15961 (79201.5)
+    Dynamics-system time: 0.55999 (24695.8)
+    Last-step event time: 0 (11094.4)
+    Post-step event time: 0.24496 (10272.3)
+    Pre-collide event time: 0.13404 (5543.68)
+    Collision-detection time: 0.1014 (3978.74)
+    Triggering contact events: 0.00395 (156.354)
+    Triggering contact separation events: 0.00058 (24.8977)
+    Committing removed contacts: 0.00042 (18.6682)
+    Culling contacts: 0.00028 (12.1213)
+    Contact reduction: 0.00024 (7.45343)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.09253 (3690.32)
+      Broad-phase time: 0.03371 (1409.06)
+      Sync bounds time: 0.02743 (1064.21)
+      Sync transforms time: 0.01226 (548.495)
+      Narrow-phase time: 0.01163 (398.293)
+    - Data:
+      Num geometries: 70 (4081465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02067 (950.298)
+        SweepAndPrune::UpdateTask::run: 0.01933 (892.79)
+        BroadPhase 2: 0.01289 (631.29)
+        BroadPhase 4: 0.00331 (119.628)
+        BroadPhase 3: 0.00076 (42.6902)
+        BroadPhase 1: 0.00051 (16.9468)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (4009463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.55378 (24448.6)
+      Solver time: 0.20189 (10897.7)
+      Sabre: Factoring: 0.03957 (2601.66)
+      Sabre: Solve: 0.00613 (366.938)
+    - Data:
+      Num multi-body constraints: 55 (3541365)
+      Num solve islands: 1 (36001)
+      Num enabled rigid bodies: 33 (1968688)
+      Num binary constraints: 5 (180005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 90.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.02114e+06)
+    Inter-step time: 22.7965 (880091)
+    Step forward time: 3.82921 (129327)
+    Pre-step event time: 2.73198 (81317.4)
+    Dynamics-system time: 0.58708 (25218.5)
+    Last-step event time: 0 (11270.5)
+    Post-step event time: 0.24122 (10538.6)
+    Pre-collide event time: 0.12268 (5678.24)
+    Collision-detection time: 0.08992 (4080.61)
+    Triggering contact events: 0.00346 (160.742)
+    Triggering contact separation events: 0.00061 (25.5536)
+    Committing removed contacts: 0.00042 (19.1591)
+    Culling contacts: 0.00028 (12.5435)
+    Contact reduction: 0.00013 (7.65325)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08234 (3784.19)
+      Broad-phase time: 0.03113 (1443.76)
+      Sync bounds time: 0.0255 (1093.22)
+      Sync transforms time: 0.00984 (560.206)
+      Narrow-phase time: 0.00932 (408.92)
+    - Data:
+      Num geometries: 70 (4151465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02006 (971.78)
+        SweepAndPrune::UpdateTask::run: 0.01864 (912.768)
+        BroadPhase 2: 0.01267 (644.679)
+        BroadPhase 4: 0.0029 (122.901)
+        BroadPhase 3: 0.00072 (43.5018)
+        BroadPhase 1: 0.00039 (17.3725)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (4077463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.58067 (24965.3)
+      Solver time: 0.22827 (11118)
+      Sabre: Factoring: 0.04061 (2646.55)
+      Sabre: Solve: 0.00614 (373.684)
+    - Data:
+      Num multi-body constraints: 55 (3596365)
+      Num solve islands: 1 (37001)
+      Num enabled rigid bodies: 33 (2001688)
+      Num binary constraints: 5 (185005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 91.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.04691e+06)
+    Inter-step time: 21.7104 (902482)
+    Step forward time: 3.39545 (132511)
+    Pre-step event time: 2.01577 (83417.3)
+    Dynamics-system time: 0.46377 (25737.8)
+    Last-step event time: 0 (11447.2)
+    Post-step event time: 0.65096 (10802.8)
+    Pre-collide event time: 0.12107 (5812.63)
+    Collision-detection time: 0.08848 (4182.56)
+    Triggering contact events: 0.0035 (164.867)
+    Triggering contact separation events: 0.00081 (26.3204)
+    Committing removed contacts: 0.00045 (19.663)
+    Culling contacts: 0.00029 (12.8505)
+    Contact reduction: 0.00024 (7.84954)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08135 (3878.25)
+      Broad-phase time: 0.03003 (1478.13)
+      Sync bounds time: 0.02565 (1123.34)
+      Sync transforms time: 0.00975 (571.326)
+      Narrow-phase time: 0.00956 (419.658)
+    - Data:
+      Num geometries: 70 (4221465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01885 (993.895)
+        SweepAndPrune::UpdateTask::run: 0.01765 (933.104)
+        BroadPhase 2: 0.01194 (658.412)
+        BroadPhase 4: 0.00279 (126.086)
+        BroadPhase 3: 0.00072 (44.294)
+        BroadPhase 1: 0.0004 (17.8211)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (4145463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.45851 (25478.7)
+      Solver time: 0.19703 (11338.8)
+      Sabre: Factoring: 0.03934 (2690.49)
+      Sabre: Solve: 0.00599 (380.113)
+    - Data:
+      Num multi-body constraints: 55 (3651365)
+      Num solve islands: 1 (38001)
+      Num enabled rigid bodies: 33 (2034688)
+      Num binary constraints: 5 (190005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 92.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.07284e+06)
+    Inter-step time: 22.4243 (924996)
+    Step forward time: 3.02573 (135745)
+    Pre-step event time: 1.99542 (85544.2)
+    Dynamics-system time: 0.51855 (26265.1)
+    Last-step event time: 0 (11624.7)
+    Post-step event time: 0.23294 (11077.2)
+    Pre-collide event time: 0.12993 (5950.15)
+    Collision-detection time: 0.09197 (4284.97)
+    Triggering contact events: 0.00349 (169.391)
+    Triggering contact separation events: 0.00059 (27.0464)
+    Committing removed contacts: 0.00042 (20.2672)
+    Culling contacts: 0.00027 (13.1583)
+    Contact reduction: 0.00024 (8.05711)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08451 (3972.49)
+      Broad-phase time: 0.03103 (1512.54)
+      Sync bounds time: 0.02637 (1153.3)
+      Sync transforms time: 0.01036 (583.033)
+      Narrow-phase time: 0.00992 (430.583)
+    - Data:
+      Num geometries: 70 (4291465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01923 (1015.48)
+        SweepAndPrune::UpdateTask::run: 0.01809 (953.157)
+        BroadPhase 2: 0.01211 (671.828)
+        BroadPhase 4: 0.00297 (129.308)
+        BroadPhase 3: 0.00073 (45.1311)
+        BroadPhase 1: 0.0004 (18.2699)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (4213463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.51296 (25999.4)
+      Solver time: 0.24417 (11562.1)
+      Sabre: Factoring: 0.03988 (2735.08)
+      Sabre: Solve: 0.01926 (386.838)
+    - Data:
+      Num multi-body constraints: 55 (3706365)
+      Num solve islands: 1 (39001)
+      Num enabled rigid bodies: 33 (2067688)
+      Num binary constraints: 5 (195005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 93.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.09818e+06)
+    Inter-step time: 21.8906 (947010)
+    Step forward time: 3.28033 (138885)
+    Pre-step event time: 2.19153 (87615.8)
+    Dynamics-system time: 0.58233 (26776.7)
+    Last-step event time: 0 (11798.6)
+    Post-step event time: 0.23859 (11340.3)
+    Pre-collide event time: 0.12305 (6083.62)
+    Collision-detection time: 0.089 (4382.9)
+    Triggering contact events: 0.00359 (173.445)
+    Triggering contact separation events: 0.00052 (27.7118)
+    Committing removed contacts: 0.0004 (20.7372)
+    Culling contacts: 0.00028 (13.4596)
+    Contact reduction: 0.00024 (8.26038)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08193 (4062.45)
+      Broad-phase time: 0.02985 (1545.93)
+      Sync bounds time: 0.02544 (1181.36)
+      Sync transforms time: 0.00991 (593.944)
+      Narrow-phase time: 0.0097 (441.092)
+    - Data:
+      Num geometries: 70 (4361465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.0191 (1036.59)
+        SweepAndPrune::UpdateTask::run: 0.01789 (972.702)
+        BroadPhase 2: 0.01186 (684.813)
+        BroadPhase 4: 0.00293 (132.391)
+        BroadPhase 3: 0.00073 (46.0121)
+        BroadPhase 1: 0.0004 (18.7198)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (4281463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.57716 (26505)
+      Solver time: 0.29422 (11778.9)
+      Sabre: Factoring: 0.03938 (2777.99)
+      Sabre: Solve: 0.09826 (393.695)
+    - Data:
+      Num multi-body constraints: 55 (3761365)
+      Num solve islands: 1 (40001)
+      Num enabled rigid bodies: 33 (2100688)
+      Num binary constraints: 5 (200005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 94.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.1235e+06)
+    Inter-step time: 21.0333 (969015)
+    Step forward time: 2.99456 (142011)
+    Pre-step event time: 1.98231 (89680.9)
+    Dynamics-system time: 0.50884 (27286.8)
+    Last-step event time: 0 (11972.5)
+    Post-step event time: 0.23993 (11599.8)
+    Pre-collide event time: 0.11969 (6215.46)
+    Collision-detection time: 0.08799 (4480.44)
+    Triggering contact events: 0.00367 (177.71)
+    Triggering contact separation events: 0.00085 (28.3723)
+    Committing removed contacts: 0.00043 (21.2223)
+    Culling contacts: 0.00028 (13.764)
+    Contact reduction: 0.00041 (8.48248)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08103 (4152.24)
+      Broad-phase time: 0.03018 (1578.89)
+      Sync bounds time: 0.02461 (1209.42)
+      Sync transforms time: 0.01007 (604.898)
+      Narrow-phase time: 0.00949 (451.702)
+    - Data:
+      Num geometries: 70 (4431465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01895 (1057.44)
+        SweepAndPrune::UpdateTask::run: 0.01769 (992.092)
+        BroadPhase 2: 0.01219 (697.869)
+        BroadPhase 4: 0.00253 (135.464)
+        BroadPhase 3: 0.00073 (46.7974)
+        BroadPhase 1: 0.00035 (19.1439)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (4349463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.50381 (27009.3)
+      Solver time: 0.19967 (11995.5)
+      Sabre: Factoring: 0.04 (2820.8)
+      Sabre: Solve: 0.00601 (400.428)
+    - Data:
+      Num multi-body constraints: 55 (3816365)
+      Num solve islands: 1 (41001)
+      Num enabled rigid bodies: 33 (2133688)
+      Num binary constraints: 5 (205005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 95.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.14891e+06)
+    Inter-step time: 22.645 (991084)
+    Step forward time: 3.35616 (145166)
+    Pre-step event time: 2.34975 (91765.9)
+    Dynamics-system time: 0.48531 (27801.9)
+    Last-step event time: 0 (12149)
+    Post-step event time: 0.23313 (11862)
+    Pre-collide event time: 0.12483 (6347.72)
+    Collision-detection time: 0.10237 (4578.67)
+    Triggering contact events: 0.00537 (181.79)
+    Triggering contact separation events: 0.00054 (29.0326)
+    Committing removed contacts: 0.00055 (21.6827)
+    Culling contacts: 0.0004 (14.0697)
+    Contact reduction: 0.00013 (8.68231)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.09332 (4242.62)
+      Broad-phase time: 0.03102 (1612.19)
+      Sync bounds time: 0.0263 (1237.73)
+      Sync transforms time: 0.00988 (615.901)
+      Narrow-phase time: 0.00991 (462.276)
+    - Data:
+      Num geometries: 70 (4501465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01954 (1078.35)
+        SweepAndPrune::UpdateTask::run: 0.01827 (1011.48)
+        BroadPhase 2: 0.0128 (710.753)
+        BroadPhase 4: 0.00258 (138.63)
+        BroadPhase 3: 0.00073 (47.5946)
+        BroadPhase 1: 0.00036 (19.5896)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (4417463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.47976 (27518.7)
+      Solver time: 0.21598 (12215.8)
+      Sabre: Factoring: 0.0399 (2864.69)
+      Sabre: Solve: 0.00621 (407.37)
+    - Data:
+      Num multi-body constraints: 55 (3871365)
+      Num solve islands: 1 (42001)
+      Num enabled rigid bodies: 33 (2166688)
+      Num binary constraints: 5 (210005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 96.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.17425e+06)
+    Inter-step time: 21.8824 (1.0131e+06)
+    Step forward time: 2.98554 (148310)
+    Pre-step event time: 1.96019 (93840.8)
+    Dynamics-system time: 0.5137 (28313.1)
+    Last-step event time: 0 (12325.4)
+    Post-step event time: 0.24152 (12125)
+    Pre-collide event time: 0.12372 (6481.27)
+    Collision-detection time: 0.08914 (4677.65)
+    Triggering contact events: 0.00376 (186.064)
+    Triggering contact separation events: 0.00062 (29.6937)
+    Committing removed contacts: 0.00042 (22.253)
+    Culling contacts: 0.00028 (14.3717)
+    Contact reduction: 0.00023 (8.89582)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08208 (4333.93)
+      Broad-phase time: 0.03032 (1646.43)
+      Sync bounds time: 0.02665 (1265.89)
+      Sync transforms time: 0.00958 (627.003)
+      Narrow-phase time: 0.0093 (472.816)
+    - Data:
+      Num geometries: 70 (4571465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01906 (1100)
+        SweepAndPrune::UpdateTask::run: 0.01792 (1031.57)
+        BroadPhase 2: 0.01206 (724.257)
+        BroadPhase 4: 0.00275 (141.819)
+        BroadPhase 3: 0.0007 (48.4024)
+        BroadPhase 1: 0.0004 (20.0385)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (4485463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.50808 (28024)
+      Solver time: 0.19653 (12432.6)
+      Sabre: Factoring: 0.03957 (2907.64)
+      Sabre: Solve: 0.006 (414.026)
+    - Data:
+      Num multi-body constraints: 55 (3926365)
+      Num solve islands: 1 (43001)
+      Num enabled rigid bodies: 33 (2199688)
+      Num binary constraints: 5 (215005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 97.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.1996e+06)
+    Inter-step time: 22.2978 (1.03511e+06)
+    Step forward time: 3.21051 (151459)
+    Pre-step event time: 2.01902 (95921.6)
+    Dynamics-system time: 0.48708 (28826.8)
+    Last-step event time: 0 (12500.8)
+    Post-step event time: 0.30347 (12386.4)
+    Pre-collide event time: 0.16742 (6614.47)
+    Collision-detection time: 0.17569 (4775.97)
+    Triggering contact events: 0.00393 (190.161)
+    Triggering contact separation events: 0.00063 (30.3401)
+    Committing removed contacts: 0.00044 (22.722)
+    Culling contacts: 0.00028 (14.7044)
+    Contact reduction: 0.00014 (9.0884)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.16869 (4424.3)
+      Broad-phase time: 0.0317203 (1679.69)
+      Sync bounds time: 0.11056 (1294.32)
+      Sync transforms time: 0.01002 (638.004)
+      Narrow-phase time: 0.00968 (483.213)
+    - Data:
+      Num geometries: 70 (4641465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02017 (1120.95)
+        SweepAndPrune::UpdateTask::run: 0.01866 (1051.05)
+        BroadPhase 2: 0.01234 (737.2)
+        BroadPhase 4: 0.00317 (144.898)
+        BroadPhase 3: 0.00074 (49.3045)
+        BroadPhase 1: 0.00041 (20.4626)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (4553463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.48184 (28532)
+      Solver time: 0.22154 (12650.9)
+      Sabre: Factoring: 0.0629 (2951.52)
+      Sabre: Solve: 0.00615 (420.574)
+    - Data:
+      Num multi-body constraints: 55 (3981365)
+      Num solve islands: 1 (44001)
+      Num enabled rigid bodies: 33 (2232688)
+      Num binary constraints: 5 (220005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 98.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.22491e+06)
+    Inter-step time: 21.1516 (1.0571e+06)
+    Step forward time: 3.20456 (154584)
+    Pre-step event time: 2.21946 (97986.6)
+    Dynamics-system time: 0.46664 (29334.6)
+    Last-step event time: 0 (12676.4)
+    Post-step event time: 0.24543 (12646.7)
+    Pre-collide event time: 0.12599 (6746.27)
+    Collision-detection time: 0.08996 (4874.15)
+    Triggering contact events: 0.0035 (194.328)
+    Triggering contact separation events: 0.00054 (30.9652)
+    Committing removed contacts: 0.00041 (23.1806)
+    Culling contacts: 0.00028 (15.0184)
+    Contact reduction: 0.00014 (9.32566)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08277 (4514.64)
+      Broad-phase time: 0.0306 (1713.37)
+      Sync bounds time: 0.0256 (1322.16)
+      Sync transforms time: 0.01 (648.955)
+      Narrow-phase time: 0.0096 (493.683)
+    - Data:
+      Num geometries: 70 (4711465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01967 (1142.3)
+        SweepAndPrune::UpdateTask::run: 0.01809 (1070.86)
+        BroadPhase 2: 0.01183 (750.412)
+        BroadPhase 4: 0.00301 (148.032)
+        BroadPhase 3: 0.00097 (50.305)
+        BroadPhase 1: 0.00041 (20.8741)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (4621463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.46122 (29033.9)
+      Solver time: 0.19951 (12866.1)
+      Sabre: Factoring: 0.03945 (2994.6)
+      Sabre: Solve: 0.00598 (427.03)
+    - Data:
+      Num multi-body constraints: 55 (4036365)
+      Num solve islands: 1 (45001)
+      Num enabled rigid bodies: 33 (2265688)
+      Num binary constraints: 5 (225005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 99.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.25031e+06)
+    Inter-step time: 21.3477 (1.07916e+06)
+    Step forward time: 3.00107 (157745)
+    Pre-step event time: 1.96507 (100073)
+    Dynamics-system time: 0.45937 (29850.6)
+    Post-step event time: 0.26527 (12910.8)
+    Last-step event time: 0 (12851.5)
+    Pre-collide event time: 0.14934 (6879.42)
+    Collision-detection time: 0.10526 (4973.48)
+    Triggering contact events: 0.00471 (198.378)
+    Triggering contact separation events: 0.00063 (31.5991)
+    Committing removed contacts: 0.00042 (23.643)
+    Culling contacts: 0.00028 (15.3395)
+    Contact reduction: 0.00014 (9.4987)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.09825 (4606.32)
+      Broad-phase time: 0.03117 (1747.1)
+      Sync bounds time: 0.02616 (1350.41)
+      Sync transforms time: 0.01037 (660.469)
+      Narrow-phase time: 0.00992 (504.671)
+    - Data:
+      Num geometries: 70 (4781465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02011 (1163.64)
+        SweepAndPrune::UpdateTask::run: 0.01816 (1090.64)
+        BroadPhase 2: 0.01181 (763.323)
+        BroadPhase 4: 0.00297 (151.164)
+        BroadPhase 3: 0.00073 (51.2289)
+        BroadPhase 1: 0.0004 (21.2863)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (4689463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.45481 (29544.1)
+      Solver time: 0.19851 (13084.8)
+      Sabre: Factoring: 0.03878 (3038.08)
+      Sabre: Solve: 0.00634 (433.444)
+    - Data:
+      Num multi-body constraints: 55 (4091365)
+      Num solve islands: 1 (46001)
+      Num enabled rigid bodies: 33 (2298688)
+      Num binary constraints: 5 (230005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 100.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.27564e+06)
+    Inter-step time: 22.1725 (1.10115e+06)
+    Step forward time: 3.01056 (160901)
+    Pre-step event time: 1.98343 (102155)
+    Dynamics-system time: 0.52564 (30364.5)
+    Post-step event time: 0.2336 (13177.4)
+    Last-step event time: 0 (13025.5)
+    Pre-collide event time: 0.12098 (7012.4)
+    Collision-detection time: 0.09087 (5072.26)
+    Triggering contact events: 0.00331 (202.519)
+    Triggering contact separation events: 0.00063 (32.2283)
+    Committing removed contacts: 0.00042 (24.1325)
+    Culling contacts: 0.00039 (15.6926)
+    Contact reduction: 0.00014 (9.67221)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08376 (4697.13)
+      Broad-phase time: 0.03102 (1780.78)
+      Sync bounds time: 0.02601 (1378.69)
+      Sync transforms time: 0.01021 (671.564)
+      Narrow-phase time: 0.00981 (515.147)
+    - Data:
+      Num geometries: 70 (4851465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01974 (1184.81)
+        SweepAndPrune::UpdateTask::run: 0.01851 (1110.37)
+        BroadPhase 2: 0.0125 (776.301)
+        BroadPhase 4: 0.00295 (154.351)
+        BroadPhase 3: 0.00084 (52.1454)
+        BroadPhase 1: 0.00041 (21.7327)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (4757463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.52009 (30052.1)
+      Solver time: 0.24321 (13303)
+      Sabre: Factoring: 0.05507 (3081.78)
+      Sabre: Solve: 0.00626 (439.977)
+    - Data:
+      Num multi-body constraints: 55 (4146365)
+      Num solve islands: 1 (47001)
+      Num enabled rigid bodies: 33 (2331688)
+      Num binary constraints: 5 (235005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 101.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.30093e+06)
+    Inter-step time: 21.038 (1.12311e+06)
+    Step forward time: 3.03337 (164044)
+    Pre-step event time: 2.01366 (104235)
+    Dynamics-system time: 0.45664 (30874.9)
+    Post-step event time: 0.23143 (13439.2)
+    Last-step event time: 0 (13201.2)
+    Pre-collide event time: 0.14757 (7143.56)
+    Collision-detection time: 0.12665 (5170.35)
+    Triggering contact events: 0.00522 (206.731)
+    Triggering contact separation events: 0.00067 (33.1459)
+    Committing removed contacts: 0.00043 (24.6265)
+    Culling contacts: 0.00028 (15.9925)
+    Contact reduction: 0.00024 (9.89457)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.11905 (4787.47)
+      Broad-phase time: 0.05815 (1814.37)
+      Sync bounds time: 0.03448 (1406.4)
+      Sync transforms time: 0.00948 (682.639)
+      Narrow-phase time: 0.00987 (525.955)
+    - Data:
+      Num geometries: 70 (4921465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.03327 (1206.05)
+        SweepAndPrune::UpdateTask::run: 0.03139 (1130.04)
+        BroadPhase 2: 0.02451 (789.183)
+        BroadPhase 4: 0.00322 (157.698)
+        BroadPhase 3: 0.00073 (52.958)
+        BroadPhase 1: 0.00041 (22.2507)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (4825463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.45158 (30556.9)
+      Solver time: 0.19526 (13518.9)
+      Sabre: Factoring: 0.03944 (3124.84)
+      Sabre: Solve: 0.00597 (446.453)
+    - Data:
+      Num multi-body constraints: 55 (4201365)
+      Num solve islands: 1 (48001)
+      Num enabled rigid bodies: 33 (2364688)
+      Num binary constraints: 5 (240005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 102.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.32622e+06)
+    Inter-step time: 21.8603 (1.14507e+06)
+    Step forward time: 3.05052 (167186)
+    Pre-step event time: 2.04159 (106314)
+    Dynamics-system time: 0.50148 (31386.1)
+    Post-step event time: 0.23224 (13698.9)
+    Last-step event time: 0 (13376.7)
+    Pre-collide event time: 0.1218 (7275.81)
+    Collision-detection time: 0.09768 (5267.53)
+    Triggering contact events: 0.00346 (210.725)
+    Triggering contact separation events: 0.00058 (33.8709)
+    Committing removed contacts: 0.00043 (25.1145)
+    Culling contacts: 0.00033 (16.2936)
+    Contact reduction: 0.00023 (10.0798)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.09025 (4877.01)
+      Broad-phase time: 0.03927 (1847.66)
+      Sync bounds time: 0.02524 (1434.39)
+      Sync transforms time: 0.01001 (693.566)
+      Narrow-phase time: 0.00969 (536.265)
+    - Data:
+      Num geometries: 70 (4991465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02814 (1227.31)
+        SweepAndPrune::UpdateTask::run: 0.0269 (1149.78)
+        BroadPhase 2: 0.02059 (802.14)
+        BroadPhase 4: 0.00328 (160.814)
+        BroadPhase 3: 0.00073 (53.8022)
+        BroadPhase 1: 0.0004 (22.6724)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (4893463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.49603 (31062.3)
+      Solver time: 0.19693 (13736.6)
+      Sabre: Factoring: 0.03921 (3168.55)
+      Sabre: Solve: 0.00604 (452.912)
+    - Data:
+      Num multi-body constraints: 55 (4256365)
+      Num solve islands: 1 (49001)
+      Num enabled rigid bodies: 33 (2397688)
+      Num binary constraints: 5 (245005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 103.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.35152e+06)
+    Inter-step time: 22.2955 (1.16704e+06)
+    Step forward time: 3.01972 (170330)
+    Pre-step event time: 2.00255 (108396)
+    Dynamics-system time: 0.51341 (31896)
+    Post-step event time: 0.24015 (13958.4)
+    Last-step event time: 0 (13552)
+    Pre-collide event time: 0.11835 (7408.69)
+    Collision-detection time: 0.08876 (5365.12)
+    Triggering contact events: 0.00347 (214.809)
+    Triggering contact separation events: 0.00065 (34.5481)
+    Committing removed contacts: 0.00043 (25.5879)
+    Culling contacts: 0.00029 (16.6159)
+    Contact reduction: 0.00024 (10.3889)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08168 (4966.82)
+      Broad-phase time: 0.02956 (1880.76)
+      Sync bounds time: 0.02577 (1462.28)
+      Sync transforms time: 0.00986 (704.449)
+      Narrow-phase time: 0.00993 (546.65)
+    - Data:
+      Num geometries: 70 (5061465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01865 (1248.2)
+        SweepAndPrune::UpdateTask::run: 0.01739 (1169.15)
+        BroadPhase 2: 0.0113 (815.077)
+        BroadPhase 4: 0.00282 (163.946)
+        BroadPhase 3: 0.0009 (54.5865)
+        BroadPhase 1: 0.00042 (23.0856)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (4961463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.50782 (31566.3)
+      Solver time: 0.22703 (13953.4)
+      Sabre: Factoring: 0.05137 (3211.89)
+      Sabre: Solve: 0.00594 (459.283)
+    - Data:
+      Num multi-body constraints: 55 (4311365)
+      Num solve islands: 1 (50001)
+      Num enabled rigid bodies: 33 (2430688)
+      Num binary constraints: 5 (250005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 104.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.37684e+06)
+    Inter-step time: 21.9916 (1.18904e+06)
+    Step forward time: 3.17814 (173472)
+    Pre-step event time: 2.02125 (110471)
+    Dynamics-system time: 0.63745 (32408.7)
+    Post-step event time: 0.25005 (14221)
+    Last-step event time: 0 (13725.9)
+    Pre-collide event time: 0.12393 (7540.09)
+    Collision-detection time: 0.08903 (5463.54)
+    Triggering contact events: 0.00355 (218.937)
+    Triggering contact separation events: 0.0007 (35.2683)
+    Committing removed contacts: 0.00041 (26.1619)
+    Culling contacts: 0.00029 (16.9152)
+    Contact reduction: 0.00022 (10.6575)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08218 (5057.52)
+      Broad-phase time: 0.0305 (1914.71)
+      Sync bounds time: 0.02595 (1490.57)
+      Sync transforms time: 0.00959 (715.262)
+      Narrow-phase time: 0.00968 (556.903)
+    - Data:
+      Num geometries: 70 (5131465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.0197 (1269.85)
+        SweepAndPrune::UpdateTask::run: 0.01836 (1189.35)
+        BroadPhase 2: 0.01251 (828.39)
+        BroadPhase 4: 0.00294 (167.33)
+        BroadPhase 3: 0.00073 (55.4446)
+        BroadPhase 1: 0.00027 (23.5323)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (5029463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.63187 (32073)
+      Solver time: 0.36658 (14170.2)
+      Sabre: Factoring: 0.08493 (3255.58)
+      Sabre: Solve: 0.00626 (466.039)
+    - Data:
+      Num multi-body constraints: 55 (4366365)
+      Num solve islands: 1 (51001)
+      Num enabled rigid bodies: 33 (2463688)
+      Num binary constraints: 5 (255005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 105.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.40217e+06)
+    Inter-step time: 21.9513 (1.21103e+06)
+    Step forward time: 3.18898 (176624)
+    Pre-step event time: 2.16443 (112556)
+    Dynamics-system time: 0.52353 (32920)
+    Post-step event time: 0.23446 (14485.1)
+    Last-step event time: 0 (13900.1)
+    Pre-collide event time: 0.12083 (7671.85)
+    Collision-detection time: 0.08923 (5561.98)
+    Triggering contact events: 0.00372 (223.206)
+    Triggering contact separation events: 0.00085 (35.911)
+    Committing removed contacts: 0.00041 (26.644)
+    Culling contacts: 0.00029 (17.3106)
+    Contact reduction: 0.00022 (10.8453)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08212 (5148.21)
+      Broad-phase time: 0.03053 (1948.53)
+      Sync bounds time: 0.02543 (1518.94)
+      Sync transforms time: 0.00996 (726.171)
+      Narrow-phase time: 0.00946 (567.481)
+    - Data:
+      Num geometries: 70 (5201465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.0192 (1291.3)
+        SweepAndPrune::UpdateTask::run: 0.01797 (1209.32)
+        BroadPhase 2: 0.01217 (841.627)
+        BroadPhase 4: 0.00281 (170.542)
+        BroadPhase 3: 0.00072 (56.235)
+        BroadPhase 1: 0.0004 (23.9459)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (5097463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.51815 (32578.3)
+      Solver time: 0.19741 (14385.6)
+      Sabre: Factoring: 0.03966 (3299)
+      Sabre: Solve: 0.00602 (472.892)
+    - Data:
+      Num multi-body constraints: 55 (4421365)
+      Num solve islands: 1 (52001)
+      Num enabled rigid bodies: 33 (2496688)
+      Num binary constraints: 5 (260005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 106.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.42746e+06)
+    Inter-step time: 22.2385 (1.23299e+06)
+    Step forward time: 2.99892 (179765)
+    Pre-step event time: 1.99182 (114634)
+    Dynamics-system time: 0.50899 (33430.1)
+    Post-step event time: 0.23263 (14746.4)
+    Last-step event time: 0 (14074.5)
+    Pre-collide event time: 0.11997 (7804.46)
+    Collision-detection time: 0.08915 (5658.86)
+    Triggering contact events: 0.00357 (227.155)
+    Triggering contact separation events: 0.00067 (36.5737)
+    Committing removed contacts: 0.00042 (27.1483)
+    Culling contacts: 0.00028 (17.6205)
+    Contact reduction: 0.00023 (11.0327)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08229 (5237.53)
+      Broad-phase time: 0.03003 (1981.69)
+      Sync bounds time: 0.0262 (1546.66)
+      Sync transforms time: 0.00948 (737.021)
+      Narrow-phase time: 0.00965 (578.046)
+    - Data:
+      Num geometries: 70 (5271465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01905 (1312.17)
+        SweepAndPrune::UpdateTask::run: 0.01751 (1228.73)
+        BroadPhase 2: 0.01175 (854.528)
+        BroadPhase 4: 0.00289 (173.687)
+        BroadPhase 3: 0.00073 (57.1454)
+        BroadPhase 1: 0.00042 (24.3558)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (5165463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.50369 (33082.6)
+      Solver time: 0.23427 (14601.6)
+      Sabre: Factoring: 0.0395 (3342)
+      Sabre: Solve: 0.00604 (479.529)
+    - Data:
+      Num multi-body constraints: 55 (4476365)
+      Num solve islands: 1 (53001)
+      Num enabled rigid bodies: 33 (2529688)
+      Num binary constraints: 5 (265005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 107.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.45278e+06)
+    Inter-step time: 22.1868 (1.25499e+06)
+    Step forward time: 2.99951 (182904)
+    Pre-step event time: 1.96205 (116706)
+    Dynamics-system time: 0.46169 (33940.3)
+    Post-step event time: 0.25952 (15008.6)
+    Last-step event time: 0 (14249.5)
+    Pre-collide event time: 0.15775 (7937.09)
+    Collision-detection time: 0.0917 (5757.98)
+    Triggering contact events: 0.00341 (231.219)
+    Triggering contact separation events: 0.00057 (37.2119)
+    Committing removed contacts: 0.00041 (27.6118)
+    Culling contacts: 0.00028 (17.9346)
+    Contact reduction: 0.00014 (11.2246)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08438 (5328.89)
+      Broad-phase time: 0.03014 (2015.41)
+      Sync bounds time: 0.02678 (1575.44)
+      Sync transforms time: 0.01063 (747.96)
+      Narrow-phase time: 0.0098 (588.657)
+    - Data:
+      Num geometries: 70 (5341465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01923 (1333.69)
+        SweepAndPrune::UpdateTask::run: 0.01797 (1248.58)
+        BroadPhase 2: 0.01195 (867.862)
+        BroadPhase 4: 0.00291 (176.767)
+        BroadPhase 3: 0.00072 (57.978)
+        BroadPhase 1: 0.00048 (24.8558)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (5233463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.45687 (33587.1)
+      Solver time: 0.19864 (14816.7)
+      Sabre: Factoring: 0.03935 (3385.05)
+      Sabre: Solve: 0.00607 (486.147)
+    - Data:
+      Num multi-body constraints: 55 (4531365)
+      Num solve islands: 1 (54001)
+      Num enabled rigid bodies: 33 (2562688)
+      Num binary constraints: 5 (270005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 108.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.47809e+06)
+    Inter-step time: 21.953 (1.27696e+06)
+    Step forward time: 3.00835 (186052)
+    Pre-step event time: 1.98465 (118785)
+    Dynamics-system time: 0.51267 (34450.3)
+    Post-step event time: 0.24194 (15274.8)
+    Last-step event time: 0 (14424.4)
+    Pre-collide event time: 0.1224 (8069.94)
+    Collision-detection time: 0.09039 (5855.72)
+    Triggering contact events: 0.00318 (235.478)
+    Triggering contact separation events: 0.0006 (37.8854)
+    Committing removed contacts: 0.00042 (28.0952)
+    Culling contacts: 0.00029 (18.2674)
+    Contact reduction: 0.00024 (11.4282)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.0833 (5418.95)
+      Broad-phase time: 0.0306 (2048.61)
+      Sync bounds time: 0.02646 (1603.46)
+      Sync transforms time: 0.00997 (759.268)
+      Narrow-phase time: 0.00948 (598.985)
+    - Data:
+      Num geometries: 70 (5411465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01952 (1354.83)
+        SweepAndPrune::UpdateTask::run: 0.01827 (1268.15)
+        BroadPhase 2: 0.01218 (880.988)
+        BroadPhase 4: 0.00291 (179.922)
+        BroadPhase 3: 0.00073 (58.7779)
+        BroadPhase 1: 0.00042 (25.2638)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (5301463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.50678 (34091.3)
+      Solver time: 0.20724 (15032.8)
+      Sabre: Factoring: 0.03977 (3428.35)
+      Sabre: Solve: 0.00603 (492.607)
+    - Data:
+      Num multi-body constraints: 55 (4586365)
+      Num solve islands: 1 (55001)
+      Num enabled rigid bodies: 33 (2595688)
+      Num binary constraints: 5 (275005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 109.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.50338e+06)
+    Inter-step time: 21.1074 (1.29895e+06)
+    Step forward time: 3.54298 (189177)
+    Pre-step event time: 2.34728 (120845)
+    Dynamics-system time: 0.49867 (34961.4)
+    Post-step event time: 0.41741 (15535.8)
+    Last-step event time: 0 (14598.5)
+    Pre-collide event time: 0.12121 (8202.22)
+    Collision-detection time: 0.10001 (5954.06)
+    Triggering contact events: 0.00385 (239.632)
+    Triggering contact separation events: 0.00059 (38.5334)
+    Committing removed contacts: 0.00042 (28.5819)
+    Culling contacts: 0.00029 (18.5743)
+    Contact reduction: 0.00024 (11.6197)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.09299 (5509.36)
+      Broad-phase time: 0.03014 (2082.07)
+      Sync bounds time: 0.03616 (1631.67)
+      Sync transforms time: 0.01007 (770.361)
+      Narrow-phase time: 0.00978 (609.482)
+    - Data:
+      Num geometries: 70 (5481465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.0195 (1376.14)
+        SweepAndPrune::UpdateTask::run: 0.01812 (1287.88)
+        BroadPhase 2: 0.01169 (894.009)
+        BroadPhase 4: 0.00307 (183.086)
+        BroadPhase 3: 0.00103 (59.6362)
+        BroadPhase 1: 0.00035 (25.6902)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (5369463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.49171 (34596.5)
+      Solver time: 0.20514 (15249.8)
+      Sabre: Factoring: 0.04 (3471.37)
+      Sabre: Solve: 0.00616 (499.289)
+    - Data:
+      Num multi-body constraints: 55 (4641365)
+      Num solve islands: 1 (56001)
+      Num enabled rigid bodies: 33 (2628688)
+      Num binary constraints: 5 (280005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 110.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.52868e+06)
+    Inter-step time: 21.5084 (1.32093e+06)
+    Step forward time: 3.53278 (192305)
+    Pre-step event time: 2.35251 (122910)
+    Dynamics-system time: 0.55183 (35471.4)
+    Post-step event time: 0.22781 (15795.1)
+    Last-step event time: 0 (14774)
+    Pre-collide event time: 0.22483 (8333.89)
+    Collision-detection time: 0.119 (6053.56)
+    Triggering contact events: 0.00465 (243.967)
+    Triggering contact separation events: 0.00056 (39.1707)
+    Committing removed contacts: 0.00043 (29.141)
+    Culling contacts: 0.00029 (18.8777)
+    Contact reduction: 0.00024 (11.8061)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.11156 (5600.78)
+      Broad-phase time: 0.03427 (2115.83)
+      Sync bounds time: 0.05128 (1660.1)
+      Sync transforms time: 0.01013 (781.727)
+      Narrow-phase time: 0.00916 (620.128)
+    - Data:
+      Num geometries: 70 (5551465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.0217 (1397.66)
+        SweepAndPrune::UpdateTask::run: 0.01945 (1307.9)
+        BroadPhase 2: 0.01288 (907.237)
+        BroadPhase 4: 0.00319 (186.299)
+        BroadPhase 3: 0.00073 (60.5706)
+        BroadPhase 1: 0.0004 (26.1057)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (5437463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.54653 (35100.3)
+      Solver time: 0.20434 (15467.8)
+      Sabre: Factoring: 0.03964 (3515.42)
+      Sabre: Solve: 0.0059 (505.937)
+    - Data:
+      Num multi-body constraints: 55 (4696365)
+      Num solve islands: 1 (57001)
+      Num enabled rigid bodies: 33 (2661688)
+      Num binary constraints: 5 (285005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 111.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.55398e+06)
+    Inter-step time: 21.166 (1.34291e+06)
+    Step forward time: 2.96417 (195438)
+    Pre-step event time: 1.9411 (124977)
+    Dynamics-system time: 0.51798 (35982.4)
+    Post-step event time: 0.23864 (16057.5)
+    Last-step event time: 0 (14947.6)
+    Pre-collide event time: 0.11892 (8465.98)
+    Collision-detection time: 0.09161 (6150.95)
+    Triggering contact events: 0.00347 (248.008)
+    Triggering contact separation events: 0.00087 (39.8134)
+    Committing removed contacts: 0.00041 (29.6349)
+    Culling contacts: 0.0004 (19.1805)
+    Contact reduction: 0.00013 (12.0446)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08453 (5690.5)
+      Broad-phase time: 0.03125 (2149.31)
+      Sync bounds time: 0.02696 (1687.94)
+      Sync transforms time: 0.01009 (792.502)
+      Narrow-phase time: 0.00944 (630.65)
+    - Data:
+      Num geometries: 70 (5621465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01946 (1418.78)
+        SweepAndPrune::UpdateTask::run: 0.0183 (1327.6)
+        BroadPhase 2: 0.01242 (920.454)
+        BroadPhase 4: 0.00289 (189.421)
+        BroadPhase 3: 0.00073 (61.3768)
+        BroadPhase 1: 0.0004 (26.6054)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (5505463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.49741 (35605.6)
+      Solver time: 0.20655 (15684.4)
+      Sabre: Factoring: 0.04842 (3558.84)
+      Sabre: Solve: 0.00593 (512.487)
+    - Data:
+      Num multi-body constraints: 55 (4751365)
+      Num solve islands: 1 (58001)
+      Num enabled rigid bodies: 33 (2694688)
+      Num binary constraints: 5 (290005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 112.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.57928e+06)
+    Inter-step time: 21.228 (1.3649e+06)
+    Step forward time: 3.00929 (198558)
+    Pre-step event time: 1.96939 (127038)
+    Dynamics-system time: 0.5336 (36491)
+    Post-step event time: 0.23244 (16317.8)
+    Last-step event time: 0 (15122.4)
+    Pre-collide event time: 0.11918 (8597.86)
+    Collision-detection time: 0.09015 (6248.64)
+    Triggering contact events: 0.00343 (252.046)
+    Triggering contact separation events: 0.00057 (40.4426)
+    Committing removed contacts: 0.00061 (30.1193)
+    Culling contacts: 0.00031 (19.5075)
+    Contact reduction: 0.00013 (12.2163)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08273 (5780.35)
+      Broad-phase time: 0.0299 (2182.35)
+      Sync bounds time: 0.02668 (1715.89)
+      Sync transforms time: 0.01005 (803.467)
+      Narrow-phase time: 0.00931 (641.278)
+    - Data:
+      Num geometries: 70 (5691465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01895 (1439.86)
+        SweepAndPrune::UpdateTask::run: 0.01757 (1347.22)
+        BroadPhase 2: 0.01194 (933.416)
+        BroadPhase 4: 0.00276 (192.707)
+        BroadPhase 3: 0.00073 (62.1984)
+        BroadPhase 1: 0.00039 (27.0201)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (5573463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.52835 (36108.4)
+      Solver time: 0.19842 (15901)
+      Sabre: Factoring: 0.03996 (3601.85)
+      Sabre: Solve: 0.006 (519.102)
+    - Data:
+      Num multi-body constraints: 55 (4806365)
+      Num solve islands: 1 (59001)
+      Num enabled rigid bodies: 33 (2727688)
+      Num binary constraints: 5 (295005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 113.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.60457e+06)
+    Inter-step time: 21.2017 (1.38688e+06)
+    Step forward time: 2.98032 (201685)
+    Pre-step event time: 1.97175 (129099)
+    Dynamics-system time: 0.50721 (37002.6)
+    Post-step event time: 0.23682 (16579.5)
+    Last-step event time: 0 (15298.2)
+    Pre-collide event time: 0.11943 (8729.3)
+    Collision-detection time: 0.08841 (6346.81)
+    Triggering contact events: 0.00362 (256.184)
+    Triggering contact separation events: 0.00059 (41.0966)
+    Committing removed contacts: 0.00041 (30.5828)
+    Culling contacts: 0.00028 (19.842)
+    Contact reduction: 0.00014 (12.4139)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08094 (5870.57)
+      Broad-phase time: 0.03022 (2215.75)
+      Sync bounds time: 0.02518 (1743.88)
+      Sync transforms time: 0.00973 (814.455)
+      Narrow-phase time: 0.0093 (652)
+    - Data:
+      Num geometries: 70 (5761465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01912 (1461.08)
+        SweepAndPrune::UpdateTask::run: 0.01756 (1366.97)
+        BroadPhase 2: 0.01184 (946.645)
+        BroadPhase 4: 0.00275 (195.743)
+        BroadPhase 3: 0.00073 (62.9917)
+        BroadPhase 1: 0.00039 (27.552)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (5641463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.50126 (36614)
+      Solver time: 0.20859 (16118.6)
+      Sabre: Factoring: 0.04955 (3645.24)
+      Sabre: Solve: 0.00628 (526.052)
+    - Data:
+      Num multi-body constraints: 55 (4861365)
+      Num solve islands: 1 (60001)
+      Num enabled rigid bodies: 33 (2760688)
+      Num binary constraints: 5 (300005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 114.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.62991e+06)
+    Inter-step time: 22.0892 (1.40891e+06)
+    Step forward time: 3.00925 (204809)
+    Pre-step event time: 1.98483 (131159)
+    Dynamics-system time: 0.52185 (37515.6)
+    Post-step event time: 0.23438 (16840.2)
+    Last-step event time: 0 (15473.3)
+    Pre-collide event time: 0.12144 (8861.12)
+    Collision-detection time: 0.08921 (6444.62)
+    Triggering contact events: 0.00355 (260.3)
+    Triggering contact separation events: 0.00058 (41.7397)
+    Committing removed contacts: 0.0004 (31.0561)
+    Culling contacts: 0.00029 (20.1448)
+    Contact reduction: 0.00013 (12.6122)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08175 (5960.75)
+      Broad-phase time: 0.03022 (2249.27)
+      Sync bounds time: 0.02496 (1771.88)
+      Sync transforms time: 0.0104 (825.551)
+      Narrow-phase time: 0.00968 (662.404)
+    - Data:
+      Num geometries: 70 (5831465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01891 (1482.53)
+        SweepAndPrune::UpdateTask::run: 0.01766 (1386.94)
+        BroadPhase 2: 0.01202 (959.83)
+        BroadPhase 4: 0.00277 (198.93)
+        BroadPhase 3: 0.00073 (63.8135)
+        BroadPhase 1: 0.00036 (27.9667)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (5709463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.51654 (37121.2)
+      Solver time: 0.2548 (16335.5)
+      Sabre: Factoring: 0.05276 (3689.4)
+      Sabre: Solve: 0.00619 (532.683)
+    - Data:
+      Num multi-body constraints: 55 (4916365)
+      Num solve islands: 1 (61001)
+      Num enabled rigid bodies: 33 (2793688)
+      Num binary constraints: 5 (305005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 115.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.65518e+06)
+    Inter-step time: 21.1124 (1.43089e+06)
+    Step forward time: 3.73376 (207914)
+    Pre-step event time: 2.35377 (133204)
+    Dynamics-system time: 0.79267 (38022.9)
+    Post-step event time: 0.3204 (17098.5)
+    Last-step event time: 0 (15647)
+    Pre-collide event time: 0.11868 (8993.09)
+    Collision-detection time: 0.08941 (6543.6)
+    Triggering contact events: 0.00326 (264.319)
+    Triggering contact separation events: 0.00054 (42.3802)
+    Committing removed contacts: 0.00041 (31.529)
+    Culling contacts: 0.0004 (20.4444)
+    Contact reduction: 0.00013 (12.804)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.0821 (6051.65)
+      Broad-phase time: 0.03006 (2283.14)
+      Sync bounds time: 0.0254603 (1799.91)
+      Sync transforms time: 0.0098 (836.809)
+      Narrow-phase time: 0.01003 (672.917)
+    - Data:
+      Num geometries: 70 (5901465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.0192 (1504.19)
+        SweepAndPrune::UpdateTask::run: 0.01789 (1406.88)
+        BroadPhase 2: 0.01174 (972.955)
+        BroadPhase 4: 0.00275 (202.149)
+        BroadPhase 3: 0.00073 (64.6089)
+        BroadPhase 1: 0.00035 (28.4984)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (5777463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.78602 (37622.8)
+      Solver time: 0.27753 (16549.8)
+      Sabre: Factoring: 0.06151 (3732.41)
+      Sabre: Solve: 0.00811 (539.197)
+    - Data:
+      Num multi-body constraints: 55 (4971365)
+      Num solve islands: 1 (62001)
+      Num enabled rigid bodies: 33 (2826688)
+      Num binary constraints: 5 (310005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 116.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.68051e+06)
+    Inter-step time: 22.3057 (1.45292e+06)
+    Step forward time: 3.02251 (211036)
+    Pre-step event time: 1.99975 (135259)
+    Dynamics-system time: 0.52537 (38532.3)
+    Post-step event time: 0.23275 (17363.8)
+    Last-step event time: 0 (15822)
+    Pre-collide event time: 0.12151 (9125.41)
+    Collision-detection time: 0.08726 (6642.36)
+    Triggering contact events: 0.00345 (268.472)
+    Triggering contact separation events: 0.00058 (43.035)
+    Committing removed contacts: 0.00042 (32.022)
+    Culling contacts: 0.00027 (20.7621)
+    Contact reduction: 0.00022 (12.9961)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08031 (6142.45)
+      Broad-phase time: 0.03013 (2316.74)
+      Sync bounds time: 0.02512 (1827.98)
+      Sync transforms time: 0.00931 (847.958)
+      Narrow-phase time: 0.00918 (683.388)
+    - Data:
+      Num geometries: 70 (5971465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01906 (1525.44)
+        SweepAndPrune::UpdateTask::run: 0.01762 (1426.64)
+        BroadPhase 2: 0.01174 (986.029)
+        BroadPhase 4: 0.00278 (205.349)
+        BroadPhase 3: 0.00087 (65.5537)
+        BroadPhase 1: 0.00039 (28.9124)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (5845463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.52007 (38126.3)
+      Solver time: 0.19984 (16765.9)
+      Sabre: Factoring: 0.03933 (3775.23)
+      Sabre: Solve: 0.00591 (545.657)
+    - Data:
+      Num multi-body constraints: 55 (5026365)
+      Num solve islands: 1 (63001)
+      Num enabled rigid bodies: 33 (2859688)
+      Num binary constraints: 5 (315005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 117.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.70584e+06)
+    Inter-step time: 21.2192 (1.47495e+06)
+    Step forward time: 3.10032 (214150)
+    Pre-step event time: 2.00123 (137310)
+    Dynamics-system time: 0.58732 (39041.8)
+    Post-step event time: 0.24577 (17625.2)
+    Last-step event time: 0 (15998.2)
+    Pre-collide event time: 0.12003 (9256.89)
+    Collision-detection time: 0.08985 (6740.69)
+    Triggering contact events: 0.00378 (272.548)
+    Triggering contact separation events: 0.00057 (43.6788)
+    Committing removed contacts: 0.0004 (32.4892)
+    Culling contacts: 0.00028 (21.1012)
+    Contact reduction: 0.00024 (13.2422)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08275 (6233.03)
+      Broad-phase time: 0.03122 (2350.46)
+      Sync bounds time: 0.0261 (1856.1)
+      Sync transforms time: 0.00965 (858.9)
+      Narrow-phase time: 0.00941 (693.94)
+    - Data:
+      Num geometries: 70 (6041465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01979 (1547.17)
+        SweepAndPrune::UpdateTask::run: 0.01843 (1446.81)
+        BroadPhase 2: 0.01263 (999.263)
+        BroadPhase 4: 0.00283 (208.671)
+        BroadPhase 3: 0.00072 (66.3803)
+        BroadPhase 1: 0.00039 (29.498)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (5913463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.58156 (38630.1)
+      Solver time: 0.31827 (16983.4)
+      Sabre: Factoring: 0.04666 (3818.54)
+      Sabre: Solve: 0.00609 (552.282)
+    - Data:
+      Num multi-body constraints: 55 (5081365)
+      Num solve islands: 1 (64001)
+      Num enabled rigid bodies: 33 (2892688)
+      Num binary constraints: 5 (320005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 118.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.73119e+06)
+    Inter-step time: 22.6194 (1.49699e+06)
+    Step forward time: 3.01732 (217272)
+    Pre-step event time: 1.97473 (139364)
+    Dynamics-system time: 0.50446 (39554.8)
+    Post-step event time: 0.26898 (17888.1)
+    Last-step event time: 0 (16173.3)
+    Pre-collide event time: 0.12145 (9389.07)
+    Collision-detection time: 0.09038 (6839.6)
+    Triggering contact events: 0.00339 (276.687)
+    Triggering contact separation events: 0.00063 (44.3487)
+    Committing removed contacts: 0.00041 (32.9903)
+    Culling contacts: 0.00028 (21.4157)
+    Contact reduction: 0.00013 (13.4574)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08307 (6324)
+      Broad-phase time: 0.03135 (2384.01)
+      Sync bounds time: 0.02581 (1884.36)
+      Sync transforms time: 0.00979 (870.062)
+      Narrow-phase time: 0.00991 (704.469)
+    - Data:
+      Num geometries: 70 (6111465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02004 (1568.43)
+        SweepAndPrune::UpdateTask::run: 0.01854 (1466.59)
+        BroadPhase 2: 0.01218 (1012.45)
+        BroadPhase 4: 0.00305 (211.787)
+        BroadPhase 3: 0.00086 (67.1711)
+        BroadPhase 1: 0.00049 (29.9239)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (5981463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.49849 (39137.4)
+      Solver time: 0.19704 (17201.6)
+      Sabre: Factoring: 0.03917 (3862.08)
+      Sabre: Solve: 0.00596 (558.803)
+    - Data:
+      Num multi-body constraints: 55 (5136365)
+      Num solve islands: 1 (65001)
+      Num enabled rigid bodies: 33 (2925688)
+      Num binary constraints: 5 (325005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 119.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.75691e+06)
+    Inter-step time: 23.4809 (1.51935e+06)
+    Step forward time: 3.1689 (220444)
+    Pre-step event time: 2.06829 (141444)
+    Dynamics-system time: 0.54026 (40081.5)
+    Post-step event time: 0.25447 (18156.7)
+    Last-step event time: 0 (16348.3)
+    Pre-collide event time: 0.13318 (9522.79)
+    Collision-detection time: 0.09147 (6939.35)
+    Triggering contact events: 0.00346 (280.812)
+    Triggering contact separation events: 0.00065 (44.9923)
+    Committing removed contacts: 0.0005 (33.5076)
+    Culling contacts: 0.00029 (21.7295)
+    Contact reduction: 0.00013 (13.665)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08435 (6415.84)
+      Broad-phase time: 0.03074 (2417.77)
+      Sync bounds time: 0.0269 (1912.7)
+      Sync transforms time: 0.01039 (881.281)
+      Narrow-phase time: 0.00984 (715.677)
+    - Data:
+      Num geometries: 70 (6181465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01961 (1589.8)
+        SweepAndPrune::UpdateTask::run: 0.01841 (1486.44)
+        BroadPhase 2: 0.01258 (1025.75)
+        BroadPhase 4: 0.00268 (214.924)
+        BroadPhase 3: 0.00073 (67.9681)
+        BroadPhase 1: 0.00025 (30.3476)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (6049463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.53315 (39658)
+      Solver time: 0.2334 (17424)
+      Sabre: Factoring: 0.03987 (3906.29)
+      Sabre: Solve: 0.00615 (565.876)
+    - Data:
+      Num multi-body constraints: 55 (5191365)
+      Num solve islands: 1 (66001)
+      Num enabled rigid bodies: 33 (2958688)
+      Num binary constraints: 5 (330005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 120.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.78235e+06)
+    Inter-step time: 21.9789 (1.54146e+06)
+    Step forward time: 2.94416 (223579)
+    Pre-step event time: 1.91097 (143505)
+    Dynamics-system time: 0.45728 (40596.8)
+    Post-step event time: 0.26799 (18419.3)
+    Last-step event time: 0 (16524.6)
+    Pre-collide event time: 0.12118 (9657.66)
+    Collision-detection time: 0.1291 (7038.21)
+    Triggering contact events: 0.00534 (284.917)
+    Triggering contact separation events: 0.00061 (45.7373)
+    Committing removed contacts: 0.00043 (34.021)
+    Culling contacts: 0.00027 (22.0407)
+    Contact reduction: 0.00024 (13.8582)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.12172 (6506.77)
+      Broad-phase time: 0.04558 (2451.3)
+      Sync bounds time: 0.04866 (1941.03)
+      Sync transforms time: 0.01085 (892.314)
+      Narrow-phase time: 0.00949 (726.393)
+    - Data:
+      Num geometries: 70 (6251465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.0331 (1611.05)
+        SweepAndPrune::UpdateTask::run: 0.03075 (1506.19)
+        BroadPhase 2: 0.02305 (1038.81)
+        BroadPhase 4: 0.00345 (218.231)
+        BroadPhase 3: 0.00073 (68.7463)
+        BroadPhase 1: 0.00044 (30.759)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (6117463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.45229 (40167.3)
+      Solver time: 0.19727 (17642.7)
+      Sabre: Factoring: 0.03951 (3950.03)
+      Sabre: Solve: 0.006 (572.422)
+    - Data:
+      Num multi-body constraints: 55 (5246365)
+      Num solve islands: 1 (67001)
+      Num enabled rigid bodies: 33 (2991688)
+      Num binary constraints: 5 (335005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 121.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.80763e+06)
+    Inter-step time: 21.081 (1.56346e+06)
+    Step forward time: 3.02147 (226680)
+    Pre-step event time: 1.96069 (145546)
+    Dynamics-system time: 0.46224 (41106.9)
+    Post-step event time: 0.33019 (18679.3)
+    Last-step event time: 0 (16699.7)
+    Pre-collide event time: 0.12087 (9788.54)
+    Collision-detection time: 0.08995 (7135.71)
+    Triggering contact events: 0.00336 (288.943)
+    Triggering contact separation events: 0.00058 (46.43)
+    Committing removed contacts: 0.00041 (34.5285)
+    Culling contacts: 0.00027 (22.3432)
+    Contact reduction: 0.00023 (14.0498)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08294 (6596.52)
+      Broad-phase time: 0.03066 (2484.75)
+      Sync bounds time: 0.0257 (1968.68)
+      Sync transforms time: 0.00973 (903.231)
+      Narrow-phase time: 0.01015 (736.97)
+    - Data:
+      Num geometries: 70 (6321465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01973 (1632.19)
+        SweepAndPrune::UpdateTask::run: 0.01834 (1525.88)
+        BroadPhase 2: 0.01207 (1052)
+        BroadPhase 4: 0.00277 (221.392)
+        BroadPhase 3: 0.00111 (69.5416)
+        BroadPhase 1: 0.00043 (31.1701)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (6185463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.45697 (40671.2)
+      Solver time: 0.19906 (17859.3)
+      Sabre: Factoring: 0.04001 (3992.85)
+      Sabre: Solve: 0.00614 (579.035)
+    - Data:
+      Num multi-body constraints: 55 (5301365)
+      Num solve islands: 1 (68001)
+      Num enabled rigid bodies: 33 (3024688)
+      Num binary constraints: 5 (340005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 122.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.8329e+06)
+    Inter-step time: 21.8169 (1.58544e+06)
+    Step forward time: 3.43774 (229778)
+    Pre-step event time: 2.29359 (147584)
+    Dynamics-system time: 0.58835 (41615.2)
+    Post-step event time: 0.24309 (18939.8)
+    Last-step event time: 0 (16874.5)
+    Pre-collide event time: 0.16627 (9919.97)
+    Collision-detection time: 0.0898 (7233.68)
+    Triggering contact events: 0.00361 (293.046)
+    Triggering contact separation events: 0.00058 (47.1025)
+    Committing removed contacts: 0.00043 (35.0344)
+    Culling contacts: 0.00027 (22.6628)
+    Contact reduction: 0.00024 (14.2526)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08235 (6686.26)
+      Broad-phase time: 0.03026 (2518.37)
+      Sync bounds time: 0.02606 (1996.4)
+      Sync transforms time: 0.01004 (913.932)
+      Narrow-phase time: 0.00968 (747.318)
+    - Data:
+      Num geometries: 70 (6391465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01949 (1653.61)
+        SweepAndPrune::UpdateTask::run: 0.01821 (1545.73)
+        BroadPhase 2: 0.01219 (1065.24)
+        BroadPhase 4: 0.00283 (224.486)
+        BroadPhase 3: 0.00091 (70.3511)
+        BroadPhase 1: 0.00041 (31.5961)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (6253463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.58345 (41174)
+      Solver time: 0.30625 (18076.6)
+      Sabre: Factoring: 0.03918 (4036.24)
+      Sabre: Solve: 0.08743 (585.529)
+    - Data:
+      Num multi-body constraints: 55 (5356365)
+      Num solve islands: 1 (69001)
+      Num enabled rigid bodies: 33 (3057688)
+      Num binary constraints: 5 (345005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 123.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.85816e+06)
+    Inter-step time: 23.2817 (1.60743e+06)
+    Step forward time: 2.99206 (232873)
+    Pre-step event time: 1.94696 (149615)
+    Dynamics-system time: 0.5201 (42126.1)
+    Post-step event time: 0.25349 (19200.7)
+    Last-step event time: 0 (17048.5)
+    Pre-collide event time: 0.12362 (10051.3)
+    Collision-detection time: 0.09101 (7331.76)
+    Triggering contact events: 0.00349 (297.041)
+    Triggering contact separation events: 0.00066 (47.7262)
+    Committing removed contacts: 0.00041 (35.5716)
+    Culling contacts: 0.00038 (22.9857)
+    Contact reduction: 0.00013 (14.4585)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08412 (6776.54)
+      Broad-phase time: 0.03023 (2551.62)
+      Sync bounds time: 0.02632 (2024.57)
+      Sync transforms time: 0.01035 (925.036)
+      Narrow-phase time: 0.01023 (758.057)
+    - Data:
+      Num geometries: 70 (6461465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01912 (1674.78)
+        SweepAndPrune::UpdateTask::run: 0.01796 (1565.47)
+        BroadPhase 2: 0.01208 (1078.33)
+        BroadPhase 4: 0.00279 (227.613)
+        BroadPhase 3: 0.00072 (71.2833)
+        BroadPhase 1: 0.00042 (32.0186)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (6321463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.51438 (41679.1)
+      Solver time: 0.2016 (18293.1)
+      Sabre: Factoring: 0.04025 (4079.65)
+      Sabre: Solve: 0.00625 (591.974)
+    - Data:
+      Num multi-body constraints: 55 (5411365)
+      Num solve islands: 1 (70001)
+      Num enabled rigid bodies: 33 (3090688)
+      Num binary constraints: 5 (350005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 124.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.88343e+06)
+    Inter-step time: 21.5576 (1.62939e+06)
+    Step forward time: 3.32237 (235986)
+    Pre-step event time: 2.19968 (151658)
+    Dynamics-system time: 0.61657 (42638.8)
+    Post-step event time: 0.23376 (19466.8)
+    Last-step event time: 0 (17223.2)
+    Pre-collide event time: 0.11992 (10183.6)
+    Collision-detection time: 0.09002 (7430.24)
+    Triggering contact events: 0.00351 (301.065)
+    Triggering contact separation events: 0.00058 (48.4343)
+    Committing removed contacts: 0.00042 (36.0718)
+    Culling contacts: 0.00028 (23.2936)
+    Contact reduction: 0.00046 (14.6494)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08232 (6867.36)
+      Broad-phase time: 0.03082 (2585.29)
+      Sync bounds time: 0.02493 (2053.12)
+      Sync transforms time: 0.0099 (935.672)
+      Narrow-phase time: 0.01015 (768.658)
+    - Data:
+      Num geometries: 70 (6531465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01948 (1696.38)
+        SweepAndPrune::UpdateTask::run: 0.01812 (1585.63)
+        BroadPhase 2: 0.01193 (1091.79)
+        BroadPhase 4: 0.00281 (230.802)
+        BroadPhase 3: 0.00073 (72.1337)
+        BroadPhase 1: 0.00055 (32.4887)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (6389463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.61065 (42186)
+      Solver time: 0.28013 (18510.3)
+      Sabre: Factoring: 0.0401 (4122.98)
+      Sabre: Solve: 0.00596 (598.663)
+    - Data:
+      Num multi-body constraints: 55 (5466365)
+      Num solve islands: 1 (71001)
+      Num enabled rigid bodies: 33 (3123688)
+      Num binary constraints: 5 (355005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 125.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.90864e+06)
+    Inter-step time: 21.5004 (1.65132e+06)
+    Step forward time: 3.55188 (239088)
+    Pre-step event time: 2.32795 (153692)
+    Dynamics-system time: 0.54956 (43151.9)
+    Post-step event time: 0.29604 (19728.1)
+    Last-step event time: 0 (17397.3)
+    Pre-collide event time: 0.12297 (10314.7)
+    Collision-detection time: 0.18097 (7529.94)
+    Triggering contact events: 0.02047 (305.196)
+    Triggering contact separation events: 0.00069 (49.1321)
+    Committing removed contacts: 0.00081 (36.5889)
+    Culling contacts: 0.00028 (23.6176)
+    Contact reduction: 0.00014 (14.8707)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.17333 (6959.34)
+      Broad-phase time: 0.04034 (2619.62)
+      Sync bounds time: 0.10671 (2081.88)
+      Sync transforms time: 0.00984 (946.685)
+      Narrow-phase time: 0.01006 (779.269)
+    - Data:
+      Num geometries: 70 (6601465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02019 (1718.15)
+        SweepAndPrune::UpdateTask::run: 0.01886 (1605.83)
+        BroadPhase 2: 0.01205 (1105.15)
+        BroadPhase 4: 0.0035 (234.068)
+        BroadPhase 3: 0.00085 (72.9252)
+        BroadPhase 1: 0.00046 (32.9432)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (6457463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.5442 (42692.8)
+      Solver time: 0.28148 (18728)
+      Sabre: Factoring: 0.1218 (4166.23)
+      Sabre: Solve: 0.00606 (605.045)
+    - Data:
+      Num multi-body constraints: 55 (5521365)
+      Num solve islands: 1 (72001)
+      Num enabled rigid bodies: 33 (3156688)
+      Num binary constraints: 5 (360005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 126.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.93387e+06)
+    Inter-step time: 21.8702 (1.67327e+06)
+    Step forward time: 2.95895 (242182)
+    Pre-step event time: 1.94596 (155721)
+    Dynamics-system time: 0.46111 (43662.3)
+    Post-step event time: 0.28233 (19989.1)
+    Last-step event time: 0 (17573.3)
+    Pre-collide event time: 0.12321 (10446.7)
+    Collision-detection time: 0.08979 (7629.23)
+    Triggering contact events: 0.00338 (309.246)
+    Triggering contact separation events: 0.00063 (49.7891)
+    Committing removed contacts: 0.00042 (37.0751)
+    Culling contacts: 0.00028 (23.9267)
+    Contact reduction: 0.00044 (15.056)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.0826 (7050.74)
+      Broad-phase time: 0.03077 (2653.32)
+      Sync bounds time: 0.0261503 (2110.91)
+      Sync transforms time: 0.00955 (957.747)
+      Narrow-phase time: 0.00978 (789.612)
+    - Data:
+      Num geometries: 70 (6671465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01929 (1739.78)
+        SweepAndPrune::UpdateTask::run: 0.01792 (1625.97)
+        BroadPhase 2: 0.01242 (1118.6)
+        BroadPhase 4: 0.00265 (237.253)
+        BroadPhase 3: 0.00073 (73.7724)
+        BroadPhase 1: 0.0004 (33.3988)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (6525463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.45612 (43197.4)
+      Solver time: 0.19601 (18945.8)
+      Sabre: Factoring: 0.0393 (4210.05)
+      Sabre: Solve: 0.00577 (611.339)
+    - Data:
+      Num multi-body constraints: 55 (5576365)
+      Num solve islands: 1 (73001)
+      Num enabled rigid bodies: 33 (3189688)
+      Num binary constraints: 5 (365005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 127.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.95915e+06)
+    Inter-step time: 22.2168 (1.69527e+06)
+    Step forward time: 2.93091 (245281)
+    Pre-step event time: 1.90545 (157755)
+    Dynamics-system time: 0.53143 (44174.6)
+    Post-step event time: 0.22971 (20250.6)
+    Last-step event time: 0 (17748.3)
+    Pre-collide event time: 0.1201 (10578.4)
+    Collision-detection time: 0.08905 (7727.82)
+    Triggering contact events: 0.00329 (313.221)
+    Triggering contact separation events: 0.00063 (50.4485)
+    Committing removed contacts: 0.00043 (37.5807)
+    Culling contacts: 0.00028 (24.2354)
+    Contact reduction: 0.00024 (15.2589)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08189 (7141.62)
+      Broad-phase time: 0.03024 (2687.24)
+      Sync bounds time: 0.02554 (2139.06)
+      Sync transforms time: 0.00985 (968.734)
+      Narrow-phase time: 0.00975 (800.017)
+    - Data:
+      Num geometries: 70 (6741465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01938 (1761.27)
+        SweepAndPrune::UpdateTask::run: 0.01821 (1645.95)
+        BroadPhase 2: 0.01231 (1131.98)
+        BroadPhase 4: 0.00302 (240.396)
+        BroadPhase 3: 0.00072 (74.5558)
+        BroadPhase 1: 0.00038 (33.9038)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (6593463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.52697 (43704)
+      Solver time: 0.21706 (19164.6)
+      Sabre: Factoring: 0.04013 (4253.45)
+      Sabre: Solve: 0.00616 (617.775)
+    - Data:
+      Num multi-body constraints: 55 (5631365)
+      Num solve islands: 1 (74001)
+      Num enabled rigid bodies: 33 (3222688)
+      Num binary constraints: 5 (370005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 128.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (1.98438e+06)
+    Inter-step time: 21.9429 (1.71722e+06)
+    Step forward time: 2.95668 (248373)
+    Pre-step event time: 1.90148 (159780)
+    Dynamics-system time: 0.46403 (44686.6)
+    Post-step event time: 0.32193 (20512.4)
+    Last-step event time: 0 (17923.4)
+    Pre-collide event time: 0.12054 (10711.1)
+    Collision-detection time: 0.08936 (7826.23)
+    Triggering contact events: 0.00369 (317.363)
+    Triggering contact separation events: 0.00059 (51.0881)
+    Committing removed contacts: 0.00042 (38.1719)
+    Culling contacts: 0.00028 (24.5598)
+    Contact reduction: 0.00023 (15.4436)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.0822 (7232.12)
+      Broad-phase time: 0.03085 (2720.94)
+      Sync bounds time: 0.02539 (2167.27)
+      Sync transforms time: 0.00974 (979.753)
+      Narrow-phase time: 0.00976 (810.404)
+    - Data:
+      Num geometries: 70 (6811465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01946 (1782.64)
+        SweepAndPrune::UpdateTask::run: 0.01821 (1665.78)
+        BroadPhase 2: 0.01221 (1145.37)
+        BroadPhase 4: 0.00308 (243.496)
+        BroadPhase 3: 0.00072 (75.4311)
+        BroadPhase 1: 0.00041 (34.329)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (6661463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.45895 (44210.4)
+      Solver time: 0.19947 (19382.8)
+      Sabre: Factoring: 0.04015 (4296.63)
+      Sabre: Solve: 0.00593 (624.53)
+    - Data:
+      Num multi-body constraints: 55 (5686365)
+      Num solve islands: 1 (75001)
+      Num enabled rigid bodies: 33 (3255688)
+      Num binary constraints: 5 (375005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 129.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (2.00966e+06)
+    Inter-step time: 21.8154 (1.73922e+06)
+    Step forward time: 2.95068 (251465)
+    Pre-step event time: 1.90287 (161806)
+    Dynamics-system time: 0.51531 (45199.2)
+    Post-step event time: 0.25106 (20772.7)
+    Last-step event time: 0 (18097.9)
+    Pre-collide event time: 0.12823 (10843.3)
+    Collision-detection time: 0.09211 (7924.64)
+    Triggering contact events: 0.00364 (321.37)
+    Triggering contact separation events: 0.00055 (51.7231)
+    Committing removed contacts: 0.00041 (38.684)
+    Culling contacts: 0.00029 (24.872)
+    Contact reduction: 0.00024 (15.6426)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08496 (7322.69)
+      Broad-phase time: 0.03232 (2754.61)
+      Sync bounds time: 0.02577 (2195.2)
+      Sync transforms time: 0.0099 (990.92)
+      Narrow-phase time: 0.01049 (820.946)
+    - Data:
+      Num geometries: 70 (6881465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02002 (1803.99)
+        SweepAndPrune::UpdateTask::run: 0.01857 (1685.57)
+        BroadPhase 2: 0.01295 (1158.71)
+        BroadPhase 4: 0.00267 (246.577)
+        BroadPhase 3: 0.00073 (76.3197)
+        BroadPhase 1: 0.00039 (34.7631)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (6729463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.50997 (44717.2)
+      Solver time: 0.22769 (19601)
+      Sabre: Factoring: 0.05004 (4340.14)
+      Sabre: Solve: 0.00587 (631.259)
+    - Data:
+      Num multi-body constraints: 55 (5741365)
+      Num solve islands: 1 (76001)
+      Num enabled rigid bodies: 33 (3288688)
+      Num binary constraints: 5 (380005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 130.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (2.03491e+06)
+    Inter-step time: 22.2332 (1.76119e+06)
+    Step forward time: 3.10892 (254554)
+    Pre-step event time: 1.99583 (163830)
+    Dynamics-system time: 0.46858 (45709.6)
+    Post-step event time: 0.30221 (21034.4)
+    Last-step event time: 0 (18271.4)
+    Pre-collide event time: 0.14957 (10974.8)
+    Collision-detection time: 0.1171 (8022.77)
+    Triggering contact events: 0.00344 (325.429)
+    Triggering contact separation events: 0.0009 (52.3868)
+    Committing removed contacts: 0.00043 (39.2072)
+    Culling contacts: 0.00028 (25.1805)
+    Contact reduction: 0.00015 (15.8271)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.10953 (7413.09)
+      Broad-phase time: 0.05467 (2788.14)
+      Sync bounds time: 0.02732 (2223.1)
+      Sync transforms time: 0.01052 (1002.16)
+      Narrow-phase time: 0.00974 (831.43)
+    - Data:
+      Num geometries: 70 (6951465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01942 (1825.17)
+        SweepAndPrune::UpdateTask::run: 0.01813 (1705.28)
+        BroadPhase 2: 0.01209 (1171.82)
+        BroadPhase 4: 0.00287 (249.79)
+        BroadPhase 3: 0.00073 (77.1446)
+        BroadPhase 1: 0.00042 (35.196)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (6797463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.46303 (45221.8)
+      Solver time: 0.20045 (19817.2)
+      Sabre: Factoring: 0.03915 (4382.97)
+      Sabre: Solve: 0.00596 (637.745)
+    - Data:
+      Num multi-body constraints: 55 (5796365)
+      Num solve islands: 1 (77001)
+      Num enabled rigid bodies: 33 (3321688)
+      Num binary constraints: 5 (385005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 131.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (2.06016e+06)
+    Inter-step time: 22.512 (1.78317e+06)
+    Step forward time: 2.94591 (257638)
+    Pre-step event time: 1.91864 (165849)
+    Dynamics-system time: 0.52336 (46221.8)
+    Post-step event time: 0.23425 (21294.7)
+    Last-step event time: 0 (18447.9)
+    Pre-collide event time: 0.1225 (11107.6)
+    Collision-detection time: 0.08938 (8120.93)
+    Triggering contact events: 0.00391 (329.611)
+    Triggering contact separation events: 0.00064 (53.0241)
+    Committing removed contacts: 0.00042 (39.7111)
+    Culling contacts: 0.00029 (25.5059)
+    Contact reduction: 0.00023 (16.0069)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08235 (7503.26)
+      Broad-phase time: 0.03042 (2821.62)
+      Sync bounds time: 0.02564 (2251)
+      Sync transforms time: 0.00994 (1013.01)
+      Narrow-phase time: 0.00954 (841.882)
+    - Data:
+      Num geometries: 70 (7021465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01964 (1846.44)
+        SweepAndPrune::UpdateTask::run: 0.01845 (1725.04)
+        BroadPhase 2: 0.01187 (1184.87)
+        BroadPhase 4: 0.00318 (253.096)
+        BroadPhase 3: 0.0011 (77.9401)
+        BroadPhase 1: 0.00036 (35.6187)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (6865463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.51804 (45728.2)
+      Solver time: 0.19776 (20034.9)
+      Sabre: Factoring: 0.03977 (4426.02)
+      Sabre: Solve: 0.00593 (644.278)
+    - Data:
+      Num multi-body constraints: 55 (5851365)
+      Num solve islands: 1 (78001)
+      Num enabled rigid bodies: 33 (3354688)
+      Num binary constraints: 5 (390005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 132.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (2.08545e+06)
+    Inter-step time: 21.597 (1.80516e+06)
+    Step forward time: 3.37025 (260748)
+    Pre-step event time: 2.19131 (167883)
+    Dynamics-system time: 0.59846 (46735.4)
+    Post-step event time: 0.2331 (21564.7)
+    Last-step event time: 0 (18624.5)
+    Pre-collide event time: 0.12102 (11240)
+    Collision-detection time: 0.09034 (8218.04)
+    Triggering contact events: 0.00323 (333.77)
+    Triggering contact separation events: 0.00057 (53.7437)
+    Committing removed contacts: 0.00042 (40.191)
+    Culling contacts: 0.00028 (25.809)
+    Contact reduction: 0.00023 (16.2092)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08308 (7592.67)
+      Broad-phase time: 0.03021 (2854.55)
+      Sync bounds time: 0.02665 (2279.02)
+      Sync transforms time: 0.01023 (1024.05)
+      Narrow-phase time: 0.00953 (852.213)
+    - Data:
+      Num geometries: 70 (7091465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01926 (1867.33)
+        SweepAndPrune::UpdateTask::run: 0.01801 (1744.46)
+        BroadPhase 2: 0.012 (1197.68)
+        BroadPhase 4: 0.00298 (256.367)
+        BroadPhase 3: 0.00073 (78.7594)
+        BroadPhase 1: 0.00041 (36.0392)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (6933463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.59334 (46235.8)
+      Solver time: 0.19871 (20252.8)
+      Sabre: Factoring: 0.03971 (4470.06)
+      Sabre: Solve: 0.00601 (650.822)
+    - Data:
+      Num multi-body constraints: 55 (5906365)
+      Num solve islands: 1 (79001)
+      Num enabled rigid bodies: 33 (3387688)
+      Num binary constraints: 5 (395005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 133.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (2.11071e+06)
+    Inter-step time: 21.9522 (1.82715e+06)
+    Step forward time: 2.92753 (263842)
+    Pre-step event time: 1.90817 (169906)
+    Dynamics-system time: 0.51841 (47248.6)
+    Post-step event time: 0.2347 (21828.8)
+    Last-step event time: 0 (18801.6)
+    Pre-collide event time: 0.12018 (11372)
+    Collision-detection time: 0.08967 (8317.41)
+    Triggering contact events: 0.00355 (337.819)
+    Triggering contact separation events: 0.00067 (54.4652)
+    Committing removed contacts: 0.00042 (40.6982)
+    Culling contacts: 0.00028 (26.1323)
+    Contact reduction: 0.00024 (16.4159)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.0824 (7683.69)
+      Broad-phase time: 0.0295 (2887.87)
+      Sync bounds time: 0.02579 (2307.63)
+      Sync transforms time: 0.01004 (1035.41)
+      Narrow-phase time: 0.00997 (862.608)
+    - Data:
+      Num geometries: 70 (7161465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01875 (1888.47)
+        SweepAndPrune::UpdateTask::run: 0.01741 (1763.97)
+        BroadPhase 2: 0.01179 (1210.76)
+        BroadPhase 4: 0.00282 (259.429)
+        BroadPhase 3: 0.00073 (79.5438)
+        BroadPhase 1: 0.00041 (36.4907)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (7001463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.51268 (46743)
+      Solver time: 0.20835 (20470.4)
+      Sabre: Factoring: 0.03948 (4513.24)
+      Sabre: Solve: 0.00594 (657.624)
+    - Data:
+      Num multi-body constraints: 55 (5961365)
+      Num solve islands: 1 (80001)
+      Num enabled rigid bodies: 33 (3420688)
+      Num binary constraints: 5 (400005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 134.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (2.1359e+06)
+    Inter-step time: 22.0843 (1.84907e+06)
+    Step forward time: 2.96873 (266922)
+    Pre-step event time: 1.91243 (171923)
+    Dynamics-system time: 0.49762 (47759)
+    Post-step event time: 0.2336 (22089.8)
+    Last-step event time: 0 (18975.8)
+    Pre-collide event time: 0.12174 (11504.3)
+    Collision-detection time: 0.1445 (8416.4)
+    Triggering contact events: 0.00614 (341.807)
+    Triggering contact separation events: 0.00055 (55.1039)
+    Committing removed contacts: 0.00069 (41.1946)
+    Culling contacts: 0.00029 (26.4593)
+    Contact reduction: 0.00023 (16.6311)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.13604 (7774.68)
+      Broad-phase time: 0.06034 (2921.36)
+      Sync bounds time: 0.03397 (2336.33)
+      Sync transforms time: 0.00989 (1046.39)
+      Narrow-phase time: 0.01013 (873.279)
+    - Data:
+      Num geometries: 70 (7231465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.03156 (1909.85)
+        SweepAndPrune::UpdateTask::run: 0.03039 (1783.74)
+        BroadPhase 2: 0.02396 (1223.9)
+        BroadPhase 4: 0.00267 (262.656)
+        BroadPhase 3: 0.00094 (80.3366)
+        BroadPhase 1: 0.00041 (36.903)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (7069463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.49276 (47247.4)
+      Solver time: 0.19952 (20687.4)
+      Sabre: Factoring: 0.03916 (4556.2)
+      Sabre: Solve: 0.00592 (664.425)
+    - Data:
+      Num multi-body constraints: 55 (6016365)
+      Num solve islands: 1 (81001)
+      Num enabled rigid bodies: 33 (3453688)
+      Num binary constraints: 5 (405005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 135.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (2.16126e+06)
+    Inter-step time: 21.2419 (1.87113e+06)
+    Step forward time: 2.92732 (270035)
+    Pre-step event time: 1.89731 (173959)
+    Dynamics-system time: 0.52721 (48277.9)
+    Post-step event time: 0.23662 (22354.7)
+    Last-step event time: 0 (19151.1)
+    Pre-collide event time: 0.12108 (11637)
+    Collision-detection time: 0.08869 (8514.63)
+    Triggering contact events: 0.00337 (346.007)
+    Triggering contact separation events: 0.00057 (55.7732)
+    Committing removed contacts: 0.00041 (41.6711)
+    Culling contacts: 0.00027 (26.7842)
+    Contact reduction: 0.00023 (16.8283)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08121 (7865.04)
+      Broad-phase time: 0.02995 (2954.78)
+      Sync bounds time: 0.02513 (2364.06)
+      Sync transforms time: 0.00993 (1057.54)
+      Narrow-phase time: 0.00946 (883.93)
+    - Data:
+      Num geometries: 70 (7301465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.0192 (1931.1)
+        SweepAndPrune::UpdateTask::run: 0.01784 (1803.55)
+        BroadPhase 2: 0.01173 (1237.17)
+        BroadPhase 4: 0.00311 (265.819)
+        BroadPhase 3: 0.0009 (81.1757)
+        BroadPhase 1: 0.0004 (37.3461)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (7137463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.52214 (47760.4)
+      Solver time: 0.26 (20907)
+      Sabre: Factoring: 0.05208 (4599.47)
+      Sabre: Solve: 0.00596 (670.921)
+    - Data:
+      Num multi-body constraints: 55 (6071365)
+      Num solve islands: 1 (82001)
+      Num enabled rigid bodies: 33 (3486688)
+      Num binary constraints: 5 (410005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 136.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (2.18672e+06)
+    Inter-step time: 21.8601 (1.89328e+06)
+    Step forward time: 3.00416 (273156)
+    Pre-step event time: 1.97159 (175998)
+    Dynamics-system time: 0.47425 (48797.3)
+    Post-step event time: 0.28926 (22620.8)
+    Last-step event time: 0 (19330.1)
+    Pre-collide event time: 0.12306 (11770)
+    Collision-detection time: 0.0895 (8614.85)
+    Triggering contact events: 0.00346 (350.336)
+    Triggering contact separation events: 0.0006 (56.4009)
+    Committing removed contacts: 0.00041 (42.1867)
+    Culling contacts: 0.00028 (27.1073)
+    Contact reduction: 0.00013 (17.038)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08263 (7957.36)
+      Broad-phase time: 0.03047 (2988.97)
+      Sync bounds time: 0.02554 (2392.59)
+      Sync transforms time: 0.0101 (1068.92)
+      Narrow-phase time: 0.0099 (894.702)
+    - Data:
+      Num geometries: 70 (7371465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.0195 (1952.61)
+        SweepAndPrune::UpdateTask::run: 0.01826 (1823.59)
+        BroadPhase 2: 0.01221 (1250.45)
+        BroadPhase 4: 0.0028 (269.149)
+        BroadPhase 3: 0.0009 (81.9865)
+        BroadPhase 1: 0.00036 (37.7813)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (7205463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.45615 (48273.7)
+      Solver time: 0.19717 (21127.4)
+      Sabre: Factoring: 0.03946 (4643.06)
+      Sabre: Solve: 0.00592 (677.45)
+    - Data:
+      Num multi-body constraints: 55 (6126365)
+      Num solve islands: 1 (83001)
+      Num enabled rigid bodies: 33 (3519688)
+      Num binary constraints: 5 (415005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 137.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (2.21196e+06)
+    Inter-step time: 21.2888 (1.91524e+06)
+    Step forward time: 3.24284 (276255)
+    Pre-step event time: 2.04458 (178034)
+    Dynamics-system time: 0.60472 (49308.7)
+    Post-step event time: 0.32016 (22881.8)
+    Last-step event time: 0 (19505)
+    Pre-collide event time: 0.12843 (11902.2)
+    Collision-detection time: 0.08965 (8713.16)
+    Triggering contact events: 0.00335 (354.407)
+    Triggering contact separation events: 0.00056 (57.0399)
+    Committing removed contacts: 0.00043 (42.6934)
+    Culling contacts: 0.00028 (27.4439)
+    Contact reduction: 0.00012 (17.2274)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.08247 (8047.73)
+      Broad-phase time: 0.03063 (3022.71)
+      Sync bounds time: 0.02564 (2420.41)
+      Sync transforms time: 0.00976 (1080.09)
+      Narrow-phase time: 0.01006 (905.217)
+    - Data:
+      Num geometries: 70 (7441465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.01947 (1974.2)
+        SweepAndPrune::UpdateTask::run: 0.01809 (1843.67)
+        BroadPhase 2: 0.01165 (1263.72)
+        BroadPhase 4: 0.00342 (272.378)
+        BroadPhase 3: 0.00073 (82.8393)
+        BroadPhase 1: 0.00039 (38.2281)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (7273463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.59963 (48779)
+      Solver time: 0.20134 (21344.9)
+      Sabre: Factoring: 0.03923 (4687.01)
+      Sabre: Solve: 0.00579 (683.891)
+    - Data:
+      Num multi-body constraints: 55 (6181365)
+      Num solve islands: 1 (84001)
+      Num enabled rigid bodies: 33 (3552688)
+      Num binary constraints: 5 (420005)
+      Num contact constraints: 0 (0)
+    - Children:
+
+
+ *** Time step 138.649 ***
+Root
+- Children:
+  Simulation
+  - Timings:
+    Update RenderManager: 0 (2.23721e+06)
+    Inter-step time: 21.0543 (1.93721e+06)
+    Step forward time: 3.42104 (279343)
+    Pre-step event time: 2.3391 (180057)
+    Dynamics-system time: 0.52254 (49819.4)
+    Post-step event time: 0.23494 (23143.4)
+    Last-step event time: 0 (19679.9)
+    Pre-collide event time: 0.14472 (12034.5)
+    Collision-detection time: 0.11347 (8811.61)
+    Triggering contact events: 0.00447 (358.503)
+    Triggering contact separation events: 0.00056 (57.7078)
+    Committing removed contacts: 0.00055 (43.1643)
+    Culling contacts: 0.00039 (27.7558)
+    Contact reduction: 0.00013 (17.4247)
+  - Data:
+    Num contacts removed: 0 (0)
+  - Children:
+    Space
+    - Timings:
+      Update time: 0.10567 (8138.47)
+      Broad-phase time: 0.03827 (3056.13)
+      Sync bounds time: 0.03196 (2448.78)
+      Sync transforms time: 0.01429 (1091.41)
+      Narrow-phase time: 0.01331 (915.686)
+    - Data:
+      Num geometries: 70 (7511465)
+      Num geometry-geometry contact points: 0 (0)
+      Num geometry-geometry contacts: 0 (0)
+      Num narrow phase tests: 0 (0)
+    - Children:
+      SweepPrune
+      - Timings:
+        SweepAndPrune::update(): 0.02512 (1995.43)
+        SweepAndPrune::UpdateTask::run: 0.02322 (1863.44)
+        BroadPhase 2: 0.01594 (1276.93)
+        BroadPhase 4: 0.00326 (275.478)
+        BroadPhase 3: 0.00107 (83.6674)
+        BroadPhase 1: 0.00039 (38.6401)
+      - Data:
+        NumOverlaps: 0 (0)
+        NumBoxes: 68 (7341463)
+      - Children:
+    DynamicsSystem
+    - Timings:
+      Update time: 0.51746 (49284)
+      Solver time: 0.20225 (21562.1)
+      Sabre: Factoring: 0.03929 (4730.56)
+      Sabre: Solve: 0.0059 (690.702)
+    - Data:
+      Num multi-body constraints: 55 (6236365)
+      Num solve islands: 1 (85001)
+      Num enabled rigid bodies: 33 (3585688)
+      Num binary constraints: 5 (425005)
+      Num contact constraints: 0 (0)
+    - Children:

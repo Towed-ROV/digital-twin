@@ -57,14 +57,6 @@ class RovAssembly(agxSDK.Assembly):
         self.link3 = builder.create_wing_left(wing_material, WING_SCALE, "wing_l", rot=(0, 0, 0))
         link3rot = self.link3.getPosition()
         print("buildt left wing")
-        # echo lod
-        # self.ehco_lod = Sensor(seafloor, self, WATER_DEPTH)
-        # print("buildt echo lod")
-        # self.ehco_lod.beam.setPosition(agx.Vec3(0, 0, 0))
-        # self.link4 = agx.RigidBody(self.ehco_lod.beam)
-        # self.link4.setPosition(agx.Vec3(0, 0, -WATER_DEPTH))
-        # self.link1.getGeometry('Rov_body').setEnableCollisions(self.ehco_lod.beam, False)
-        # print("buildt sonar shape")
 
         # disabling internal collisions
         self.link1.getGeometry('Rov_body').setEnableCollisions(self.link2.getGeometry('wing_r'), False)
@@ -88,17 +80,14 @@ class RovAssembly(agxSDK.Assembly):
                                        pos=link3rot, axis=agx.Vec3(0, 1, 0), lock=False, motor=True,
                                        range=(MIN_WING_ANGLE, MAX_WING_ANGLE), compliance=1e-5)
         # sonar
-        # self.sonar_joint = self.build_lock_joint(self.link1, self.link4, (0,0,0), (0,0,0))
         print("buildt joints")
         # adding models to assembly
         self.add(self.link1)
         self.add(self.link2)
         self.add(self.link3)
-        # self.add(self.link4)
         print("added models to assembly")
         self.add(self.hinge1)
         self.add(self.hinge2)
-        # self.add(self.sonar_joint)
         print("aded links to assembly")
         self.left_wing_angle = lambda: self.hinge1.getAngle()
         self.right_wing_angle = lambda: self.hinge2.getAngle()
@@ -107,7 +96,7 @@ class RovAssembly(agxSDK.Assembly):
         print("added wing step lenght")
         self.setName('rov')
         print("set name")
-
+        Sec.postCallback(self.post)
 
     @staticmethod
     def disable_col(geo, ruged: agx.RigidBody):
@@ -213,6 +202,11 @@ class RovAssembly(agxSDK.Assembly):
         material = agx.Material(name)
         material.getBulkMaterial().setDensity(density)
         return material
+
+    def post(self, t):
+        r_p = self.link1.getPosition()
+        cam_pos = agx.Vec3(r_p[0] + 15, r_p[1] + 20, r_p[2] + 10)
+        demoutils.init_camera(eye=cam_pos, center=r_p)
 
 
 if __name__ == "__main__":

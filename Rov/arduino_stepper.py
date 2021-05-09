@@ -4,8 +4,9 @@ from functions import _map, constrain
 import demoutils
 from functions import deg2rad, rad2deg
 from rov_simulation_parameters import WATER_LENGTH
-import rov_controller
 
+
+# import rov_controller
 
 class ArduinoStepper(agxSDK.StepEventListener):
     def __init__(self, pid: PID_Controller, pid_trim: PID_Controller, rov):
@@ -84,7 +85,7 @@ class ArduinoStepper(agxSDK.StepEventListener):
                     else:
                         self.wing_pos_port = wing_pos
                         self.wing_pos_sb = wing_pos
-                self.compensate_wing_to_pitch()
+                # self.compensate_wing_to_pitch()
                 self.rov.update_wings(self.wing_pos_port, self.wing_pos_sb)
                 # step_position_sb = _map(self.wing_pos_sb, -self.max_wing_angle, self.max_wing_angle,
                 #                        self.min_stepper_pos_sb, self.max_stepper_pos_sb)
@@ -156,8 +157,8 @@ class ArduinoStepper(agxSDK.StepEventListener):
         self.send("wing_pos_sb:" + str(angle_sb))
 
     def compensate_wing_to_pitch(self):
-        self.wing_pos_sb = self.wing_pos_sb - self.pitch*100
-        self.wing_pos_port = self.wing_pos_port - self.pitch*100
+        self.wing_pos_sb = self.wing_pos_sb - self.pitch * 100
+        self.wing_pos_port = self.wing_pos_port - self.pitch * 100
 
     def trim_wing_pos(self, wing_pos, trim_pos):
         if wing_pos + trim_pos > self.max_wing_angle:
@@ -177,100 +178,99 @@ class ArduinoStepper(agxSDK.StepEventListener):
     def handle_received_message(self):
         try:
             received_command = self.read()
-            # if len(received_command)> 1:
-            # print(received_command)
-            if received_command[0] == "auto_mode":
-                if received_command[1] == "True":
-                    self.set_target_mode(self.auto_depth_mode)
-                    self.send(received_command + ":True")
-                elif received_command[1] == "False":
-                    self.set_target_mode(self.manual_mode)
-                    self.manual_wing_pos = int(self.wing_pos_sb)
-                    self.send(received_command + ":True")
-                else:
-                    self.send(received_command + ":False")
+            if len(received_command) > 1:
+                print("inc: ", received_command)
+                if received_command[0] == "auto_mode":
+                    if received_command[1] == "True":
+                        self.set_target_mode(self.auto_depth_mode)
+                        self.send(received_command + ":True")
+                    elif received_command[1] == "False":
+                        self.set_target_mode(self.manual_mode)
+                        self.manual_wing_pos = int(self.wing_pos_sb)
+                        self.send(received_command + ":True")
+                    else:
+                        self.send(received_command + ":False")
+                elif received_command[0] == "manual_wing_pos":
+                    check_manual_wing_pos = float(received_command[1])
+                    if self.max_wing_angle > check_manual_wing_pos > -self.max_wing_angle:
+                        self.manual_wing_pos = check_manual_wing_pos
+                        self.send(received_command[0] + ":True")
+                    else:
+                        self.send(received_command[0] + ":False")
 
-            elif received_command[0] == "manual_wing_pos":
-                check_manual_wing_pos = float(received_command[1])
-                if self.max_wing_angle > check_manual_wing_pos > -self.max_wing_angle:
-                    self.manual_wing_pos = check_manual_wing_pos
+                elif received_command[0] == "emergency_surface":
+                    self.set_target_mode(self.manual_mode, self.max_wing_angle)
+                    self.depth_rov_offset = received_command[1]
                     self.send(received_command[0] + ":True")
-                else:
-                    self.send(received_command[0] + ":False")
 
-            elif received_command[0] == "emergency_surface":
-                self.set_target_mode(self.manual_mode, self.max_wing_angle)
-                self.depth_rov_offset = received_command[1]
-                self.send(received_command[0] + ":True")
-
-            elif received_command[0] == "depth":
-                self.depth = float(received_command[1])
-                self.send(received_command[0] + ":True")
-                # print(received_command)
-
-            elif received_command[0] == "roll":
-                self.roll = float(received_command[1])
-                self.send(received_command[0] + ":True")
-
-            elif received_command[0] == "pitch":
-                self.pitch = float(received_command[1])
-                self.send(received_command[0] + ":True")
-
-            elif received_command[0] == "set_point_depth":
-                self.set_point_depth = float(received_command[1])
-                self.send(received_command[0] + ":True")
-
-            elif received_command[0] == "pid_depth_p":
-                self.pid_depth_p = float(received_command[1])
-                if self.pid_depth_p >= 0:
-                    self.pid_trim.set_tunings(self.pid_depth_p, self.pid_depth_i, self.pid_depth_d)
+                elif received_command[0] == "depth":
+                    self.depth = float(received_command[1])
                     self.send(received_command[0] + ":True")
-                else:
-                    self.send(received_command[0] + ":False")
+                    # print(received_command)
 
-            elif received_command[0] == "pid_depth_i":
-                self.pid_depth_i = float(received_command[1])
-                if self.pid_depth_i >= 0:
-                    self.pid_trim.set_tunings(self.pid_depth_p, self.pid_depth_i, self.pid_depth_d)
+                elif received_command[0] == "roll":
+                    self.roll = float(received_command[1])
                     self.send(received_command[0] + ":True")
-                else:
-                    self.send(received_command[0] + ":False")
 
-            elif received_command[0] == "pid_depth_d":
-                self.pid_depth_d = float(received_command[1])
-                if self.pid_depth_d >= 0:
-                    self.pid_trim.set_tunings(self.pid_depth_p, self.pid_depth_i, self.pid_depth_d)
+                elif received_command[0] == "pitch":
+                    self.pitch = float(received_command[1])
                     self.send(received_command[0] + ":True")
-                else:
-                    self.send(received_command[0] + ":False")
 
-            elif received_command[0] == "pid_roll_p":
-                self.pid_roll_p = float(received_command[1])
-                if self.pid_roll_p >= 0:
-                    self.pid_trim.set_tunings(self.pid_roll_p, self.pid_roll_i, self.pid_roll_d)
+                elif received_command[0] == "set_point_depth":
+                    self.set_point_depth = float(received_command[1])
                     self.send(received_command[0] + ":True")
-                else:
-                    self.send(received_command[0] + ":False")
 
-            elif received_command[0] == "pid_roll_i":
-                self.pid_roll_i = float(received_command[1])
-                if self.pid_roll_i >= 0:
-                    self.pid_trim.set_tunings(self.pid_roll_p, self.pid_roll_i, self.pid_roll_d)
+                elif received_command[0] == "pid_depth_p":
+                    self.pid_depth_p = float(received_command[1])
+                    if self.pid_depth_p >= 0:
+                        self.pid_trim.set_tunings(self.pid_depth_p, self.pid_depth_i, self.pid_depth_d)
+                        self.send(received_command[0] + ":True")
+                    else:
+                        self.send(received_command[0] + ":False")
+
+                elif received_command[0] == "pid_depth_i":
+                    self.pid_depth_i = float(received_command[1])
+                    if self.pid_depth_i >= 0:
+                        self.pid_trim.set_tunings(self.pid_depth_p, self.pid_depth_i, self.pid_depth_d)
+                        self.send(received_command[0] + ":True")
+                    else:
+                        self.send(received_command[0] + ":False")
+
+                elif received_command[0] == "pid_depth_d":
+                    self.pid_depth_d = float(received_command[1])
+                    if self.pid_depth_d >= 0:
+                        self.pid_trim.set_tunings(self.pid_depth_p, self.pid_depth_i, self.pid_depth_d)
+                        self.send(received_command[0] + ":True")
+                    else:
+                        self.send(received_command[0] + ":False")
+
+                elif received_command[0] == "pid_roll_p":
+                    self.pid_roll_p = float(received_command[1])
+                    if self.pid_roll_p >= 0:
+                        self.pid_trim.set_tunings(self.pid_roll_p, self.pid_roll_i, self.pid_roll_d)
+                        self.send(received_command[0] + ":True")
+                    else:
+                        self.send(received_command[0] + ":False")
+
+                elif received_command[0] == "pid_roll_i":
+                    self.pid_roll_i = float(received_command[1])
+                    if self.pid_roll_i >= 0:
+                        self.pid_trim.set_tunings(self.pid_roll_p, self.pid_roll_i, self.pid_roll_d)
+                        self.send(received_command[0] + ":True")
+                    else:
+                        self.send(received_command[0] + ":False")
+
+                elif received_command[0] == "pid_roll_d":
+                    self.pid_roll_d = float(received_command[1])
+                    if self.pid_roll_d >= 0:
+                        self.pid_trim.set_tunings(self.pid_roll_p, self.pid_roll_i, self.pid_roll_d)
+                        self.send(received_command[0] + ":True")
+                    else:
+                        self.send(received_command[0] + ":False")
+
+                elif received_command[0] == "reset":
+                    self.reset_stepper()
                     self.send(received_command[0] + ":True")
-                else:
-                    self.send(received_command[0] + ":False")
-
-            elif received_command[0] == "pid_roll_d":
-                self.pid_roll_d = float(received_command[1])
-                if self.pid_roll_d >= 0:
-                    self.pid_trim.set_tunings(self.pid_roll_p, self.pid_roll_i, self.pid_roll_d)
-                    self.send(received_command[0] + ":True")
-                else:
-                    self.send(received_command[0] + ":False")
-
-            elif received_command[0] == "reset":
-                self.reset_stepper()
-                self.send(received_command[0] + ":True")
         except ValueError:
             pass
 

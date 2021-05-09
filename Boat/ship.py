@@ -130,7 +130,6 @@ class Ship(agxSDK.Assembly):
 
     def post(self, t):
         pos, n = self.getPosition()
-        print("water ",pos,n)
         if pos[0] - WATER_LENGTH * n > 50:
             print("build more water")
             self.n += 1
