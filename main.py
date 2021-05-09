@@ -2,7 +2,6 @@
 from agxOSG import createVisual
 import demoutils
 from demoutils import sim
-from agxCollide import Geometry
 
 # local imports:
 from rov_simulation_parameters import *
