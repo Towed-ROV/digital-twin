@@ -31,7 +31,7 @@ class rov_builder(agxIO.MeshReader):
         geom.setPosition(agx.Vec3(0, self.rov_volume[2] / 1.15, 0))
         rov_body = self.build_rigid_body(geom, name, (0, 0, 0), (0, 0, 0))
         rov_body.setMotionControl(agx.RigidBody.DYNAMICS)
-        rov_body.setCmLocalTranslate(agx.Vec3(*cm))
+        rov_body.setCmLocalTranslate(agx.Vec3(*CM_ROV))
 
         tank1, tank2 = self.build_tanks(material=tank_material)
 
@@ -79,7 +79,7 @@ class rov_builder(agxIO.MeshReader):
         tank2 = tank1.clone()
         tank1.setRotation(agx.EulerAngles(0, 0, 1 / 2 * math.pi))
         tank2.setRotation(agx.EulerAngles(0, math.pi, math.pi * 3 / 2))
-        x, y, z = self.rov_volume[0] / 8, self.rov_volume[2] / 1.9, rad / 1.8 + self.rov_volume[2]
+        x, y, z = length/1.5,rad*1.5,rad*2
         tank1.setPosition(x, +y, z)
         tank2.setPosition(x, -y, z)
         return tank1, tank2

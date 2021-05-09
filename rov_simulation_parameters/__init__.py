@@ -25,6 +25,7 @@ K_I_TRIM = 0.02
 K_D_TRIM = 1
 TRIM_MAX_OUT = 8
 TRIM_MIN_OUT = -8
+CM_ROV = 0,0,0
 # ------------------------SIMULATION------------------------#
 SIM_TIME_STEP = 0.001
 start = False
