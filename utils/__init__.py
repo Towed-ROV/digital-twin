@@ -42,14 +42,15 @@ def decorator(decerator, sim):
             decerator.setText(3, "distance : {} M".format(str(round(rov_body.getPosition()[0], 2))))
             decerator.setText(4, "Pitch : {}".format(str(round(rov_body.getRotation()[0] * 100, 2))))
             decerator.setText(5, "Roll : {}".format(str(round(rov_body.getRotation()[1] * 100, 2))))
-            decerator.setText(6, "wing : L:{} || R:{}".format(str(round(rov_body.hinge1.getAngle(), 2)),
-                                                              str(round(rov_body.hinge2.getAngle(), 2))))
+            decerator.setText(10, "wing : L:{} || R:{}".format(str(round(rov_body.hinge1.getAngle(), 2)),
+                                                               str(round(rov_body.hinge2.getAngle(), 2))))
+
 
 def build_pid_controller(p, i, d, mode, setpoint, direction, name, max_out=None, min_out=None):
     pid = PID_Controller(p, i, d, direction)
     pid.setName(name)
     pid.set_mode(*mode)
     pid.set_setpoint(setpoint)
-    if max and min:
-        pid.set_output_limits(max_out, min_out)
+    if max is not None and min is not None:
+        pid.set_output_limits(limit_max=max_out, limit_min=min_out)
     return pid

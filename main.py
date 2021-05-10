@@ -14,7 +14,7 @@ from Boat.ship import Ship
 from Boat.boat_controller import Boat_Controller
 from Boat.Boat_sensor import Boat_Sensor
 from Rov.rov_assembly import RovAssembly
-from Rov.rov_controller import RovController
+# from Rov.rov_controller import RovController
 
 # python imports
 from keyboard_listener import KeyboardListener
@@ -53,12 +53,12 @@ def build_scene():
     setBodyViscousDrag(rov, controller)
     print("buildt rov")
 
-    lock = agx.LockJoint(rov.getRigidBody('rovBody'))
+    lock = agx.AngularLockJoint(rov.getRigidBody('rovBody'))
     lock.setCompliance(1e-2, agx.LockJoint.ALL_DOF)
     """Locks roll"""
     lock.setCompliance(1e-12, agx.LockJoint.ROTATIONAL_1)
     """Locks pitch"""
-    # lock.setCompliance(1e-12, agx.LockJoint.ROTATIONAL_2)
+    lock.setCompliance(0.01, agx.LockJoint.ROTATIONAL_2)
     """locks yaw"""
     lock.setCompliance(1e-12, agx.LockJoint.ROTATIONAL_3)
     print("buildt lock for rov")
@@ -86,9 +86,9 @@ def build_scene():
     print("buildt controll for wire")
 
     """Creates a controller to control the wings of the Rov"""
-    wing_controll = RovController(rov, rov_pid, pid_trim, seafloor.getShape().asHeightField())
-    wing_controll.setName('wingControll')
-    print("buildt wing control")
+    # wing_controll = RovController(rov, rov_pid, pid_trim, seafloor.getShape().asHeightField())
+    # wing_controll.setName('wingControll')
+    # print("buildt wing control")
 
     # rov.ehco_lod.beam.setEnableCollisions(water_geometry, False)
     # print("set echolod and water collisions to false")
@@ -120,8 +120,8 @@ def build_scene():
     print("added ship rov pid")
     # sim().add(pid_trim)
     # print("added ship rov trim pid")
-    sim().add(wing_controll)
-    print("added wing controller")
+    # sim().add(wing_controll)
+    #print("added wing controller")
     sim().add(lock)
     print("added lock for rov")
     # sim().addEventListener(rov.ehco_lod)
@@ -132,12 +132,12 @@ def build_scene():
     r_p = rov.getPosition()
     cam_pos = agx.Vec3(r_p[0] + 30, r_p[1] + 60, r_p[2] + 20)
     demoutils.init_camera(eye=cam_pos, center=r_p)
-    v =0
+    v = 0
     m = 0
     for geo in rov.link1.getGeometries():
         v += geo.calculateVolume() * 1027
         m += geo.calculateMass()
-        print(m,v,m-v)
+        print(m, v, m - v)
     """locks the rov in fixed position, for mounting wing and cable to rov"""
     if adjust_rov:
         lock1 = agx.LockJoint(rov.link1)

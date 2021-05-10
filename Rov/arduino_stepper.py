@@ -3,7 +3,7 @@ from pid import PID_Controller
 from functions import _map, constrain
 import demoutils
 from functions import deg2rad, rad2deg
-from rov_simulation_parameters import WATER_LENGTH
+from rov_simulation_parameters import WATER_LENGTH,MAX_WING_ANGLE,ROV_DEPTH_SETPOINT
 
 
 # import rov_controller
@@ -35,7 +35,7 @@ class ArduinoStepper(agxSDK.StepEventListener):
         self.interval = 0.01
         self.previousMillis = 0
 
-        self.max_wing_angle = 35
+        self.max_wing_angle = MAX_WING_ANGLE
         self.has_been_reset = True
         self.max_stepper_pos_port = 1.232
         self.min_stepper_pos_port = 0.8495
@@ -55,12 +55,14 @@ class ArduinoStepper(agxSDK.StepEventListener):
         self.current_pos_port = 1.232
         self.reset = False
         self.start = False
-        self.set_point_depth = -6
+        self.set_point_depth = ROV_DEPTH_SETPOINT
 
     def pre(self, t):
         if not self.reset:
             self.send("StepperArduino:0")
+
             msg = self.read()
+
             if msg[0] == "reset":
                 self.reset = True
 
@@ -68,50 +70,49 @@ class ArduinoStepper(agxSDK.StepEventListener):
         #     if self.read()[0] == "start":
         #         print("start step")
         #         self.start = True
-        else:
-            self.depth = round(self.rov.link1.getPosition()[2])  # * 1.23, 2)
-            if self.has_been_reset:
-                self.pid.set_setpoint(self.set_point_depth)
-                if self.target_mode == self.manual_mode:
-                    pos = constrain(self.manual_wing_pos, -self.max_wing_angle, self.max_wing_angle)
-                    # print("pos: ",pos)
-                    self.wing_pos_sb = pos
-                    self.wing_pos_port = pos
-                elif self.target_mode == self.auto_depth_mode:
-                    wing_pos = self.pid.compute(self.depth)
-                    trim_pos = self.pid_trim.compute(self.roll)
-                    if trim_pos != 0:
-                        self.wing_pos_sb, self.wing_pos_port = self.trim_wing_pos(wing_pos, trim_pos)
-                    else:
-                        self.wing_pos_port = wing_pos
-                        self.wing_pos_sb = wing_pos
-                # self.compensate_wing_to_pitch()
-                self.rov.update_wings(self.wing_pos_port, self.wing_pos_sb)
-                # step_position_sb = _map(self.wing_pos_sb, -self.max_wing_angle, self.max_wing_angle,
-                #                        self.min_stepper_pos_sb, self.max_stepper_pos_sb)
-                # step_position_port = _map(self.wing_pos_port, -self.max_wing_angle, self.max_wing_angle,
-                #                        self.min_stepper_pos_port, self.max_stepper_pos_port)
-                self.current_pos_sb = self.rov.hinge1.getAngle()
-                self.current_pos_port = self.rov.hinge2.getAngle()
-                # if step_position_sb != self.current_pos_sb:
-                # self.move_stepper_pos_sb(step_position_sb)
-                # if step_position_port != self.current_pos_port:
-                # self.move_stepper_pos_port(step_position_port)
-                # self.move_stepper_pos_port(step_position_port)
+            else:
+                self.depth = round(self.rov.link1.getPosition()[2])  # * 1.23, 2)
+                if self.has_been_reset:
+                    self.pid.set_setpoint(self.set_point_depth)
 
-                current_millis = time.monotonic()
-                if current_millis - self.previousMillis >= self.interval:
-                    self.update_wing_pos_gui(self.current_pos_port, self.current_pos_sb)
-                    self.previousMillis = current_millis
-            self.handle_received_message()
+                    if self.target_mode == self.manual_mode:
+                        pos = constrain(self.manual_wing_pos, -self.max_wing_angle, self.max_wing_angle)
+                        self.wing_pos_sb = pos
+                        self.wing_pos_port = pos
+                    elif self.target_mode == self.auto_depth_mode:
+                        wing_pos = -self.pid.compute(self.depth)
+                        trim_pos = self.pid_trim.compute(self.roll)
+                        if trim_pos != 0:
+                            self.wing_pos_sb, self.wing_pos_port = self.trim_wing_pos(wing_pos, trim_pos)
+                        else:
+                            self.wing_pos_port = wing_pos
+                            self.wing_pos_sb = wing_pos
+                    self.compensate_wing_to_pitch()
+                    self.rov.update_wings(self.wing_pos_port, self.wing_pos_sb)
+                    # step_position_sb = _map(self.wing_pos_sb, -self.max_wing_angle, self.max_wing_angle,
+                    #                        self.min_stepper_pos_sb, self.max_stepper_pos_sb)
+                    # step_position_port = _map(self.wing_pos_port, -self.max_wing_angle, self.max_wing_angle,
+                    #                        self.min_stepper_pos_port, self.max_stepper_pos_port)
+                    self.current_pos_sb = self.rov.hinge1.getAngle()
+                    self.current_pos_port = self.rov.hinge2.getAngle()
+                    # if step_position_sb != self.current_pos_sb:
+                    # self.move_stepper_pos_sb(step_position_sb)
+                    # if step_position_port != self.current_pos_port:
+                    # self.move_stepper_pos_port(step_position_port)
+                    # self.move_stepper_pos_port(step_position_port)
+
+                    current_millis = time.monotonic()
+                    if current_millis - self.previousMillis >= self.interval:
+                        self.update_wing_pos_gui(self.current_pos_port, self.current_pos_sb)
+                        self.previousMillis = current_millis
+                self.handle_received_message()
 
     def post(self, time: "agx::TimeStamp const &") -> "void":
 
         pos = self.rov.link1.getPosition()
         rot = self.rov.link1.getRotation()
         decorator = demoutils.app().getSceneDecorator()
-        decorator.setText(9, "pid : {}, wing: {}".format(str(self.pid.output), round(
-            rad2deg(self.rov.left_wing_angle()), 2)))
+        decorator.setText(9, "pid : {}, wing: {}".format(self.pid.output, round(rad2deg(self.rov.left_wing_angle()), 2)))
         decorator.setText(3, "Rov Position in Z direction : {} M".format(str(round(pos[2], 2))))
         decorator.setText(4, "Pitch : {}".format(str(round(rot[0] * 100, 2))))
         decorator.setText(5, "Roll : {}".format(str(round(rot[1] * 100, 2))))

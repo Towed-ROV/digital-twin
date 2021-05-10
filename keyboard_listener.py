@@ -16,12 +16,10 @@ class KeyboardListener(agxSDK.GuiEventListener):
         Sec.postCallback(lambda t: self.display_forces(t))
 
     def display_forces(self, t):
-        # print(t)
         demoutils.app().getSceneDecorator().setText(6, "Target set point : {} M".format(
             self.pid.setpoint))
         self.plot_setpoint.append(self.pid.setpoint)
         self.plot_time.append(t)
-        # print(t)
         if self.plot and not self.plotted:
             """plots stored values to csv file"""
             plot_setpoint = np.array(self.plot_setpoint)

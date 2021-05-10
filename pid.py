@@ -133,7 +133,7 @@ class PID_Controller(agxSDK.StepEventListener):
 
     def set_output_limits(self, limit_min, limit_max):
         if limit_min >= limit_max:
-            return
+            raise ValueError("min is larger than max")
 
         self.output_limit_min = limit_min
         self.output_limit_max = limit_max

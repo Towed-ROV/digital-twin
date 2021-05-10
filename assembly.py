@@ -79,7 +79,7 @@ class rov_builder(agxIO.MeshReader):
         tank2 = tank1.clone()
         tank1.setRotation(agx.EulerAngles(0, 0, 1 / 2 * math.pi))
         tank2.setRotation(agx.EulerAngles(0, math.pi, math.pi * 3 / 2))
-        x, y, z = length/1.5,rad*1.5,rad*2
+        x, y, z = length/1.5,rad*1.5,rad*3.5
         tank1.setPosition(x, +y, z)
         tank2.setPosition(x, -y, z)
         return tank1, tank2
