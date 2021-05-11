@@ -1,6 +1,7 @@
 import agx, agxModel
 from rov_simulation_parameters import WING_LIFT, WING_PDRAG, WING_SCALE, WING_VDRAG, BODY_LIFT, BODY_PDRAG, BODY_VDRAG
 from pid import PID_Controller
+from demoutils import sim, init_camera
 
 
 def setBodyWaterParameters(controller: agxModel.WindAndWaterController, body: agx.RigidBody,
@@ -54,3 +55,35 @@ def build_pid_controller(p, i, d, mode, setpoint, direction, name, max_out=None,
     if max is not None and min is not None:
         pid.set_output_limits(limit_max=max_out, limit_min=min_out)
     return pid
+
+
+def add_objects_to_sim(*args):
+    for obj in args:
+        sim.add(obj)
+
+
+def set_camera_to_rov(rov):
+    r_p = rov.getPosition()
+    cam_pos = agx.Vec3(r_p[0] + 30, r_p[1] + 60, r_p[2] + 20)
+    init_camera(eye=cam_pos, center=r_p)
+
+
+def print_builancy(rigid_body):
+    v = 0
+    m = 0
+    for geo in rigid_body.getGeometries():
+        v += geo.calculateVolume() * 1027
+        m += geo.calculateMass()
+        print(m, v, m - v)
+
+
+def build_angular_lockJoint(body, dof, roll, pitch, yaw):
+    lock = agx.AngularLockJoint(body)
+    lock.setCompliance(dof, agx.LockJoint.ALL_DOF)
+    """Locks roll"""
+    lock.setCompliance(roll, agx.LockJoint.ROTATIONAL_1)
+    """Locks pitch"""
+    lock.setCompliance(pitch, agx.LockJoint.ROTATIONAL_2)
+    """locks yaw"""
+    lock.setCompliance(yaw, agx.LockJoint.ROTATIONAL_3)
+    return lock

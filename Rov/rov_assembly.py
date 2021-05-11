@@ -4,13 +4,12 @@ import agx
 import agxSDK
 from pid import PID_Controller
 from keyboard_listener import KeyboardListener
-from functions import deg2rad, rad2deg, limit
+from functions import deg2rad, limit
 import numpy as np
 import pandas as pd
 import math
-from assembly import rov_builder
+from Rov.assembly import rov_builder
 from modules.agxPythonModules.utils.callbacks import StepEventCallback as Sec
-from sensor import Sensor
 from rov_simulation_parameters import *
 
 """Class rovAssembly, creates a agx assembly of the rov, with to hinges, one on each wings"""

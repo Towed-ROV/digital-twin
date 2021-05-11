@@ -73,7 +73,8 @@ class ArduinoStepper(agxSDK.StepEventListener):
             else:
                 self.depth = round(self.rov.link1.getPosition()[2])  # * 1.23, 2)
                 if self.has_been_reset:
-                    self.pid.set_setpoint(self.set_point_depth)
+                    #if(self.ser.is_open):
+                       # self.pid.set_setpoint(self.set_point_depth)
 
                     if self.target_mode == self.manual_mode:
                         pos = constrain(self.manual_wing_pos, -self.max_wing_angle, self.max_wing_angle)
