@@ -1,9 +1,13 @@
 import agxWire
 import agx
 import agxOSG
+from agxOSG import createVisual
 import demoutils
 from rov_simulation_parameters import WIRE_RESOLUTION
+
 """Create a pulling wire"""
+
+
 class MakeWire:
     @staticmethod
     def create_wire(density, size, body_1, pos_1, body_2, pos_2):

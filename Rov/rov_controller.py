@@ -5,6 +5,7 @@ from functions import deg2rad, rad2deg
 import demoutils
 import agx
 from rov_simulation_parameters import WATER_LENGTH
+
 """Class RovController for Rov and by using StepEventListener it updates the wing position every step of the simulation"""
 
 
@@ -38,9 +39,9 @@ class RovController(agxSDK.StepEventListener):
         rot = self.rov.link1.getRotation()
         current_depth = self.rov.getRigidBody('rovBody').getPosition()[2]
         self.pid.compute(current_depth)
-        output_left = deg2rad(-self.pid.output)#-rot[0] * 100)  # - self.pid_trim.output)
-        output_right = deg2rad(-self.pid.output)#-rot[0] * 100)  # + self.pid_trim.output)
-        #self.rov.update_wings(output_left, output_right)
+        output_left = deg2rad(-self.pid.output)  # -rot[0] * 100)  # - self.pid_trim.output)
+        output_right = deg2rad(-self.pid.output)  # -rot[0] * 100)  # + self.pid_trim.output)
+        # self.rov.update_wings(output_left, output_right)
 
     def post(self, t):
         """ can send depth and everything form here aswell
@@ -58,8 +59,6 @@ class RovController(agxSDK.StepEventListener):
         decorator.setText(5, "Roll : {}".format(str(round(rot[1] * 100, 2))))
         x, y = int(WATER_LENGTH + pos[0]), int(pos[1])
 
-        #print(int(pos[0]),int(pos[1]),int(pos[2]))
-        decorator.setText(5, "seafloor actual : {}".format(str(round(self.depth.getHeight(x, y) - pos[2], 2))))
-        decorator.setText(7, "distance : {}M".format(str(round(self.rov.link1.getPosition()[0], 2))))
-
-
+        # print(int(pos[0]),int(pos[1]),int(pos[2]))
+        decorator.setText(11, "seafloor actual : {}".format(str(round(self.depth.getHeight(x, y) - pos[2], 2))))
+        decorator.setText(7, "distance : {}M".format(str(WATER_LENGTH + round( self.rov.link1.getPosition()[0], 2))))

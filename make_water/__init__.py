@@ -8,20 +8,24 @@ import demoutils
 # python imports
 import cv2
 # local imports
-from seafloor_image_generator import seafloorImageBuilder
+from make_water.seafloor_image_generator import seafloorImageBuilder
+from rov_simulation_parameters import SEAFLOOR_VARIANCE
+
 """
 autor:  me and  j
 """
+
+
 class MakeWater:
     """
 
     """
+
     @staticmethod
     def make_water(water_density, water_length, water_width, water_height):
         """
 
         Args:
-            adjust_rov:
             water_density:
             water_length:
             water_width:
@@ -34,16 +38,17 @@ class MakeWater:
         seafloorImageBuilder.save_new_seafloor_image(width=water_length)
         water_material = agx.Material("waterMaterial")
         water_material.getBulkMaterial().setDensity(water_density)
-        water_geometry = agxCollide.Geometry(agxCollide.Box(water_length, water_width/2, water_height/2))
-        water_geometry.setPosition(0, 0, -water_height/2)
-        seafloor = MakeWater.make_seafloor(vairance=30, length=water_length * 2, width=water_width,
-                                                  depth=-water_height )
+        water_geometry = agxCollide.Geometry(agxCollide.Box(water_length, water_width / 2, water_height / 2))
+        water_geometry.setPosition(0, 0, -water_height / 2)
+        seafloor = MakeWater.make_seafloor(vairance=SEAFLOOR_VARIANCE, length=water_length * 2, width=water_width,
+                                           depth=-water_height)
         """Surface of water at z = 0."""
         water_geometry.setMaterial(water_material)
         MakeWater.add_color(water_geometry)
+        """ ads visualisation"""
+        agxOSG.createVisual(seafloor, demoutils.root())
         print("build water and seafloor")
         return water_geometry, seafloor
-
 
     @staticmethod
     def add_color(geomerty):
@@ -72,6 +77,7 @@ class MakeWater:
             depth = -depth
         if depth + vairance > 0:
             raise Warning("seafloor above surface")
+
         seafloor_img = cv2.imread('seafloor.png', cv2.IMREAD_GRAYSCALE)
         seafloor_field = hf.createFromFile('seafloor.png', length, width, depth, depth + vairance)
         return agxCollide.Geometry(seafloor_field)

@@ -3,7 +3,7 @@ from pid import PID_Controller
 from functions import _map, constrain
 import demoutils
 from functions import deg2rad, rad2deg
-from rov_simulation_parameters import WATER_LENGTH,MAX_WING_ANGLE,ROV_DEPTH_SETPOINT
+from rov_simulation_parameters import WATER_LENGTH, MAX_WING_ANGLE, ROV_DEPTH_SETPOINT
 
 
 # import rov_controller
@@ -13,6 +13,13 @@ class ArduinoStepper(agxSDK.StepEventListener):
         # super().__init__(agxSDK.GuiEventListener.KEYBOARD)
         super().__init__()
         # PID controller
+        self.pid_depth_p = 0
+        self.pid_depth_i = 0
+        self.pid_depth_d = 0
+        self.pid_roll_p = 0
+        self.pid_roll_i = 0
+        self.pid_roll_d = 0
+        self.depth_rov_offset = 0
         self.pid = pid
         self.pid_trim = pid_trim
         self.manual_wing_pos = 0
@@ -60,22 +67,13 @@ class ArduinoStepper(agxSDK.StepEventListener):
     def pre(self, t):
         if not self.reset:
             self.send("StepperArduino:0")
-
             msg = self.read()
-
             if msg[0] == "reset":
                 self.reset = True
-
-        # elif not self.start:
-        #     if self.read()[0] == "start":
-        #         print("start step")
-        #         self.start = True
             else:
                 self.depth = round(self.rov.link1.getPosition()[2])  # * 1.23, 2)
-                if self.has_been_reset:
-                    #if(self.ser.is_open):
-                       # self.pid.set_setpoint(self.set_point_depth)
 
+                if self.has_been_reset:
                     if self.target_mode == self.manual_mode:
                         pos = constrain(self.manual_wing_pos, -self.max_wing_angle, self.max_wing_angle)
                         self.wing_pos_sb = pos
@@ -90,35 +88,25 @@ class ArduinoStepper(agxSDK.StepEventListener):
                             self.wing_pos_sb = wing_pos
                     self.compensate_wing_to_pitch()
                     self.rov.update_wings(self.wing_pos_port, self.wing_pos_sb)
-                    # step_position_sb = _map(self.wing_pos_sb, -self.max_wing_angle, self.max_wing_angle,
-                    #                        self.min_stepper_pos_sb, self.max_stepper_pos_sb)
-                    # step_position_port = _map(self.wing_pos_port, -self.max_wing_angle, self.max_wing_angle,
-                    #                        self.min_stepper_pos_port, self.max_stepper_pos_port)
                     self.current_pos_sb = self.rov.hinge1.getAngle()
                     self.current_pos_port = self.rov.hinge2.getAngle()
-                    # if step_position_sb != self.current_pos_sb:
-                    # self.move_stepper_pos_sb(step_position_sb)
-                    # if step_position_port != self.current_pos_port:
-                    # self.move_stepper_pos_port(step_position_port)
-                    # self.move_stepper_pos_port(step_position_port)
 
                     current_millis = time.monotonic()
                     if current_millis - self.previousMillis >= self.interval:
                         self.update_wing_pos_gui(self.current_pos_port, self.current_pos_sb)
                         self.previousMillis = current_millis
-                self.handle_received_message()
+                self.handle_received_message(msg)
 
     def post(self, time: "agx::TimeStamp const &") -> "void":
-
         pos = self.rov.link1.getPosition()
         rot = self.rov.link1.getRotation()
         decorator = demoutils.app().getSceneDecorator()
-        decorator.setText(9, "pid : {}, wing: {}".format(self.pid.output, round(rad2deg(self.rov.left_wing_angle()), 2)))
+        decorator.setText(9,
+                          "pid : {}, wing: {}".format(self.pid.output, round(rad2deg(self.rov.left_wing_angle()), 2)))
         decorator.setText(3, "Rov Position in Z direction : {} M".format(str(round(pos[2], 2))))
         decorator.setText(4, "Pitch : {}".format(str(round(rot[0] * 100, 2))))
         decorator.setText(5, "Roll : {}".format(str(round(rot[1] * 100, 2))))
         x, y = int(WATER_LENGTH + pos[0]), int(pos[1])
-        # print(int(pos[0]),int(pos[1]),int(pos[2]))
         decorator.setText(7, "distance : {}M".format(str(round(self.rov.link1.getPosition()[0], 2))))
 
     def reset_stepper(self):
@@ -177,11 +165,14 @@ class ArduinoStepper(agxSDK.StepEventListener):
         return constrain(wing_pos_sb, -self.max_wing_angle, self.max_wing_angle), \
                constrain(wing_pos_port, -self.max_wing_angle, self.max_wing_angle)
 
-    def handle_received_message(self):
+    def handle_received_message(self, msg=None):
         try:
-            received_command = self.read()
+            if msg is None:
+                received_command = self.read()
+            else:
+                received_command = msg
             if len(received_command) > 1:
-                print("inc: ", received_command)
+                # print("inc: ", received_command)
                 if received_command[0] == "auto_mode":
                     if received_command[1] == "True":
                         self.set_target_mode(self.auto_depth_mode)
@@ -202,28 +193,27 @@ class ArduinoStepper(agxSDK.StepEventListener):
 
                 elif received_command[0] == "emergency_surface":
                     self.set_target_mode(self.manual_mode, self.max_wing_angle)
-                    self.depth_rov_offset = received_command[1]
                     self.send(received_command[0] + ":True")
 
                 elif received_command[0] == "depth":
-                    self.depth = float(received_command[1])
+                    # self.depth = float(received_command[1])
                     self.send(received_command[0] + ":True")
                     # print(received_command)
 
                 elif received_command[0] == "roll":
-                    self.roll = float(received_command[1])
+                    #self.roll = float(received_command[1])
                     self.send(received_command[0] + ":True")
 
                 elif received_command[0] == "pitch":
-                    self.pitch = float(received_command[1])
+                    #self.pitch = float(received_command[1])
                     self.send(received_command[0] + ":True")
 
                 elif received_command[0] == "set_point_depth":
                     self.set_point_depth = float(received_command[1])
+                    self.pid.set_setpoint(-self.set_point_depth)
                     self.send(received_command[0] + ":True")
 
                 elif received_command[0] == "pid_depth_p":
-                    self.pid_depth_p = float(received_command[1])
                     if self.pid_depth_p >= 0:
                         self.pid_trim.set_tunings(self.pid_depth_p, self.pid_depth_i, self.pid_depth_d)
                         self.send(received_command[0] + ":True")
@@ -231,7 +221,6 @@ class ArduinoStepper(agxSDK.StepEventListener):
                         self.send(received_command[0] + ":False")
 
                 elif received_command[0] == "pid_depth_i":
-                    self.pid_depth_i = float(received_command[1])
                     if self.pid_depth_i >= 0:
                         self.pid_trim.set_tunings(self.pid_depth_p, self.pid_depth_i, self.pid_depth_d)
                         self.send(received_command[0] + ":True")
@@ -239,7 +228,6 @@ class ArduinoStepper(agxSDK.StepEventListener):
                         self.send(received_command[0] + ":False")
 
                 elif received_command[0] == "pid_depth_d":
-                    self.pid_depth_d = float(received_command[1])
                     if self.pid_depth_d >= 0:
                         self.pid_trim.set_tunings(self.pid_depth_p, self.pid_depth_i, self.pid_depth_d)
                         self.send(received_command[0] + ":True")
@@ -247,7 +235,6 @@ class ArduinoStepper(agxSDK.StepEventListener):
                         self.send(received_command[0] + ":False")
 
                 elif received_command[0] == "pid_roll_p":
-                    self.pid_roll_p = float(received_command[1])
                     if self.pid_roll_p >= 0:
                         self.pid_trim.set_tunings(self.pid_roll_p, self.pid_roll_i, self.pid_roll_d)
                         self.send(received_command[0] + ":True")
@@ -255,7 +242,6 @@ class ArduinoStepper(agxSDK.StepEventListener):
                         self.send(received_command[0] + ":False")
 
                 elif received_command[0] == "pid_roll_i":
-                    self.pid_roll_i = float(received_command[1])
                     if self.pid_roll_i >= 0:
                         self.pid_trim.set_tunings(self.pid_roll_p, self.pid_roll_i, self.pid_roll_d)
                         self.send(received_command[0] + ":True")
@@ -263,7 +249,6 @@ class ArduinoStepper(agxSDK.StepEventListener):
                         self.send(received_command[0] + ":False")
 
                 elif received_command[0] == "pid_roll_d":
-                    self.pid_roll_d = float(received_command[1])
                     if self.pid_roll_d >= 0:
                         self.pid_trim.set_tunings(self.pid_roll_p, self.pid_roll_i, self.pid_roll_d)
                         self.send(received_command[0] + ":True")
@@ -300,6 +285,7 @@ class ArduinoStepper(agxSDK.StepEventListener):
 
     def read(self):
         message = self.ser.readline()
+
         message = message.strip()
         message = message.decode('utf-8').strip("<").strip(">")
         # if message:

@@ -128,6 +128,7 @@ class Ship(agxSDK.Assembly):
         demoutils.app().getSceneDecorator().setText(2, "Speed in X direction : {} knots".format(
             str(round(self.m_body.getVelocity()[0] * 1.94384449, 2))))
 
+
     def post(self, t):
         pos, n = self.getPosition()
         if pos[0] - WATER_LENGTH * n > 50:

@@ -113,6 +113,10 @@ class RovAssembly(agxSDK.Assembly):
         """
 
         Args:
+            range:
+            compliance:
+            lock:
+            motor:
             link:
             part:
             pos:
@@ -135,15 +139,15 @@ class RovAssembly(agxSDK.Assembly):
     @staticmethod
     def build_lock_joint(part1, part2, pos1, pos2) -> agx.LockJoint:
         """
-
+        creates a agx lock joint between two parts and returns the resoult
         Args:
             part1:
             part2:
-            pos1:
-            pos2:
+            pos1: The lock possition on part 2
+            pos2: The lock possition on part 2
 
         Returns:
-
+            a  lock joint
         """
         f1 = agx.Frame()
         f2 = agx.Frame()
@@ -182,18 +186,17 @@ class RovAssembly(agxSDK.Assembly):
         self.plot_depth.append(self.link1.getPosition()[2])
         self.plot_pitch.append(self.link1.getRotation()[0] * 10)
         self.plot_roll.append(self.link1.getRotation()[1] * 100)
-
+        self.plot_wing_angle.append(self.link2.getRotation()[0]*10)
         if plot:
             """plots stored values to csv file"""
             plot_wing_angle = np.array(self.plot_wing_angle)
             plot_depth = np.array(self.plot_depth)
             plot_pitch = np.array(self.plot_pitch)
             plot_roll = np.array(self.plot_roll)
-
-            pd.DataFrame(plot_depth).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\plotDepth.csv")
-            pd.DataFrame(plot_pitch).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\plotPitch.csv")
-            pd.DataFrame(plot_wing_angle).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\plot_wing_angle.csv")
-            pd.DataFrame(plot_roll).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\pplot_roll.csv")
+            pd.DataFrame(plot_depth).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\AGX-towed-rov-simulation\plots\plotDepth.csv")
+            pd.DataFrame(plot_pitch).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\AGX-towed-rov-simulation\plots\plotPitch.csv")
+            pd.DataFrame(plot_wing_angle).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\AGX-towed-rov-simulation\plots\plot_wing_angle.csv")
+            pd.DataFrame(plot_roll).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\AGX-towed-rov-simulation\plots\plot_roll.csv")
             self.plotted = True
 
     @staticmethod
@@ -204,26 +207,7 @@ class RovAssembly(agxSDK.Assembly):
 
     def post(self, t):
         r_p = self.link1.getPosition()
-        cam_pos = agx.Vec3(r_p[0] + 15, r_p[1] + 20, r_p[2] + 10)
+        cam_pos = agx.Vec3(r_p[0] , r_p[1] + 100, r_p[2] )
         demoutils.init_camera(eye=cam_pos, center=r_p)
+        self.plotter(True)
 
-
-if __name__ == "__main__":
-    kp = 1000
-    ki = 1000
-    kd = 1
-
-    pid = PID_Controller(kp, ki, kd, 0)
-    pid.setName('pid')
-    pid.set_output_limits(-45, 45)
-    pid.set_mode(1, 0, 0)
-    pid.set_setpoint(-20)
-    keyboard = KeyboardListener(pid, True)
-
-    """Creates the rov"""
-    rov = RovAssembly(pid, keyboard)
-    rov.setPosition(agx.Vec3(0, 0, 0))
-    rov.setName("rov")
-    rov.setRotation(agx.EulerAngles(0, 0, math.pi))
-
-    rov.displayForces(1)

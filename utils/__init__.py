@@ -1,11 +1,24 @@
 import agx, agxModel
-from rov_simulation_parameters import WING_LIFT, WING_PDRAG, WING_SCALE, WING_VDRAG, BODY_LIFT, BODY_PDRAG, BODY_VDRAG
+from rov_simulation_parameters import WING_LIFT, WING_PDRAG, WING_SCALE, WING_VDRAG, BODY_LIFT, BODY_PDRAG, BODY_VDRAG, \
+    WATER_DENSITY
 from pid import PID_Controller
 from demoutils import sim, init_camera
 
 
 def setBodyWaterParameters(controller: agxModel.WindAndWaterController, body: agx.RigidBody,
                            lift: float = 0.01, viscous_drag: float = 0.1, pressure_drag: float = 0.6):
+    """
+    sets the water parameters of a rigid body.
+    Args:
+        controller: the water around the body
+        body: the body
+        lift: new lift
+        viscous_drag: new v drag
+        pressure_drag: new p drag
+
+    Returns:None
+
+    """
     agxModel.WindAndWaterParameters.setHydrodynamicCoefficient(controller, body,
                                                                agxModel.WindAndWaterParameters.VISCOUS_DRAG,
                                                                viscous_drag)
@@ -18,6 +31,13 @@ def setBodyWaterParameters(controller: agxModel.WindAndWaterController, body: ag
 
 
 def setBodyViscousDrag(body, controller: agxModel.WindAndWaterController):
+    """
+    sets the body drag for the wings and the body seperately.
+    Args:
+        body: the rov
+        controller: the water aroun the rov
+    Returns:
+    """
     bodies = body.getRigidBodies()
     for rigid_bodies in bodies:
         if "wing" in rigid_bodies.getName().lower():
@@ -30,12 +50,30 @@ def setBodyViscousDrag(body, controller: agxModel.WindAndWaterController):
 
 
 def setWireViscousDrag(wire, controller):
+    """
+    sets water parameters for a wire.
+    Args:
+        wire: the wire
+        controller:  the water around the wire
+
+    Returns:
+
+    """
     for geo in wire.nodes:
         rig = geo.getRigidBody()
         setBodyWaterParameters(controller, rig, lift=0)
 
 
 def decorator(decerator, sim):
+    """
+    ads text to the main window.
+    Args:
+        decerator: the window decorator
+        sim:  the simulation
+
+    Returns: None
+
+    """
     rov_body = sim.getRigidBody("rov_body")
     if rov_body:
         while True:
@@ -47,7 +85,23 @@ def decorator(decerator, sim):
                                                                str(round(rov_body.hinge2.getAngle(), 2))))
 
 
-def build_pid_controller(p, i, d, mode, setpoint, direction, name, max_out=None, min_out=None):
+def build_pid_controller(p, i, d, mode, setpoint, direction, name, max_out=None, min_out=None) -> PID_Controller:
+    """
+    builds a pid controller
+    Args:
+        p:
+        i:
+        d:
+        mode:
+        setpoint:
+        direction:
+        name:
+        max_out:
+        min_out:
+
+    Returns:the pid Controller
+
+    """
     pid = PID_Controller(p, i, d, direction)
     pid.setName(name)
     pid.set_mode(*mode)
@@ -58,26 +112,62 @@ def build_pid_controller(p, i, d, mode, setpoint, direction, name, max_out=None,
 
 
 def add_objects_to_sim(*args):
+    """
+    adds all objects provided to the simulation.
+    Args:
+        *args:
+
+    Returns:
+
+    """
     for obj in args:
-        sim.add(obj)
+        sim().add(obj)
 
 
 def set_camera_to_rov(rov):
+    """
+    sets the position of the camera to the rov
+    Args:
+        rov:
+
+    Returns:
+
+    """
     r_p = rov.getPosition()
-    cam_pos = agx.Vec3(r_p[0] + 30, r_p[1] + 60, r_p[2] + 20)
+    cam_pos = agx.Vec3(r_p[0] + 5, r_p[1] + 10, r_p[2] + 2)
     init_camera(eye=cam_pos, center=r_p)
 
 
 def print_builancy(rigid_body):
+    """
+    gets the weight of a body compared to that of water fillig the same volume
+    Args:
+        rigid_body:
+
+    Returns:
+
+    """
     v = 0
     m = 0
     for geo in rigid_body.getGeometries():
-        v += geo.calculateVolume() * 1027
+        v += geo.calculateVolume() * WATER_DENSITY
         m += geo.calculateMass()
         print(m, v, m - v)
 
 
 def build_angular_lockJoint(body, dof, roll, pitch, yaw):
+    """
+    builds a lock for a body to the background.
+    Args:
+        body: body
+        dof: constraints in dof
+        roll:  roll constraint
+        pitch: pitch constraint
+        yaw: yaw constraint
+
+    Returns: the lock.
+
+    """
     lock = agx.AngularLockJoint(body)
     lock.setCompliance(dof, agx.LockJoint.ALL_DOF)
     """Locks roll"""
