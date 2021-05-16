@@ -1,11 +1,12 @@
+"""
+authors: Jørgen; Sophus
+"""
+
 # agx imports:
-from agxOSG import createVisual
-import demoutils
-from demoutils import sim
 
 # local imports:
 from rov_simulation_parameters import *
-from utils import *
+from utils.__init__ import *
 from make_water import MakeWater
 from make_wire import MakeWire
 from Rov.arduino_sensor import ArduinoSensor

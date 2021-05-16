@@ -24,40 +24,58 @@ class Boat_Sensor(StepEventListener):
         self.boat = boat
         self.seafloor = seafloor
         self.last_x = boat.getPosition()[0][0]
-        self.travel_distance = 4
+        self.travel_distance = 10
         self.message_builder = lambda type, data: {"payload_name": type, "payload_data": data}
         self.pay_loader = lambda name, value: {"name": name, "value": value}
         self.last_time = 0
         self.freq = 1 / 2
-        self.lat_list = [60.0000000001, 60.010000000001, 60.020000000001, 60.030000000001, 60.040000000001,
-                         60.050000000001, 60.060000000001, 60.070000000001, 60.080000000001, 60.090000000001,
-                         610000000001]
+        self.lat_list = [60.0000000001, 61.010000000001, 62.020000000001, 63.030000000001, 64.040000000001,
+                         65.050000000001, 66.060000000001, 67.070000000001, 68.080000000001, 69.090000000001,
+                         700000000001]
         self.lon_list = [l * 1 / 10 for l in self.lat_list]
 
         self.GPS_i = 0
 
     def pre(self, time: "agx::TimeStamp const &"):
+        """
+        gather data and send NMEA data to the surface Unit software.
+        Args:
+            time: in simulation time
 
+        Returns:
+
+        """
         if time - self.last_time > self.freq:
             delta_x = self.get_travel_distance()
+            print(delta_x,self.travel_distance)
             if delta_x >= self.travel_distance:
                 sent = "GPGGA, , {}, N, {}, W, 2, 0 9, 0, 0, M,,,,".format(self.lat_list[self.GPS_i],
                                                                            self.lon_list[self.GPS_i])
+                print(sent)
                 chk = hex(reduce(_operator.xor, map(ord, sent), 0))[2:].upper()
                 sent = "${}*{} \n".format(sent, chk)
-                self.send_GPS_ser(sent.encode())
+                self.send(sent.encode())
                 self.GPS_i = self.GPS_i + 1 if self.GPS_i < len(self.lon_list) - 1 else 0
 
             sent = "SDDBT,{},f,{},M,".format(-self.get_depth_under_boat(), -self.get_depth_under_boat())
             chk = hex(reduce(_operator.xor, map(ord, sent), 0))[2:].upper()
             sent = "${}*{} \n".format(sent, chk)
-            self.send_ser(sent.encode())
+            self.send(sent.encode())
             self.last_time = time
 
     def connect(self):
+        """
+        conect over ZMQ.
+
+        """
         self.connection.connect(f"tcp://{self.host}:{self.port}")
 
     def get_travel_distance(self):
+        """
+        check how far the boat has traveled in the simulation
+        Returns: float of the travel distance
+
+        """
         pos, n = self.boat.getPosition()
         x = pos[0]
         delta_x = x - self.last_x
@@ -66,32 +84,43 @@ class Boat_Sensor(StepEventListener):
         return delta_x
 
     def get_depth_under_boat(self) -> float:
+        """
+        gets the depth from the boat to the seafloor
+        Returns: float with the seafloor depth under the boat
+
+        """
         pos, n = self.boat.getPosition()
         x = int(pos[0] + WATER_LENGTH * (n) - 1)
         y = int(pos[1])
         return self.seafloor.getHeight(x, y)
 
-    def handle_received_message(self):
-        received_command = self.read()
-        if received_command[0] == "depth_rov_offset":
-            self.send_zmq(received_command + ":True")
-        elif received_command[0] == "depth_beneath_rov_offset":
-            self.send_zmq(received_command + ":True")
 
-    def send_zmq(self, data):
-        self.connection.send_json(data)
+    def send(self, data:bytes):
+        """
+        send data over serial as the echolod.
+        Args:
+            data: encoded data to be sendt
 
-    def recv(self):
-        data = self.connection.recv_json()
-        return data
 
-    def send_ser(self, data):
-        # print(data)
+        """
         self.ser.write(data)
 
     def send_GPS_ser(self, data):
-        self.ser.write(data)
+        """
+
+        send data over serial as the gps.
+        Args:
+            data: serial encoded data
+
+
+        """
+        self.serGPS.write(data)
 
     def post(self,t):
+        """
+        adds  the depth under the boat to the window.
+        Args:
+            t: in simulation time
+        """
         demoutils.app().getSceneDecorator().setText(8, "Depth under boat : {} m".format(
             str(round(self.get_depth_under_boat() , 2))))

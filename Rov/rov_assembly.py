@@ -18,13 +18,10 @@ from rov_simulation_parameters import *
 class RovAssembly(agxSDK.Assembly):
     def __init__(self, keyboard):
         """
-
+        initializes adn adds all bodies and constaints to the ROV.
         Args:
-            keyboard:
-            seaFloor:
-            wing_scale:
-            depth:
-        """
+            keyboard: keyboard event listener for direct controll
+       """
         super().__init__()
 
         self.keyboard = keyboard
@@ -96,7 +93,7 @@ class RovAssembly(agxSDK.Assembly):
         self.setName('rov')
         print("set name")
         Sec.postCallback(self.post)
-
+        self.last = 0
     @staticmethod
     def disable_col(geo, ruged: agx.RigidBody):
         """
@@ -143,7 +140,7 @@ class RovAssembly(agxSDK.Assembly):
         Args:
             part1:
             part2:
-            pos1: The lock possition on part 2
+            pos1: The lock possition on part 1
             pos2: The lock possition on part 2
 
         Returns:
@@ -162,17 +159,26 @@ class RovAssembly(agxSDK.Assembly):
 
     def getGeometries(self) -> "agxCollide::GeometryRefSet const &":
         """
-
-        Returns:
+        returns the geometries in the assembly
 
         """
         a = agxSDK.Assembly.getGeometries(self)
         return a
 
     def getPitch(self) -> "agx::Quat":
+        """
+        returns the pithc of the assembly
+        """
         return self.link1.getRotation()[0]
 
     def update_wings(self, sb_p, port_p):
+        """
+        uptates the angle of the wings.
+        Args:
+            sb_p: starboard wing angle
+            port_p: portside wing angle
+
+        """
         sb_p = deg2rad(sb_p)
         port_p = deg2rad(port_p)
         a1 = -self.hinge1.getAngle()
@@ -182,32 +188,62 @@ class RovAssembly(agxSDK.Assembly):
         self.hinge1.getMotor1D().setSpeed(d1)
         self.hinge2.getMotor1D().setSpeed(d2)
 
-    def plotter(self, plot):
-        self.plot_depth.append(self.link1.getPosition()[2])
-        self.plot_pitch.append(self.link1.getRotation()[0] * 10)
-        self.plot_roll.append(self.link1.getRotation()[1] * 100)
-        self.plot_wing_angle.append(self.link2.getRotation()[0]*10)
-        if plot:
+    def plotter(self, t):
+        """
+        plots datafrom the assembly to a csvfile.
+        Args:
+            t: in simulation time
+        """
+        if t-self.last> 0.1 :
+            self.last = t
+            self.plot_depth.append(self.link1.getPosition()[2])
+            self.plot_pitch.append(self.link1.getRotation()[0] * 10)
+            self.plot_roll.append(self.link1.getRotation()[1] * 100)
+            self.plot_wing_angle.append(self.link2.getRotation()[0] * 10)
+
+            print(len(self.plot_depth))
             """plots stored values to csv file"""
             plot_wing_angle = np.array(self.plot_wing_angle)
             plot_depth = np.array(self.plot_depth)
             plot_pitch = np.array(self.plot_pitch)
             plot_roll = np.array(self.plot_roll)
-            pd.DataFrame(plot_depth).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\AGX-towed-rov-simulation\plots\plotDepth.csv")
-            pd.DataFrame(plot_pitch).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\AGX-towed-rov-simulation\plots\plotPitch.csv")
-            pd.DataFrame(plot_wing_angle).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\AGX-towed-rov-simulation\plots\plot_wing_angle.csv")
-            pd.DataFrame(plot_roll).to_csv("D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\AGX-towed-rov-simulation\plots\plot_roll.csv")
+            pd.DataFrame(plot_depth).to_csv(
+                "D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\AGX-towed-rov-simulation\plots\plotDepth.csv")
+            pd.DataFrame(plot_pitch).to_csv(
+                "D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\AGX-towed-rov-simulation\plots\plotPitch.csv")
+            pd.DataFrame(plot_wing_angle).to_csv(
+                "D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\AGX-towed-rov-simulation\plots\plot_wing_angle.csv")
+            pd.DataFrame(plot_roll).to_csv(
+                "D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\AGX-towed-rov-simulation\plots\plot_roll.csv")
             self.plotted = True
 
     @staticmethod
-    def build_material(name, density):
+    def build_material(name, density) -> agx.Material:
+        """
+        build material with a set density and name
+        Returns: the material
+
+        """
         material = agx.Material(name)
         material.getBulkMaterial().setDensity(density)
         return material
 
     def post(self, t):
-        r_p = self.link1.getPosition()
-        cam_pos = agx.Vec3(r_p[0] , r_p[1] + 100, r_p[2] )
-        demoutils.init_camera(eye=cam_pos, center=r_p)
-        self.plotter(True)
+        """
+        sets the camera possiton to follow the rov and plots data to csv.
+        Args:
+            t: in simulaton time
 
+        """
+        self.set_camera()
+        self.plotter(t)
+
+    def set_camera(self):
+        """
+        updates the camera to follow the rov.
+        Returns:
+
+        """
+        r_p = self.link1.getPosition()
+        cam_pos = agx.Vec3(r_p[0], r_p[1] + 100, r_p[2])
+        demoutils.init_camera(eye=cam_pos, center=r_p)

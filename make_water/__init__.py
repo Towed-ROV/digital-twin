@@ -18,20 +18,20 @@ autor:  me and  j
 
 class MakeWater:
     """
-
+    this class builds water and seafloor geomerties ads the water and adds the water to a controller.
     """
 
     @staticmethod
     def make_water(water_density, water_length, water_width, water_height):
         """
-
+        generates seafloor and water.
         Args:
-            water_density:
-            water_length:
-            water_width:
-            water_height:
+            water_density: the water dencity
+            water_length: the length of the water and the seafloor
+            water_width:  width of the water and the seafloor
+            water_height: depth of the water and the max depth of the seafloor
 
-        Returns:
+        Returns: A Water geometry and a  seafloor geometry
 
         """
 
@@ -52,6 +52,13 @@ class MakeWater:
 
     @staticmethod
     def add_color(geomerty):
+        """
+        adds bluesih transparent color to a provided geomerty
+        Args:
+            geomerty: the water geometry that you want to add collor to.
+
+
+        """
         waterNode = agxOSG.createVisual(geomerty, demoutils.root())
         color = agxRender.Color.DeepSkyBlue()
         alpha = 0.4
@@ -61,23 +68,22 @@ class MakeWater:
         agxOSG.setAlpha(waterNode, alpha)
 
     @staticmethod
-    def make_seafloor(vairance, length, width, depth):
+    def make_seafloor(vairance, length, width, depth)->agxCollide.Geometry:
         """
-
+        builds a heightfield for the water.
         Args:
-            vairance:
+            vairance: the vaiance in height for the height field, should always be less then the depth of the water,
+            or the seafloor would be above the water surface.
             length:
-            width:
-            depth:
+            the length of the height field
+            width: the with of the height field
+            depth: the depth of the height fileld
 
-        Returns:
-
+        Returns: a Geomery with the heightfield shape.
         """
         if depth > 0:
             depth = -depth
         if depth + vairance > 0:
             raise Warning("seafloor above surface")
-
-        seafloor_img = cv2.imread('seafloor.png', cv2.IMREAD_GRAYSCALE)
         seafloor_field = hf.createFromFile('seafloor.png', length, width, depth, depth + vairance)
         return agxCollide.Geometry(seafloor_field)

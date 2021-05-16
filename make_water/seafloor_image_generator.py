@@ -3,6 +3,9 @@ import cv2
 
 
 class seafloorImageBuilder:
+    """
+    class that can generate a seafloor image.
+    """
     @staticmethod
     def normalize(array, new_min=0, new_max=1):
         """
@@ -51,8 +54,8 @@ class seafloorImageBuilder:
     @staticmethod
     def get_base_seafloor() -> np.ndarray:
         """
-
-        Returns:
+        abasic array for seafloor generation
+        Returns:  np array for seafloor generation
 
         """
         return np.array(
