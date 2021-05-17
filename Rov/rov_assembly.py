@@ -4,7 +4,7 @@ import agx
 import agxSDK
 from pid import PID_Controller
 from keyboard_listener import KeyboardListener
-from functions import deg2rad, limit
+from functions import deg2rad, rad2deg, limit
 import numpy as np
 import pandas as pd
 import math
@@ -94,6 +94,7 @@ class RovAssembly(agxSDK.Assembly):
         print("set name")
         Sec.postCallback(self.post)
         self.last = 0
+
     @staticmethod
     def disable_col(geo, ruged: agx.RigidBody):
         """
@@ -169,7 +170,12 @@ class RovAssembly(agxSDK.Assembly):
         """
         returns the pithc of the assembly
         """
-        return self.link1.getRotation()[0]
+        return round(self.link1.getRotation()[0] * 100, 1)
+
+    def get_wing_agles(self):
+        port = rad2deg(self.link2.getRotation().getAngle() - math.pi)
+        sb = rad2deg(self.link3.getRotation().getAngle() - math.pi)
+        return port, sb
 
     def update_wings(self, sb_p, port_p):
         """
@@ -183,10 +189,11 @@ class RovAssembly(agxSDK.Assembly):
         port_p = deg2rad(port_p)
         a1 = -self.hinge1.getAngle()
         a2 = -self.hinge2.getAngle()
-        d1 = limit(a1 - sb_p, -2, 2) * 10
-        d2 = limit(a2 - port_p, -2, 2) * 10
-        self.hinge1.getMotor1D().setSpeed(d1)
-        self.hinge2.getMotor1D().setSpeed(d2)
+        d1 = limit(a1 - sb_p, -2, 2) * 100
+        d2 = limit(a2 - port_p, -2, 2) * 100
+        print(d1,d2,a1)
+        self.hinge1.getMotor1D().setSpeed( d1)
+        self.hinge2.getMotor1D().setSpeed( d2)
 
     def plotter(self, t):
         """
@@ -194,12 +201,13 @@ class RovAssembly(agxSDK.Assembly):
         Args:
             t: in simulation time
         """
-        if t-self.last> 0.1 :
+        if t - self.last > 0.1:
+            print(t)
             self.last = t
-            self.plot_depth.append(self.link1.getPosition()[2])
-            self.plot_pitch.append(self.link1.getRotation()[0] * 10)
-            self.plot_roll.append(self.link1.getRotation()[1] * 100)
-            self.plot_wing_angle.append(self.link2.getRotation()[0] * 10)
+            self.plot_depth.append(round(self.link1.getPosition()[2], 1))
+            self.plot_pitch.append(round(self.link1.getRotation()[0] * 100, 1))
+            self.plot_roll.append(round(self.link1.getRotation()[1] * 100, 1))
+            self.plot_wing_angle.append(round(self.link2.getRotation()[0] * 100, 1))
 
             print(len(self.plot_depth))
             """plots stored values to csv file"""

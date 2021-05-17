@@ -14,7 +14,7 @@ WIRE_POS_ROV = (0, 0, 0.22)
 # ------------------------ROV------------------------#
 ROV_POS = Vec3(-WATER_LENGTH / 2 + 20, 0, 0)
 ROV_K_P = 100
-ROV_K_I = 80
+ROV_K_I = 0.001
 ROV_K_D = 10
 ROV_DEPTH_SETPOINT = -5
 ROV_BODY_DENSITY = 1304.36

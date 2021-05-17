@@ -92,7 +92,7 @@ class Boat_Sensor(StepEventListener):
         pos, n = self.boat.getPosition()
         x = int(pos[0] + WATER_LENGTH * (n) - 1)
         y = int(pos[1])
-        return self.seafloor.getHeight(x, y)
+        return round(self.seafloor.getHeight(x, y),1)
 
 
     def send(self, data:bytes):
