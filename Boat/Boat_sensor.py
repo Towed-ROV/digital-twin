@@ -47,7 +47,7 @@ class Boat_Sensor(StepEventListener):
         """
         if time - self.last_time > self.freq:
             delta_x = self.get_travel_distance()
-            print(delta_x,self.travel_distance)
+            #print(delta_x,self.travel_distance)
             if delta_x >= self.travel_distance:
                 sent = "GPGGA, , {}, N, {}, W, 2, 0 9, 0, 0, M,,,,".format(self.lat_list[self.GPS_i],
                                                                            self.lon_list[self.GPS_i])
@@ -57,7 +57,7 @@ class Boat_Sensor(StepEventListener):
                 self.send(sent.encode())
                 self.GPS_i = self.GPS_i + 1 if self.GPS_i < len(self.lon_list) - 1 else 0
 
-            sent = "SDDBT,{},f,{},M,".format(-self.get_depth_under_boat(), -self.get_depth_under_boat())
+            sent = "SDDBT,{},f,{},M,".format(-self.get_depth_under_boat()/3.2808, -self.get_depth_under_boat())
             chk = hex(reduce(_operator.xor, map(ord, sent), 0))[2:].upper()
             sent = "${}*{} \n".format(sent, chk)
             self.send(sent.encode())
@@ -79,7 +79,7 @@ class Boat_Sensor(StepEventListener):
         pos, n = self.boat.getPosition()
         x = pos[0]
         delta_x = x - self.last_x
-        if delta_x > self.travel_distance:
+        if delta_x >= self.travel_distance:
             self.last_x = x
         return delta_x
 

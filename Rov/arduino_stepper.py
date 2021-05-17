@@ -4,7 +4,7 @@ from functions import _map, constrain
 from functions import deg2rad, rad2deg
 from rov_simulation_parameters import *
 import demoutils
-
+from time import monotonic
 class ArduinoStepper(agxSDK.StepEventListener):
     def __init__(self, pid, pid_trim, rov):
         # super().__init__(agxSDK.GuiEventListener.KEYBOARD)
@@ -12,7 +12,7 @@ class ArduinoStepper(agxSDK.StepEventListener):
         # PID controller
         self.pid = pid
         self.pid_trim = pid_trim
-
+        self.last_time=0
         self.manual_wing_pos = 0
         self.roll = 0
         self.pitch = 0
@@ -76,6 +76,7 @@ class ArduinoStepper(agxSDK.StepEventListener):
                     pos = constrain(self.manual_wing_pos, -self.max_wing_angle, self.max_wing_angle)
                     self.wing_pos_sb = pos
                     self.wing_pos_port = pos
+                    self.rov.update_wings(self.wing_pos_sb, self.wing_pos_port)
                 elif self.target_mode == self.auto_depth_mode:
                     # print(self.depth)
                     # print(type(self.pid.compute(self.depth)))
@@ -87,25 +88,25 @@ class ArduinoStepper(agxSDK.StepEventListener):
                     else:
                         self.wing_pos_port = wing_pos
                         self.wing_pos_sb = wing_pos
-                self.compensate_wing_to_pitch()
-                step_position_sb = _map(self.wing_pos_sb, -self.max_wing_angle, self.max_wing_angle,
-                                        self.min_stepper_pos_sb, self.max_stepper_pos_sb)
-                step_position_port = _map(self.wing_pos_port, -self.max_wing_angle, self.max_wing_angle,
-                                          self.min_stepper_pos_port, self.max_stepper_pos_port)
-                self.current_pos_port,self.current_pos_sb = self.rov.get_wing_agles()
-                print("pid", self.pid.output)
-                self.rov.update_wings(sb_p=-self.pid.output, port_p=-self.pid.output)
-                #print(self.pid.output,self.current_pos_port,)
-                #if step_position_sb != self.current_pos_sb:
-                #    self.move_stepper_pos_sb(step_position_sb)
-                #if step_position_port != self.current_pos_port:
-                 #   self.move_stepper_pos_port(step_position_port)
+                    self.compensate_wing_to_pitch()
+                    step_position_sb = _map(self.wing_pos_sb, -self.max_wing_angle, self.max_wing_angle,
+                                            self.min_stepper_pos_sb, self.max_stepper_pos_sb)
+                    step_position_port = _map(self.wing_pos_port, -self.max_wing_angle, self.max_wing_angle,
+                                              self.min_stepper_pos_port, self.max_stepper_pos_port)
+                    self.current_pos_port,self.current_pos_sb = self.rov.get_wing_agles()
+                    #print("pid", self.pid.output)
+                    self.rov.update_wings(sb_p=-self.pid.output, port_p=-self.pid.output)
+                    #print(self.pid.output,self.current_pos_port,)
+                    #if step_position_sb != self.current_pos_sb:
+                    #    self.move_stepper_pos_sb(step_position_sb)
+                    #if step_position_port != self.current_pos_port:
+                     #   self.move_stepper_pos_port(step_position_port)
 
-                current_millis = time.monotonic()
-                #if current_millis - self.previousMillis >= self.interval:
-                #    self.update_wing_pos_gui(self.current_pos_port, self.current_pos_sb)
-                #    self.previousMillis = current_millis
-            self.handle_received_message()
+                    current_millis = time.monotonic()
+                    #if current_millis - self.previousMillis >= self.interval:
+                    #    self.update_wing_pos_gui(self.current_pos_port, self.current_pos_sb)
+                    #    self.previousMillis = current_millis
+                self.handle_received_message()
 
     def reset_stepper(self):
         self.send("reset:True")
@@ -116,11 +117,11 @@ class ArduinoStepper(agxSDK.StepEventListener):
         if current_millis_port - self.last_millis_port >= self.time_interval:
             self.rov.update_wings(sb_p=self.current_pos_port, port_p=self.current_pos_sb)
             if step_pos > self.current_pos_port:
-                print("opp port")
+                #print("opp port")
                 self.current_pos_port = self.current_pos_port + self.interval_port
                 self.rov.distance2.getLock1D().setPosition(self.current_pos_port)
             elif step_pos< self.current_pos_port:
-                print("ned port")
+                #print("ned port")
                 self.current_pos_port = self.current_pos_port - self.interval_sb
                 self.rov.distance2.getLock1D().setPosition(self.current_pos_port)
             self.last_millis_port = current_millis_port
@@ -183,6 +184,7 @@ class ArduinoStepper(agxSDK.StepEventListener):
             elif received_command[0] == "manual_wing_pos":
                 check_manual_wing_pos = float(received_command[1])
                 if self.max_wing_angle > check_manual_wing_pos > -self.max_wing_angle:
+
                     self.manual_wing_pos = check_manual_wing_pos
                     self.send(received_command[0] + ":True")
                 else:
@@ -204,7 +206,7 @@ class ArduinoStepper(agxSDK.StepEventListener):
 
             elif received_command[0] == "set_point_depth":
                 self.set_point_depth = float(received_command[1])
-                self.pid.set_setpoint(self.set_point_depth)
+                self.pid.set_setpoint(-abs(self.set_point_depth))
                 self.send(received_command[0] + ":True")
 
             elif received_command[0] == "pid_depth_p":
@@ -310,8 +312,8 @@ class ArduinoStepper(agxSDK.StepEventListener):
         if message:
             try:
                 msg = message.split(":", 1)
-                if msg[0] != 'depth' and msg[0] != 'roll' and msg[0] != 'pitch':
-                    print(message)
+                #if msg[0] != 'depth' and msg[0] != 'roll' and msg[0] != 'pitch':
+                    #print(message)
 
             except Exception as e:
                 print(e)

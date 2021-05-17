@@ -191,7 +191,7 @@ class RovAssembly(agxSDK.Assembly):
         a2 = -self.hinge2.getAngle()
         d1 = limit(a1 - sb_p, -2, 2) * 100
         d2 = limit(a2 - port_p, -2, 2) * 100
-        print(d1,d2,a1)
+        # print(d1,d2,a1)
         self.hinge1.getMotor1D().setSpeed( d1)
         self.hinge2.getMotor1D().setSpeed( d2)
 
@@ -202,14 +202,14 @@ class RovAssembly(agxSDK.Assembly):
             t: in simulation time
         """
         if t - self.last > 0.1:
-            print(t)
+            #print(t)
             self.last = t
             self.plot_depth.append(round(self.link1.getPosition()[2], 1))
             self.plot_pitch.append(round(self.link1.getRotation()[0] * 100, 1))
             self.plot_roll.append(round(self.link1.getRotation()[1] * 100, 1))
             self.plot_wing_angle.append(round(self.link2.getRotation()[0] * 100, 1))
 
-            print(len(self.plot_depth))
+            #print(len(self.plot_depth))
             """plots stored values to csv file"""
             plot_wing_angle = np.array(self.plot_wing_angle)
             plot_depth = np.array(self.plot_depth)
