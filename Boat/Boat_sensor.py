@@ -57,7 +57,7 @@ class Boat_Sensor(StepEventListener):
                 self.send(sent.encode())
                 self.GPS_i = self.GPS_i + 1 if self.GPS_i < len(self.lon_list) - 1 else 0
 
-            sent = "SDDBT,{},f,{},M,".format(-self.get_depth_under_boat()/3.2808, -self.get_depth_under_boat())
+            sent = "SDDBT,{},f,{},M,".format(-self.get_depth_under_boat()*3.2808, -self.get_depth_under_boat())
             chk = hex(reduce(_operator.xor, map(ord, sent), 0))[2:].upper()
             sent = "${}*{} \n".format(sent, chk)
             self.send(sent.encode())

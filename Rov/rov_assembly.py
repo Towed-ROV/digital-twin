@@ -25,10 +25,11 @@ class RovAssembly(agxSDK.Assembly):
         super().__init__()
 
         self.keyboard = keyboard
-        self.plot_pitch = []
-        self.plot_wing_angle = []
-        self.plot_depth = []
-        self.plot_roll = []
+        self.plot_pitch = np.array([])
+        self.plot_wing_angle = np.array([])
+        self.plot_depth = np.array([])
+        self.plot_roll = np.array([])
+        self.plot_time = np.array([])
         self.plotted = False
         print("initilaized master and vields")
 
@@ -189,11 +190,11 @@ class RovAssembly(agxSDK.Assembly):
         port_p = deg2rad(port_p)
         a1 = -self.hinge1.getAngle()
         a2 = -self.hinge2.getAngle()
-        d1 = limit(a1 - sb_p, -2, 2) * 100
-        d2 = limit(a2 - port_p, -2, 2) * 100
+        d1 = limit(a1 - sb_p, -2, 2)  * 1/10
+        d2 = limit(a2 - port_p, -2, 2) * 1/10
         # print(d1,d2,a1)
-        self.hinge1.getMotor1D().setSpeed( d1)
-        self.hinge2.getMotor1D().setSpeed( d2)
+        self.hinge1.getMotor1D().setSpeed(d1)
+        self.hinge2.getMotor1D().setSpeed(d2)
 
     def plotter(self, t):
         """
@@ -202,27 +203,27 @@ class RovAssembly(agxSDK.Assembly):
             t: in simulation time
         """
         if t - self.last > 0.1:
-            #print(t)
+            # print(t)
             self.last = t
-            self.plot_depth.append(round(self.link1.getPosition()[2], 1))
-            self.plot_pitch.append(round(self.link1.getRotation()[0] * 100, 1))
-            self.plot_roll.append(round(self.link1.getRotation()[1] * 100, 1))
-            self.plot_wing_angle.append(round(self.link2.getRotation()[0] * 100, 1))
+            self.plot_depth = np.append( self.plot_depth,round(self.link1.getPosition()[2], 1))
+            self.plot_pitch = np.append(self.plot_pitch,round(self.link1.getRotation()[0] * 100, 1))
+            self.plot_roll = np.append( self.plot_roll,round(self.link1.getRotation()[1] * 100, 1))
+            self.plot_wing_angle = np.append(self.plot_wing_angle,round(self.link2.getRotation()[0] * 100, 1))
+            self.plot_time = np.append( self.plot_time,round(t, 3, ))
 
-            #print(len(self.plot_depth))
+            # print(len(self.plot_depth))
             """plots stored values to csv file"""
-            plot_wing_angle = np.array(self.plot_wing_angle)
-            plot_depth = np.array(self.plot_depth)
-            plot_pitch = np.array(self.plot_pitch)
-            plot_roll = np.array(self.plot_roll)
-            pd.DataFrame(plot_depth).to_csv(
+
+            pd.DataFrame(self.plot_depth).to_csv(
                 "D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\AGX-towed-rov-simulation\plots\plotDepth.csv")
-            pd.DataFrame(plot_pitch).to_csv(
+            pd.DataFrame(self.plot_pitch).to_csv(
                 "D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\AGX-towed-rov-simulation\plots\plotPitch.csv")
-            pd.DataFrame(plot_wing_angle).to_csv(
+            pd.DataFrame(self.plot_wing_angle).to_csv(
                 "D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\AGX-towed-rov-simulation\plots\plot_wing_angle.csv")
-            pd.DataFrame(plot_roll).to_csv(
+            pd.DataFrame(self.plot_roll).to_csv(
                 "D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\AGX-towed-rov-simulation\plots\plot_roll.csv")
+            pd.DataFrame(self.plot_time).to_csv(
+                "D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\AGX-towed-rov-simulation\plots\ime_plot.csv")
             self.plotted = True
 
     @staticmethod

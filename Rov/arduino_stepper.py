@@ -94,18 +94,8 @@ class ArduinoStepper(agxSDK.StepEventListener):
                     step_position_port = _map(self.wing_pos_port, -self.max_wing_angle, self.max_wing_angle,
                                               self.min_stepper_pos_port, self.max_stepper_pos_port)
                     self.current_pos_port,self.current_pos_sb = self.rov.get_wing_agles()
-                    #print("pid", self.pid.output)
-                    self.rov.update_wings(sb_p=-self.pid.output, port_p=-self.pid.output)
-                    #print(self.pid.output,self.current_pos_port,)
-                    #if step_position_sb != self.current_pos_sb:
-                    #    self.move_stepper_pos_sb(step_position_sb)
-                    #if step_position_port != self.current_pos_port:
-                     #   self.move_stepper_pos_port(step_position_port)
 
-                    current_millis = time.monotonic()
-                    #if current_millis - self.previousMillis >= self.interval:
-                    #    self.update_wing_pos_gui(self.current_pos_port, self.current_pos_sb)
-                    #    self.previousMillis = current_millis
+                    self.rov.update_wings(sb_p=-self.pid.output, port_p=-self.pid.output)
                 self.handle_received_message()
 
     def reset_stepper(self):
