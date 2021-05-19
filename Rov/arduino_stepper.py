@@ -1,18 +1,22 @@
 import serial, time, agxSDK
+import agxCollide
 from pid import PID_Controller
 from functions import _map, constrain
 from functions import deg2rad, rad2deg
 from rov_simulation_parameters import *
 import demoutils
 from time import monotonic
+
+
 class ArduinoStepper(agxSDK.StepEventListener):
-    def __init__(self, pid, pid_trim, rov):
+    def __init__(self, pid, pid_trim, rov, floor:agxCollide.HeightField):
         # super().__init__(agxSDK.GuiEventListener.KEYBOARD)
         super().__init__()
         # PID controller
+        self.seafloor = floor
         self.pid = pid
         self.pid_trim = pid_trim
-        self.last_time=0
+        self.last_time = 0
         self.manual_wing_pos = 0
         self.roll = 0
         self.pitch = 0
@@ -93,7 +97,7 @@ class ArduinoStepper(agxSDK.StepEventListener):
                                             self.min_stepper_pos_sb, self.max_stepper_pos_sb)
                     step_position_port = _map(self.wing_pos_port, -self.max_wing_angle, self.max_wing_angle,
                                               self.min_stepper_pos_port, self.max_stepper_pos_port)
-                    self.current_pos_port,self.current_pos_sb = self.rov.get_wing_agles()
+                    self.current_pos_port, self.current_pos_sb = self.rov.get_wing_agles()
 
                     self.rov.update_wings(sb_p=-self.pid.output, port_p=-self.pid.output)
                 self.handle_received_message()
@@ -107,11 +111,11 @@ class ArduinoStepper(agxSDK.StepEventListener):
         if current_millis_port - self.last_millis_port >= self.time_interval:
             self.rov.update_wings(sb_p=self.current_pos_port, port_p=self.current_pos_sb)
             if step_pos > self.current_pos_port:
-                #print("opp port")
+                # print("opp port")
                 self.current_pos_port = self.current_pos_port + self.interval_port
                 self.rov.distance2.getLock1D().setPosition(self.current_pos_port)
-            elif step_pos< self.current_pos_port:
-                #print("ned port")
+            elif step_pos < self.current_pos_port:
+                # print("ned port")
                 self.current_pos_port = self.current_pos_port - self.interval_sb
                 self.rov.distance2.getLock1D().setPosition(self.current_pos_port)
             self.last_millis_port = current_millis_port
@@ -188,16 +192,17 @@ class ArduinoStepper(agxSDK.StepEventListener):
             elif received_command[0] == "depth":
                 self.depth = float(received_command[1])
 
-            #elif received_command[0] == "roll":
-                #self.roll = float(received_command[1])
+            # elif received_command[0] == "roll":
+            # self.roll = float(received_command[1])
 
             elif received_command[0] == "pitch":
                 self.pitch = float(received_command[1])
 
             elif received_command[0] == "set_point_depth":
                 self.set_point_depth = float(received_command[1])
+                print("ny set",received_command)
                 self.pid.set_setpoint(-abs(self.set_point_depth))
-                self.send(received_command[0] + ":True")
+                self.send(received_command[0] + ":{}".format(self.set_point_depth))
 
             elif received_command[0] == "pid_depth_p":
                 pid_depth_p = float(received_command[1])
@@ -258,21 +263,41 @@ class ArduinoStepper(agxSDK.StepEventListener):
         Args:
             time: in simulation time
         """
-        if time-self.last_post >  0.001:
-            self.last_post=time
+
+        if time - self.last_post > 0.001:
+            self.last_post = time
             pos = self.rov.link1.getPosition()
             rot = self.rov.link1.getRotation()
             decorator = demoutils.app().getSceneDecorator()
-            if round(time%2,2)== 0:
-                print("seconds to simulate 2 sec: ",monotonic()-self.last_time)
-                self.last_time=monotonic()
-            decorator.setText(9,
-                              "pid : {}, wing: {}".format(self.pid.output, round(rad2deg(self.rov.left_wing_angle()), 2)))
-            decorator.setText(3, "Rov Position in Z direction : {} M".format(str(round(pos[2], 2))))
-            decorator.setText(4, "Pitch : {}".format(str(round(rot[0] * 100, 2))))
-            decorator.setText(5, "Roll : {}".format(str(round(rot[1] * 100, 2))))
-            x, y = int(WATER_LENGTH + pos[0]), int(pos[1])
-            decorator.setText(7, "distance : {}M".format(str(round(self.rov.link1.getPosition()[0], 2))))
+            if round(time % 2, 2) == 0:
+                print("seconds to simulate 2 sec: ", monotonic() - self.last_time)
+                self.last_time = monotonic()
+            decorator.setText(9, "pid : {}, wing: {}".format(round(self.pid.output, 2),
+                                                             round(rad2deg(self.rov.left_wing_angle()), 2)))
+            decorator.setText(3, "Rov depth: {} M".format(str(abs(round(pos[2], 2)))))
+            decorator.setText(4, "Set point : {} M".format(abs(self.pid.setpoint)))
+            x = int(self.seafloor.getSize()[0] / 2 + pos[0])  # + self.seafloor.getSize()[0]/2)
+            y = int(pos[1])
+            decorator.setText(5, "depth under rov: {} M".format(str(round(abs(pos[2]-self.seafloor.getHeight(x,y)),2))))
+            decorator.setText(6, "Pitch : {}".format(str(round(rot[0] * 100, 2))))
+            decorator.setText(7, "time : {}".format(str(round(time,2))))
+            decorator.setText(1,    "distance : {}M".format(
+                str(-round(-10 - WATER_LENGTH - self.rov.link1.getPosition()[0], 2))))
+
+            # print(int(pos[0]),int(pos[1]),int(pos[2]))
+            #print(x,y,self.seafloor.getSize())
+            #print(self.seafloor.getSize()[0]/2 + x, x+WATER_LENGTH)
+            #decorator.setText(2, "depth under rov : {}".format(str(self.seafloor.getHeight(self.seafloor.getSize()[0]/2+x, y) - pos[2], 2))))
+
+    def get_depth_under_rov(self) -> float:
+        """
+        gets the depth from the rov to the seafloor.
+        Returns: float with the seafloor depth under the rov.
+        """
+        pos = self.rov.getPosition()
+        x = int(pos[0] + WATER_LENGTH - 1)
+        y = int(pos[1])
+        return round(-pos[2] + self.seafloor.getHeight(x, y), 1)
 
     def set_target_mode(self, target_mode, wing_pos=0):
         mode_set = False
@@ -302,8 +327,8 @@ class ArduinoStepper(agxSDK.StepEventListener):
         if message:
             try:
                 msg = message.split(":", 1)
-                #if msg[0] != 'depth' and msg[0] != 'roll' and msg[0] != 'pitch':
-                    #print(message)
+                # if msg[0] != 'depth' and msg[0] != 'roll' and msg[0] != 'pitch':
+                # print(message)
 
             except Exception as e:
                 print(e)

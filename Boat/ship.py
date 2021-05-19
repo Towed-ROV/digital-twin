@@ -3,6 +3,7 @@ import agxRender
 import demoutils
 import agx
 import agxSDK
+import numpy as np
 import agxCollide
 import math
 from modules.agxPythonModules.utils.callbacks import StepEventCallback as Sec
@@ -77,7 +78,7 @@ class Ship(agxSDK.Assembly):
 
         """Assemble ship"""
         ship.add(b)  # base
-
+        self.plot_under=np.array([])
         ship.add(left_c)  # left capsule
         ship.add(right_capsules)  # left fender
         ship.add(t_box)  # box on top of base
@@ -123,14 +124,16 @@ class Ship(agxSDK.Assembly):
                 f = p.getForce()
                 tot_contact_force = tot_contact_force + f
         demoutils.app().getSceneDecorator().setText(0, "Towed-Rov simulation")
-        demoutils.app().getSceneDecorator().setText(1, "Thrust       : {} kN".format(
-            self.m_propulsion_force / 500))  # 2/1000 ( 2 because of the 2 propellers )
-        demoutils.app().getSceneDecorator().setText(2, "Speed in X direction : {} knots".format(
+        #demoutils.app().getSceneDecorator().setText(1, "Thrust       : {} kN".format(
+            #self.m_propulsion_force / 500))  # 2/1000 ( 2 because of the 2 propellers )
+        demoutils.app().getSceneDecorator().setText(2, "Speed Boat: {} knots".format(
             str(round(self.m_body.getVelocity()[0] * 1.94384449, 2))))
 
 
     def post(self, t):
+        return
         pos, n = self.getPosition()
+
         if pos[0] - WATER_LENGTH * n > 50:
             print("build more water")
             self.n += 1

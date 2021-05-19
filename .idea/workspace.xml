@@ -26,8 +26,17 @@
     <list default="true" id="a81053cf-228f-4eb3-8dc3-26f5da944597" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Boat/Boat_sensor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Boat/Boat_sensor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Boat/ship.py" beforeDir="false" afterPath="$PROJECT_DIR$/Boat/ship.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rov/arduino_sensor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rov/arduino_sensor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Rov/arduino_stepper.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rov/arduino_stepper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Rov/rov_assembly.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rov/rov_assembly.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rov/rov_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rov/rov_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/keyboard_listener.py" beforeDir="false" afterPath="$PROJECT_DIR$/keyboard_listener.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/make_water/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/make_water/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/make_water/seafloor_image_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/make_water/seafloor_image_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plots/dritt.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plots/plot_roll.xlsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/rov_simulation_parameters/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/rov_simulation_parameters/__init__.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -81,7 +90,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../sleperovPY/Slepe-ROV/RPi" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../sleperovPY/Slepe-ROV" />
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -98,17 +107,17 @@
     <option name="myUseBundledCoveragePy" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\docs\AGX-towed-rov-simulation\fonts" />
+      <recent name="C:\Users\sophus\PycharmProjects\sideScanPlotter\AGX-towed-rov-simulation\fonts" />
+      <recent name="C:\Users\sophus\PycharmProjects\sideScanPlotter\AGX-towed-rov-simulation\models" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\AGX-towed-rov-simulation\Movies" />
       <recent name="D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\AGX-towed-rov-simulation\make_water" />
       <recent name="D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\AGX-towed-rov-simulation\Rov" />
       <recent name="C:\AGX-towed-rov-simulation\Rov" />
       <recent name="C:\Users\Jørgen sin kule bruk\Documents\GitHub\AGX-towed-rov-simulation" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\docs\AGX-towed-rov-simulation\fonts" />
-      <recent name="C:\Users\sophus\PycharmProjects\sideScanPlotter\AGX-towed-rov-simulation\fonts" />
-      <recent name="C:\Users\sophus\PycharmProjects\sideScanPlotter\AGX-towed-rov-simulation\models" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -212,6 +221,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="seafloor_image_generator (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="AGX-towed-rov-simulation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/make_water" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/make_water/seafloor_image_generator.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="seafloor_image_generator" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="AGX-towed-rov-simulation" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -234,42 +265,20 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="rov-sim" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <list>
       <item itemvalue="Python.main" />
       <item itemvalue="Python.main (1)" />
-      <item itemvalue="Python.test" />
       <item itemvalue="Python.arduino_sensor" />
       <item itemvalue="Python.seafloor_image_generator" />
+      <item itemvalue="Python.seafloor_image_generator (1)" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.seafloor_image_generator (1)" />
         <item itemvalue="Python.main (1)" />
         <item itemvalue="Python.arduino_sensor" />
         <item itemvalue="Python.seafloor_image_generator" />
-        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -309,6 +318,9 @@
       <workItem from="1621177165224" duration="6321000" />
       <workItem from="1621188935175" duration="21172000" />
       <workItem from="1621266995419" duration="9454000" />
+      <workItem from="1621283244643" duration="8692000" />
+      <workItem from="1621294481157" duration="4338000" />
+      <workItem from="1621324760907" duration="51627000" />
     </task>
     <servers />
   </component>
@@ -331,7 +343,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/AGX_towed_rov_simulation$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1620387368096" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/AGX_towed_rov_simulation$seafloor_image_generator.coverage" NAME="seafloor_image_generator Coverage Results" MODIFIED="1619352389971" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/AGX_towed_rov_simulation$main.coverage" NAME="main Coverage Results" MODIFIED="1621277932750" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/AGX_towed_rov_simulation$main.coverage" NAME="main Coverage Results" MODIFIED="1621453418388" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/AGX_towed_rov_simulation$arduino_sensor.coverage" NAME="arduino_sensor Coverage Results" MODIFIED="1619351634407" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Rov" />
   </component>
 </project>

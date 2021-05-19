@@ -42,6 +42,7 @@ class MakeWater:
         water_geometry.setPosition(0, 0, -water_height / 2)
         seafloor = MakeWater.make_seafloor(vairance=SEAFLOOR_VARIANCE, length=water_length * 2, width=water_width,
                                            depth=-water_height)
+        seafloor.setPosition(agx.Vec3(0,0,0))
         """Surface of water at z = 0."""
         water_geometry.setMaterial(water_material)
         MakeWater.add_color(water_geometry)

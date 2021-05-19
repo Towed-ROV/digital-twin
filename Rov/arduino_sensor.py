@@ -51,14 +51,14 @@ class ArduinoSensor(agxSDK.StepEventListener):
         rov_body = self.rov
         if self.turn_to_send == 1:
             self.depth = round(rov_body.link1.getPosition()[2] + self.depth_rov_offset, 3)
-            self.send("depth:" + str(-self.depth))
+            self.send("depth:" + str(abs(self.depth)))
             # print("depth:" + str(-self.depth))
             self.turn_to_send = 2
         elif self.turn_to_send == 2:
             pos = self.rov.link1.getPosition()
             x = int(pos[0] + WATER_LENGTH - 1)
             y = int(pos[1])
-            self.depth_beneath_rov = self.depth-round(self.seafloor.getHeight(x, y),3)
+            self.depth_beneath_rov = round(abs(self.depth - round(self.seafloor.getHeight(x, y),3)),2)
             self.send("depth_beneath_rov:" + str(self.depth_beneath_rov + self.depth_beneath_rov_offset))
             self.turn_to_send = 3
         elif self.turn_to_send == 3:

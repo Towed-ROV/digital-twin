@@ -11,6 +11,7 @@ import math
 from Rov.assembly import rov_builder
 from modules.agxPythonModules.utils.callbacks import StepEventCallback as Sec
 from rov_simulation_parameters import *
+from time import monotonic
 
 """Class rovAssembly, creates a agx assembly of the rov, with to hinges, one on each wings"""
 
@@ -43,7 +44,7 @@ class RovAssembly(agxSDK.Assembly):
         # rov body
         self.link1 = builder.create_rov_body(rov_material, name='rovBody', scale=ROV_SCALE,
                                              cm=(0.27511, -0.18095, 0.0494), tank_material=tank_material)
-
+        self.last_plot = 0
         print("buildt rov body")
         print("volumebounds: ", self.link1.getGeometry("Rov_body").getBoundingVolume().size())
         # wing left
@@ -60,7 +61,7 @@ class RovAssembly(agxSDK.Assembly):
         self.link1.getGeometry('Rov_body').setEnableCollisions(self.link3.getGeometry('wing_l'), False)
 
         print("removed internal collitions")
-
+        self.realtime = np.array([])
         # adding visualisation
         demoutils.create_visual(self.link1)
         demoutils.create_visual(self.link2)
@@ -95,6 +96,7 @@ class RovAssembly(agxSDK.Assembly):
         print("set name")
         Sec.postCallback(self.post)
         self.last = 0
+        self.startime = monotonic()
 
     @staticmethod
     def disable_col(geo, ruged: agx.RigidBody):
@@ -190,8 +192,21 @@ class RovAssembly(agxSDK.Assembly):
         port_p = deg2rad(port_p)
         a1 = -self.hinge1.getAngle()
         a2 = -self.hinge2.getAngle()
-        d1 = limit(a1 - sb_p, -2, 2)  * 1/10
-        d2 = limit(a2 - port_p, -2, 2) * 1/10
+        # d1 = limit(a1 - sb_p, -2, 2)  * 1/10
+        # d2 = limit(a2 - port_p, -2, 2) * 1/10
+        if abs(a1 - sb_p) < 0.01:
+            d1 = 0
+        elif a1 > sb_p:
+            d1 = 0.5
+        elif a1 < sb_p:
+            d1 = -0.5
+        if abs(a2 - port_p) < 0.01:
+            d2 = 0
+        elif a2 > port_p:
+            d2 = 0.5
+        elif a2 < port_p:
+            d2 = -0.5
+
         # print(d1,d2,a1)
         self.hinge1.getMotor1D().setSpeed(d1)
         self.hinge2.getMotor1D().setSpeed(d2)
@@ -202,15 +217,16 @@ class RovAssembly(agxSDK.Assembly):
         Args:
             t: in simulation time
         """
-        if t - self.last > 0.1:
+        if t-self.last_plot > 0.2:
             # print(t)
             self.last = t
-            self.plot_depth = np.append( self.plot_depth,round(self.link1.getPosition()[2], 1))
-            self.plot_pitch = np.append(self.plot_pitch,round(self.link1.getRotation()[0] * 100, 1))
-            self.plot_roll = np.append( self.plot_roll,round(self.link1.getRotation()[1] * 100, 1))
-            self.plot_wing_angle = np.append(self.plot_wing_angle,round(self.link2.getRotation()[0] * 100, 1))
-            self.plot_time = np.append( self.plot_time,round(t, 3, ))
+            self.plot_depth = np.append(self.plot_depth, round(self.link1.getPosition()[2], 1))
+            self.plot_pitch = np.append(self.plot_pitch, round(self.link1.getRotation()[0] * 100, 1))
+            self.plot_roll = np.append(self.plot_roll, round(self.link1.getRotation()[1] * 100, 1))
+            self.plot_wing_angle = np.append(self.plot_wing_angle, round(self.link2.getRotation()[0] * 100, 1))
+            self.plot_time = np.append(self.plot_time, round(t, 3, ))
 
+            self.realtime = np.append(self.realtime, round(monotonic() - self.startime, 2))
             # print(len(self.plot_depth))
             """plots stored values to csv file"""
 
@@ -224,7 +240,12 @@ class RovAssembly(agxSDK.Assembly):
                 "D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\AGX-towed-rov-simulation\plots\plot_roll.csv")
             pd.DataFrame(self.plot_time).to_csv(
                 "D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\AGX-towed-rov-simulation\plots\ime_plot.csv")
-            self.plotted = True
+            pd.DataFrame(self.realtime).to_csv(
+                "D:\ROV_BATCHELOR\Code\AGX-towed-rov-simulation\AGX-towed-rov-simulation\plots\ctualtime.csv")
+
+            self.last_plot = t
+            self.startime = monotonic()
+            # self.plotted = True
 
     @staticmethod
     def build_material(name, density) -> agx.Material:
@@ -253,6 +274,6 @@ class RovAssembly(agxSDK.Assembly):
         Returns:
 
         """
-        r_p = self.link1.getPosition()
-        cam_pos = agx.Vec3(r_p[0], r_p[1] + 100, r_p[2])
+        r_p = agx.Vec3(self.link1.getPosition()[0] + 10, self.link1.getPosition()[1], self.link1.getPosition()[2] - 5)
+        cam_pos = agx.Vec3(r_p[0] + 10, r_p[1] + 75, r_p[2])
         demoutils.init_camera(eye=cam_pos, center=r_p)

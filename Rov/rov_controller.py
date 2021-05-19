@@ -54,11 +54,10 @@ class RovController(agxSDK.StepEventListener):
         decorator = demoutils.app().getSceneDecorator()
         decorator.setText(9, "pid : {}, wing: {}".format(str(self.pid.output), round(
             rad2deg(self.rov.left_wing_angle()), 2)))
-        decorator.setText(3, "Rov Position in Z direction : {} M".format(str(round(pos[2], 2))))
-        decorator.setText(4, "Pitch : {}".format(str(round(rot[0] * 100, 2))))
-        decorator.setText(5, "Roll : {}".format(str(round(rot[1] * 100, 2))))
+        decorator.setText(3, "Rov depth : {} M".format(str(-round(pos[2], 2))))
+        decorator.setText(5, "Pitch : {}".format(str(round(rot[0] * 100, 2))))
+        decorator.setText(6, "Roll : {}".format(str(round(rot[1] * 100, 2))))
         x, y = int(WATER_LENGTH + pos[0]), int(pos[1])
 
-        # print(int(pos[0]),int(pos[1]),int(pos[2]))
-        decorator.setText(11, "seafloor actual : {}".format(str(round(self.depth.getHeight(x, y) - pos[2], 2))))
-        decorator.setText(7, "distance : {}M".format(str(WATER_LENGTH + round( self.rov.link1.getPosition()[0], 2))))
+        decorator.setText(7, "distance : {}M".format(
+            str(self.seafloor.getSize()[0] / 2 + round(self.rov.link1.getPosition()[0], 2))))

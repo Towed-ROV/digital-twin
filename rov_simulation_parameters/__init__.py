@@ -2,12 +2,12 @@ from agx import Vec3
 
 # ------------------------POSITION, SIZE AND WIRE------------------------#
 WATER_DEPTH = 60
-WATER_WIDTH = 30
-WATER_LENGTH = 1000
+WATER_WIDTH = 5
+WATER_LENGTH = 2500
 WATER_DENSITY = 1027
-SEAFLOOR_VARIANCE = WATER_DEPTH / 2
+SEAFLOOR_VARIANCE = 35
 
-WIRE_LENGTH = 200
+WIRE_LENGTH = 300
 WIRE_SEGMENTS = 300
 WIRE_RESOLUTION = int(WIRE_SEGMENTS / WIRE_LENGTH)
 WIRE_POS_ROV = (0, 0, 0.22)
@@ -29,7 +29,7 @@ K_I_TRIM = 0.02
 K_D_TRIM = 1
 TRIM_MAX_OUT = 8
 TRIM_MIN_OUT = -8
-CM_ROV = 20, 0, 0
+CM_ROV = 1, 0, 0
 # ------------------------SIMULATION------------------------#
 SIM_TIME_STEP = 0.005
 start = False
@@ -40,7 +40,7 @@ BOAT_K_P = 0.02
 BOAT_K_I = 0.0001
 BOAT_K_D = 0
 BOAT_POS = Vec3(-WATER_LENGTH / 2 + 20 + WIRE_LENGTH, 0, 0)
-BOAT_SPEED = 3.5
+BOAT_SPEED = 4.5
 BOAT_MAX_OUT = 8
 BOAT_MIN_OUT = -8
 # ------------------------HYDORDYNAMICS------------------------#

@@ -12,12 +12,9 @@ class KeyboardListener(agxSDK.GuiEventListener):
         self.plot = plot
         self.plot_time = []
         self.plot_setpoint = []
-
         Sec.postCallback(lambda t: self.display_forces(t))
-
     def display_forces(self, t):
-        demoutils.app().getSceneDecorator().setText(6, "Target set point : {} M".format(
-            self.pid.setpoint))
+
         self.plot_setpoint.append(self.pid.setpoint)
         self.plot_time.append(t)
         if self.plot and not self.plotted:

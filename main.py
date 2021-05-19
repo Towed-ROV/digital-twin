@@ -61,7 +61,7 @@ def build_scene():
 
     """ creates arduino simulations"""
     arduino_sensor = ArduinoSensor(rov, seafloor.getShape().asHeightField())
-    arduino_stepper = ArduinoStepper(rov_pid, pid_trim, rov)
+    arduino_stepper = ArduinoStepper(rov_pid, pid_trim, rov, seafloor.getShape().asHeightField())
     print("buildt pid for boat")
     pid_boat = build_pid_controller(p=BOAT_K_P, i=BOAT_K_I, d=BOAT_K_D, direction=0, name="pidBoat", max_out=2,
                                     min_out=-2, setpoint=BOAT_SPEED, mode=(1, 0, 0))
@@ -75,7 +75,6 @@ def build_scene():
     ship.setVelocity(agx.Vec3(-1, 0, 0))
     ship_controller = Boat_Controller(ship, pid_boat, arduino_stepper)
     print("buildt ship")
-
     """builds the wire and wire controller"""
     wire, wire_renderer = MakeWire().create_wire(1030, 0.001, ship, agx.Vec3(2, 0, 0), rov, agx.Vec3(*WIRE_POS_ROV))
     setWireViscousDrag(wire, controller)
